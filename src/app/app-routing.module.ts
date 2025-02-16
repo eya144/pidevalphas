@@ -12,6 +12,9 @@ import { ContactComponent } from './contact/contact.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ServiceComponent } from './service/service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AddMaterielComponent } from './add-materiel/add-materiel.component';
+import { EditMaterielComponent } from './edit-materiel/edit-materiel.component';
+import { CommandeComponent } from './commande/commande.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -27,7 +30,11 @@ const routes: Routes = [
   { path: 'service', component: ServiceComponent },
   { path: 'service', component: ServiceComponent }, 
    { path: 'dashboard', component: DashboardComponent },
-  
+   { path: 'addMateriel', component: AddMaterielComponent },
+   { path: 'editMateriel/:id', component: EditMaterielComponent }, 
+   { path: 'commande', component: CommandeComponent },
+
+
   
 
   { path: '', redirectTo:'/home',pathMatch:'full' }

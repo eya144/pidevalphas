@@ -1,0 +1,35 @@
+<app-headeer></app-headeer>
+<body>
+  <h2>Passer la commande</h2>
+
+  <table>
+    <tr>
+      <th>Nom</th>
+      <th>Prix Unitaire</th>
+      <th>Quantité Demandée</th>
+      <th>Prix Total</th>
+      <th>Supprimer</th> 
+    </tr>
+    <tr *ngFor="let ligneCommande of lignesCommande">
+      <td>{{ ligneCommande.materiel.nomMateriel }}</td>
+      <td>{{ ligneCommande.prixUnitaire }}</td>
+      <td>
+        <input 
+          type="number" 
+          [(ngModel)]="ligneCommande.quantite" 
+          (input)="calculerPrixTotal(ligneCommande)"
+          (keydown.enter)="modifierLigneCommande(ligneCommande)"
+        >
+      </td>
+      
+      <td>{{ ligneCommande.prixTotal }}</td>
+      <td>
+        <button (click)="supprimerLigneCommande(ligneCommande.idLigneCommande)">
+          <i class="fa fa-trash"></i> <!-- Icône de suppression -->
+        </button>
+      </td>
+    </tr>
+  </table>
+
+  <button (click)="validerCommande()">Confirmer la commande</button>
+</body>

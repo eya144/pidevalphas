@@ -1,0 +1,124 @@
+/* Style général du body */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e0f7fa;
+    padding-top: 550px;
+    padding-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Formulaire principal */
+.add-materiel-form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.add-materiel-form:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Titre du formulaire */
+.add-materiel-form h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #00796b;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Style des champs de formulaire */
+.add-materiel-form div {
+    margin-bottom: 20px;
+}
+
+/* Style des labels */
+label {
+    font-weight: 600;
+    color: #00796b;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Style des champs de texte */
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    border: 2px solid #00796b;
+    border-radius: 8px;
+    background-color: #f1f1f1;
+    color: #00796b;
+    transition: border 0.3s ease;
+}
+
+/* Effet focus sur les champs de saisie */
+input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    border-color: #004d40;
+    background-color: #ffffff;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 77, 64, 0.3);
+}
+
+/* Style du select */
+select {
+    background-color: #f1f1f1;
+    color: #00796b;
+}
+
+/* Style des options dans le select */
+select option {
+    background-color: #ffffff;
+    color: #00796b;
+    padding: 10px;
+}
+
+/* Style du bouton */
+button {
+    width: 100%;
+    padding: 16px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Effet de survol du bouton */
+button:hover {
+    background-color: #004d40;
+    transform: translateY(-3px);
+}
+
+/* Animation de bouton actif */
+button:active {
+    transform: translateY(1px);
+}
+
+/* Style des messages d'erreur */
+.error-message {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Style pour les champs invalides */
+input:invalid, select:invalid {
+    border-color: #d32f2f;
+    background-color: #ffe6e6;
+}
+
+input:invalid:focus, select:invalid:focus {
+    box-shadow: 0 0 10px rgba(211, 47, 47, 0.5);
+}

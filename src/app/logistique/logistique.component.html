@@ -1,1 +1,68 @@
-<p>logistique works!</p>
+<!-- Header -->
+<app-headeer></app-headeer>
+<body>
+    <div class="container">
+        <!-- Drawer des catégories -->
+        <div class="drawer">
+            <h3>Catégories</h3>
+            <ul>
+                <li *ngFor="let cat of categories" (click)="filtrerParCategorie(cat)">
+                    {{ cat }}
+                </li>
+                <li class="reset-filter" (click)="getAllMateriels()">Afficher Tous</li>
+            </ul>
+        </div>
+
+        <!-- Liste des matériels -->
+        <div class="materiels-container">
+            <h2>Liste des Matériels</h2>
+            <div class="materiels-list">
+                <div class="materiel-card" *ngFor="let materiel of materiels">
+                    <div class="materiel-details">
+                        <h4>Nom: {{ materiel.nomMateriel }}</h4>
+                        <p>Catégorie: {{ materiel.categorie }}</p>
+                        <p>Quantité: {{ materiel.quantite }}</p>
+                        <p>Prix Unitaire: {{ materiel.prixMateriel }}</p>
+                        <div class="commande-container">
+                            <!-- Checkbox pour sélectionner le matériel -->
+                            <input type="checkbox" 
+                                   [checked]="materielSelectionne[materiel.idMateriel]" 
+                                   (change)="toggleCommande(materiel.idMateriel)">
+                            <span>Commander</span>
+
+                            <!-- Zone de saisie de la quantité et bouton de validation -->
+                            <div *ngIf="materielSelectionne[materiel.idMateriel]" class="commande-inputs">
+                                <input type="number" 
+                                       [(ngModel)]="quantites[materiel.idMateriel]" 
+                                       placeholder="Quantité demandée">
+                                <button (click)="passerCommande(materiel)">✔</button>
+                            </div>
+                        </div>
+
+                        <!-- Bouton Supprimer -->
+                        <button class="btn-delete" (click)="deleteMateriel(materiel.idMateriel)">
+                            <i class="fa fa-trash"></i> Supprimer
+                        </button>
+
+                        <!-- Bouton Modifier -->
+                        <button class="btn-edit" (click)="redirectToEditMateriel(materiel.idMateriel)">
+                            <i class="fa fa-pencil"></i> Modifier
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bouton pour ajouter un nouveau matériel -->
+            <div class="add-materiel-btn">
+                <button class="btn" (click)="redirectToAddMateriel()">
+                    <i class="fa fa-plus"></i> Ajouter un matériel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bouton "Passer la commande" -->
+    <button *ngIf="hasSelectedMateriels()" (click)="passerCommandeGlobale()" class="btn-commande">
+        Passer la commande
+    </button>
+</body>

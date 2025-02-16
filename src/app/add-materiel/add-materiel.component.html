@@ -1,0 +1,40 @@
+<app-headeer></app-headeer>
+<body>
+    <div class="add-materiel-form">
+        <h2>Ajouter un Matériel</h2>
+        <form (ngSubmit)="addMateriel()" #materielForm="ngForm">
+          <div>
+            <label for="nomMateriel">Nom du Matériel</label>
+            <input type="text" id="nomMateriel" [(ngModel)]="materiel.nomMateriel" name="nomMateriel" required #nomMateriel="ngModel">
+            <div *ngIf="nomMateriel.invalid && nomMateriel.touched" class="error-message">
+              Le nom du matériel est requis.
+            </div>
+          </div>
+          <div>
+            <label for="categorie">Catégorie</label>
+            <select id="categorie" [(ngModel)]="materiel.categorie" name="categorie" required #categorie="ngModel">
+              <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+            </select>
+            <div *ngIf="categorie.invalid && categorie.touched" class="error-message">
+              La catégorie est requise.
+            </div>
+          </div>
+          <div>
+            <label for="quantite">Quantité</label>
+            <input type="number" id="quantite" [(ngModel)]="materiel.quantite" name="quantite" required min="1" #quantite="ngModel">
+            <div *ngIf="quantite.invalid && quantite.touched" class="error-message">
+              La quantité doit être supérieure à 1.
+            </div>
+          </div>
+          <div>
+            <label for="prixMateriel">Quantité</label>
+            <input type="number" id="prixMateriel" [(ngModel)]="materiel.prixMateriel" name="prixMateriel" required min="1" step="0.01" #quantite="ngModel">
+            <div *ngIf="quantite.invalid && quantite.touched" class="error-message">
+              La quantité doit être supérieure à 1.
+            </div>
+          </div>
+         
+          <button type="submit" class="btn" [disabled]="materielForm.invalid">Ajouter</button>
+        </form>
+      </div>
+</body>

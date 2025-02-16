@@ -18,6 +18,12 @@ import { ServiceComponent } from './service/service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BackMenuAdminComponent } from './back-menu-admin/back-menu-admin.component';
 import { BackHeaderComponent } from './back-header/back-header.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HeadeerComponent } from './headeer/headeer.component';
+import { AddMaterielComponent } from './add-materiel/add-materiel.component';
+import { FormsModule } from '@angular/forms';
+import { EditMaterielComponent } from './edit-materiel/edit-materiel.component';
+import { CommandeComponent } from './commande/commande.component';
 
 @NgModule({
   declarations: [
@@ -30,17 +36,22 @@ import { BackHeaderComponent } from './back-header/back-header.component';
     RHComponent,
     FinanceComponent,
     InspectionComponent,
- 
     ContactComponent,
       InscriptionComponent,
       ServiceComponent,
       DashboardComponent,
       BackMenuAdminComponent,
-      BackHeaderComponent
+      BackHeaderComponent,
+      HeadeerComponent,
+      AddMaterielComponent,
+      EditMaterielComponent,
+      CommandeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule  
   ],
   providers: [],
   bootstrap: [AppComponent]

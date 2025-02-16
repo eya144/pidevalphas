@@ -1,0 +1,29 @@
+<div class="edit-materiel-container">
+    <h2>Modifier le Matériel</h2>
+    <form (ngSubmit)="saveMateriel()">
+      <div class="form-group">
+        <label for="nomMateriel">Nom du Matériel</label>
+        <input type="text" id="nomMateriel" [(ngModel)]="materiel.nomMateriel" name="nomMateriel" required />
+      </div>
+      <div class="form-group">
+        <label for="categorie">Catégorie</label>
+        <select id="categorie" [(ngModel)]="materiel.categorie" name="categorie" required>
+          <option *ngFor="let categorie of categories" [value]="categorie">{{ categorie }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="quantite">Quantité</label>
+        <input type="number" id="quantite" [(ngModel)]="materiel.quantite" name="quantite" required />
+      </div>
+      <div class="form-group">
+        <label for="prixMateriel">Prix Unitaire</label>
+        <input type="number" id="prixMateriel" [(ngModel)]="materiel.prixMateriel" name="prixMateriel" required />
+      </div>
+  
+      <div class="form-actions">
+        <button type="submit" class="btn-save">Sauvegarder</button>
+        <button type="button" class="btn-cancel" (click)="router.navigate(['/logistique'])">Annuler</button>
+      </div>
+    </form>
+  </div>
+  
