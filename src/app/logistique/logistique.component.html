@@ -10,12 +10,19 @@
                     {{ cat }}
                 </li>
                 <li class="reset-filter" (click)="getAllMateriels()">Afficher Tous</li>
+               
             </ul>
+            
         </div>
 
         <!-- Liste des matériels -->
         <div class="materiels-container">
-            <h2>Liste des Matériels</h2>
+            <div class="title-container">
+                <h2>Liste des Matériels</h2>
+                <a routerLink="/dashboardLogistique">
+                    <img src="assets/img/logistique/6820955.png" alt="image-dashboard" class="dashboard-image">
+                </a>
+            </div>
             <div class="materiels-list">
                 <div class="materiel-card" *ngFor="let materiel of materiels">
                     <div class="materiel-details">
@@ -62,7 +69,10 @@
     </div>
 
     <!-- Bouton "Passer la commande" -->
-    <button *ngIf="hasSelectedMateriels()" (click)="passerCommandeGlobale()" class="btn-commande">
-        Passer la commande
-    </button>
+
+<button *ngIf="hasSelectedMateriels()" (click)="passerCommandeGlobale()" class="btn-commande">
+    Passer la commande
+</button>
+
+
 </body>

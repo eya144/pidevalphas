@@ -8,10 +8,10 @@
       <th>Prix Unitaire</th>
       <th>Quantité Demandée</th>
       <th>Prix Total</th>
-      <th>Supprimer</th> 
+      <th>Supprimer</th>
     </tr>
     <tr *ngFor="let ligneCommande of lignesCommande">
-      <td>{{ ligneCommande.materiel.nomMateriel }}</td>
+      <td>{{ ligneCommande.materiel.nomMateriel }}</td>  <!-- Simplifiez cette ligne pour vérifier que les données sont bien présentes -->
       <td>{{ ligneCommande.prixUnitaire }}</td>
       <td>
         <input 
@@ -21,7 +21,6 @@
           (keydown.enter)="modifierLigneCommande(ligneCommande)"
         >
       </td>
-      
       <td>{{ ligneCommande.prixTotal }}</td>
       <td>
         <button (click)="supprimerLigneCommande(ligneCommande.idLigneCommande)">
@@ -30,6 +29,7 @@
       </td>
     </tr>
   </table>
-
-  <button (click)="validerCommande()">Confirmer la commande</button>
+  
+  <p>{{ lignesCommande.length }} lignes de commande</p> <!-- Affiche le nombre de lignes -->
+    <button (click)="validerCommande()">Confirmer la commande</button>
 </body>

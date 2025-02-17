@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { CommandeService } from 'serviceLogistique/commande.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LigneCommandeService } from 'serviceLogistique/ligne-commande.service';
 
 @Component({
@@ -9,26 +8,24 @@ import { LigneCommandeService } from 'serviceLogistique/ligne-commande.service';
   styleUrls: ['./commande.component.css']
 })
 export class CommandeComponent {
-  lignesCommande: any[] = [];  // Tableau pour stocker les lignes de commande
+  lignesCommande: any[] = [];
+  idCommande!: number;
 
   constructor(
     private ligneCommandeService: LigneCommandeService,
-    private commandeService: CommandeService,
-    private router: Router
+    private route: ActivatedRoute,
+
   ) { }
 
   ngOnInit(): void {
-    // Récupérer toutes les lignes de commande au moment de l'initialisation du composant
-    this.ligneCommandeService.getAllLigneCommande().subscribe(
-      (data) => {
-        this.lignesCommande = data;  // Assigner les données à la variable
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération des lignes de commande', error);
+    this.route.paramMap.subscribe(params => {
+      const idCommandeParam = params.get('idCommande');
+      if (idCommandeParam) {
+        this.idCommande = +idCommandeParam;
+        this.getLignesCommandeByCommande(this.idCommande);
       }
-    );
+    });
   }
-
   // Méthode pour calculer le prix total en fonction de la quantité
   calculerPrixTotal(ligneCommande: any): void {
     ligneCommande.prixTotal = ligneCommande.prixUnitaire * ligneCommande.quantite;
@@ -42,7 +39,8 @@ export class CommandeComponent {
     const commande = {
       prixTotal: prixTotal,
       ligneCommandes: this.lignesCommande,
-      idfournisseur: 1  // ID fournisseur par défaut
+      idfournisseur: 1 ,
+      status : "En_attente " // ID fournisseur par défaut
     };
   
    
@@ -75,5 +73,19 @@ export class CommandeComponent {
       }
     );
   }
+
+getLignesCommandeByCommande(idCommande: number): void {
+  console.log("ID Commande envoyé au backend:", idCommande);  // Vérifiez l'ID envoyé
+  this.ligneCommandeService.getLignesCommandeByCommande(idCommande).subscribe(
+    (data) => {
+      console.log('Données reçues:', data);
+      this.lignesCommande = data;
+      console.log('Nombre de lignes dans Angular:', this.lignesCommande.length);
+    },
+    (error) => {
+      console.error('Erreur lors de la récupération des lignes de commande', error);
+    }
+  );
+}
   
 }

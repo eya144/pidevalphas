@@ -1,0 +1,93 @@
+/* Style global */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding-top: 60px; /* Réduit l'espace top */
+    background-color: #121f2c; /* Couleur de fond sombre */
+    color: #ffffff; /* Texte en blanc pour contraster avec le fond sombre */
+}
+
+/* Conteneur principal du dashboard */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Drawer (menu latéral) */
+.drawer {
+    width: 250px;
+    background-color: #121f2c; /* Couleur de fond du drawer */
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-right: 2px solid #444c74;
+}
+
+.drawer h3 {
+    color: #ffffff; /* Titre du menu en blanc */
+    font-size: 1.6em;
+    margin-bottom: 20px;
+}
+
+.drawer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.drawer li {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #bbbbbb; /* Couleur du texte des items en gris clair */
+}
+
+.drawer li:hover {
+    background-color: #2a3d53; /* Fond plus clair au survol */
+    transform: translateX(5px);
+}
+
+.drawer li.active {
+    background-color: #007bff; /* Couleur du lien actif */
+    color: white;
+}
+
+/* Contenu principal du dashboard */
+.dashboard-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #1a2b3a; /* Fond du contenu principal */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+}
+
+/* Style des boutons dans le contenu */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Links dans le menu */
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+
+  

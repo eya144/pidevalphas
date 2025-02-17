@@ -24,4 +24,12 @@ export class LigneCommandeService {
   getAllLigneCommande(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/getAllLigneCommande`);
   }
+  supprimerLignesSansCommande(): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/supprimerLignesCommandeSansIdCommande`);
+  }
+  getLignesCommandeByCommande(idCommande: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/lignesCommande/${idCommande}`);
+  }
+  
+  
 }

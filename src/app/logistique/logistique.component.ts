@@ -74,50 +74,51 @@ export class LogistiqueComponent {
     this.router.navigate(['/commande']);
   }
 
-passerCommande(materiel: any): void {
-  const quantite = this.quantites[materiel.idMateriel];
-
-  if (!quantite || quantite <= 0) {
-    alert('Veuillez entrer une quantité valide.');
-    return;
+  passerCommande(materiel: any): void {
+    const quantite = this.quantites[materiel.idMateriel];
+  
+    if (!quantite || quantite <= 0) {
+      alert('Veuillez entrer une quantité valide.');
+      return;
+    }
+  
+    const nouvelleLigneCommande = {
+      prixUnitaire: materiel.prixMateriel,
+      quantite: quantite,
+      prixTotal: materiel.prixMateriel * quantite,
+      materiel: { idMateriel: materiel.idMateriel }
+    };
+  
+    // Vérifier si une ligne de commande existe déjà pour ce matériel
+    const ligneExistante = this.lignesCommande.find(l => l.materiel.idMateriel === materiel.idMateriel);
+  
+    if (ligneExistante) {
+      // Mettre à jour la ligne de commande existante
+      this.ligneCommandeService.modifierLigneCommande(ligneExistante.idLigneCommande, nouvelleLigneCommande).subscribe(
+        (response) => {
+          alert('Ligne de commande mise à jour avec succès !');
+          // Mettre à jour la liste des lignes de commande
+          const index = this.lignesCommande.findIndex(l => l.idLigneCommande === ligneExistante.idLigneCommande);
+          this.lignesCommande[index] = response;
+        },
+        (error) => {
+          console.error('Erreur lors de la mise à jour de la ligne de commande', error);
+        }
+      );
+    } else {
+      // Ajouter une nouvelle ligne de commande
+      this.ligneCommandeService.ajouterLigneCommande(nouvelleLigneCommande).subscribe(
+        (response) => {
+          alert('Ligne de commande ajoutée avec succès !');
+          this.lignesCommande.push(response); // Ajouter la nouvelle ligne à la liste
+        },
+        (error) => {
+          console.error('Erreur lors de l’ajout de la ligne de commande', error);
+        }
+      );
+    }
   }
-
-  const nouvelleLigneCommande = {
-    prixUnitaire: materiel.prixMateriel,
-    quantite: quantite,
-    prixTotal: materiel.prixMateriel * quantite,
-    materiel: { idMateriel: materiel.idMateriel }
-  };
-
-  // Vérifier si une ligne de commande existe déjà pour ce matériel
-  const ligneExistante = this.lignesCommande.find(l => l.materiel.idMateriel === materiel.idMateriel);
-
-  if (ligneExistante) {
-    // Mettre à jour la ligne de commande existante
-    this.ligneCommandeService.modifierLigneCommande(ligneExistante.idLigneCommande, nouvelleLigneCommande).subscribe(
-      (response) => {
-        alert('Ligne de commande mise à jour avec succès !');
-        // Mettre à jour la liste des lignes de commande
-        const index = this.lignesCommande.findIndex(l => l.idLigneCommande === ligneExistante.idLigneCommande);
-        this.lignesCommande[index] = response;
-      },
-      (error) => {
-        console.error('Erreur lors de la mise à jour de la ligne de commande', error);
-      }
-    );
-  } else {
-    // Ajouter une nouvelle ligne de commande
-    this.ligneCommandeService.ajouterLigneCommande(nouvelleLigneCommande).subscribe(
-      (response) => {
-        alert('Ligne de commande ajoutée avec succès !');
-        this.lignesCommande.push(response); // Ajouter la nouvelle ligne à la liste
-      },
-      (error) => {
-        console.error('Erreur lors de l’ajout de la ligne de commande', error);
-      }
-    );
-  }
-}
+// logistique.component.ts
 
 passerCommandeGlobale(): void {
   if (this.lignesCommande.length === 0) {
@@ -138,14 +139,28 @@ passerCommandeGlobale(): void {
   this.commandeService.ajouterCommande(nouvelleCommande).subscribe(
     response => {
       alert("Commande créée avec succès !");
+      
+      // Supprimer les lignes de commande qui n'ont pas de commande associée
+      this.ligneCommandeService.supprimerLignesSansCommande().subscribe(
+        () => {
+          console.log("Lignes de commande sans commande supprimées.");
+        },
+        error => {
+          console.error("Erreur lors de la suppression des lignes de commande sans commande", error);
+        }
+      );
+
       this.materielSelectionne = {}; // Réinitialiser la sélection
       this.quantites = {}; // Réinitialiser les quantités
       this.lignesCommande = []; // Réinitialiser la liste des lignes de commande
-      this.router.navigate(['/commande']); // Redirection vers l'interface /commande
+      const idCommandeCreee = response.idCommande; // Récupérer l'ID de la commande créée
+      
+      this.router.navigate(['/commande', idCommandeCreee]); // Naviguer vers la page des commandes filtrées// Redirection vers l'interface /commande
     },
     error => {
       console.error("Erreur lors de la création de la commande", error);
     }
   );
 }
+
 }

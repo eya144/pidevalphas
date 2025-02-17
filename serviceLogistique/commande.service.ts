@@ -14,6 +14,8 @@ export class CommandeService {
     ajouterCommande(commande: any): Observable<any> {
       return this.http.post<any>(`${this.baseUrl}/ajouterCommande`, commande);
     }
-          
-    
+    getAllCommandes(): Observable<any> {
+      return this.http.get<any>(`${this.baseUrl}/getAllCommande`);
+    }
+
 }

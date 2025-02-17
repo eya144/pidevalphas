@@ -15,6 +15,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddMaterielComponent } from './add-materiel/add-materiel.component';
 import { EditMaterielComponent } from './edit-materiel/edit-materiel.component';
 import { CommandeComponent } from './commande/commande.component';
+import { DashboardLogistiqueComponent } from './dashboard-logistique/dashboard-logistique.component';
+import { CommandeDashComponent } from './commande-dash/commande-dash.component';
+import { StocksComponent } from './stocks/stocks.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -29,13 +32,19 @@ const routes: Routes = [
   { path: 'inscrire', component: InscriptionComponent },
   { path: 'service', component: ServiceComponent },
   { path: 'service', component: ServiceComponent }, 
-   { path: 'dashboard', component: DashboardComponent },
-   { path: 'addMateriel', component: AddMaterielComponent },
-   { path: 'editMateriel/:id', component: EditMaterielComponent }, 
-   { path: 'commande', component: CommandeComponent },
-
-
-  
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'addMateriel', component: AddMaterielComponent },
+  { path: 'editMateriel/:id', component: EditMaterielComponent }, 
+  { path: 'commande/:idCommande', component: CommandeComponent },
+  {
+    path: 'dashboardLogistique',
+    component: DashboardLogistiqueComponent,
+    children: [
+      { path: 'overview', component: StocksComponent }, // Vue d'ensemble des stocks
+      { path: 'orders', component: CommandeDashComponent }, // Suivi des commandes fournisseurs
+     
+    ],
+  },
 
   { path: '', redirectTo:'/home',pathMatch:'full' }
 ];

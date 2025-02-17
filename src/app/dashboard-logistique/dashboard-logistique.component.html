@@ -1,0 +1,22 @@
+<app-back-header></app-back-header>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Drawer -->
+        <div class="drawer">
+          <h3>Menu</h3>
+          <ul>
+            <li routerLink="/dashboardLogistique/overview" routerLinkActive="active">Vue d'ensemble des stocks</li>
+            <li routerLink="/dashboardLogistique/orders" routerLinkActive="active">Suivi des commandes fournisseurs</li>
+            <li routerLink="/dashboardLogistique/material-assignment" routerLinkActive="active">Affectation du matériel aux projets</li>
+            <li routerLink="/dashboardLogistique/statistics" routerLinkActive="active">Statistiques et performance</li>
+            <li routerLink="/dashboardLogistique/notifications" routerLinkActive="active">Notifications et alertes</li>
+          </ul>
+        </div>
+      
+        <!-- Contenu principal du dashboard -->
+        <div class="dashboard-content">
+            <router-outlet></router-outlet> 
+        </div>
+      </div>
+</body>

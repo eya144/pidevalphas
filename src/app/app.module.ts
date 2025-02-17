@@ -24,6 +24,9 @@ import { AddMaterielComponent } from './add-materiel/add-materiel.component';
 import { FormsModule } from '@angular/forms';
 import { EditMaterielComponent } from './edit-materiel/edit-materiel.component';
 import { CommandeComponent } from './commande/commande.component';
+import { DashboardLogistiqueComponent } from './dashboard-logistique/dashboard-logistique.component';
+import { CommandeDashComponent } from './commande-dash/commande-dash.component';
+import { StocksComponent } from './stocks/stocks.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { CommandeComponent } from './commande/commande.component';
       HeadeerComponent,
       AddMaterielComponent,
       EditMaterielComponent,
-      CommandeComponent
+      CommandeComponent,
+      DashboardLogistiqueComponent,
+      CommandeDashComponent,
+      StocksComponent
   ],
   imports: [
     BrowserModule,
