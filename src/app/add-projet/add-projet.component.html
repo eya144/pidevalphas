@@ -1,0 +1,118 @@
+<div class="container">
+    <h2>Ajouter un projet</h2>
+  
+    <form [formGroup]="projetForm" (ngSubmit)="ajouterProjet()">
+      <div class="form-group">
+        <label for="nom">Nom du Projet</label>
+        <input type="text" id="nom" formControlName="nom" class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description" class="form-control"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="typeProjet">Type de Projet</label>
+        <select id="typeProjet" formControlName="typeProjet" class="form-control">
+          <option value="Construction">Construction</option>
+          <option value="Rénovation">Rénovation</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="status">Statut</label>
+        <select id="status" formControlName="status" class="form-control">
+          <option value="En cours">En cours</option>
+          <option value="Terminé">Terminé</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="budgetInitial">Budget Initial (EUR)</label>
+        <input type="number" id="budgetInitial" formControlName="budgetInitial" class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="dateDebut">Date de Début</label>
+        <input type="text" id="dateDebut" formControlName="dateDebut" class="form-control" placeholder="jj/mm/aaaa" />
+      </div>
+  
+      <div class="form-group">
+        <label for="dateFinPrevue">Date de Fin Prévue</label>
+        <input type="text" id="dateFinPrevue" formControlName="dateFinPrevue" class="form-control" placeholder="jj/mm/aaaa" />
+      </div>
+  
+      <div class="form-group">
+        <label for="adresse">Adresse</label>
+        <input type="text" id="adresse" formControlName="adresse" class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="latitude">Latitude</label>
+        <input type="text" id="latitude" formControlName="latitude" class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="longitude">Longitude</label>
+        <input type="text" id="longitude" formControlName="longitude" class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="maitreOuvrage">Maître d'Ouvrage</label>
+        <input type="text" id="maitreOuvrage" formControlName="maitreOuvrage" class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="maitreOeuvre">Maître d'Œuvre</label>
+        <input type="text" id="maitreOeuvre" formControlName="maitreOeuvre" class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="entrepreneurPrincipal">Entrepreneur Principal</label>
+        <input type="text" id="entrepreneurPrincipal" formControlName="entrepreneurPrincipal" class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="chefProjetId">Chef de Projet (ID)</label>
+        <input type="number" id="chefProjetId" formControlName="chefProjetId" class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="permisConstruction">Permis de Construction</label>
+        <input type="checkbox" id="permisConstruction" formControlName="permisConstruction" />
+      </div>
+  
+      <div class="form-group">
+        <label for="progression">Progression (%)</label>
+        <input type="number" id="progression" formControlName="progression" class="form-control" min="0" max="100" />
+      </div>
+  
+      <div class="form-group">
+        <label for="risquesIdentifies">Risques Identifiés</label>
+        <textarea id="risquesIdentifies" formControlName="risquesIdentifies" class="form-control"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="contraintes">Contraintes</label>
+        <textarea id="contraintes" formControlName="contraintes" class="form-control"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="missions">Missions</label>
+        <input type="text" id="missions" formControlName="missions" class="form-control" placeholder="séparées par des virgules" />
+      </div>
+  
+      <div class="form-group">
+        <label for="membresEquipeIds">Membres de l'Équipe (IDs)</label>
+        <input type="text" id="membresEquipeIds" formControlName="membresEquipeIds" class="form-control" placeholder="séparés par des virgules" />
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Ajouter le Projet</button>
+  
+      <div *ngIf="message" [ngClass]="messageType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
+        {{ message }}
+      </div>
+    </form>
+  </div>
+  

@@ -1,0 +1,40 @@
+<div *ngIf="message" [ngClass]="'alert ' + (messageType === 'success' ? 'alert-success' : 'alert-danger')">
+    {{ message }}
+  </div>
+  
+  <div class="projets-container">
+    <div *ngIf="!selectedProjet">
+      <button class="btn-add" (click)="goToAddProjet()">➕ Ajouter un projet</button>
+    </div>
+  
+    <div *ngIf="projets.length > 0">
+      <div class="projets-list">
+        <div *ngFor="let projet of projets" class="projet-item">
+          <div class="projet-header">
+            <h3>{{ projet.nom }}</h3>
+            <span class="projet-status" [ngClass]="{
+              'status-success': projet.status === 'Terminé',
+              'status-pending': projet.status === 'En Cours',
+              'status-delayed': projet.status === 'Retard'
+            }">{{ projet.status }}</span>
+          </div>
+          <p class="projet-description">{{ projet.description }}</p>
+          <div class="projet-actions">
+            <button class="btn-edit" (click)="editProjet(projet)">✏️ Modifier</button>
+            <button class="btn-delete" (click)="deleteProjet(projet.idProjet)">🗑️ Supprimer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedProjet" class="projet-details-modal">
+      <div class="modal-content">
+        <h2>{{ selectedProjet.nom }}</h2>
+        <p><strong>Description:</strong> {{ selectedProjet.description }}</p>
+        <p><strong>Budget initial:</strong> {{ selectedProjet.budgetInitial | currency }}</p>
+        <p><strong>Progression:</strong> {{ selectedProjet.progression }}%</p>
+        <button class="btn-close" (click)="closeDetails()">❌ Fermer</button>
+      </div>
+    </div>
+  </div>
+  

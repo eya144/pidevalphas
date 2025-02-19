@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ProductComponent } from './product/product.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 import { RHComponent } from './rh/rh.component';
@@ -12,10 +11,11 @@ import { ContactComponent } from './contact/contact.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ServiceComponent } from './service/service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProjetComponent } from './projet/projet.component';
+import { AddProjetComponent } from './add-projet/add-projet.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'produit', component: ProductComponent },
   { path: 'about', component: AboutComponent },
   { path: 'RH', component: RHComponent },
   { path: 'logistique', component: LogistiqueComponent },
@@ -25,15 +25,12 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'inscrire', component: InscriptionComponent },
   { path: 'service', component: ServiceComponent },
-  { path: 'service', component: ServiceComponent }, 
-   { path: 'dashboard', component: DashboardComponent },
-  
-  
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'projet', component: ProjetComponent },
+  { path: 'projets/ajouter', component: AddProjetComponent },
 
-  { path: '', redirectTo:'/home',pathMatch:'full' }
+  { path: '', redirectTo:'/home', pathMatch: 'full' }
 ];
-
- 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
