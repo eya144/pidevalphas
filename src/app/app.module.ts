@@ -11,6 +11,8 @@ import { LogistiqueComponent } from './logistique/logistique.component';
 import { RHComponent } from './rh/rh.component';
 import { FinanceComponent } from './finance/finance.component';
 import { InspectionComponent } from './inspection/inspection.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'; 
 
 import { ContactComponent } from './contact/contact.component';
 import { InscriptionComponent } from './inscription/inscription.component';
@@ -18,6 +20,7 @@ import { ServiceComponent } from './service/service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BackMenuAdminComponent } from './back-menu-admin/back-menu-admin.component';
 import { BackHeaderComponent } from './back-header/back-header.component';
+import { AddFinanceComponent } from './add-finance/add-finance.component';
 
 @NgModule({
   declarations: [
@@ -36,11 +39,14 @@ import { BackHeaderComponent } from './back-header/back-header.component';
       ServiceComponent,
       DashboardComponent,
       BackMenuAdminComponent,
-      BackHeaderComponent
+      BackHeaderComponent,
+      AddFinanceComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule ,
+    ReactiveFormsModule ,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

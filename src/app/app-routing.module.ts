@@ -12,6 +12,7 @@ import { ContactComponent } from './contact/contact.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ServiceComponent } from './service/service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AddFinanceComponent } from './add-finance/add-finance.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -27,6 +28,8 @@ const routes: Routes = [
   { path: 'service', component: ServiceComponent },
   { path: 'service', component: ServiceComponent }, 
    { path: 'dashboard', component: DashboardComponent },
+   { path: 'add-finance', component:AddFinanceComponent },
+
   
   
 
