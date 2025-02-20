@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DemandeEmploiService {
+  organiserEntretien(entretienData: { dateEntretien: string; typeEntretient: string; lienMeet: string | null; }) {
+    throw new Error('Method not implemented.');
+  }
   
   private apiUrl = 'http://localhost:8082/pidev/Api/entretien';
 
@@ -20,5 +23,22 @@ export class DemandeEmploiService {
   updateDemandeEmploi(demande: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/updateDemandeEmploi/${demande.idDemandeEmploi}`, demande);
   }
+  getAllDemandesEmploi(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/getAllDemandeEmploi`);
+  }
+  changerStatutDemande(id: number, nouveauStatut: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/updateStatut/${id}`, { status: nouveauStatut });
+  }
+  supprimerDemandeEmploi(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/deleteDemandeEmploiById/${id}`);
+}
+
+passerEntretien(idDemandeEmploi: number): Observable<any> {
+  return this.http.post(`${this.apiUrl}/ajouter/${idDemandeEmploi}`, {});
+}
+modifierEntretien(idDemande: number, entretienData: any): Observable<any> {
+  return this.http.put(`${this.apiUrl}/modifier/${idDemande}`, entretienData);
+}
+
   
 }

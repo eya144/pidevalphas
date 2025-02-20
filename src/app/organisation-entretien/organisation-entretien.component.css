@@ -1,0 +1,81 @@
+body {
+    padding-top: 350px;
+    background: linear-gradient(to bottom, #f2f2f2, #d1e0e0); /* Dégradé de fond */
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    background-color: #ffffff; /* Fond blanc pour le formulaire */
+    border-radius: 10px; /* Coins arrondis */
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Ombre portée */
+    width: 60%; /* Largeur du formulaire */
+    margin: 0 auto; /* Centré horizontalement */
+    font-size: 1.1em;
+}
+
+h2 {
+    text-align: center; /* Centrer le titre */
+    color: #333; /* Couleur du texte */
+    font-weight: 600;
+}
+
+label {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    display: block;
+    color: #555;
+}
+
+input[type="datetime-local"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+input[type="datetime-local"]:focus,
+input[type="text"]:focus {
+    border-color: #5cb85c; /* Bordure verte quand l'input est sélectionné */
+    outline: none;
+}
+
+.checkbox-container {
+    margin-bottom: 20px;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    width: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: #1f3852; /* Effet hover sur le bouton */
+}
+
+button[type="button"] {
+    background-color: #27387b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button[type="button"]:hover {
+    background-color: rgb(9, 11, 71);
+}
+
+.app-footer-home {
+    margin-top: 50px;
+}

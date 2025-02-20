@@ -31,8 +31,8 @@ import { CommandeFournisseurComponent } from './commande-fournisseur/commande-fo
 import { DemandeEmploiComponent } from './demande-emploi/demande-emploi.component';
 import { FooterHomeComponent } from './footer-home/footer-home.component';
 import { DetailsDemandeEmploiComponent } from './details-demande-emploi/details-demande-emploi.component';
-import { EntretientComponent } from './entretient/entretient.component';
 import { EntretienComponent } from './entretien/entretien.component';
+import { OrganisationEntretienComponent } from './organisation-entretien/organisation-entretien.component';
 
 @NgModule({
   declarations: [
@@ -62,8 +62,8 @@ import { EntretienComponent } from './entretien/entretien.component';
       DemandeEmploiComponent,
       FooterHomeComponent,
       DetailsDemandeEmploiComponent,
-      EntretientComponent,
-      EntretienComponent
+      EntretienComponent,
+      OrganisationEntretienComponent
   ],
   imports: [
     BrowserModule,

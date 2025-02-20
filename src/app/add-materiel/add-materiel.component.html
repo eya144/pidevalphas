@@ -27,7 +27,7 @@
             </div>
           </div>
           <div>
-            <label for="prixMateriel">Quantité</label>
+            <label for="prixMateriel">Prix</label>
             <input type="number" id="prixMateriel" [(ngModel)]="materiel.prixMateriel" name="prixMateriel" required min="1" step="0.01" #quantite="ngModel">
             <div *ngIf="quantite.invalid && quantite.touched" class="error-message">
               La quantité doit être supérieure à 1.

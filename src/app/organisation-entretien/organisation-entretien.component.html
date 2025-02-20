@@ -1,0 +1,34 @@
+<app-headeer></app-headeer>
+<body>
+    
+    <div class="container">
+        <h2>Organisation de l'Entretien</h2>
+      
+        <form (ngSubmit)="validerEntretien()">
+          <!-- Sélection de la date -->
+          <label for="dateEntretien">Date et Heure de l'entretien :</label>
+          <input type="datetime-local" id="dateEntretien" [(ngModel)]="dateEntretien" name="dateEntretien" required />
+      
+          <!-- Type d'entretien -->
+          <div class="checkbox-container">
+            <label>
+              <input type="checkbox" [(ngModel)]="estEnLigne" name="estEnLigne" (change)="gererTypeEntretien()" />
+              Entretien en ligne
+            </label>
+          </div>
+      
+          <!-- Lien Meet (affiché uniquement si en ligne) -->
+          <div *ngIf="estEnLigne">
+            <label for="lienMeet">Lien Google Meet :</label>
+            <input type="text" id="lienMeet" [(ngModel)]="lienMeet" name="lienMeet" required />
+            <button type="button" (click)="genererLienMeet()">Générer un lien Meet</button>
+          </div>
+      
+          <button type="submit" class="btn-save">Valider l'entretien</button>
+        </form>
+      </div>
+      
+    
+</body>
+
+<app-footer-home></app-footer-home>
