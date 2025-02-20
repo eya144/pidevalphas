@@ -1,0 +1,58 @@
+<app-headeer></app-headeer>
+
+<body>
+  <div class="form-container">
+    <form [formGroup]="demandeEmploiForm" (ngSubmit)="onSubmit()">
+      <div class="form-field">
+        <label for="nom">Nom :</label>
+        <input id="nom" type="text" formControlName="nom" />
+        <div *ngIf="demandeEmploiForm.controls['nom'].invalid && demandeEmploiForm.controls['nom'].touched">
+          Le nom est requis.
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="prenom">Prénom :</label>
+        <input id="prenom" type="text" formControlName="prenom" />
+        <div *ngIf="demandeEmploiForm.controls['prenom'].invalid && demandeEmploiForm.controls['prenom'].touched">
+          Le prénom est requis.
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="age">Âge :</label>
+        <input id="age" type="number" formControlName="age" />
+        <div *ngIf="demandeEmploiForm.controls['age'].invalid && demandeEmploiForm.controls['age'].touched">
+          L'âge est requis (minimum 18 ans).
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="experience">Expérience :</label>
+        <input id="experience" type="text" formControlName="experience" />
+        <div *ngIf="demandeEmploiForm.controls['experience'].invalid && demandeEmploiForm.controls['experience'].touched">
+          L'expérience est requise.
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="adresseMail">Adresse Email :</label>
+        <input id="adresseMail" type="email" formControlName="adresseMail" />
+        <div *ngIf="demandeEmploiForm.controls['adresseMail'].invalid && demandeEmploiForm.controls['adresseMail'].touched">
+          L'adresse email est requise et doit être valide.
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="specialite">Spécialité :</label>
+        <input id="specialite" type="text" formControlName="specialite" />
+        <div *ngIf="demandeEmploiForm.controls['specialite'].invalid && demandeEmploiForm.controls['specialite'].touched">
+          La spécialité est requise.
+        </div>
+      </div>
+      <button type="submit" [disabled]="demandeEmploiForm.invalid">Soumettre</button>
+    </form>
+  </div>
+
+</body>
+
+<app-footer-home></app-footer-home>

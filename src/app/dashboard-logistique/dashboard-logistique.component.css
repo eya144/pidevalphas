@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding-top: 60px; /* Réduit l'espace top */
     background-color: #121f2c; /* Couleur de fond sombre */
-    color: #ffffff; /* Texte en blanc pour contraster avec le fond sombre */
+    color: #040000; /* Texte en blanc pour contraster avec le fond sombre */
 }
 
 /* Conteneur principal du dashboard */
@@ -48,7 +48,7 @@ body {
 }
 
 .drawer li.active {
-    background-color: #007bff; /* Couleur du lien actif */
+    background-color: #345a83; /* Couleur du lien actif */
     color: white;
 }
 

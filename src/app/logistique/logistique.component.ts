@@ -133,7 +133,7 @@ passerCommandeGlobale(): void {
     idfournisseur: null,  // Ajoutez un fournisseur si nécessaire
     dateCreation: new Date(),
     prixTotal: prixTotalCommande,
-    ligneCommandes: this.lignesCommande
+    ligneCommandes: this.lignesCommande // Assurez-vous que cette liste est initialisée
   };
 
   this.commandeService.ajouterCommande(nouvelleCommande).subscribe(
@@ -155,7 +155,7 @@ passerCommandeGlobale(): void {
       this.lignesCommande = []; // Réinitialiser la liste des lignes de commande
       const idCommandeCreee = response.idCommande; // Récupérer l'ID de la commande créée
       
-      this.router.navigate(['/commande', idCommandeCreee]); // Naviguer vers la page des commandes filtrées// Redirection vers l'interface /commande
+      this.router.navigate(['/commande', idCommandeCreee]); // Naviguer vers la page des commandes filtrées
     },
     error => {
       console.error("Erreur lors de la création de la commande", error);

@@ -21,11 +21,13 @@ export class CommandeComponent {
     this.route.paramMap.subscribe(params => {
       const idCommandeParam = params.get('idCommande');
       if (idCommandeParam) {
-        this.idCommande = +idCommandeParam;
+        this.idCommande = +idCommandeParam;  // Convertir en nombre
+        console.log("ID Commande récupéré:", this.idCommande);  // 🔥 Vérification
         this.getLignesCommandeByCommande(this.idCommande);
       }
     });
   }
+  
   // Méthode pour calculer le prix total en fonction de la quantité
   calculerPrixTotal(ligneCommande: any): void {
     ligneCommande.prixTotal = ligneCommande.prixUnitaire * ligneCommande.quantite;
@@ -74,18 +76,18 @@ export class CommandeComponent {
     );
   }
 
-getLignesCommandeByCommande(idCommande: number): void {
-  console.log("ID Commande envoyé au backend:", idCommande);  // Vérifiez l'ID envoyé
-  this.ligneCommandeService.getLignesCommandeByCommande(idCommande).subscribe(
-    (data) => {
-      console.log('Données reçues:', data);
-      this.lignesCommande = data;
-      console.log('Nombre de lignes dans Angular:', this.lignesCommande.length);
-    },
-    (error) => {
-      console.error('Erreur lors de la récupération des lignes de commande', error);
-    }
-  );
-}
+  getLignesCommandeByCommande(idCommande: number): void {
+    console.log("ID Commande envoyé au backend:", idCommande);  
+    this.ligneCommandeService.getLignesCommandeByCommande(idCommande).subscribe(
+      (data) => {
+        console.log('Réponse reçue du backend:', data);  
+        this.lignesCommande = data;
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des lignes de commande', error);
+      }
+    );
+  }
+  
   
 }

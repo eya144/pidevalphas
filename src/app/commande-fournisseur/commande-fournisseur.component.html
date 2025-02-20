@@ -1,0 +1,35 @@
+<app-headeer></app-headeer>
+<body>
+  <h2>Liste des commandes du fournisseur</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Prix Total</th>
+        <th>Date de création</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let commande of commandes">
+        <td>{{ commande.prixTotal | currency:'Dt ':'symbol':'1.2-2' }}</td>
+        <td>{{ commande.dateCreation | date:'dd/MM/yyyy' }}</td>
+        <td>{{ commande.status }}</td>
+        <td>
+          <button class="btn-accepter" 
+                  (click)="modifierCommande(commande.idCommande, 'Accepte')"
+                  [disabled]="commande.status === 'Accepte'">
+            Accepter
+          </button>
+    
+          <button class="btn-refuser" 
+                  (click)="modifierCommande(commande.idCommande, 'Refuse')"
+                  [disabled]="commande.status === 'Refuse'">
+            Refuser
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>

@@ -18,6 +18,9 @@ import { CommandeComponent } from './commande/commande.component';
 import { DashboardLogistiqueComponent } from './dashboard-logistique/dashboard-logistique.component';
 import { CommandeDashComponent } from './commande-dash/commande-dash.component';
 import { StocksComponent } from './stocks/stocks.component';
+import { CommandeFournisseurComponent } from './commande-fournisseur/commande-fournisseur.component';
+import { DemandeEmploiComponent } from './demande-emploi/demande-emploi.component';
+import { DetailsDemandeEmploiComponent } from './details-demande-emploi/details-demande-emploi.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -45,7 +48,9 @@ const routes: Routes = [
      
     ],
   },
-
+  { path: 'commandeFournisseur', component: CommandeFournisseurComponent },
+  { path: 'demandeEmploi', component: DemandeEmploiComponent },
+  { path: 'demandeEmploi/details/:id', component: DetailsDemandeEmploiComponent },
   { path: '', redirectTo:'/home',pathMatch:'full' }
 ];
 

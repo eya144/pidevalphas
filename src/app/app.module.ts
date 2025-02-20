@@ -21,12 +21,18 @@ import { BackHeaderComponent } from './back-header/back-header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeadeerComponent } from './headeer/headeer.component';
 import { AddMaterielComponent } from './add-materiel/add-materiel.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditMaterielComponent } from './edit-materiel/edit-materiel.component';
 import { CommandeComponent } from './commande/commande.component';
 import { DashboardLogistiqueComponent } from './dashboard-logistique/dashboard-logistique.component';
 import { CommandeDashComponent } from './commande-dash/commande-dash.component';
 import { StocksComponent } from './stocks/stocks.component';
+import { CommandeFournisseurComponent } from './commande-fournisseur/commande-fournisseur.component';
+import { DemandeEmploiComponent } from './demande-emploi/demande-emploi.component';
+import { FooterHomeComponent } from './footer-home/footer-home.component';
+import { DetailsDemandeEmploiComponent } from './details-demande-emploi/details-demande-emploi.component';
+import { EntretientComponent } from './entretient/entretient.component';
+import { EntretienComponent } from './entretien/entretien.component';
 
 @NgModule({
   declarations: [
@@ -51,13 +57,20 @@ import { StocksComponent } from './stocks/stocks.component';
       CommandeComponent,
       DashboardLogistiqueComponent,
       CommandeDashComponent,
-      StocksComponent
+      StocksComponent,
+      CommandeFournisseurComponent,
+      DemandeEmploiComponent,
+      FooterHomeComponent,
+      DetailsDemandeEmploiComponent,
+      EntretientComponent,
+      EntretienComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule  
+    FormsModule  ,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

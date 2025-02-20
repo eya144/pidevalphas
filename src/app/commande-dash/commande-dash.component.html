@@ -1,1 +1,52 @@
-<p>commande-dash works!</p>
+<h2>Liste des commandes</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Prix Total</th>
+      <th>Date de création</th>
+      <th>Statut</th>
+      <th>Fournisseur</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let commande of commandes">
+      <!-- Afficher les détails des lignes de commande au-dessus -->
+      <tr *ngIf="lignesCommandeVisible[commande.idCommande]">
+        <td colspan="5">
+          <table>
+            <thead>
+              <tr>
+                <th>Matériel</th>
+                <th>Quantité</th>
+                <th>Prix Unitaire</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ligne of lignesCommande[commande.idCommande]">
+                <td>{{ ligne.materiel?.nomMateriel }}</td>
+                <td>{{ ligne.quantite }}</td>
+                <td>{{ ligne.prixUnitaire | currency:'Dt ':'symbol':'1.2-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <!-- Ligne principale de la commande -->
+      <tr>
+        <td>{{ commande.prixTotal | currency:'Dt ':'symbol':'1.2-2' }}</td>
+        <td>{{ commande.dateCreation | date:'dd/MM/yyyy' }}</td>
+        <td>{{ commande.status }}</td>
+        <td>{{ commande.idfournisseur }}</td>
+        <td>
+          <button (click)="toggleLignesCommande(commande.idCommande)">
+            <i class="fas fa-eye" style="color: rgb(28, 28, 54);"></i>
+          </button>
+          <button (click)="supprimerCommande(commande.idCommande)">
+            <i class="fas fa-trash-alt" style="color: rgb(176, 38, 38);"></i>
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
