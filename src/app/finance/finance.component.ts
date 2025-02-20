@@ -19,9 +19,8 @@ export class FinanceComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private financeService: FinanceService ,
-    private router:Router
-
+    private financeService: FinanceService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -45,7 +44,6 @@ export class FinanceComponent implements OnInit {
 
   toggleAddForm(): void {
     this.router.navigate(['/add-finance']);
-    
   }
 
   addFacture(formData: any): void {
@@ -73,10 +71,7 @@ export class FinanceComponent implements OnInit {
   }
 
   updateFacture(facture: Facture): void {
-    this.factureForm.patchValue(facture);
-    this.isEditing = true;
-    this.editingFactureId = facture.idFacture;
-    this.showAddForm = true;
+    this.router.navigate(['/edit-finance', facture.idFacture]); // Rediriger vers la page d'édition
   }
 
   private getAllFactures(): void {

@@ -21,6 +21,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BackMenuAdminComponent } from './back-menu-admin/back-menu-admin.component';
 import { BackHeaderComponent } from './back-header/back-header.component';
 import { AddFinanceComponent } from './add-finance/add-finance.component';
+import { EditFinanceComponent } from './edit-finance/edit-finance.component';
+import { PaiementComponent } from './paiement/paiement.component';
+import { AddPaiementComponent } from './add-paiement/add-paiement.component';
+import { EditPaiementComponent } from './edit-paiement/edit-paiement.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { AddFinanceComponent } from './add-finance/add-finance.component';
       DashboardComponent,
       BackMenuAdminComponent,
       BackHeaderComponent,
-      AddFinanceComponent
+      AddFinanceComponent,
+      EditFinanceComponent,
+      PaiementComponent,
+      AddPaiementComponent,
+      EditPaiementComponent
   ],
   imports: [
     BrowserModule,

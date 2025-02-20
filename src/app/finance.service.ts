@@ -36,7 +36,7 @@ export class FinanceService {
   }
 
   // Met à jour une facture existante
-  updateFacture(editingFactureId: number, facture: Facture): Observable<Facture> {
-    return this.http.put<Facture>(`${this.apiUrl}/${facture.idFacture}`, facture);
+  updateFacture(idFacture: number, facture: Facture): Observable<Facture> {
+    return this.http.put<Facture>(`${this.apiUrl}/${idFacture}`, facture);
   }
 }

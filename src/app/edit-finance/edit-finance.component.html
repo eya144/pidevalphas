@@ -1,0 +1,67 @@
+<div class="container mt-5">
+    <div class="form-container">
+      <h2 class="form-title">Modifier la Facture</h2>
+      <form (ngSubmit)="onSubmit()" [formGroup]="factureForm" class="invoice-form">
+        <!-- ID Commande -->
+        <div class="form-group">
+          <label for="idCommande" class="form-label">ID Commande :</label>
+          <input type="number" id="idCommande" formControlName="idCommande" class="form-control" required>
+        </div>
+  
+        <!-- ID Responsable Logistique -->
+        <div class="form-group">
+          <label for="idResponsableLogistique" class="form-label">ID Responsable Logistique :</label>
+          <input type="number" id="idResponsableLogistique" formControlName="idResponsableLogistique" class="form-control" required>
+        </div>
+  
+        <!-- ID Fournisseur -->
+        <div class="form-group">
+          <label for="idFournisseur" class="form-label">ID Fournisseur :</label>
+          <input type="number" id="idFournisseur" formControlName="idFournisseur" class="form-control" required>
+        </div>
+  
+        <!-- ID Utilisateur -->
+        <div class="form-group">
+          <label for="idUtilisateur" class="form-label">ID Utilisateur :</label>
+          <input type="number" id="idUtilisateur" formControlName="idUtilisateur" class="form-control" required>
+        </div>
+  
+        <!-- Montant Total -->
+        <div class="form-group">
+          <label for="montantTotal" class="form-label">Montant Total :</label>
+          <input type="number" step="0.01" id="montantTotal" formControlName="montantTotal" class="form-control" required>
+        </div>
+  
+        <!-- Date Facture -->
+        <div class="form-group">
+          <label for="dateFacture" class="form-label">Date Facture :</label>
+          <input type="date" id="dateFacture" formControlName="dateFacture" class="form-control" required>
+        </div>
+  
+        <!-- Date Échéance -->
+        <div class="form-group">
+          <label for="dateEcheance" class="form-label">Date Échéance :</label>
+          <input type="date" id="dateEcheance" formControlName="dateEcheance" class="form-control" required>
+        </div>
+  
+        <!-- Montant Total Hors Taxe -->
+        <div class="form-group">
+          <label for="montantTotalHorsTaxe" class="form-label">Montant Total Hors Taxe :</label>
+          <input type="number" step="0.01" id="montantTotalHorsTaxe" formControlName="montantTotalHorsTaxe" class="form-control" required>
+        </div>
+  
+        <!-- TVA -->
+        <div class="form-group">
+          <label for="tva" class="form-label">Taxe :</label>
+          <input type="number" step="0.01" id="tva" formControlName="tva" class="form-control" required>
+        </div>
+  
+        <!-- Bouton de soumission -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" [disabled]="factureForm.invalid">Mettre à jour</button>
+          <button type="button" class="btn btn-secondary" (click)="annuler()">Annuler</button>
+
+        </div>
+      </form>
+    </div>
+  </div>

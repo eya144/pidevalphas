@@ -1,0 +1,41 @@
+<div class="container mt-5">
+    <h2>Modifier un Paiement</h2>
+    <form [formGroup]="paiementForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="idUtilisateur" class="form-label">ID Utilisateur</label>
+        <input type="number" id="idUtilisateur" class="form-control" formControlName="idUtilisateur" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="idContrat" class="form-label">ID Contrat</label>
+        <input type="number" id="idContrat" class="form-control" formControlName="idContrat" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="montant" class="form-label">Montant</label>
+        <input type="number" id="montant" class="form-control" formControlName="montant">
+      </div>
+  
+      <div class="mb-3">
+        <label for="datePaiement" class="form-label">Date de Paiement</label>
+        <input type="date" id="datePaiement" class="form-control" formControlName="datePaiement">
+      </div>
+  
+      <div class="mb-3">
+        <label for="payment" class="form-label">Méthode de Paiement</label>
+        <select id="payment" class="form-control" formControlName="payment">
+          <option value="Carte Bancaire">Carte</option>
+          <option value="Virement">Virement</option>
+          <option value="Chèque">Chèque</option>
+        </select>
+      </div>
+  
+      <div class="mb-3">
+        <label for="numeroCarte" class="form-label">Numéro de Carte</label>
+        <input type="text" id="numeroCarte" class="form-control" formControlName="numeroCarte">
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="paiementForm.invalid">Modifier</button>
+      <button type="button" class="btn btn-secondary" (click)="annuler()">Annuler</button>
+    </form>
+  </div>
+  

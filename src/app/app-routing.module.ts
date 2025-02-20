@@ -13,6 +13,9 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { ServiceComponent } from './service/service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddFinanceComponent } from './add-finance/add-finance.component';
+import { EditFinanceComponent } from './edit-finance/edit-finance.component';
+import { PaiementComponent } from './paiement/paiement.component';
+import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -29,11 +32,11 @@ const routes: Routes = [
   { path: 'service', component: ServiceComponent }, 
    { path: 'dashboard', component: DashboardComponent },
    { path: 'add-finance', component:AddFinanceComponent },
+   { path: 'edit-finance/:id', component: EditFinanceComponent }, // Nouvelle route pour l'édition
+   { path: 'paiement', component: PaiementComponent },
+   { path: 'add-paiement', component:AddPaiementComponent },
 
-  
-  
-
-  { path: '', redirectTo:'/home',pathMatch:'full' }
+   { path: '', redirectTo:'/home',pathMatch:'full' }
 ];
 
  

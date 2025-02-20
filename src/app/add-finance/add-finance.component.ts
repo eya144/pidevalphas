@@ -55,4 +55,8 @@ export class AddFinanceComponent implements OnInit {
       console.error('Le formulaire est invalide.');
     }
   }
+  
+  annuler(): void {
+    this.router.navigate(['/finance']); // Redirection vers la liste des paiements
+  }
 }

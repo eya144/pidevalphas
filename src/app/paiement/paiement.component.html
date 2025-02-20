@@ -129,53 +129,46 @@
 <!-- Slider Area End -->
 
     <div class="container mt-5">
-      <div class="facture-container">
-<div>
-    <!-- Bouton Ajouter une Facture -->
-          <button class="btn btn-primary" (click)="toggleAddForm()">  Ajouter une Facture</button>
-        </div>
-        <h2>Liste des Factures</h2>
-        
-        <!-- Liste des factures -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID Commande</th>
-                    <th>ID Responsable Logistique</th>
-                    <th>ID Fournisseur</th>
-                    <th>ID Utilisateur</th>
-                    <th>Montant Total</th>
-                    <th>Date Facture</th>
-                    <th>Date Échéance</th>
-                    <th>Montant Total Hors Taxe</th>
-                    <th>Taxe</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let facture of factures">
-                    <td>{{ facture.idCommande }}</td>
-                    <td>{{ facture.idResponsableLogistique }}</td>
-                    <td>{{ facture.idFournisseur }}</td>
-                    <td>{{ facture.idUtilisateur }}</td>
-                    <td>{{ facture.montantTotal | currency }}</td>
-                    <td>{{ facture.dateFacture | date }}</td>
-                    <td>{{ facture.dateEcheance | date }}</td>
-                    <td>{{ facture.montantTotalHorsTaxe | currency }}</td>
-                    <td>{{ facture.tva | currency }}</td>
-                    <td>
-                        <button class="btn btn-danger" (click)="deleteFacture(facture.idFacture)">Supprimer</button>
-                        <button class="btn btn-warning" (click)="updateFacture(facture)">Modifier</button>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-  
-  
-    </div></div>
-  </main>
-  
+    <div class="paiement-container">
+      <div>
+        <!-- Bouton Ajouter un Paiement -->
+        <button class="btn btn-primary" (click)="toggleAddForm()">Ajouter un Paiement</button>
+      </div>
+      <h2>Liste des Paiements</h2>
+      
+      <!-- Liste des paiements -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID Paiement</th>
+            <th>ID Utilisateur</th>
+            <th>ID Contrat</th>
+            <th>Montant</th>
+            <th>Date Paiement</th>
+            <th>Méthode de Paiement</th>
+            <th>Numéro de Carte</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let paiement of paiements">
+            <td>{{ paiement.idPaiement }}</td>
+            <td>{{ paiement.idUtilisateur }}</td>
+            <td>{{ paiement.idContrat }}</td>
+            <td>{{ paiement.montant | currency }}</td>
+            <td>{{ paiement.datePaiement | date }}</td>
+            <td>{{ paiement.payment }}</td>
+            <td>{{ paiement.numeroCarte }}</td>
+            <td>
+              <button class="btn btn-danger" (click)="deletePaiement(paiement.idPaiement)">Supprimer</button>
+              <button class="btn btn-warning" (click)="updatePaiement(paiement)">Modifier</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+   
 <footer>
     <!-- Footer Start-->
     <div class="footer-main">
