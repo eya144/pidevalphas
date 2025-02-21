@@ -51,37 +51,35 @@
                         <div class="col-xl-8 col-lg-8 col-md-8">
                             <!-- Main-menu -->
                             <div class="main-menu f-right d-none d-lg-block">
-                                <nav> 
-                                    <ul id="navigation">                                                                                                                   
-                                        <li><a routerLink="/home">Home</a></li>
-                                        <li><a routerLink="/about">About</a></li>
-                                        <li><a routerLink="/produit">Projects</a></li>
-                                        <li><a routerLink="/service">Services</a></li>
-                                        <li><a routerLink="/RH">RH </a></li>
-                                        <li><a>Finance</a>
-                                            <ul class="submenu">
-                                                <li><a routerLink="/finance">Invoice</a></li>
-                                                <li><a routerLink="/paiement">Payment</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a routerLink="/Logistique">Logistique</a></li>
-                                         <li><a routerLink="/inspection">Inspection</a>
-                                            <ul class="submenu">
-                                                <li>Element</li>
-                                                <li> Details</li>
-                                                <li>Services Details</li>
-                                            </ul>
-                                        </li>
-                                        <li><a>Connexion</a>
-                                            <ul class="submenu">
-                                                <li><a routerLink="/login">se connecter</a></li>
-                                                <li><a routerLink="/inscrire">S'inscrire</a></li>
-                                                
-                                            </ul>
-                                        </li>
-                                        
+                                <nav>
+                                    <ul id="navigation">
+                                      <li><a routerLink="/home">Home</a></li>
+                                      <li><a routerLink="/about">About</a></li>
+                                      <li><a routerLink="/produit">Projects</a></li>
+                                      <li><a routerLink="/service">Services</a></li>
+                                      <li><a routerLink="/RH">HR</a></li>
+                                      <li><a>Finance</a>
+                                        <ul class="submenu">
+                                          <li><a routerLink="/finance">Invoice</a></li>
+                                          <li><a routerLink="/paiement">Payment</a></li>
+                                        </ul>
+                                      </li>
+                                      <li><a routerLink="/Logistique">Logistics</a></li>
+                                      <li><a routerLink="/inspection">Inspection</a>
+                                        <ul class="submenu">
+                                          <li>Element</li>
+                                          <li>Details</li>
+                                          <li>Service Details</li>
+                                        </ul>
+                                      </li>
+                                      <li><a>Login</a>
+                                        <ul class="submenu">
+                                          <li><a routerLink="/login">Sign In</a></li>
+                                          <li><a routerLink="/inscrire">Sign Up</a></li>
+                                        </ul>
+                                      </li>
                                     </ul>
-                                </nav>
+                                  </nav>
                             </div>
                         </div>             
                         <div class="col-xl-2 col-lg-2 col-md-3">
@@ -104,76 +102,71 @@
 
 
   <!-- Slider Area Start -->
-<div class="slider-area">
-    <div class="slider-active">
-        <div class="single-slider  hero-overly slider-height d-flex align-items-center"    style="background-image: url('assets/img/hero/h1_hero.jpg');">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-11">
-                        <div class="hero__caption">
-                            <div class="hero-text1">
-                                <span data-animation="fadeInUp" data-delay=".3s">Smart Solutions for Your Financial Future</span>
-                            </div>
-                            <h1 data-animation="fadeInUp" data-delay=".5s">Secure &amp; Grow</h1>
-                            
-                            <div class="hero-text2 mt-110" data-animation="fadeInUp" data-delay=".9s">
-                                <span><a href="services.html">Our Services</a></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="single-slider hero-overly slider-height d-flex align-items-center" style="background-image: url('assets/img/hero/h1_hero.jpg');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-11">
+          <div class="hero__caption">
+            <div class="hero-text1">
+              <span data-animation="fadeInUp" data-delay=".3s">Smart Solutions for Your Financial Future</span>
             </div>
+            <h1 data-animation="fadeInUp" data-delay=".5s">Secure &amp; Grow</h1>
+            <div class="hero-text2 mt-110" data-animation="fadeInUp" data-delay=".9s">
+              <span><a href="services.html">Our Services</a></span>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 <!-- Slider Area End -->
 
-    <div class="container mt-5">
-      <div class="facture-container">
-<div>
-    <!-- Bouton Ajouter une Facture -->
-          <button class="btn btn-primary" (click)="toggleAddForm()">  Ajouter une Facture</button>
-        </div>
-        <h2>Liste des Factures</h2>
-        
-        <!-- Liste des factures -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID Commande</th>
-                    <th>ID Responsable Logistique</th>
-                    <th>ID Fournisseur</th>
-                    <th>ID Utilisateur</th>
-                    <th>Montant Total</th>
-                    <th>Date Facture</th>
-                    <th>Date Échéance</th>
-                    <th>Montant Total Hors Taxe</th>
-                    <th>Taxe</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let facture of factures">
-                    <td>{{ facture.idCommande }}</td>
-                    <td>{{ facture.idResponsableLogistique }}</td>
-                    <td>{{ facture.idFournisseur }}</td>
-                    <td>{{ facture.idUtilisateur }}</td>
-                    <td>{{ facture.montantTotal | currency }}</td>
-                    <td>{{ facture.dateFacture | date }}</td>
-                    <td>{{ facture.dateEcheance | date }}</td>
-                    <td>{{ facture.montantTotalHorsTaxe | currency }}</td>
-                    <td>{{ facture.tva | currency }}</td>
-                    <td>
-                        <button class="btn btn-danger" (click)="deleteFacture(facture.idFacture)">Supprimer</button>
-                        <button class="btn btn-warning" (click)="updateFacture(facture)">Modifier</button>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-  
-  
-    </div></div>
+<div class="container mt-5">
+    <div class="facture-container">
+      <div>
+        <!-- Add Invoice Button -->
+        <button class="btn btn-primary" (click)="toggleAddForm()">✚ Add Invoice</button>
+      </div>
+      <h2>Invoice List</h2>
+      <!-- Invoice List -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Logistics Manager ID</th>
+            <th>Supplier ID</th>
+            <th>User ID</th>
+            <th>Total Amount</th>
+            <th>Invoice Date</th>
+            <th>Due Date</th>
+            <th>Total Amount (Excl. Tax)</th>
+            <th>Tax</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let facture of factures">
+            <td>{{ facture.idCommande }}</td>
+            <td>{{ facture.idResponsableLogistique }}</td>
+            <td>{{ facture.idFournisseur }}</td>
+            <td>{{ facture.idUtilisateur }}</td>
+            <td>{{ facture.montantTotal | currency }}</td>
+            <td>{{ facture.dateFacture | date }}</td>
+            <td>{{ facture.dateEcheance | date }}</td>
+            <td>{{ facture.montantTotalHorsTaxe | currency }}</td>
+            <td>{{ facture.tva | currency }}</td>
+            <td>
+              <div class="button-container">
+                <button (click)="deleteFacture(facture.idFacture)">🗑️</button>
+                <button (click)="updateFacture(facture)">✏️</button>
+                <button (click)="navigateToPaiement()">💳</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   </main>
   
 <footer>

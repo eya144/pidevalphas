@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AddPaiementComponent implements OnInit {
   paiementForm: FormGroup = new FormGroup({});
-  
+
   constructor(
     private fb: FormBuilder,
     private paiementService: PaiementService,
@@ -38,7 +38,7 @@ export class AddPaiementComponent implements OnInit {
       console.log('Formulaire invalide');
       return;
     }
-  
+
     this.paiementService.addPaiement(this.paiementForm.value).subscribe({
       next: () => {
         alert('Paiement ajouté avec succès');
@@ -49,7 +49,6 @@ export class AddPaiementComponent implements OnInit {
       }
     });
   }
-  
 
   annuler(): void {
     this.router.navigate(['/paiement']); // Redirection vers la liste des paiements

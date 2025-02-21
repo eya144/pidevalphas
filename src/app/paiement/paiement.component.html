@@ -126,49 +126,56 @@
         </div>
     </div>
 </div>
-<!-- Slider Area End -->
-
-    <div class="container mt-5">
-    <div class="paiement-container">
-      <div>
-        <!-- Bouton Ajouter un Paiement -->
-        <button class="btn btn-primary" (click)="toggleAddForm()">Ajouter un Paiement</button>
-      </div>
-      <h2>Liste des Paiements</h2>
-      
-      <!-- Liste des paiements -->
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID Paiement</th>
-            <th>ID Utilisateur</th>
-            <th>ID Contrat</th>
-            <th>Montant</th>
-            <th>Date Paiement</th>
-            <th>Méthode de Paiement</th>
-            <th>Numéro de Carte</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let paiement of paiements">
-            <td>{{ paiement.idPaiement }}</td>
-            <td>{{ paiement.idUtilisateur }}</td>
-            <td>{{ paiement.idContrat }}</td>
-            <td>{{ paiement.montant | currency }}</td>
-            <td>{{ paiement.datePaiement | date }}</td>
-            <td>{{ paiement.payment }}</td>
-            <td>{{ paiement.numeroCarte }}</td>
-            <td>
-              <button class="btn btn-danger" (click)="deletePaiement(paiement.idPaiement)">Supprimer</button>
-              <button class="btn btn-warning" (click)="updatePaiement(paiement)">Modifier</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="paiement-container">
+    <div class="paiement-header">
+      <h2>MYBESTSHOP</h2>
+      <p>Commande #1434733106</p>
+      <p>Montant: 5,00 EUR</p>
     </div>
+    <div class="paiement-methods">
+      <div class="method">
+        <img src="assets/img/logo/visa-logo.png" alt="VISA">
+        <span>VISA</span>
+      </div>
+      <div class="method">
+        <img src="assets/img/logo/bancontact-logo.png" alt="Bancontact">
+        <span>Bancontact</span>
+      </div>
+      <div class="method">
+        <img src="assets/img/logo/vir-logo.png" alt="ING">
+        <span>VIRREMENT</span>
+      </div>
+    </div>
+        <form [formGroup]="paiementForm" (ngSubmit)="submitForm()">
+        <div class="mb-3">
+            <label for="montant" class="form-label">Montant</label>
+            <input type="number" id="montant" class="form-control" formControlName="montant" placeholder="20000000">
+          </div>
+      
+          <div class="mb-3">
+            <label for="datePaiement" class="form-label">Date de Paiement</label>
+            <input type="date" id="datePaiement" class="form-control" formControlName="datePaiement" placeholder="2025-02-21">
+          </div>
+      
+          <div class="mb-3">
+            <label for="payment" class="form-label">Méthode de Paiement</label>
+            <select id="payment" class="form-control" formControlName="payment" placeholder="Carte">
+              <option value="Carte Bancaire">Carte </option>
+              <option value="Virement">Virement</option>
+              <option value="Chèque">Chèque</option>
+            </select>
+          </div>
+      
+          <div class="mb-3">
+            <label for="numeroCarte" class="form-label">Numéro de Carte</label>
+            <input type="text" id="numeroCarte" class="form-control" formControlName="numeroCarte" placeholder="12345678">
+          </div>
+      
+          <button type="submit" class="btn btn-primary" [disabled]="paiementForm.invalid">Ajouter</button>
+          <button type="button" class="btn btn-secondary" (click)="annuler()">Annuler</button>
+
+        </form>
   </div>
-   
 <footer>
     <!-- Footer Start-->
     <div class="footer-main">

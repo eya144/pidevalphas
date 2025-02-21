@@ -1,44 +1,27 @@
 <div class="container mt-5">
-    <h2>Ajouter une Facture</h2>
-    <form (ngSubmit)="addFacture()" [formGroup]="factureForm">
-      <div class="mb-3">
-        <label for="idCommande" class="form-label">ID Commande :</label>
-        <input type="number" id="idCommande" formControlName="idCommande" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="idResponsableLogistique" class="form-label">ID Responsable Logistique :</label>
-        <input type="number" id="idResponsableLogistique" formControlName="idResponsableLogistique" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="idFournisseur" class="form-label">ID Fournisseur :</label>
-        <input type="number" id="idFournisseur" formControlName="idFournisseur" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="idUtilisateur" class="form-label">ID Utilisateur :</label>
-        <input type="number" id="idUtilisateur" formControlName="idUtilisateur" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="montantTotal" class="form-label">Montant Total :</label>
-        <input type="number" step="0.01" id="montantTotal" formControlName="montantTotal" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="dateFacture" class="form-label">Date Facture :</label>
-        <input type="date" id="dateFacture" formControlName="dateFacture" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="dateEcheance" class="form-label">Date Échéance :</label>
-        <input type="date" id="dateEcheance" formControlName="dateEcheance" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="montantTotalHorsTaxe" class="form-label">Montant Total Hors Taxe :</label>
-        <input type="number" step="0.01" id="montantTotalHorsTaxe" formControlName="montantTotalHorsTaxe" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="tva" class="form-label">Taxe :</label>
-        <input type="number" step="0.01" id="tva" formControlName="tva" class="form-control" required>
-      </div>
-      <button type="submit" class="btn btn-primary" [disabled]="factureForm.invalid">Créer la Facture</button>
-      <button type="button" class="btn btn-secondary" (click)="annuler()">Annuler</button>
-
-    </form>
-  </div>
+  <h2>Add Invoice</h2>
+  <form (ngSubmit)="addFacture()" [formGroup]="factureForm">
+    <div class="mb-3">
+      <label for="montantTotal" class="form-label">Total Amount:</label>
+      <input type="number" step="0.01" id="montantTotal" formControlName="montantTotal" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="dateFacture" class="form-label">Invoice Date:</label>
+      <input type="date" id="dateFacture" formControlName="dateFacture" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="dateEcheance" class="form-label">Due Date:</label>
+      <input type="date" id="dateEcheance" formControlName="dateEcheance" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="montantTotalHorsTaxe" class="form-label">Total Amount (Excl. Tax):</label>
+      <input type="number" step="0.01" id="montantTotalHorsTaxe" formControlName="montantTotalHorsTaxe" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="tva" class="form-label">Tax:</label>
+      <input type="number" step="0.01" id="tva" formControlName="tva" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="factureForm.invalid">Add Invoice</button>
+    <button type="button" class="btn btn-secondary" (click)="annuler()">Cancel</button>
+  </form>
+</div>

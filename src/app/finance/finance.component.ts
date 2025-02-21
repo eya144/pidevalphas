@@ -24,16 +24,30 @@ export class FinanceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initForm();
-    this.getAllFactures();
+    this.initForm(); // Initialiser le formulaire
+    this.getAllFactures(); // Charger les factures au démarrage
+  }
+  
+  navigateToPaiement(): void {
+    this.router.navigate(['/paiement']);
   }
 
+  // Méthode pour récupérer toutes les factures
+  private getAllFactures(): void {
+    this.financeService.getAllFactures().subscribe(
+      factures => {
+        this.factures = factures;
+        console.log('Factures récupérées:', this.factures); // Ajoutez ce log pour vérifier les données
+      },
+      error => {
+        console.error('Erreur lors de la récupération des factures:', error);
+      }
+    );
+  }
+
+  // Initialiser le formulaire réactif
   initForm(): void {
     this.factureForm = this.fb.group({
-      idCommande: [null, Validators.required],
-      idResponsableLogistique: [null, Validators.required],
-      idFournisseur: [null, Validators.required],
-      idUtilisateur: [null, Validators.required],
       montantTotal: [null, [Validators.required, Validators.min(0)]],
       dateFacture: [null, Validators.required],
       dateEcheance: [null, Validators.required],
@@ -42,44 +56,52 @@ export class FinanceComponent implements OnInit {
     });
   }
 
+  // Rediriger vers le formulaire d'ajout
   toggleAddForm(): void {
     this.router.navigate(['/add-finance']);
   }
 
-  addFacture(formData: any): void {
+  // Ajouter une facture
+  addFacture(): void {
     if (this.factureForm.invalid) {
       return;
     }
-    
-    if (this.isEditing && this.editingFactureId !== null) {
-      this.financeService.updateFacture(this.editingFactureId, formData).subscribe(updatedFacture => {
-        this.factures = this.factures.map(f => f.idFacture === updatedFacture.idFacture ? updatedFacture : f);
-        this.resetForm();
-      });
-    } else {
-      this.financeService.addFacture(formData).subscribe(newFacture => {
-        this.factures.push(newFacture);
-        this.resetForm();
-      });
+
+    const formData = this.factureForm.value;
+
+    this.financeService.addFacture(formData).subscribe(newFacture => {
+      this.factures.push(newFacture);
+      this.resetForm();
+    });
+  }
+
+  // Supprimer une facture
+  deleteFacture(idFacture: number | undefined): void {
+    if (idFacture === undefined) {
+      console.error("ID de la facture non défini.");
+      return;
     }
+    this.financeService.deleteFacture(idFacture).subscribe(
+      () => {
+        this.factures = this.factures.filter(f => f.idFacture !== idFacture);
+        console.log('Facture supprimée avec succès');
+      },
+      error => {
+        console.error('Erreur lors de la suppression de la facture:', error);
+      }
+    );
   }
 
-  deleteFacture(idFacture: number): void {
-    this.financeService.deleteFacture(idFacture).subscribe(() => {
-      this.factures = this.factures.filter(f => f.idFacture !== idFacture);
-    });
-  }
-
+  // Rediriger vers le formulaire de modification
   updateFacture(facture: Facture): void {
-    this.router.navigate(['/edit-finance', facture.idFacture]); // Rediriger vers la page d'édition
+    if (facture.idFacture === undefined) {
+      console.error("ID de la facture non défini.");
+      return;
+    }
+    this.router.navigate(['/edit-finance', facture.idFacture]);
   }
 
-  private getAllFactures(): void {
-    this.financeService.getAllFactures().subscribe(factures => {
-      this.factures = factures;
-    });
-  }
-
+  // Réinitialiser le formulaire
   private resetForm(): void {
     this.factureForm.reset();
     this.isEditing = false;

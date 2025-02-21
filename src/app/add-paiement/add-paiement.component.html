@@ -2,16 +2,6 @@
     <h2>Ajouter un Paiement</h2>
     <form [formGroup]="paiementForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
-        <label for="idUtilisateur" class="form-label">ID Utilisateur</label>
-        <input type="number" id="idUtilisateur" class="form-control" formControlName="idUtilisateur">
-      </div>
-  
-      <div class="mb-3">
-        <label for="idContrat" class="form-label">ID Contrat</label>
-        <input type="number" id="idContrat" class="form-control" formControlName="idContrat">
-      </div>
-  
-      <div class="mb-3">
         <label for="montant" class="form-label">Montant</label>
         <input type="number" id="montant" class="form-control" formControlName="montant">
       </div>

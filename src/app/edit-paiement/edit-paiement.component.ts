@@ -10,7 +10,7 @@ import { PaiementService } from '../paiement.service';
 })
 export class EditPaiementComponent implements OnInit {
   paiementForm!: FormGroup;
-  paiementId!: number; 
+  paiementId!: number;
 
   constructor(
     private fb: FormBuilder,
@@ -47,12 +47,11 @@ export class EditPaiementComponent implements OnInit {
       return;
     }
 
-    const paiementModifie = this.paiementForm.value(); // Obtenir les valeurs du formulaire, y compris les champs désactivés
+    const paiementModifie = this.paiementForm.value; // Obtenir les valeurs du formulaire, y compris les champs désactivés
 
     this.paiementService.updatePaiement(this.paiementId, paiementModifie).subscribe(() => {
-      
-        this.router.navigate(['/paiement']); // Redirection vers la liste des paiements
-      });
+      this.router.navigate(['/paiement']); // Redirection vers la liste des paiements
+    });
   }
 
   annuler(): void {

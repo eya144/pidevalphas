@@ -16,8 +16,10 @@ export class PaiementService {
   }
 
   addPaiement(paiement: Paiement): Observable<Paiement> {
+    console.log('Envoi des données au backend:', paiement); // Ajoutez ce log
     return this.http.post<Paiement>(this.apiUrl, paiement);
   }
+  
 
   updatePaiement(id: number, paiement: Paiement): Observable<Paiement> {
     return this.http.put<Paiement>(`${this.apiUrl}/${id}`, paiement);

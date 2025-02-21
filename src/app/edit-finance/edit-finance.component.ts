@@ -21,17 +21,19 @@ export class EditFinanceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.factureId = +this.route.snapshot.params['id']; // Récupérer l'ID de la facture depuis l'URL
+    // Récupérer l'ID de la facture depuis l'URL
+    this.factureId = +this.route.snapshot.params['id'];
+    console.log('ID de la facture récupéré depuis l\'URL :', this.factureId); // Ajoutez ce log
+
+    // Initialiser le formulaire
     this.initForm();
+
+    // Charger les données de la facture
     this.loadFacture();
   }
 
   initForm(): void {
     this.factureForm = this.fb.group({
-      idCommande: [null, Validators.required],
-      idResponsableLogistique: [null, Validators.required],
-      idFournisseur: [null, Validators.required],
-      idUtilisateur: [null, Validators.required],
       montantTotal: [null, [Validators.required, Validators.min(0)]],
       dateFacture: [null, Validators.required],
       dateEcheance: [null, Validators.required],
@@ -40,18 +42,35 @@ export class EditFinanceComponent implements OnInit {
     });
   }
 
+  // Méthode pour charger les données de la facture
   loadFacture(): void {
-    this.financeService.getFactureById(this.factureId).subscribe(facture => {
-      this.factureForm.patchValue(facture); // Remplir le formulaire avec les données de la facture
-    });
+    this.financeService.getFactureById(this.factureId).subscribe(
+      facture => {
+        console.log('Données de la facture chargées depuis l\'API :', facture); // Log pour déboguer
+        this.factureForm.patchValue(facture); // Remplir le formulaire avec les données de la facture
+      },
+      error => {
+        console.error('Erreur lors du chargement de la facture :', error); // Log en cas d'erreur
+      }
+    );
   }
 
+  // Méthode pour soumettre le formulaire
   onSubmit(): void {
     if (this.factureForm.valid) {
       const updatedFacture = this.factureForm.value;
-      this.financeService.updateFacture(this.factureId, updatedFacture).subscribe(() => {
-        this.router.navigate(['/finance']); // Rediriger vers la liste des factures après la mise à jour
-      });
+      console.log('Données du formulaire à envoyer pour mise à jour :', updatedFacture); // Log pour déboguer
+      this.financeService.updateFacture(this.factureId, updatedFacture).subscribe(
+        () => {
+          console.log('Facture mise à jour avec succès');
+          this.router.navigate(['/finance']); // Rediriger vers la liste des factures
+        },
+        error => {
+          console.error('Erreur lors de la mise à jour de la facture :', error); // Log en cas d'erreur
+        }
+      );
+    } else {
+      console.warn('Le formulaire est invalide. Veuillez corriger les erreurs.'); // Log si le formulaire est invalide
     }
   }
   annuler(): void {

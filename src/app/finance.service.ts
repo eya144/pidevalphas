@@ -17,17 +17,16 @@ export class FinanceService {
 
   // Récupère toutes les factures
   getAllFactures(): Observable<Facture[]> {
-    return this.http.get<Facture[]>(this.apiUrl);
+    return this.http.get<Facture[]>(`${this.apiUrl}`);
   }
-
   // Récupère une facture par son ID
   getFactureById(idFacture: number): Observable<Facture> {
     return this.http.get<Facture>(`${this.apiUrl}/${idFacture}`);
   }
 
-  // Ajoute une nouvelle facture
-  addFacture(facture: Facture): Observable<Facture> {
-    return this.http.post<Facture>(`${this.apiUrl}/`, facture);
+   // Ajouter une facture
+   addFacture(facture: Facture): Observable<Facture> {
+    return this.http.post<Facture>(this.apiUrl, facture);
   }
 
   // Supprime une facture par son ID
@@ -36,7 +35,9 @@ export class FinanceService {
   }
 
   // Met à jour une facture existante
-  updateFacture(idFacture: number, facture: Facture): Observable<Facture> {
-    return this.http.put<Facture>(`${this.apiUrl}/${idFacture}`, facture);
+  updateFacture(id: number, facture: Facture): Observable<Facture> {
+    return this.http.put<Facture>(`${this.apiUrl}/${id}`, facture);
   }
+  
+  
 }

@@ -17,10 +17,6 @@ export class AddFinanceComponent implements OnInit {
     private router: Router
   ) {
     this.factureForm = this.fb.group({
-      idCommande: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      idResponsableLogistique: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      idFournisseur: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      idUtilisateur: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       montantTotal: ['', [Validators.required, Validators.min(0)]],
       dateFacture: ['', [Validators.required]],
       dateEcheance: ['', [Validators.required]],
@@ -37,26 +33,19 @@ export class AddFinanceComponent implements OnInit {
       const factureData = this.factureForm.value;
       this.financeService.addFacture(factureData).subscribe(
         response => {
-          console.log('Facture ajoutée avec succès:', response);
-          this.router.navigate(['/finance']);
+          console.log('Invoice added successfully:', response);
+          this.router.navigate(['/finance']); // Rediriger vers la liste des factures
         },
         error => {
-          console.error('Erreur lors de l\'ajout de la facture:', error);
-          if (error.status === 404) {
-            console.error('Endpoint non trouvé. Vérifiez l\'URL de l\'API.');
-          } else if (error.status === 400) {
-            console.error('Données invalides envoyées au serveur.');
-          } else {
-            console.error('Erreur serveur:', error.message);
-          }
+          console.error('Error adding invoice:', error);
         }
       );
     } else {
-      console.error('Le formulaire est invalide.');
+      console.error('Form is invalid.');
     }
   }
-  
+
   annuler(): void {
-    this.router.navigate(['/finance']); // Redirection vers la liste des paiements
+    this.router.navigate(['/finance']); // Redirection vers la liste des factures
   }
 }
