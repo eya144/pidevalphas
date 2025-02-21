@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Paiement } from 'src/app/core/models/Paiement';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaiementService {
-  private apiUrl = 'http://localhost:8089/pidev/Api/paiement'; // Remplacez par l'URL réelle de votre backend
+  private apiUrl ='http://localhost:8089/pidev/Api/paiement'; // Remplacez par l'URL réelle de votre backend
 
   constructor(private http: HttpClient) {}
 
@@ -16,9 +17,14 @@ export class PaiementService {
   }
 
   addPaiement(paiement: Paiement): Observable<Paiement> {
-    console.log('Envoi des données au backend:', paiement); // Ajoutez ce log
-    return this.http.post<Paiement>(this.apiUrl, paiement);
-  }
+    console.log('Envoi des données au backend:', paiement);
+    return this.http.post<Paiement>(this.apiUrl, paiement).pipe(
+        catchError(error => {
+            console.error('Erreur lors de l\'ajout du paiement:', error);
+            throw error;
+        })
+    );
+}
   
 
   updatePaiement(id: number, paiement: Paiement): Observable<Paiement> {

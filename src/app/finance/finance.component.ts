@@ -75,14 +75,22 @@ export class FinanceComponent implements OnInit {
     });
   }
 
-  // Supprimer une facture
-  deleteFacture(idFacture: number | undefined): void {
-    if (idFacture === undefined) {
-      console.error("ID de la facture non défini.");
-      return;
-    }
+// Supprimer une facture avec confirmation
+deleteFacture(idFacture: number | undefined): void {
+  // Vérifier si l'ID de la facture est défini
+  if (idFacture === undefined) {
+    console.error("ID de la facture non défini.");
+    return;
+  }
+
+  // Afficher une boîte de dialogue de confirmation
+  const isConfirmed = confirm('Êtes-vous sûr de vouloir supprimer cette facture ?');
+
+  // Si l'utilisateur confirme la suppression
+  if (isConfirmed) {
     this.financeService.deleteFacture(idFacture).subscribe(
       () => {
+        // Filtrer la liste des factures pour exclure celle supprimée
         this.factures = this.factures.filter(f => f.idFacture !== idFacture);
         console.log('Facture supprimée avec succès');
       },
@@ -90,7 +98,11 @@ export class FinanceComponent implements OnInit {
         console.error('Erreur lors de la suppression de la facture:', error);
       }
     );
+  } else {
+    // Si l'utilisateur annule la suppression
+    console.log('Suppression annulée');
   }
+}
 
   // Rediriger vers le formulaire de modification
   updateFacture(facture: Facture): void {

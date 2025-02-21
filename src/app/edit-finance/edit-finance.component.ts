@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FinanceService } from '../finance.service';
 import { Facture } from 'src/app/core/models/Factures';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-finance',
@@ -55,20 +56,25 @@ export class EditFinanceComponent implements OnInit {
     );
   }
 
-  // Méthode pour soumettre le formulaire
   onSubmit(): void {
     if (this.factureForm.valid) {
       const updatedFacture = this.factureForm.value;
       console.log('Données du formulaire à envoyer pour mise à jour :', updatedFacture); // Log pour déboguer
-      this.financeService.updateFacture(this.factureId, updatedFacture).subscribe(
-        () => {
-          console.log('Facture mise à jour avec succès');
-          this.router.navigate(['/finance']); // Rediriger vers la liste des factures
-        },
-        error => {
-          console.error('Erreur lors de la mise à jour de la facture :', error); // Log en cas d'erreur
-        }
-      );
+  
+      // Supprimer l'ancienne facture avant de mettre à jour
+      this.financeService.deleteFacture(this.factureId)
+        .pipe(
+          switchMap(() => this.financeService.updateFacture(this.factureId, updatedFacture))
+        )
+        .subscribe(
+          () => {
+            console.log('Ancienne facture supprimée et nouvelle facture mise à jour avec succès');
+            this.router.navigate(['/finance']); // Rediriger vers la liste des factures
+          },
+          error => {
+            console.error('Erreur lors de la suppression ou de la mise à jour de la facture :', error); // Log en cas d'erreur
+          }
+        );
     } else {
       console.warn('Le formulaire est invalide. Veuillez corriger les erreurs.'); // Log si le formulaire est invalide
     }
@@ -76,4 +82,5 @@ export class EditFinanceComponent implements OnInit {
   annuler(): void {
     this.router.navigate(['/finance']); // Redirection vers la liste des paiements
   }
+  
 }

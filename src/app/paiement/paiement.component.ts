@@ -34,7 +34,6 @@ export class PaiementComponent implements OnInit {
       payment: [null, Validators.required],
       numeroCarte: [null, [Validators.required, Validators.minLength(12), Validators.maxLength(19)]]
     });
-    
   }
 
   getAllPaiements(): void {
@@ -64,7 +63,6 @@ export class PaiementComponent implements OnInit {
   submitForm(): void {
     if (this.paiementForm.valid) {
       const paiement: Paiement = this.paiementForm.value;
-      console.log('Données du formulaire:', paiement); // Ajoutez ce log pour vérifier les données
       this.paiementService.addPaiement(paiement).subscribe(
         (response) => {
           console.log('Paiement ajouté avec succès:', response);

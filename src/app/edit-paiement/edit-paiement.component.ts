@@ -27,8 +27,6 @@ export class EditPaiementComponent implements OnInit {
 
   private initForm(): void {
     this.paiementForm = this.fb.group({
-      idUtilisateur: [{ value: null, disabled: true }, Validators.required],
-      idContrat: [{ value: null, disabled: true }, Validators.required],
       montant: [null, [Validators.required, Validators.min(0)]],
       datePaiement: [null, Validators.required],
       payment: ['', Validators.required],
