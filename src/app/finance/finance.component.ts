@@ -120,4 +120,18 @@ deleteFacture(idFacture: number | undefined): void {
     this.editingFactureId = null;
     this.showAddForm = false;
   }
+
+  // Méthode pour basculer le statut
+  toggleStatus(facture: Facture): void {
+    const newStatus = facture.status === 'Paid' ? 'Unpaid' : 'Paid'; // Basculer le statut
+    this.financeService.updateFactureStatus(facture.idFacture!, newStatus).subscribe(
+      updatedFacture => {
+        facture.status = updatedFacture.status; // Mettre à jour le statut localement
+        console.log('Statut mis à jour avec succès:', updatedFacture);
+      },
+      error => {
+        console.error('Erreur lors de la mise à jour du statut:', error);
+      }
+    );
+  }
 }

@@ -39,5 +39,9 @@ export class FinanceService {
     return this.http.put<Facture>(`${this.apiUrl}/${id}`, facture);
   }
   
-  
+    // Méthode pour mettre à jour le statut d'une facture
+  updateFactureStatus(idFacture: number, status: 'Paid' | 'Unpaid'): Observable<Facture> {
+      const url = `${this.apiUrl}/${idFacture}/status`; // Endpoint pour mettre à jour le statut
+      return this.http.put<Facture>(url, { status }); // Envoyer une requête PUT avec le nouveau statut
+    }
 }

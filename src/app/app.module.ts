@@ -25,6 +25,7 @@ import { EditFinanceComponent } from './edit-finance/edit-finance.component';
 import { PaiementComponent } from './paiement/paiement.component';
 import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 import { EditPaiementComponent } from './edit-paiement/edit-paiement.component';
+import { CommandeComptableComponent } from './commande-comptable/commande-comptable.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { EditPaiementComponent } from './edit-paiement/edit-paiement.component';
       EditFinanceComponent,
       PaiementComponent,
       AddPaiementComponent,
-      EditPaiementComponent
+      EditPaiementComponent,
+      CommandeComptableComponent
   ],
   imports: [
     BrowserModule,

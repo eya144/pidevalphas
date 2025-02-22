@@ -5,8 +5,9 @@ export interface Facture {
   idFournisseur?: number;
   idUtilisateur?: number;
   montantTotal: number;
-  dateFacture: string;
-  dateEcheance: string;
+  dateFacture: string; // ou Date si vous utilisez des objets Date
+  dateEcheance: string; // ou Date si vous utilisez des objets Date
   montantTotalHorsTaxe: number;
   tva: number;
+  status: 'Paid' | 'Unpaid'; // Ajout du statut
 }

@@ -127,57 +127,30 @@
         </div>
     </div>
 </div>
-<div class="paiement-container">
-    <div class="paiement-header">
-      <h2>MYBESTSHOP</h2>
-      <p>Commande #1434733106</p>
-      <p>Montant: 5,00 EUR</p>
-    </div>
-    <div class="paiement-methods">
-      <div class="method">
-        <img src="assets/img/logo/visa-logo.png" alt="VISA">
-        <span>VISA</span>
-      </div>
-      <div class="method">
-        <img src="assets/img/logo/bancontact-logo.png" alt="Bancontact">
-        <span>Bancontact</span>
-      </div>
-      <div class="method">
-        <img src="assets/img/logo/vir-logo.png" alt="ING">
-        <span>VIRREMENT</span>
-      </div>
-    </div>
-        <form [formGroup]="paiementForm" (ngSubmit)="submitForm()">
-        <div class="mb-3">
-            <label for="montant" class="form-label">montant</label>
-            <input type="number" id="montant" class="form-control" formControlName="montant" placeholder="20000000">
-          </div>
-      
-          <div class="mb-3">
-            <label for="datePaiement" class="form-label">Date de Paiement</label>
-            <input type="date" id="datePaiement" class="form-control" formControlName="datePaiement" placeholder="2025-02-21">
-          </div>
-      
-          <div class="mb-3">
-            <label for="payment" class="form-label">Méthode de Paiement</label>
-            <select id="payment" class="form-control" formControlName="payment" placeholder="Carte">
-              <option value="CARTE">Carte </option>
-              <option value="VIREMENT">Virement</option>
-              <option value="CHÈQUE">Chèque</option>ESPECES
-              <option value="ESPECES">Espéce</option>
-              
-            </select>
-          </div>
-      
-          <div class="mb-3">
-            <label for="numeroCarte" class="form-label">Numéro de Carte</label>
-            <input type="number" id="numeroCarte" class="form-control" formControlName="numeroCarte" placeholder="12345678">
-          </div>
-      
-          <button type="submit" class="btn btn-primary" [disabled]="paiementForm.invalid">Ajouter</button>
-          <button type="button" class="btn btn-secondary" (click)="annuler()">Annuler</button>
-
-        </form>
+<div class="container">
+    <h2>Liste des Commandes</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>IDResponsableLogistique</th>
+          <th>Nom de la Commande</th>
+          <th>Quantité</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let commande of commandes">
+          <td>{{ commande.idCommande }}</td>
+          <td>{{ commande.idResponsableLogistique }}</td>
+          <td>{{ commande.nomCommande }}</td>
+          <td>{{ commande.quantite }}</td>
+          <td>
+            <button (click)="createFacture(commande)" class="btn btn-primary">Créer Facture</button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 <footer>
     <!-- Footer Start-->

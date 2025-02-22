@@ -58,6 +58,7 @@
                                       <li><a routerLink="/produit">Projects</a></li>
                                       <li><a routerLink="/service">Services</a></li>
                                       <li><a routerLink="/RH">HR</a></li>
+                                      <li><a routerLink="/commandeComptable">Command </a></li>
                                       <li><a>Finance</a>
                                         <ul class="submenu">
                                           <li><a routerLink="/finance">Invoice</a></li>
@@ -123,10 +124,7 @@
 
 <div class="container mt-5">
     <div class="facture-container">
-      <div>
-        <!-- Add Invoice Button -->
-        <button class="btn btn-primary" (click)="toggleAddForm()">✚ Add Invoice</button>
-      </div>
+
       <h2>Invoice List</h2>
       <!-- Invoice List -->
       <table class="table">
@@ -141,6 +139,7 @@
             <th>Due Date</th>
             <th>Total Amount (Excl. Tax)</th>
             <th>Tax</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -155,6 +154,15 @@
             <td>{{ facture.dateEcheance | date }}</td>
             <td>{{ facture.montantTotalHorsTaxe | currency }}</td>
             <td>{{ facture.tva | currency }}</td>
+            <td>
+              <!-- Bouton avec icônes et sans fond ni bordure -->
+              <button
+                [ngClass]="{'btn-success': facture.status === 'Paid', 'btn-danger': facture.status === 'Unpaid'}"
+                (click)="toggleStatus(facture)"
+              >
+                {{ facture.status === 'Paid' ? '✅ Paid' : '❌ Unpaid' }}
+              </button>
+            </td>
             <td>
               <div class="button-container">
                 <button (click)="deleteFacture(facture.idFacture)">🗑️</button>
