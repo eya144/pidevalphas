@@ -5,24 +5,29 @@ import { ProductComponent } from './product/product.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 import { RHComponent } from './rh/rh.component';
-import { LogistiqueComponent } from './logistique/logistique.component';
+import { LogistiqueComponent } from './rahma/module1Materiel/logistique/logistique.component';
 import { InspectionComponent } from './inspection/inspection.component';
 import { FinanceComponent } from './finance/finance.component';
 import { ContactComponent } from './contact/contact.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ServiceComponent } from './service/service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AddMaterielComponent } from './add-materiel/add-materiel.component';
-import { EditMaterielComponent } from './edit-materiel/edit-materiel.component';
-import { CommandeComponent } from './commande/commande.component';
-import { DashboardLogistiqueComponent } from './dashboard-logistique/dashboard-logistique.component';
-import { CommandeDashComponent } from './commande-dash/commande-dash.component';
+import { AddMaterielComponent } from './rahma/module1Materiel/add-materiel/add-materiel.component';
+import { EditMaterielComponent } from './rahma/module1Materiel/edit-materiel/edit-materiel.component';
+import { CommandeComponent } from './rahma/module1Commande/commande/commande.component';
+import { DashboardLogistiqueComponent } from './rahma/dashboard-logistique/dashboard-logistique.component';
+import { CommandeDashComponent } from './rahma/module1Commande/commande-dash/commande-dash.component';
 import { StocksComponent } from './stocks/stocks.component';
-import { CommandeFournisseurComponent } from './commande-fournisseur/commande-fournisseur.component';
-import { DemandeEmploiComponent } from './demande-emploi/demande-emploi.component';
-import { DetailsDemandeEmploiComponent } from './details-demande-emploi/details-demande-emploi.component';
-import { EntretienComponent } from './entretien/entretien.component';
-import { OrganisationEntretienComponent } from './organisation-entretien/organisation-entretien.component';
+import { CommandeFournisseurComponent } from './rahma/module1Commande/commande-fournisseur/commande-fournisseur.component';
+import { DemandeEmploiComponent } from './rahma/module2Entretien/demande-emploi/demande-emploi.component';
+import { DetailsDemandeEmploiComponent } from './rahma/module2Entretien/details-demande-emploi/details-demande-emploi.component';
+import { EntretienComponent } from './rahma/module2Entretien/entretien/entretien.component';
+import { OrganisationEntretienComponent } from './rahma/module2Entretien/organisation-entretien/organisation-entretien.component';
+import { DemandeMaterielComponent } from './rahma/module1Demande/demande-materiel/demande-materiel.component';
+import { DetailDemandeComponent } from './rahma/module1Demande/detail-demande/detail-demande.component';
+import { ListDemandeComponent } from './rahma/module1Demande/list-demande/list-demande.component';
+import { ListeDemandeByUserComponent } from './rahma/module1Demande/liste-demande-by-user/liste-demande-by-user.component';
+import { ListeDemandeDashComponent } from './rahma/module1Demande/liste-demande-dash/liste-demande-dash.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -41,13 +46,12 @@ const routes: Routes = [
   { path: 'addMateriel', component: AddMaterielComponent },
   { path: 'editMateriel/:id', component: EditMaterielComponent }, 
   { path: 'commande/:idCommande', component: CommandeComponent },
-  {
-    path: 'dashboardLogistique',
+  {path: 'dashboardLogistique',
     component: DashboardLogistiqueComponent,
     children: [
       { path: 'overview', component: StocksComponent }, // Vue d'ensemble des stocks
-      { path: 'orders', component: CommandeDashComponent }, // Suivi des commandes fournisseurs
-     
+      { path: 'orders', component: CommandeDashComponent }, 
+      { path: 'listDemandeDash', component: ListeDemandeDashComponent },
     ],
   },
   { path: 'commandeFournisseur', component: CommandeFournisseurComponent },
@@ -55,6 +59,12 @@ const routes: Routes = [
   { path: 'demandeEmploi/details/:id', component: DetailsDemandeEmploiComponent },
   { path: 'demandesEmploi', component : EntretienComponent },
   { path: 'entretientOrg/:id', component: OrganisationEntretienComponent },
+  { path: 'demandeMateriel', component: DemandeMaterielComponent },
+  { path: 'detailDemande/:id', component: DetailDemandeComponent },
+  { path: 'listDemande', component: ListDemandeComponent },
+  { path: 'listDemandeByUser', component: ListeDemandeByUserComponent },
+  
+
   { path: '', redirectTo:'/home',pathMatch:'full' }
 ];
 

@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
-import { LogistiqueComponent } from './logistique/logistique.component';
+import { LogistiqueComponent } from './rahma/module1Materiel/logistique/logistique.component';
 import { RHComponent } from './rh/rh.component';
 import { FinanceComponent } from './finance/finance.component';
 import { InspectionComponent } from './inspection/inspection.component';
@@ -20,19 +20,24 @@ import { BackMenuAdminComponent } from './back-menu-admin/back-menu-admin.compon
 import { BackHeaderComponent } from './back-header/back-header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeadeerComponent } from './headeer/headeer.component';
-import { AddMaterielComponent } from './add-materiel/add-materiel.component';
+import { AddMaterielComponent } from './rahma/module1Materiel/add-materiel/add-materiel.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditMaterielComponent } from './edit-materiel/edit-materiel.component';
-import { CommandeComponent } from './commande/commande.component';
-import { DashboardLogistiqueComponent } from './dashboard-logistique/dashboard-logistique.component';
-import { CommandeDashComponent } from './commande-dash/commande-dash.component';
+import { EditMaterielComponent } from './rahma/module1Materiel/edit-materiel/edit-materiel.component';
+import { CommandeComponent } from './rahma/module1Commande/commande/commande.component';
+import { DashboardLogistiqueComponent } from './rahma/dashboard-logistique/dashboard-logistique.component';
+import { CommandeDashComponent } from './rahma/module1Commande/commande-dash/commande-dash.component';
 import { StocksComponent } from './stocks/stocks.component';
-import { CommandeFournisseurComponent } from './commande-fournisseur/commande-fournisseur.component';
-import { DemandeEmploiComponent } from './demande-emploi/demande-emploi.component';
+import { CommandeFournisseurComponent } from './rahma/module1Commande/commande-fournisseur/commande-fournisseur.component';
+import { DemandeEmploiComponent } from './rahma/module2Entretien/demande-emploi/demande-emploi.component';
 import { FooterHomeComponent } from './footer-home/footer-home.component';
-import { DetailsDemandeEmploiComponent } from './details-demande-emploi/details-demande-emploi.component';
-import { EntretienComponent } from './entretien/entretien.component';
-import { OrganisationEntretienComponent } from './organisation-entretien/organisation-entretien.component';
+import { DetailsDemandeEmploiComponent } from './rahma/module2Entretien/details-demande-emploi/details-demande-emploi.component';
+import { EntretienComponent } from './rahma/module2Entretien/entretien/entretien.component';
+import { OrganisationEntretienComponent } from './rahma/module2Entretien/organisation-entretien/organisation-entretien.component';
+import { DemandeMaterielComponent } from './rahma/module1Demande/demande-materiel/demande-materiel.component';
+import { DetailDemandeComponent } from './rahma/module1Demande/detail-demande/detail-demande.component';
+import { ListDemandeComponent } from './rahma/module1Demande/list-demande/list-demande.component';
+import { ListeDemandeByUserComponent } from './rahma/module1Demande/liste-demande-by-user/liste-demande-by-user.component';
+import { ListeDemandeDashComponent } from './rahma/module1Demande/liste-demande-dash/liste-demande-dash.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +68,12 @@ import { OrganisationEntretienComponent } from './organisation-entretien/organis
       FooterHomeComponent,
       DetailsDemandeEmploiComponent,
       EntretienComponent,
-      OrganisationEntretienComponent
+      OrganisationEntretienComponent,
+      DemandeMaterielComponent,
+      DetailDemandeComponent,
+      ListDemandeComponent,
+      ListeDemandeByUserComponent,
+      ListeDemandeDashComponent
   ],
   imports: [
     BrowserModule,

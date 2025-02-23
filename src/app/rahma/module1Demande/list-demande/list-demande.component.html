@@ -1,0 +1,29 @@
+<div class="container">
+    <h2>Liste des demandes</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Date Demande</th>
+          <th>Lignes de Demande</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let demande of demandes">
+          <td>{{ demande.idDemande }}</td>
+          <td>{{ demande.status }}</td>
+          <td>{{ demande.dateDemande | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let ligne of demande.ligneDemandes">
+                <strong>Quantité demandée:</strong> {{ ligne.quantite }} |
+                <strong>Matériel demandé:</strong> {{ ligne.materiel.nomMateriel }}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

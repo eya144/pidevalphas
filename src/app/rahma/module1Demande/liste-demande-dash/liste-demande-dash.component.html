@@ -1,0 +1,42 @@
+<h2>Liste des demandes</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID Demande</th>
+      <th>Statut</th>
+      <th>Date Demande</th>
+      <th>Lignes de Demande</th>
+      <th>Actions</th> <!-- Nouvelle colonne pour les boutons -->
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let demande of demandes">
+      
+      <td>{{ demande.idDemande }}</td>
+      <td>{{ demande.status }}</td>
+      <td>{{ demande.dateDemande | date: 'dd/MM/yyyy' }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let ligne of demande.ligneDemandes">
+            <strong>Quantité:</strong> {{ ligne.quantite }} <br>
+            <strong>Matériel:</strong> {{ ligne.materiel.nomMateriel }} ({{ ligne.materiel.categorie }})
+          </li>
+        </ul>
+      </td>
+      <td>
+        <!-- Boutons d'action -->
+        <button (click)="accepterDemande(demande.idDemande)" [disabled]="demande.status === 'accepte'" class="btn btn-success">
+          Accepter
+        </button>
+        <button (click)="refuserDemande(demande.idDemande)" [disabled]="demande.status === 'refuse'" class="btn btn-danger">
+          Refuser
+        </button>
+        <button (click)="mettreEnAttente(demande.idDemande)" [disabled]="demande.status === 'en_attente'" class="btn btn-warning">
+          En attente
+        </button>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>

@@ -1,19 +1,19 @@
 /* Style général */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    background-color: #171725;
+    color: #ffffff;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 53%;
+    padding-top: 13%;
   }
   
   /* Conteneur principal */
   .container {
     width: 80%;
-    background: #ffffff;
+    background: #3a3d53;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -23,7 +23,7 @@ body {
   /* Titre */
   h2 {
     text-align: center;
-    color: #2c3e50;
+    color: #ffffff;
     font-size: 24px;
     margin-bottom: 20px;
   }
@@ -33,7 +33,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    background: white;
+    background: #171725;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -50,7 +50,7 @@ body {
   /* Lignes du tableau */
   td {
     padding: 12px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ffffff;
   }
   
   /* Style des lignes alternées */
@@ -114,7 +114,7 @@ body {
   .isLoading {
     text-align: center;
     font-size: 16px;
-    color: #555;
+    color: #ffffff;
     margin-top: 10px;
   }
   

@@ -1,12 +1,16 @@
 body {
-    padding-top: 350px;
-    background: linear-gradient(to bottom, #f2f2f2, #d1e0e0); /* Dégradé de fond */
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background-color: #19192b;
+    color: #ffffff;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 13%;
 }
 
 .container {
-    background-color: #ffffff; /* Fond blanc pour le formulaire */
-    border-radius: 10px; /* Coins arrondis */
+    background: #3a3d53;    border-radius: 10px; /* Coins arrondis */
     padding: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Ombre portée */
     width: 60%; /* Largeur du formulaire */

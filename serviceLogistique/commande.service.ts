@@ -26,6 +26,12 @@ export class CommandeService {
     modifierCommande(id: number, status: string): Observable<any> {
       return this.http.post<any>(`${this.baseUrl}/modifierCommande/${id}/${status}`, {});
     }
+    modifierCommandePrix(idCommande: number): Observable<void> {
+      return this.http.put<void>(`${this.baseUrl}/modifierCommandePrix/${idCommande}`, {});
+    }
+    
+  
+    
     
 
 }

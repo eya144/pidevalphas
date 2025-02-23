@@ -1,0 +1,154 @@
+/* Style général de la page */
+body {
+    padding-top: 450px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Fond léger et doux */
+    margin: 0;
+    color: #333;
+}
+
+/* Titre de la section */
+.section-title {
+    text-align: center;
+    color: #2c3e50; /* Couleur sombre et élégante */
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* Style du tableau */
+.demande-table {
+    width: 90%;
+    max-width: 1200px;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Entêtes de tableau */
+.demande-table thead th {
+    background-color: #2c3e50; /* Couleur sombre pour les en-têtes */
+    color: #fff;
+    text-align: left;
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Lignes du tableau */
+.demande-table tbody td {
+    padding: 14px 20px;
+    text-align: left;
+    color: #555;
+    font-size: 14px;
+    border-top: 1px solid #eaeaea;
+}
+
+/* Effet de survol des lignes du tableau */
+.demande-table tbody tr:hover {
+    background-color: #f1f3f5; /* Couleur de survol très légère */
+    transition: background-color 0.2s ease;
+}
+
+/* Liste des lignes de demande */
+.ligne-demande-list {
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Style des éléments de la liste */
+.ligne-demande-item {
+    color: #555;
+    margin-bottom: 12px;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #f8f9fa; /* Fond léger pour chaque ligne */
+    border: 1px solid #eaeaea;
+}
+
+.ligne-demande-item strong {
+    color: #2c3e50; /* Couleur sombre pour les textes importants */
+    font-weight: 600;
+}
+
+/* Style pour les icônes d'action */
+.action-icons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Icônes de modification et suppression */
+.edit-btn, .delete-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #3498db; /* Bleu clair pour l'édition */
+    transition: color 0.2s ease;
+}
+
+.edit-btn:hover {
+    color: #2980b9; /* Bleu plus foncé au survol */
+}
+
+.delete-btn {
+    color: #e74c3c; /* Rouge pour la suppression */
+}
+
+.delete-btn:hover {
+    color: #c0392b; /* Rouge plus foncé au survol */
+}
+
+/* Champ de saisie pour la quantité */
+.quantite-input {
+    margin-top: 5px;
+    padding: 8px;
+    width: 100px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.quantite-input:focus {
+    border-color: #3498db; /* Bleu clair au focus */
+    outline: none;
+}
+
+/* Bouton de suppression pour la commande entière */
+.delete-commande-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.delete-commande-btn:hover {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #c0392b; /* Rouge plus foncé au survol */
+}
+
+/* Pour les lignes impaires et paires */
+.demande-table tbody tr:nth-child(odd) {
+    background-color: #f8f9fa; /* Fond légèrement gris pour les lignes impaires */
+}
+
+.demande-table tbody tr:nth-child(even) {
+    background-color: #ffffff; /* Fond blanc pour les lignes paires */
+}

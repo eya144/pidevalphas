@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommandeService } from 'serviceLogistique/commande.service';
 import { LigneCommandeService } from 'serviceLogistique/ligne-commande.service';
 
 @Component({
@@ -13,7 +14,9 @@ export class CommandeComponent {
 
   constructor(
     private ligneCommandeService: LigneCommandeService,
+    private commandeService: CommandeService,
     private route: ActivatedRoute,
+    private router: Router, 
 
   ) { }
 
@@ -34,19 +37,30 @@ export class CommandeComponent {
   }
 
   validerCommande(): void {
-    // Calculer le prix total de la commande côté frontend
-    const prixTotal = this.calculerPrixTotalTotal();
+    const idCommande = this.idCommande; // Récupérer l'ID de la commande actuelle
   
-    // Créer la commande avec les lignes de commande et l'ID fournisseur par défaut
-    const commande = {
-      prixTotal: prixTotal,
-      ligneCommandes: this.lignesCommande,
-      idfournisseur: 1 ,
-      status : "En_attente " // ID fournisseur par défaut
-    };
+    this.ligneCommandeService.getLignesCommandeByCommande(idCommande).subscribe(
+      (lignes) => {
+        this.lignesCommande = lignes;
+        const prixTotal = this.calculerPrixTotalTotal();
   
-   
+        // Mise à jour du prix total de la commande
+        this.commandeService.modifierCommandePrix(idCommande).subscribe(
+          () => {
+            alert("Commande confirmée avec le prix total mis à jour !");
+            this.router.navigate(['/logistique']); 
+          },
+          (error) => {
+            console.error("Erreur lors de la mise à jour du prix total", error);
+          }
+        );
+      },
+      (error) => {
+        console.error("Erreur lors de la récupération des lignes de commande", error);
+      }
+    );
   }
+  
   
   // Méthode pour calculer la somme des prix totaux de toutes les lignes de commande
   calculerPrixTotalTotal(): number {
