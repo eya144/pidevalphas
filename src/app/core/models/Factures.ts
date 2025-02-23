@@ -1,4 +1,5 @@
 export interface Facture {
+  montant: any;
   idFacture?: number;
   idCommande?: number;
   idResponsableLogistique?: number;

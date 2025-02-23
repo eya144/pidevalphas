@@ -15,6 +15,8 @@ export class PaiementComponent implements OnInit {
   showAddForm = false;
   isEditing = false;
   editingPaiementId: number | null = null;
+  successMessage: string | null = null; // Variable pour stocker le message de succès
+
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +53,7 @@ export class PaiementComponent implements OnInit {
     this.router.navigate(['/add-paiement']);
   }
 
+
   deletePaiement(idPaiement: number): void {
     this.paiementService.deletePaiement(idPaiement).subscribe(() => {
       this.paiements = this.paiements.filter(p => p.idPaiement !== idPaiement);
@@ -66,10 +69,16 @@ export class PaiementComponent implements OnInit {
       this.paiementService.addPaiement(paiement).subscribe(
         (response) => {
           console.log('Paiement ajouté avec succès:', response);
-          this.router.navigate(['/paiement']); // Rediriger vers la liste des paiements
+          this.successMessage = 'Paiement ajouté avec succès !'; // Définir le message de succès
+  
+          // Rediriger vers la liste des paiements après 2 secondes
+          setTimeout(() => {
+            this.router.navigate(['/finance']);
+          }, 2000); // Délai de 2 secondes avant la redirection
         },
         (error) => {
           console.error('Erreur lors de l\'ajout du paiement:', error);
+          this.successMessage = null; // Effacer le message de succès en cas d'erreur
         }
       );
     } else {

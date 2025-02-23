@@ -26,6 +26,7 @@ import { PaiementComponent } from './paiement/paiement.component';
 import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 import { EditPaiementComponent } from './edit-paiement/edit-paiement.component';
 import { CommandeComptableComponent } from './commande-comptable/commande-comptable.component';
+import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepaie-comptable.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,6 @@ import { CommandeComptableComponent } from './commande-comptable/commande-compta
     RHComponent,
     FinanceComponent,
     InspectionComponent,
- 
     ContactComponent,
       InscriptionComponent,
       ServiceComponent,
@@ -50,7 +50,8 @@ import { CommandeComptableComponent } from './commande-comptable/commande-compta
       PaiementComponent,
       AddPaiementComponent,
       EditPaiementComponent,
-      CommandeComptableComponent
+      CommandeComptableComponent,
+      FichedepaieComptableComponent,
   ],
   imports: [
     BrowserModule,

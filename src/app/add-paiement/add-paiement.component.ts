@@ -28,7 +28,7 @@ export class AddPaiementComponent implements OnInit {
       montant: [null, [Validators.required, Validators.min(0)]],
       datePaiement: [null, Validators.required],
       payment: ['', Validators.required],
-      numeroCarte: ['', [Validators.required, Validators.pattern('^[0-9]{16}$')]] // Numéro carte avec 16 chiffres
+      numeroCarte: ['', [Validators.required]] // Numéro carte avec 16 chiffres
     });
   }
 

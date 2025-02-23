@@ -1,3 +1,4 @@
+
 <header>
     <!-- Header Start -->
    <div class="header-area header-transparent">
@@ -125,60 +126,40 @@
                 </div>
             </div>
         </div>
+        <div class="fiches-de-paie-container">
+            <h2>Liste des Fiches de Paie</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Montant Initial</th>
+                  <th>Jours Non Travaillés</th>
+                  <th>Type de Paiement</th>
+                  <th>Date de Paiement</th>
+                  <th>Statut de Paiement</th>
+                  <th>Montant Final</th>
+                  <th>Nom Utilisateur</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let fiche of fichesDePaie">
+                  <td>{{ fiche.montantInitial }}</td>
+                  <td>{{ fiche.joursTravailles }}</td>
+                  <td>{{ fiche.typePaiement }}</td>
+                  <td>{{ fiche.datePaiement | date }}</td>
+                  <td>{{ fiche.statutPaiementL }}</td>
+                  <td>{{ fiche.montantFinal }}</td>
+                  <td>{{ fiche.nom }}</td>
+                  <td>
+                    <button (click)="calculerSalaire(fiche)">Calculer Salaire</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
     </div>
 </div>
-<div class="paiement-container">
-    <div class="paiement-header">
-      <h2>MYBESTSHOP</h2>
-      <p>Commande #1434733106</p>
-      <p>Montant: 5,00 EUR</p>
-    </div>
-    <div class="paiement-methods">
-      <div class="method">
-        <img src="assets/img/logo/visa-logo.png" alt="VISA">
-        <span>VISA</span>
-      </div>
-      <div class="method">
-        <img src="assets/img/logo/bancontact-logo.png" alt="Bancontact">
-        <span>Bancontact</span>
-      </div>
-      <div class="method">
-        <img src="assets/img/logo/vir-logo.png" alt="ING">
-        <span>VIRREMENT</span>
-      </div>
-    </div>
-        <form [formGroup]="paiementForm" (ngSubmit)="submitForm()">
-        <div class="mb-3">
-            <label for="montant" class="form-label">montant</label>
-            <input type="number" id="montant" class="form-control" formControlName="montant" placeholder="20000000">
-          </div>
-      
-          <div class="mb-3">
-            <label for="datePaiement" class="form-label">Date de Paiement</label>
-            <input type="date" id="datePaiement" class="form-control" formControlName="datePaiement" placeholder="2025-02-21">
-          </div>
-      
-          <div class="mb-3">
-            <label for="payment" class="form-label">Méthode de Paiement</label>
-            <select id="payment" class="form-control" formControlName="payment" placeholder="Carte">
-              <option value="CARTE">Carte </option>
-              <option value="VIREMENT">Virement</option>
-              <option value="CHÈQUE">Chèque</option>ESPECES
-              <option value="ESPECES">Espéce</option>
-              
-            </select>
-          </div>
-      
-          <div class="mb-3">
-            <label for="numeroCarte" class="form-label">Numéro de Carte</label>
-            <input type="number" id="numeroCarte" class="form-control" formControlName="numeroCarte" placeholder="123456789">
-          </div>
-      
-          <button type="submit" class="btn btn-primary" [disabled]="paiementForm.invalid">Ajouter</button>
-          <button type="button" class="btn btn-secondary" (click)="annuler()">Annuler</button>
-
-        </form>
-  </div>
+</main>
 <footer>
     <!-- Footer Start-->
     <div class="footer-main">
@@ -263,3 +244,4 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </div>
     <!-- Footer End-->
 </footer>
+

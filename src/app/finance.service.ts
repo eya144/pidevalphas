@@ -10,6 +10,7 @@ export class FinanceService {
 
   // URL de l'API pour accéder aux factures
   private apiUrl = 'http://localhost:8089/pidev/Api/facture';
+  router: any;
 
   // Adjust this URL if necessary
 
@@ -44,4 +45,8 @@ export class FinanceService {
       const url = `${this.apiUrl}/${idFacture}/status`; // Endpoint pour mettre à jour le statut
       return this.http.put<Facture>(url, { status }); // Envoyer une requête PUT avec le nouveau statut
     }
+    // Dans votre composant de liste des factures
+navigateToPaiement(idFacture: number): void {
+  this.router.navigate(['/paiement', idFacture]); // Passez l'ID de la facture
+}
 }

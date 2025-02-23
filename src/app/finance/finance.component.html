@@ -62,7 +62,7 @@
                                       <li><a>Finance</a>
                                         <ul class="submenu">
                                           <li><a routerLink="/finance">Invoice</a></li>
-                                          <li><a routerLink="/paiement">Payment</a></li>
+                                          <li><a routerLink="/fichedepaie-comptable">Payslip</a></li>
                                         </ul>
                                       </li>
                                       <li><a routerLink="/Logistique">Logistics</a></li>
@@ -162,12 +162,14 @@
               >
                 {{ facture.status === 'Paid' ? '✅ Paid' : '❌ Unpaid' }}
               </button>
+              
             </td>
             <td>
               <div class="button-container">
                 <button (click)="deleteFacture(facture.idFacture)">🗑️</button>
                 <button (click)="updateFacture(facture)">✏️</button>
                 <button (click)="navigateToPaiement()">💳</button>
+                
               </div>
             </td>
           </tr>
