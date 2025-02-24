@@ -150,9 +150,10 @@
                   <td>{{ fiche.statutPaiementL }}</td>
                   <td>{{ fiche.montantFinal }}</td>
                   <td>{{ fiche.nom }}</td>
-                  <td>
-                    <button (click)="calculerSalaire(fiche)">Calculer Salaire</button>
-                  </td>
+                  <td> 
+                    <button (click)="calculerSalaire(fiche)" class="button-hover" >Calculer Salaire</button>
+                    <button (click)="navigateToPaiement(fiche)"> 💳 </button>
+                    <button (click)="imprimerFiche(fiche)"> 🖨️ </button>                  </td>
                 </tr>
               </tbody>
             </table>

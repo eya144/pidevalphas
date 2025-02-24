@@ -16,7 +16,7 @@ export class FinanceComponent implements OnInit {
   showAddForm = false;
   isEditing = false;
   editingFactureId: number | null = null;
-
+  idFacture: number | undefined;
   constructor(
     private fb: FormBuilder,
     private financeService: FinanceService,
@@ -28,7 +28,7 @@ export class FinanceComponent implements OnInit {
     this.getAllFactures(); // Charger les factures au démarrage
   }
   
-  navigateToPaiement(): void {
+  navigateToPaiement(idFacture: number | undefined): void {
     this.router.navigate(['/paiement']);
   }
 

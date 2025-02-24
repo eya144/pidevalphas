@@ -18,13 +18,47 @@ th {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: none;
   color: white;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
 }
 
-button:hover {
+.button-hover {
   background-color: #45a049;
+}
+.fiches-de-paie-container {
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.button-container {
+  display: flex; /* Aligne les boutons sur une ligne */
+  gap: 10px; /* Ajoute un espacement entre les boutons */
+}
+
+.button-container button {
+  background: none; /* Supprime l'arrière-plan */
+  border: none; /* Supprime la bordure */
+  font-size: 20px; /* Ajuste la taille des icônes */
+  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+}
+
+.button-container button:hover {
+  opacity: 0.7; /* Ajoute un effet au survol */
 }
