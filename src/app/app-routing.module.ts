@@ -13,6 +13,7 @@ import { ServiceComponent } from './service/service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProjetComponent } from './projet/projet.component';
 import { AddProjetComponent } from './add-projet/add-projet.component';
+import { EditProjetComponent } from './edit-projet/edit-projet.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'service', component: ServiceComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'projet', component: ProjetComponent },
-  { path: 'projets/ajouter', component: AddProjetComponent },
+  { path: 'add-projet', component: AddProjetComponent },
+  { path: 'edit-projet/:id', component: EditProjetComponent},
 
   { path: '', redirectTo:'/home', pathMatch: 'full' }
 ];

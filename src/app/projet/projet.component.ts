@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';  // Importer le service Router
 import { Projet } from '../core/models/Projet';
+import { Router } from '@angular/router';
 import { ProjetService } from '../projet.service';
 
 @Component({
@@ -9,63 +9,61 @@ import { ProjetService } from '../projet.service';
   styleUrls: ['./projet.component.css']
 })
 export class ProjetComponent implements OnInit {
-  projets: Projet[] = [];
-  selectedProjet: Projet | null = null;
-  message: string | null = null;
-  messageType: 'success' | 'danger' | null = null;
 
-  // Ajouter le Router au constructeur
+  projets: Projet[] = [];
+
+  // 🔑 Mapping temporaire ID → Nom du chef de projet
+  chefProjetMap: { [key: number]: string } = {
+    1: 'Hela Ben Amor',
+    2: 'Ahmed Zribi',
+    3: 'Fares Mansouri',
+    4: 'Zaid Khelifi'
+  };
+
   constructor(private projetService: ProjetService, private router: Router) {}
 
   ngOnInit(): void {
-    this.loadProjets();
+    this.getProjets();
   }
 
-  loadProjets(): void {
-    this.projetService.getAllProjets().subscribe({
-      next: (data: Projet[]) => {
-        this.projets = data;
-        this.showMessage('Projets chargés avec succès.', 'success');
+  // 🟢 Récupérer la liste des projets
+  getProjets(): void {
+    this.projetService.getProjets().subscribe(
+      (data) => {
+        // Associer chaque projet à un nom de chef de projet
+        this.projets = data.map(projet => ({
+          ...projet,
+          nomChefProjet: this.getChefProjetName(projet.chefProjetId)
+        }));
       },
-      error: (err: any) => {
-        this.showMessage('Erreur de récupération des projets.', 'danger');
+      (error) => {
+        console.error('Erreur lors de la récupération des projets', error);
       }
-    });
+    );
   }
 
-  selectProjet(projet: Projet): void {
-    this.selectedProjet = projet;
+  // 🔍 Obtenir le nom du chef de projet par ID
+  getChefProjetName(id: number): string {
+    return this.chefProjetMap[id] || 'Non attribué';
   }
 
-  showMessage(message: string, type: 'success' | 'danger'): void {
-    this.message = message;
-    this.messageType = type;
-    setTimeout(() => (this.message = null), 5000);
+  // ➕ Ajouter un projet
+  ajouterProjet(): void {
+    this.router.navigate(['/add-projet']);
   }
 
-  goToAddProjet(): void {
-    // Utiliser le Router pour la redirection
-    this.router.navigate(['/projets/ajouter']);
+  // ✏ Modifier un projet
+  modifierProjet(id: number): void {
+    this.router.navigate([`/edit-projet/${id}`]);
   }
 
-  editProjet(projet: Projet): void {
-    // Modification de la ligne pour utiliser idProjet
-    window.location.href = `/projets/modifier/${projet.idProjet}`;
-  }
-
-  deleteProjet(idProjet: number): void {
-    if (confirm('Voulez-vous vraiment supprimer ce projet ?')) {
-      this.projetService.deleteProjet(idProjet).subscribe({
-        next: () => {
-          this.showMessage('Projet supprimé avec succès.', 'success');
-          this.loadProjets();
-        },
-        error: () => this.showMessage('Erreur lors de la suppression.', 'danger')
-      });
+  // ❌ Supprimer un projet
+  supprimerProjet(id: number): void {
+    if (confirm('Êtes-vous sûre de vouloir supprimer ce projet ?')) {
+      this.projetService.deleteProjet(id).subscribe(
+        () => this.getProjets(),
+        (error) => console.error('Erreur lors de la suppression', error)
+      );
     }
-  }
-
-  closeDetails(): void {
-    this.selectedProjet = null;
   }
 }

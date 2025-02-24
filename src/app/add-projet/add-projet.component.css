@@ -51,4 +51,14 @@
     background-color: #dc3545;
     color: white;
   }
-  
+  /* Assurez-vous que l'élément contenant la carte prend toute la largeur et une hauteur appropriée */
+#map {
+  height: 400px;  /* Ajustez la hauteur de la carte selon vos préférences */
+  width: 100%;    /* La carte occupera toute la largeur de son parent */
+  margin-top: 20px;  /* Marge au-dessus de la carte */
+}
+
+/* Personnalisez l'apparence du formulaire si nécessaire */
+.projet-form-container {
+  margin-top: 20px; /* Espace pour séparer le formulaire de la carte */
+}

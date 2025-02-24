@@ -1,40 +1,56 @@
-<div *ngIf="message" [ngClass]="'alert ' + (messageType === 'success' ? 'alert-success' : 'alert-danger')">
-    {{ message }}
+<app-header></app-header>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container my-4">
+  <h2 class="text-center">📋 Liste des Projets</h2>
+  
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-primary" (click)="ajouterProjet()">➕ Ajouter un Projet</button>
   </div>
-  
-  <div class="projets-container">
-    <div *ngIf="!selectedProjet">
-      <button class="btn-add" (click)="goToAddProjet()">➕ Ajouter un projet</button>
-    </div>
-  
-    <div *ngIf="projets.length > 0">
-      <div class="projets-list">
-        <div *ngFor="let projet of projets" class="projet-item">
-          <div class="projet-header">
-            <h3>{{ projet.nom }}</h3>
-            <span class="projet-status" [ngClass]="{
-              'status-success': projet.status === 'Terminé',
-              'status-pending': projet.status === 'En Cours',
-              'status-delayed': projet.status === 'Retard'
-            }">{{ projet.status }}</span>
-          </div>
-          <p class="projet-description">{{ projet.description }}</p>
-          <div class="projet-actions">
-            <button class="btn-edit" (click)="editProjet(projet)">✏️ Modifier</button>
-            <button class="btn-delete" (click)="deleteProjet(projet.idProjet)">🗑️ Supprimer</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div *ngIf="selectedProjet" class="projet-details-modal">
-      <div class="modal-content">
-        <h2>{{ selectedProjet.nom }}</h2>
-        <p><strong>Description:</strong> {{ selectedProjet.description }}</p>
-        <p><strong>Budget initial:</strong> {{ selectedProjet.budgetInitial | currency }}</p>
-        <p><strong>Progression:</strong> {{ selectedProjet.progression }}%</p>
-        <button class="btn-close" (click)="closeDetails()">❌ Fermer</button>
-      </div>
-    </div>
-  </div>
-  
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Chef de Projet</th>
+        <th>Status</th>
+        <th>Date Début</th>
+        <th>Date Fin Prévue</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let projet of projets">
+        <td>{{ projet.nom }}</td>
+        <td>{{ projet.description }}</td>
+        <td>{{ projet.nomChefProjet }}</td>
+        <td>{{ projet.status }}</td>
+        <td>{{ projet.dateDebut | date:'dd/MM/yyyy' }}</td>
+        <td>{{ projet.dateFinPrevue | date:'dd/MM/yyyy' }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm me-1" (click)="modifierProjet(projet.idProjet)">
+            ✏ Modifier
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="supprimerProjet(projet.idProjet)">
+            🗑 Supprimer
+          </button>
+        </td>
+      </tr>
+
+      <!-- Message si la liste est vide -->
+      <tr *ngIf="projets.length === 0">
+        <td colspan="7" class="text-center text-muted">
+          Aucun projet disponible.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

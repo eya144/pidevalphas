@@ -1,95 +1,112 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Projet } from '../core/models/Projet';
 import { ProjetService } from '../projet.service';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-add-projet',
-  templateUrl: './add-projet.component.html'
+  templateUrl: './add-projet.component.html',
+  styleUrls: ['./add-projet.component.css']
 })
-export class AddProjetComponent {
-  projetForm: FormGroup;
-  message: string = '';
-  messageType: string = '';
+export class AddProjetComponent implements OnInit {
+  projetForm!: FormGroup;
+  marker!: L.Marker;
+  map!: L.Map;
+  formSuccess = false;
+  formError = false;
 
-  constructor(private fb: FormBuilder, private projetService: ProjetService) {
+  chefs = [
+    { id: 1, nom: 'Hela Ben Amor' },
+    { id: 2, nom: 'Ahmed Zribi' },
+    { id: 3, nom: 'Fares Mansouri' }
+  ];
+
+  constructor(
+    private fb: FormBuilder,
+    private projetService: ProjetService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
     this.projetForm = this.fb.group({
-      nom: [''],
-      description: [''],
-      typeProjet: [''],
-      status: [''],
-      budgetInitial: [500000],
-      dateDebut: [''],
-      dateFinPrevue: [''],
-      dateFinReelle: [''],
-      adresse: [''],
-      latitude: [''],
-      longitude: [''],
-      maitreOuvrage: [''],
-      maitreOeuvre: [''],
-      entrepreneurPrincipal: [''],
-      chefProjetId: [''],
-      permisConstruction: [false],
-      progression: [45],
-      risquesIdentifies: [''],
-      contraintes: [''],
-      missions: [''],
-      membresEquipeIds: ['']
+      nom: ['', Validators.required],
+      description: ['', Validators.required],
+      typeProjet: ['', Validators.required],
+      status: ['', Validators.required],
+      dateDebut: ['', Validators.required],
+      dateFinPrevue: ['', Validators.required],
+      budgetInitial: [0, [Validators.required, Validators.min(1000)]],
+      chefProjetId: ['', Validators.required],
+      latitude: [36.8065, Validators.required],
+      longitude: [10.1815, Validators.required]
+    });
+
+    this.initMap();
+    this.projetForm.get('dateDebut')?.valueChanges.subscribe(() => this.validateDates());
+    this.projetForm.get('dateFinPrevue')?.valueChanges.subscribe(() => this.validateDates());
+  }
+
+  initMap(): void {
+    this.map = L.map('map').setView([36.8065, 10.1815], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(this.map);
+
+    this.marker = L.marker([36.8065, 10.1815], { draggable: true }).addTo(this.map);
+
+    this.marker.on('dragend', () => {
+      const position = this.marker.getLatLng();
+      this.projetForm.patchValue({
+        latitude: position.lat,
+        longitude: position.lng
+      });
+    });
+
+    this.map.on('click', (event: L.LeafletMouseEvent) => {
+      const lat = event.latlng.lat;
+      const lng = event.latlng.lng;
+      this.projetForm.patchValue({ latitude: lat, longitude: lng });
+      this.marker.setLatLng([lat, lng]);
     });
   }
 
-  ajouterProjet(): void {
-    if (this.projetForm.valid) {
-      const formData = this.projetForm.value;
-      
-      // Convertir les dates du format "jj/mm/aaaa" en format ISO "yyyy-mm-dd"
-      formData.dateDebut = this.convertDateToIso(formData.dateDebut);
-      formData.dateFinPrevue = this.convertDateToIso(formData.dateFinPrevue);
-      
-      // Conversion explicite des champs numériques
-      formData.budgetInitial = Number(formData.budgetInitial);
-      formData.latitude = Number(formData.latitude);
-      formData.longitude = Number(formData.longitude);
-      formData.chefProjetId = Number(formData.chefProjetId);
-      formData.progression = Number(formData.progression);
-      
-      // Convertir membresEquipeIds et missions si ce sont des chaînes
-      if (typeof formData.membresEquipeIds === 'string') {
-        formData.membresEquipeIds = formData.membresEquipeIds.split(',').map((id: string) => Number(id.trim()));
-      }
-      if (typeof formData.missions === 'string') {
-        formData.missions = formData.missions.split(',').map((mission: string) => mission.trim());
-      }
-      
-      // Affichez la charge utile dans la console pour débogage
-      console.log('Payload envoyé:', formData);
-      
-      // Appel du service pour ajouter le projet
-      this.projetService.ajouterProjet(formData).subscribe({
-        next: () => {
-          this.message = 'Projet ajouté avec succès !';
-          this.messageType = 'success';
-          this.projetForm.reset();
-        },
-        error: (error) => {
-          console.error('Erreur lors de l\'ajout du projet :', error);
-          this.message = `Erreur : ${error.error?.message || 'Impossible d\'ajouter le projet.'}`;
-          this.messageType = 'danger';
-        }
-      });
+  validateDates(): void {
+    const dateDebut = new Date(this.projetForm.get('dateDebut')?.value);
+    const dateFinPrevue = new Date(this.projetForm.get('dateFinPrevue')?.value);
+    if (dateDebut > dateFinPrevue) {
+      this.projetForm.get('dateFinPrevue')?.setErrors({ dateInvalide: true });
     } else {
-      this.message = 'Veuillez remplir tous les champs requis.';
-      this.messageType = 'danger';
+      this.projetForm.get('dateFinPrevue')?.setErrors(null);
     }
   }
-  
-  // Fonction pour convertir une date du format "jj/mm/aaaa" au format ISO "yyyy-mm-dd"
-  convertDateToIso(date: string): string {
-    if (!date) {
-      return '';
+
+  onSubmit(): void {
+    if (this.projetForm.valid) {
+      const projet: Projet = this.projetForm.value;
+      this.projetService.addProjet(projet).subscribe(
+        () => {
+          this.formSuccess = true;
+          this.formError = false;
+          setTimeout(() => {
+            this.router.navigate(['/projet']);
+          }, 2000);
+        },
+        (error) => {
+          this.formSuccess = false;
+          this.formError = true;
+          console.error('Erreur lors de l\'ajout du projet', error);
+        }
+      );
+    } else {
+      alert('Veuillez remplir tous les champs correctement.');
     }
-    const [day, month, year] = date.split('/');
-    // Crée un objet Date et retourne la partie date au format ISO
-    const isoDate = new Date(+year, +month - 1, +day).toISOString().split('T')[0];
-    return isoDate;
+  }
+
+  // Méthode pour obtenir l'objet de contrôle d'un champ spécifique
+  get f() {
+    return this.projetForm.controls;
   }
 }

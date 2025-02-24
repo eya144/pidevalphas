@@ -18,9 +18,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BackMenuAdminComponent } from './back-menu-admin/back-menu-admin.component';
 import { BackHeaderComponent } from './back-header/back-header.component';
 import { ProjetComponent } from './projet/projet.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddProjetComponent } from './add-projet/add-projet.component';
+import { FooterHomeComponent } from './footer-home/footer-home.component';
+import { HeaderComponent } from './header/header.component';
+import { EditProjetComponent } from './edit-projet/edit-projet.component';
+import { MapComponent } from './map/map.component';
+import { MapSelectorComponentComponent } from './map-selector-component/map-selector-component.component';
 
 @NgModule({
   declarations: [
@@ -40,13 +45,19 @@ import { AddProjetComponent } from './add-projet/add-projet.component';
       BackMenuAdminComponent,
       BackHeaderComponent,
       ProjetComponent,
-      AddProjetComponent
+      AddProjetComponent,
+      FooterHomeComponent,
+      HeaderComponent,
+      EditProjetComponent,
+      MapComponent,
+      MapSelectorComponentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

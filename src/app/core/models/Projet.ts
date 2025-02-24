@@ -1,28 +1,24 @@
-// src/app/core/models/Projet.ts
-
 export interface Projet {
-    idProjet: number;
-    nom: string;
-    description: string;
-    typeProjet: string; // On suppose que c'est une chaîne de caractères. Tu peux définir un enum si nécessaire
-    status: string; // Même chose ici, tu peux créer un enum pour les statuts
-    dateDebut: string; // Date sous forme de string (par exemple, 'YYYY-MM-DD')
-    dateFinPrevue: string;
-    dateFinReelle: string;
-    budgetInitial: number;
-    budgetReel: number;
-    adresse: string;
-    latitude: number;
-    longitude: number;
-    maitreOuvrage: string;
-    maitreOeuvre: string;
-    entrepreneurPrincipal: string;
-    chefProjetId: number;
-    permisConstruction: boolean;
-    progression: number;
-    risquesIdentifies: string;
-    contraintes: string;
-    missions: any[]; // Liste des missions, tu peux créer une interface pour Mission si tu veux
-    membresEquipeIds: number[]; // Liste des IDs des membres de l'équipe
-  }
-  
+  idProjet: number;                  // Identifiant unique du projet
+  nom: string;                       // Nom du projet
+  description: string;               // Description détaillée du projet
+  typeProjet: string;                // Type de projet (par exemple, construction, rénovation, etc.)
+  status: string;                    // Statut du projet (en cours, terminé, suspendu, etc.)
+  dateDebut: string;                 // Date de début du projet (format : 'yyyy-MM-dd')
+  dateFinPrevue: string;             // Date de fin prévue du projet (format : 'yyyy-MM-dd')
+  dateFinReelle: string;             // Date de fin réelle du projet (format : 'yyyy-MM-dd'), peut être vide
+  budgetInitial: number;             // Budget initial alloué au projet
+  budgetReel: number;                // Budget réel dépensé jusqu'à présent
+  adresse: string;                   // Adresse du projet (lieu de réalisation)
+  latitude: number;                  // Latitude géographique du projet (en degrés)
+  longitude: number;                 // Longitude géographique du projet (en degrés)
+  maitreOuvrage: string;             // Nom du maître d'ouvrage (propriétaire du projet)
+  maitreOeuvre: string;              // Nom du maître d'œuvre (superviseur du projet)
+  entrepreneurPrincipal: string;     // Nom de l'entrepreneur principal
+  chefProjetId: number;              // ID du chef de projet (référence à un utilisateur dans la base de données)
+  nomChefProjet?: string;  // Ajoute cette ligne
+  permisConstruction: boolean;       // Si le permis de construire a été obtenu
+  progression: number;               // Pourcentage de progression du projet (0 à 100)
+  risquesIdentifies: string;         // Risques identifiés pour le projet
+  contraintes: string;               // Contraintes et défis associés au projet
+}
