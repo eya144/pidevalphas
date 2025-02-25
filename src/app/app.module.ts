@@ -13,6 +13,7 @@ import { FinanceComponent } from './finance/finance.component';
 import { InspectionComponent } from './inspection/inspection.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; 
+import { MatDialogModule } from '@angular/material/dialog'; // Add this import
 
 import { ContactComponent } from './contact/contact.component';
 import { InscriptionComponent } from './inscription/inscription.component';
@@ -27,6 +28,11 @@ import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 import { EditPaiementComponent } from './edit-paiement/edit-paiement.component';
 import { CommandeComptableComponent } from './commande-comptable/commande-comptable.component';
 import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepaie-comptable.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { AppHeaderComponent } from './app-header/app-header.component';
+import { AppFooterComponent } from './app-footer/app-footer.component';
 
 @NgModule({
   declarations: [
@@ -52,12 +58,18 @@ import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepa
       EditPaiementComponent,
       CommandeComptableComponent,
       FichedepaieComptableComponent,
+      ConfirmationDialogComponent,
+      SuccessDialogComponent,
+      AppHeaderComponent,
+      AppFooterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule ,
     ReactiveFormsModule ,
-    HttpClientModule
+    HttpClientModule ,
+    MatDialogModule,
+    BrowserAnimationsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

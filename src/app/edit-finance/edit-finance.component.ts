@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FinanceService } from '../finance.service';
 import { Facture } from 'src/app/core/models/Factures';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-finance',
@@ -13,6 +12,8 @@ import { switchMap } from 'rxjs/operators';
 export class EditFinanceComponent implements OnInit {
   factureForm!: FormGroup;
   factureId!: number;
+  idCommande: number | null = null;
+  idResponsableLogistique: number | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -22,14 +23,8 @@ export class EditFinanceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Récupérer l'ID de la facture depuis l'URL
     this.factureId = +this.route.snapshot.params['id'];
-    console.log('ID de la facture récupéré depuis l\'URL :', this.factureId); // Ajoutez ce log
-
-    // Initialiser le formulaire
     this.initForm();
-
-    // Charger les données de la facture
     this.loadFacture();
   }
 
@@ -39,48 +34,49 @@ export class EditFinanceComponent implements OnInit {
       dateFacture: [null, Validators.required],
       dateEcheance: [null, Validators.required],
       montantTotalHorsTaxe: [null, [Validators.required, Validators.min(0)]],
-      tva: [null, [Validators.required, Validators.min(0)]]
+      tva: [null, [Validators.required, Validators.min(0)]],
+      status: ['Unpaid', Validators.required]
     });
   }
 
-  // Méthode pour charger les données de la facture
   loadFacture(): void {
     this.financeService.getFactureById(this.factureId).subscribe(
       facture => {
-        console.log('Données de la facture chargées depuis l\'API :', facture); // Log pour déboguer
-        this.factureForm.patchValue(facture); // Remplir le formulaire avec les données de la facture
+        console.log('Données de la facture chargées depuis l\'API :', facture);
+        this.idCommande = facture.idCommande ?? null;
+        this.idResponsableLogistique = facture.idResponsableLogistique ?? null;
+        this.factureForm.patchValue(facture);
       },
       error => {
-        console.error('Erreur lors du chargement de la facture :', error); // Log en cas d'erreur
+        console.error('Erreur lors du chargement de la facture :', error);
       }
     );
   }
 
   onSubmit(): void {
     if (this.factureForm.valid) {
-      const updatedFacture = this.factureForm.value;
-      console.log('Données du formulaire à envoyer pour mise à jour :', updatedFacture); // Log pour déboguer
-  
-      // Supprimer l'ancienne facture avant de mettre à jour
-      this.financeService.deleteFacture(this.factureId)
-        .pipe(
-          switchMap(() => this.financeService.updateFacture(this.factureId, updatedFacture))
-        )
-        .subscribe(
-          () => {
-            console.log('Ancienne facture supprimée et nouvelle facture mise à jour avec succès');
-            this.router.navigate(['/finance']); // Rediriger vers la liste des factures
-          },
-          error => {
-            console.error('Erreur lors de la suppression ou de la mise à jour de la facture :', error); // Log en cas d'erreur
-          }
-        );
+      const updatedFacture: Facture = {
+        ...this.factureForm.value,
+        idFacture: this.factureId, // Inclure l'identifiant de la facture
+        idCommande: this.idCommande,
+        idResponsableLogistique: this.idResponsableLogistique
+      };
+
+      this.financeService.updateFacture(this.factureId, updatedFacture).subscribe(
+        () => {
+          console.log('Facture mise à jour avec succès');
+          this.router.navigate(['/finance']);
+        },
+        error => {
+          console.error('Erreur lors de la mise à jour de la facture :', error);
+        }
+      );
     } else {
-      console.warn('Le formulaire est invalide. Veuillez corriger les erreurs.'); // Log si le formulaire est invalide
+      console.warn('Le formulaire est invalide. Veuillez corriger les erreurs.');
     }
   }
+
   annuler(): void {
-    this.router.navigate(['/finance']); // Redirection vers la liste des paiements
+    this.router.navigate(['/finance']);
   }
-  
 }

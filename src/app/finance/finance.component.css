@@ -128,8 +128,3 @@
   .button-container button:hover {
     opacity: 0.7; /* Ajoute un effet au survol */
   }
-/* Réduire la largeur de l'image */
-.slider-image {
-  max-height: 10%; /* Ajustez la valeur selon vos besoins */
-  margin: 0 auto; /* Centrer l'image */
-}

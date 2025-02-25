@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommandeService } from '../commande.service';
 import { Commande } from '../core/models/Commande';
-
 @Component({
   selector: 'app-commande-comptable',
   templateUrl: './commande-comptable.component.html',
