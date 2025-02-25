@@ -23,5 +23,19 @@ getVehicules(): void {
     this.vehicules = data;
   });
 }
+updateChauffeur(vehicule: any): void {
+  // Mettre à jour l'ID du chauffeur du véhicule et appeler la méthode de mise à jour
+  this.vehiculeService.modifierVehicule(vehicule.idVehicule, vehicule).subscribe(response => {
+    console.log('Véhicule mis à jour:', response);
+  });
+}
+updateDisponibilite(vehicule: any): void {
+  if (!vehicule.disponible) {
+    vehicule.idChauffeur = null; // Si le véhicule devient indisponible, réinitialiser l'ID du chauffeur
+  }
+  this.vehiculeService.modifierVehicule(vehicule.idVehicule, vehicule).subscribe(response => {
+    console.log('Disponibilité du véhicule mise à jour:', response);
+  });
+}
 
 }
