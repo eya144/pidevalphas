@@ -1,0 +1,92 @@
+/* Style global du tableau */
+.custom-table {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  /* En-tête du tableau */
+  .table-header {
+    background-color: #1e3e60;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Lignes du tableau */
+  .table-row {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .table-row:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.02);
+  }
+  
+  /* Cellules de tableau */
+  td {
+    text-align: center;
+    padding: 12px 18px;
+    font-size: 1rem;
+  }
+  
+  /* Badge pour l'indication de disponibilité */
+  .badge {
+    font-size: 0.9rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  
+  /* Boutons d'action (Modifier et Supprimer) */
+  .action-buttons button {
+    margin: 5px;
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Bouton Modifier (stylisé) */
+  .btn-edit {
+    background-color: #428144;
+    color: white;
+    border: none;
+  }
+  
+  .btn-edit:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+  
+  /* Bouton Supprimer (stylisé) */
+  .btn-delete {
+    background-color: #f44336;
+    color: white;
+    border: none;
+  }
+  
+  .btn-delete:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+  }
+  
+  /* Message d'alerte si aucun véhicule */
+  .alert {
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #ff9800;
+    color: #fff;
+    border-radius: 8px;
+  }
+  
+  /* Table responsive */
+  .table-responsive {
+    overflow-x: auto;
+  }
+  .text{
+    align-items: center;
+    color: #ffffff;
+  }

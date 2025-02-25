@@ -1,78 +1,109 @@
 <!-- Header -->
 <app-headeer></app-headeer>
 <body>
-    <div class="container">
-        <!-- Drawer des catégories -->
-        <div class="drawer">
-            <h3>Catégories</h3>
-            <ul>
-                <li *ngFor="let cat of categories" (click)="filtrerParCategorie(cat)">
-                    {{ cat }}
-                </li>
-                <li class="reset-filter" (click)="getAllMateriels()">Afficher Tous</li>
-               
-            </ul>
-            
-        </div>
-
-        <!-- Liste des matériels -->
-        <div class="materiels-container">
-            <div class="title-container">
-                <h2>Liste des Matériels</h2>
-                <a routerLink="/dashboardLogistique">
-                    <img src="assets/img/logistique/6820955.png" alt="image-dashboard" class="dashboard-image">
-                </a>
-            </div>
-            <div class="materiels-list">
-                <div class="materiel-card" *ngFor="let materiel of materiels">
-                    <div class="materiel-details">
-                        <h4>Nom: {{ materiel.nomMateriel }}</h4>
-                        <p>Catégorie: {{ materiel.categorie }}</p>
-                        <p>Quantité: {{ materiel.quantite }}</p>
-                        <p>Prix Unitaire: {{ materiel.prixMateriel }}</p>
-                        <div class="commande-container">
-                            <!-- Checkbox pour sélectionner le matériel -->
-                            <input type="checkbox" 
-                                   [checked]="materielSelectionne[materiel.idMateriel]" 
-                                   (change)="toggleCommande(materiel.idMateriel)">
-                            <span>Commander</span>
-
-                            <!-- Zone de saisie de la quantité et bouton de validation -->
-                            <div *ngIf="materielSelectionne[materiel.idMateriel]" class="commande-inputs">
-                                <input type="number" 
-                                       [(ngModel)]="quantites[materiel.idMateriel]" 
-                                       placeholder="Quantité demandée">
-                                <button (click)="passerCommande(materiel)">✔</button>
-                            </div>
-                        </div>
-
-                        <!-- Bouton Supprimer -->
-                        <button class="btn-delete" (click)="deleteMateriel(materiel.idMateriel)">
-                            <i class="fa fa-trash"></i> Supprimer
-                        </button>
-
-                        <!-- Bouton Modifier -->
-                        <button class="btn-edit" (click)="redirectToEditMateriel(materiel.idMateriel)">
-                            <i class="fa fa-pencil"></i> Modifier
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bouton pour ajouter un nouveau matériel -->
-            <div class="add-materiel-btn">
-                <button class="btn" (click)="redirectToAddMateriel()">
-                    <i class="fa fa-plus"></i> Ajouter un matériel
-                </button>
-            </div>
-        </div>
+  <div class="btns-container">
+    <button class="btn-add" (click)="redirectToAddMateriel()">
+      <i class="fa fa-plus"></i> Ajouter un matériel
+    </button>
+    <button class="btn-add" (click)="redirectToAddVehicule()">
+      <i class="fa fa-plus"></i> Ajouter un véhicule
+    </button>
+    <a routerLink="/dashboardLogistique">
+      <img src="assets/img/logistique/6820955.png" alt="image-dashboard" class="dashboard-image">
+    </a>
+  </div>
+  <div class="container">
+    <!-- Drawer des catégories -->
+    <div class="drawer">
+      <h3>Catégories</h3>
+      <ul>
+        <li *ngFor="let cat of categories" (click)="filtrerParCategorie(cat)">
+          {{ cat }}
+        </li>
+        <li class="reset-filter" (click)="getAllMateriels()">Afficher Tous</li>
+       
+      </ul>
     </div>
 
-    <!-- Bouton "Passer la commande" -->
+    <!-- Liste des matériels -->
+    <div class="materiels-container">
+      <div class="title-container">
+        <h2>Liste des Matériels</h2>
+       
+      </div>
+      <div class="materiels-list">
+        <div class="materiel-card" *ngFor="let materiel of materiels">
+          <div class="materiel-details">
+            <h4>Nom: {{ materiel.nomMateriel }}</h4>
+            <p>Catégorie: {{ materiel.categorie }}</p>
+            <p>Quantité: {{ materiel.quantite }}</p>
+            <p>Prix Unitaire: {{ materiel.prixMateriel }}</p>
+            <div class="commande-container">
+              <input type="checkbox" 
+                     [checked]="materielSelectionne[materiel.idMateriel]" 
+                     (change)="toggleCommande(materiel.idMateriel)">
+              <span>Commander</span>
+              <div *ngIf="materielSelectionne[materiel.idMateriel]" class="commande-inputs">
+                <input type="number" 
+                       [(ngModel)]="quantites[materiel.idMateriel]" 
+                       placeholder="Quantité demandée">
+                <button (click)="passerCommande(materiel)">✔</button>
+              </div>
+            </div>
+            <button class="btn-delete" (click)="deleteMateriel(materiel.idMateriel)">
+              <i class="fa fa-trash"></i> Supprimer
+            </button>
+            <button class="btn-edit" (click)="redirectToEditMateriel(materiel.idMateriel)">
+              <i class="fa fa-pencil"></i> Modifier
+            </button>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+  </div>
 
-<button *ngIf="hasSelectedMateriels()" (click)="passerCommandeGlobale()" class="btn-commande">
+  <!-- Bouton "Passer la commande" -->
+  <button *ngIf="hasSelectedMateriels()" (click)="passerCommandeGlobale()" class="btn-commande">
     Passer la commande
-</button>
+  </button>
+  <div class="separator"></div>
+  <!-- Section Véhicules -->
+  <div class="container">
+    <!-- Drawer des types de véhicules -->
+    <div class="drawer">
+      <h3>Type Véhicules</h3>
+      <ul>
+        <li *ngFor="let type of typeVehicule" (click)="filtrerParType(type)">
+          {{ type }}
+        </li>
+        <li class="reset-filter" (click)="getVehicules()">Afficher Tous</li>
+      </ul>
+    </div>
 
-
+    <!-- Liste des véhicules -->
+    <div class="materiels-container">
+      <div class="title-container">
+        <h2>Liste des Véhicules</h2>
+      </div>
+      <div class="materiels-list">
+        <div class="materiel-card" *ngFor="let vehicule of vehicules">
+          <div class="materiel-details">
+            <h4>Nom: {{ vehicule.nomVehicule }}</h4>
+            <p>Marque: {{ vehicule.marque }}</p>
+            <p>Modèle: {{ vehicule.modele }}</p>
+            <p>Immatriculation: {{ vehicule.immatriculation }}</p>
+            <p>Type: {{ vehicule.typeVehicule }}</p>
+            <p>Disponible: {{ vehicule.disponible ? 'Oui' : 'Non' }}</p>
+            <button class="btn-delete" (click)="deleteVehicule(vehicule.idVehicule)">
+              <i class="fa fa-trash"></i> Supprimer
+            </button>            
+            <button class="btn-edit" (click)="redirectToEditVehicule(vehicule.idVehicule)">
+              <i class="fa fa-pencil"></i> Modifier
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>

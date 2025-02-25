@@ -2,7 +2,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding-top: 60px; /* Réduit l'espace top */
+    padding-top: 70px; /* Réduit l'espace top */
     background-color: #121f2c; /* Couleur de fond sombre */
     color: #040000; /* Texte en blanc pour contraster avec le fond sombre */
 }
@@ -81,7 +81,7 @@ button:hover {
 /* Links dans le menu */
 a {
     color: #ffffff;
-    text-decoration: none;
+    text-decoration:none;
 }
 
 a:hover {

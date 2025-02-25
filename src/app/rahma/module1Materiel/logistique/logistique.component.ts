@@ -3,6 +3,7 @@ import { MaterielService } from 'serviceLogistique/materiel.service';
 import { LigneCommandeService } from 'serviceLogistique/ligne-commande.service';
 import { Router } from '@angular/router';
 import { CommandeService } from 'serviceLogistique/commande.service';
+import { VehiculeService } from 'serviceLogistique/vehicule.service';
 
 @Component({
   selector: 'app-logistique',
@@ -10,12 +11,28 @@ import { CommandeService } from 'serviceLogistique/commande.service';
   styleUrls: ['./logistique.component.css']
 })
 export class LogistiqueComponent {
+
   materiels: any[] = [];
+  vehicules: any[] = [];
   categories: string[] = [
     'MATERIAUX_CONSTRUCTION', 'METAUX', 'BOIS_ET_DERIVES',
     'ISOLATION', 'ELECTRICITE', 'PLOMBERIE',
     'PEINTURE_ET_FINITIONS', 'OUTILS_ET_EQUIPEMENTS_CHANTIER',
     'REVETEMENTS_SOL_MUR', 'MATERIAUX_ECOLOGIQUES_ET_INNOVANTS'
+  ];
+  typeVehicule: string[] = [
+    'CAMION_BENNE',       
+    'BETONNIERE',         
+    'GRUE_MOBILE',        // Pour soulever et déplacer des charges lourdes
+    'CHARGEUSE',          // Pour charger des matériaux comme du sable ou du gravier
+    'PELLE_HYDRAULIQUE',  // Pour creuser et déplacer la terre
+    'BULLDOZER',          // Pour le nivellement et le terrassement
+    'NACELLE_ELEVATRICE', // Pour accéder à des hauteurs en toute sécurité
+    'COMPACTEUR',         // Pour compacter le sol ou l’asphalte
+    'CAMION_PLATEAU',     // Pour transporter des équipements et matériaux
+   'EXCAVATRICE',        // Pour creuser et déplacer de grandes quantités de terre
+    'TOMBEREAU',          // Pour transporter des matériaux en vrac sur le chantier
+    'FINISSEUR',
   ];
   lignesCommande: any[] = [];  // Liste des lignes de commande sélectionnées
 
@@ -24,13 +41,16 @@ export class LogistiqueComponent {
 
   constructor(
     private materielService: MaterielService,
+    private vehiculeService: VehiculeService,
     private ligneCommandeService: LigneCommandeService,
     private commandeService: CommandeService,
     private router: Router
+    
   ) {}
 
   ngOnInit(): void {
     this.getAllMateriels();
+    this.getVehicules();
   }
 
   getAllMateriels(): void {
@@ -39,16 +59,30 @@ export class LogistiqueComponent {
       (error) => { console.error('Erreur lors de la récupération des matériels', error); }
     );
   }
-
+  getVehicules(): void {
+    this.vehiculeService.getVehicule().subscribe(
+      (data) => { this.vehicules = data; },
+      (error) => { console.error('Erreur lors de la récupération des vehicules', error); }
+    );
+  }
   filtrerParCategorie(categorie: string): void {
     this.materielService.getMaterielsByCategorie(categorie).subscribe(
       (data) => { this.materiels = data; },
       (error) => { console.error(`Erreur lors de la récupération des matériels de la catégorie ${categorie}`, error); }
     );
   }
+  filtrerParType(typeVehicule: string): void {
+    this.vehiculeService.getVehiculesByType(typeVehicule).subscribe(
+      (data) => { this.vehicules = data; },
+      (error) => { console.error(`Erreur lors de la récupération des véhicules du type ${typeVehicule}`, error); }
+    );    
+  }
 
   redirectToAddMateriel(): void {
     this.router.navigate(['/addMateriel']);
+  }
+  redirectToAddVehicule() {
+    this.router.navigate(['/addVehicule']);
   }
 
   deleteMateriel(idMateriel: number): void {
@@ -162,5 +196,20 @@ passerCommandeGlobale(): void {
     }
   );
 }
+deleteVehicule(idVehicule: number) {
+  this.vehiculeService.deleteVehicul(idVehicule).subscribe(
+    () => { 
+      this.vehicules = this.vehicules.filter(vehicule => vehicule.idVehicule !== idVehicule); 
+    },
+    (error) => { 
+      console.error(`Erreur lors de la suppression du vehicule avec l'ID ${idVehicule}`, error); 
+    }
+  );
+}
+
+redirectToEditVehicule(idVehicule: number): void {
+  this.router.navigate(['/editVehicule', idVehicule]);
+}
+
 
 }

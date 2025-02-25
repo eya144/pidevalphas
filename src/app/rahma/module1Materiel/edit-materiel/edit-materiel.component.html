@@ -1,29 +1,76 @@
-<div class="edit-materiel-container">
+<app-headeer></app-headeer>
+<body>
+  <div class="edit-materiel-container">
     <h2>Modifier le Matériel</h2>
     <form (ngSubmit)="saveMateriel()">
+      <!-- Champ Nom du Matériel -->
       <div class="form-group">
+        <!-- Le placeholder vide (" ") est nécessaire pour déclencher :placeholder-shown -->
+        <input 
+          type="text" 
+          id="nomMateriel" 
+          [(ngModel)]="materiel.nomMateriel" 
+          name="nomMateriel" 
+          placeholder=" "
+          required 
+        />
         <label for="nomMateriel">Nom du Matériel</label>
-        <input type="text" id="nomMateriel" [(ngModel)]="materiel.nomMateriel" name="nomMateriel" required />
       </div>
+
+      <!-- Champ Catégorie -->
       <div class="form-group">
-        <label for="categorie">Catégorie</label>
-        <select id="categorie" [(ngModel)]="materiel.categorie" name="categorie" required>
-          <option *ngFor="let categorie of categories" [value]="categorie">{{ categorie }}</option>
+        <!-- On ajoute une option vide par défaut pour le floating label -->
+        <select 
+          id="categorie" 
+          [(ngModel)]="materiel.categorie" 
+          name="categorie" 
+          required
+        >
+          <option value="" disabled selected hidden></option>
+          <option *ngFor="let categorie of categories" [value]="categorie">
+            {{ categorie }}
+          </option>
         </select>
+        <label for="categorie">Catégorie</label>
       </div>
+
+      <!-- Champ Quantité -->
       <div class="form-group">
+        <input 
+          type="number" 
+          id="quantite" 
+          [(ngModel)]="materiel.quantite" 
+          name="quantite" 
+          placeholder=" "
+          required 
+        />
         <label for="quantite">Quantité</label>
-        <input type="number" id="quantite" [(ngModel)]="materiel.quantite" name="quantite" required />
       </div>
+
+      <!-- Champ Prix Unitaire -->
       <div class="form-group">
+        <input 
+          type="number" 
+          id="prixMateriel" 
+          [(ngModel)]="materiel.prixMateriel" 
+          name="prixMateriel" 
+          placeholder=" "
+          required 
+        />
         <label for="prixMateriel">Prix Unitaire</label>
-        <input type="number" id="prixMateriel" [(ngModel)]="materiel.prixMateriel" name="prixMateriel" required />
       </div>
   
+      <!-- Boutons -->
       <div class="form-actions">
         <button type="submit" class="btn-save">Sauvegarder</button>
-        <button type="button" class="btn-cancel" (click)="router.navigate(['/logistique'])">Annuler</button>
+        <button 
+          type="button" 
+          class="btn-cancel" 
+          (click)="router.navigate(['/logistique'])"
+        >
+          Annuler
+        </button>
       </div>
     </form>
   </div>
-  
+</body>

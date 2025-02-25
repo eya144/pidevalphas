@@ -1,0 +1,99 @@
+<app-headeer></app-headeer>
+<body class="bg-light">
+  <div class="container mt-5">
+    <div class="card shadow-lg p-4">
+      <h2 class="text-center mb-4">Ajouter un Véhicule</h2>
+      <form [formGroup]="vehiculeForm" (ngSubmit)="onSubmit()">
+        
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group mb-3">
+              <label class="form-label"><i class="fas fa-car"></i> Nom du véhicule</label>
+              <input type="text" class="form-control" formControlName="nomVehicule" placeholder="Entrez le nom" required>
+              <div class="text-danger" *ngIf="vehiculeForm.get('nomVehicule')?.invalid && vehiculeForm.get('nomVehicule')?.touched">
+                <small *ngIf="vehiculeForm.get('nomVehicule')?.hasError('required')">Le nom du véhicule est requis.</small>
+                <small *ngIf="vehiculeForm.get('nomVehicule')?.hasError('minlength')">Le nom doit contenir au moins 3 caractères.</small>
+                <small *ngIf="vehiculeForm.get('nomVehicule')?.hasError('maxlength')">Le nom ne peut pas dépasser 50 caractères.</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group mb-3">
+              <label class="form-label"><i class="fas fa-user"></i> Chauffeur ID</label>
+              <input type="number" class="form-control" formControlName="idChauffeur" placeholder="ID du chauffeur" required>
+              <div class="text-danger" *ngIf="vehiculeForm.get('idChauffeur')?.invalid && vehiculeForm.get('idChauffeur')?.touched">
+                <small *ngIf="vehiculeForm.get('idChauffeur')?.hasError('required')">L'ID du chauffeur est requis.</small>
+                <small *ngIf="vehiculeForm.get('idChauffeur')?.hasError('pattern')">Veuillez entrer un nombre valide.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group mb-3">
+              <label class="form-label"><i class="fas fa-industry"></i> Marque</label>
+              <input type="text" class="form-control" formControlName="marque" placeholder="Ex: Toyota" required>
+              <div class="text-danger" *ngIf="vehiculeForm.get('marque')?.invalid && vehiculeForm.get('marque')?.touched">
+                <small *ngIf="vehiculeForm.get('marque')?.hasError('required')">La marque est requise.</small>
+                <small *ngIf="vehiculeForm.get('marque')?.hasError('minlength')">La marque doit contenir au moins 2 caractères.</small>
+                <small *ngIf="vehiculeForm.get('marque')?.hasError('maxlength')">La marque ne peut pas dépasser 30 caractères.</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group mb-3">
+              <label class="form-label"><i class="fas fa-car-side"></i> Modèle</label>
+              <input type="text" class="form-control" formControlName="modele" placeholder="Ex: Corolla" required>
+              <div class="text-danger" *ngIf="vehiculeForm.get('modele')?.invalid && vehiculeForm.get('modele')?.touched">
+                <small *ngIf="vehiculeForm.get('modele')?.hasError('required')">Le modèle est requis.</small>
+                <small *ngIf="vehiculeForm.get('modele')?.hasError('minlength')">Le modèle doit contenir au moins 2 caractères.</small>
+                <small *ngIf="vehiculeForm.get('modele')?.hasError('maxlength')">Le modèle ne peut pas dépasser 30 caractères.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group mb-3">
+              <label class="form-label"><i class="fas fa-id-card"></i> Immatriculation</label>
+              <input type="text" class="form-control" formControlName="immatriculation" placeholder="123-ABC" required>
+              <div class="text-danger" *ngIf="vehiculeForm.get('immatriculation')?.invalid && vehiculeForm.get('immatriculation')?.touched">
+                <small *ngIf="vehiculeForm.get('immatriculation')?.hasError('required')">L'immatriculation est requise.</small>
+                <small *ngIf="vehiculeForm.get('immatriculation')?.hasError('pattern')">L'immatriculation n'est pas valide.</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group mb-3">
+              <label class="form-label"><i class="fas fa-truck"></i> Type de véhicule</label>
+              <select class="form-select" formControlName="typeVehicule" required>
+                <option *ngFor="let type of typesVehicule" [value]="type">{{ type }}</option>
+              </select>
+              <div class="text-danger" *ngIf="vehiculeForm.get('typeVehicule')?.invalid && vehiculeForm.get('typeVehicule')?.touched">
+                <small *ngIf="vehiculeForm.get('typeVehicule')?.hasError('required')">Le type de véhicule est requis.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" formControlName="disponible">
+          <label class="form-check-label"><i class="fas fa-check-circle"></i> Disponible</label>
+        </div>
+
+
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-success btn-lg" [disabled]="vehiculeForm.invalid">
+            <i class="fas fa-plus-circle"></i> Ajouter Véhicule
+          </button>
+          <button type="button" class="btn btn-secondary btn-lg ms-3" (click)="onCancel()">
+            <i class="fas fa-times"></i> Annuler
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,52 @@
+<div class="container-fluid mt-5">
+    <h2 class="text">Gestion des Véhicules</h2>
+  
+    <!-- Tableau des véhicules avec design moderne -->
+    <div class="table-responsive">
+      <table class="table table-striped table-hover custom-table">
+        <thead>
+          <tr class="table-header">
+            <th scope="col">ID</th>
+            <th scope="col">Nom du Véhicule</th>
+            <th scope="col">Chauffeur</th>
+            <th scope="col">Marque</th>
+            <th scope="col">Modèle</th>
+            <th scope="col">Immatriculation</th>
+            <th scope="col">Type</th>
+            <th scope="col">Disponible</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vehicule of vehicules" class="table-row">
+            <td>{{ vehicule.idVehicule }}</td>
+            <td>{{ vehicule.nomVehicule }}</td>
+            <td>{{ vehicule.idChauffeur ? vehicule.idChauffeur : 'Aucun' }}</td>
+            <td>{{ vehicule.marque }}</td>
+            <td>{{ vehicule.modele }}</td>
+            <td>{{ vehicule.immatriculation }}</td>
+            <td>{{ vehicule.typeVehicule }}</td>
+            <td>
+              <span class="badge" [ngClass]="{'badge-success': vehicule.disponible, 'badge-danger': !vehicule.disponible}">
+                {{ vehicule.disponible ? 'Disponible' : 'Indisponible' }}
+              </span>
+            </td>
+            <td class="action-buttons">
+              <button class="btn btn-edit" >
+                <i class="fa fa-pencil-alt"></i> Modifier
+              </button>
+              <button class="btn btn-delete" >
+                <i class="fa fa-trash-alt"></i> Supprimer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Message si aucun véhicule n'est disponible -->
+    <div *ngIf="vehicules.length === 0" class="alert alert-warning text-center">
+      Aucun véhicule disponible pour le moment.
+    </div>
+  </div>
+  

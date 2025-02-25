@@ -1,69 +1,148 @@
-/* Style principal pour la page de modification */
-.edit-materiel-container {
+/* ========================
+   Style global
+   ======================== */
+   body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7fc;
+    color: #333;
+    margin: 0;
+    padding-top: 360px;
+  }
+  
+  /* Conteneur principal du formulaire */
+  .edit-materiel-container {
+    width: 100%;
     max-width: 600px;
-    margin: 50px auto;
+    margin: 80px auto;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   }
   
-  h2 {
+  .edit-materiel-container h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    color: #243b53;
   }
   
+  /* ========================
+     Style du formulaire
+     ======================== */
+  form {
+    width: 100%;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* Groupes de champs */
   .form-group {
-    margin-bottom: 15px;
+    position: relative;
+    margin-bottom: 25px;
   }
   
-  label {
-    display: block;
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-  }
-  
+  /* Champs de saisie (input / select) */
   input,
   select {
     width: 100%;
-    padding: 10px;
+    padding: 12px 10px;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: none;
+    border-bottom: 2px solid #aaa;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
   }
   
+  /* Pour éviter la flèche sur input[type=number] */
   input[type="number"] {
-    -moz-appearance: textfield; /* Pour éviter les flèches sur les inputs number */
+    -moz-appearance: textfield;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
   
-  select {
-    font-size: 1.1rem;
+  /* Labels flottants */
+  label {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #666;
+    pointer-events: none;
+    transition: all 0.3s ease;
   }
   
+  /* Effet focus : la bordure devient bleue */
+  input:focus,
+  select:focus {
+    border-bottom: 2px solid #243b53;
+  }
+  
+  /* Quand l'utilisateur saisit du texte OU quand le champ est focus,
+     on fait remonter le label */
+  input:focus + label,
+  input:not(:placeholder-shown) + label,
+  select:focus + label,
+  select:not([value=""]) + label {
+    top: -12px;
+    font-size: 0.9rem;
+    color: #243b53;
+    transform: none;
+  }
+  
+  /* ========================
+     Style des boutons
+     ======================== */
   .form-actions {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
   }
   
   button {
-    padding: 10px 15px;
+    flex: 1;
+    padding: 12px;
     font-size: 1rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 5px;
   }
   
+  /* Bouton Sauvegarder */
   .btn-save {
-    background-color: #4caf50;
+    background-color: #475c73;
     color: white;
   }
+  .btn-save:hover {
+    background-color: #2b4159;
+  }
   
+  /* Bouton Annuler */
   .btn-cancel {
-    background-color: #f44336;
+    background-color: #e74c3c;
     color: white;
   }
+  .btn-cancel:hover {
+    background-color: #c0392b;
+  }
   
-  button:hover {
-    opacity: 0.8;
+  /* ========================
+     Animation d’apparition
+     ======================== */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
