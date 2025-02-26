@@ -29,6 +29,9 @@ export class VehiculeService {
     modifierVehicule(id: number, vehicule: any): Observable<any> {
       return this.http.put(`${this.baseUrl}/modifierVehicule/${id}`, vehicule);
     }
+   
+   
+
     
     
       

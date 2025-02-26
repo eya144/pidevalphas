@@ -1,43 +1,73 @@
 <app-back-header></app-back-header>
+
 <body>
-    
-<div class="container">
-    <h2>Liste des Demandes d'Emploi</h2>
-  
-    <div *ngIf="isLoading">Chargement...</div>
-  
-    <table *ngIf="!isLoading && demandes.length > 0" class="table">
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Âge</th>
-          <th>Spécialité</th>
-          <th>Email</th>
-          <th>Statut</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let demande of demandes">
-          <td>{{ demande.nom }}</td>
-          <td>{{ demande.prenom }}</td>
-          <td>{{ demande.age }}</td>
-          <td>{{ demande.specialite }}</td>
-          <td>{{ demande.adresseMail }}</td>
-          <td>{{ demande.status }}</td>
-          <td>
-            <button (click)="passerEntretien(demande.idDemandeEmploi)" class="btn-accept">Passer Entretien</button>
-            <button (click)="refuserDemande(demande.idDemandeEmploi)" class="btn-decline">Refuser</button>
-            <button (click)="supprimerDemande(demande.idDemandeEmploi)" class="btn-delete">
+  <div class="container mt-5">
+    <!-- Icônes de notification et calendrier -->
+    <div class="text-center mb-4">
+      <button class="btn btn-outline-primary btn-sm mx-2">
+        <i class="bi bi-bell"></i> Notifications
+      </button>
+      <button class="btn btn-outline-secondary btn-sm mx-2" (click)="openCalendar()">
+        <i class="bi bi-calendar"></i> Calendrier
+      </button>      
+      
+    </div>
+    <h2 class="text-center mb-4">Liste des Demandes d'Emploi</h2>
+
+    <!-- Chargement -->
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Chargement...</span>
+      </div>
+    </div>
+
+    <!-- Tableau des demandes -->
+    <div *ngIf="!isLoading && demandes.length > 0">
+      <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Âge</th>
+            <th>Spécialité</th>
+            <th>Email</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let demande of demandes">
+            <td>{{ demande.nom }}</td>
+            <td>{{ demande.prenom }}</td>
+            <td>{{ demande.age }}</td>
+            <td>{{ demande.specialite }}</td>
+            <td>{{ demande.adresseMail }}</td>
+            <td>{{ demande.status }}</td>
+            <td class="d-flex justify-content-around">
+              <button (click)="passerEntretien(demande.idDemandeEmploi)" class="btn btn-success btn-sm">
+                Passer Entretien
+              </button>
+              <button (click)="refuserDemande(demande.idDemandeEmploi)" class="btn btn-danger btn-sm">
+                Refuser
+              </button>
+              <button (click)="supprimerDemande(demande.idDemandeEmploi)" class="btn btn-warning btn-sm">
                 🗑️
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <p *ngIf="!isLoading && demandes.length === 0">Aucune demande trouvée.</p>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Message si aucune demande -->
+    <p *ngIf="!isLoading && demandes.length === 0" class="text-center text-muted">Aucune demande trouvée.</p>
+
+    <!-- Calendar Modal 
+    <div *ngIf="isCalendarOpen" class="calendar-overlay" (click)="closeCalendar()">
+      <div class="calendar-content" (click)="$event.stopPropagation()">
+      </div>
+    </div>-->
   </div>
 </body>
 
+<app-footer-home></app-footer-home>

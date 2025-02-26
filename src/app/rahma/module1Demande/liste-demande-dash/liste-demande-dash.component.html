@@ -1,4 +1,8 @@
 <h2>Liste des demandes</h2>
+<div *ngIf="alertMessage" class="alert {{ alertClass }} alert-dismissible fade show" role="alert">
+  {{ alertMessage }}
+  <button type="button" class="btn-close" (click)="closeAlert()" aria-label="Close"></button>
+</div>
 <table class="table">
   <thead>
     <tr>

@@ -41,6 +41,13 @@ import { ListeDemandeDashComponent } from './rahma/module1Demande/liste-demande-
 import { AddVehiculeComponent } from './rahma/module1Materiel/add-vehicule/add-vehicule.component';
 import { EditVehiculeComponent } from './rahma/module1Materiel/edit-vehicule/edit-vehicule.component';
 import { AffectVehiculeComponent } from './rahma/module1Materiel/affect-vehicule/affect-vehicule.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -79,14 +86,24 @@ import { AffectVehiculeComponent } from './rahma/module1Materiel/affect-vehicule
       ListeDemandeDashComponent,
       AddVehiculeComponent,
       EditVehiculeComponent,
-      AffectVehiculeComponent
+      AffectVehiculeComponent,
+      
+      
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule  ,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    BrowserModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

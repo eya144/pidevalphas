@@ -1,33 +1,63 @@
 <app-back-header></app-back-header>
+
 <body>
-    
-    <div class="container">
-        <h2>Organisation de l'Entretien</h2>
-      
-        <form (ngSubmit)="validerEntretien()">
-          <!-- Sélection de la date -->
-          <label for="dateEntretien">Date et Heure de l'entretien :</label>
-          <input type="datetime-local" id="dateEntretien" [(ngModel)]="dateEntretien" name="dateEntretien" required />
-      
-          <!-- Type d'entretien -->
-          <div class="checkbox-container">
-            <label>
-              <input type="checkbox" [(ngModel)]="estEnLigne" name="estEnLigne" (change)="gererTypeEntretien()" />
-              Entretien en ligne
-            </label>
-          </div>
-      
-          <!-- Lien Meet (affiché uniquement si en ligne) -->
-          <div *ngIf="estEnLigne">
-            <label for="lienMeet">Lien Google Meet :</label>
-            <input type="text" id="lienMeet" [(ngModel)]="lienMeet" name="lienMeet" required />
-            <button type="button" (click)="genererLienMeet()">Générer un lien Meet</button>
-          </div>
-      
-          <button type="submit" class="btn-save">Valider l'entretien</button>
-        </form>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Organisation de l'Entretien</h2>
+
+    <form (ngSubmit)="validerEntretien()" class="needs-validation" novalidate>
+      <!-- Sélection de la date -->
+      <div class="mb-4">
+        <label for="dateEntretien" class="form-label">Date et Heure de l'entretien :</label>
+        <input type="datetime-local" id="dateEntretien" [(ngModel)]="dateEntretien" name="dateEntretien" class="form-control" required />
+        <div class="invalid-feedback">
+          Veuillez choisir une date et une heure.
+        </div>
       </div>
-      
-    
+
+      <!-- Type d'entretien -->
+      <div class="mb-4">
+        <label class="form-label">Type d'entretien</label>
+        <div class="form-check">
+          <input type="checkbox" [(ngModel)]="estEnLigne" name="estEnLigne" class="form-check-input" (change)="gererTypeEntretien()" id="entretienEnLigne" />
+          <label class="form-check-label" for="entretienEnLigne">
+            Entretien en ligne
+          </label>
+        </div>
+      </div>
+
+      <!-- Lien Meet (affiché uniquement si en ligne) -->
+      <div *ngIf="estEnLigne" class="mb-4">
+        <label for="lienMeet" class="form-label">Lien Google Meet :</label>
+        <div class="input-group">
+          <input type="text" id="lienMeet" [(ngModel)]="lienMeet" name="lienMeet" class="form-control" required />
+          <button type="button" class="btn btn-primary" (click)="genererLienMeet()">Générer un lien Meet</button>
+        </div>
+        <div class="invalid-feedback">
+          Le lien Google Meet est requis.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success w-100">Valider l'entretien</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS pour la validation de formulaire et autres interactions -->
+  <script>
+    (function () {
+      'use strict'
+      var forms = document.querySelectorAll('.needs-validation')
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
 </body>
 
+<app-footer-home></app-footer-home>

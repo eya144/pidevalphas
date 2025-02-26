@@ -1,55 +1,68 @@
 <app-headeer></app-headeer>
 
+
 <body>
-    <div class="details-container">
-        <h2 class="details-title">Détails de la Demande d'Emploi</h2>
-      
-        <div *ngIf="isLoading">Chargement des détails...</div>
-      
-        <div *ngIf="!isLoading && demande">
-          <div class="details-item">
-            <span class="details-label">Nom :</span> 
-            <span *ngIf="!isEditing" class="details-value">{{ demande.nom }}</span>
-            <input *ngIf="isEditing" [(ngModel)]="demande.nom" type="text" />
-          </div>
-      
-          <div class="details-item">
-            <span class="details-label">Prénom :</span> 
-            <span *ngIf="!isEditing" class="details-value">{{ demande.prenom }}</span>
-            <input *ngIf="isEditing" [(ngModel)]="demande.prenom" type="text" />
-          </div>
-      
-          <div class="details-item">
-            <span class="details-label">Âge :</span> 
-            <span *ngIf="!isEditing" class="details-value">{{ demande.age }}</span>
-            <input *ngIf="isEditing" [(ngModel)]="demande.age" type="number" />
-          </div>
-      
-          <div class="details-item">
-            <span class="details-label">Spécialité :</span> 
-            <span *ngIf="!isEditing" class="details-value">{{ demande.specialite }}</span>
-            <input *ngIf="isEditing" [(ngModel)]="demande.specialite" type="text" />
-          </div>
-      
-          <div class="details-item">
-            <span class="details-label">Expérience :</span> 
-            <span *ngIf="!isEditing" class="details-value">{{ demande.experience }}</span>
-            <input *ngIf="isEditing" [(ngModel)]="demande.experience" type="text" />
-          </div>
-      
-          <div class="details-item">
-            <span class="details-label">Email :</span> 
-            <span *ngIf="!isEditing" class="details-value">{{ demande.adresseMail }}</span>
-            <input *ngIf="isEditing" [(ngModel)]="demande.adresseMail" type="email" />
-          </div>
-      
-          <div class="btn-container">
-            <button *ngIf="!isEditing" (click)="toggleEdit()" class="edit-btn">Modifier</button>
-            <button *ngIf="isEditing" (click)="updateDemande()" class="save-btn">Valider</button>
-            <button *ngIf="isEditing" (click)="toggleEdit()" class="cancel-btn">Annuler</button>
-          </div>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Détails de la Demande d'Emploi</h2>
+
+    <div *ngIf="isLoading" class="text-center">Chargement des détails...</div>
+
+    <div *ngIf="!isLoading && demande" class="card shadow-sm p-4 rounded">
+      <div class="mb-3 row">
+        <label for="nom" class="col-sm-3 col-form-label">Nom :</label>
+        <div class="col-sm-9">
+          <span *ngIf="!isEditing" class="details-value">{{ demande.nom }}</span>
+          <input *ngIf="isEditing" [(ngModel)]="demande.nom" type="text" class="form-control border-0 rounded-0" id="nom" />
         </div>
       </div>
+
+      <div class="mb-3 row">
+        <label for="prenom" class="col-sm-3 col-form-label">Prénom :</label>
+        <div class="col-sm-9">
+          <span *ngIf="!isEditing" class="details-value">{{ demande.prenom }}</span>
+          <input *ngIf="isEditing" [(ngModel)]="demande.prenom" type="text" class="form-control border-0 rounded-0" id="prenom" />
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="age" class="col-sm-3 col-form-label">Âge :</label>
+        <div class="col-sm-9">
+          <span *ngIf="!isEditing" class="details-value">{{ demande.age }}</span>
+          <input *ngIf="isEditing" [(ngModel)]="demande.age" type="number" class="form-control border-0 rounded-0" id="age" />
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="specialite" class="col-sm-3 col-form-label">Spécialité :</label>
+        <div class="col-sm-9">
+          <span *ngIf="!isEditing" class="details-value">{{ demande.specialite }}</span>
+          <input *ngIf="isEditing" [(ngModel)]="demande.specialite" type="text" class="form-control border-0 rounded-0" id="specialite" />
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="experience" class="col-sm-3 col-form-label">Expérience :</label>
+        <div class="col-sm-9">
+          <span *ngIf="!isEditing" class="details-value">{{ demande.experience }}</span>
+          <input *ngIf="isEditing" [(ngModel)]="demande.experience" type="text" class="form-control border-0 rounded-0" id="experience" />
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="email" class="col-sm-3 col-form-label">Email :</label>
+        <div class="col-sm-9">
+          <span *ngIf="!isEditing" class="details-value">{{ demande.adresseMail }}</span>
+          <input *ngIf="isEditing" [(ngModel)]="demande.adresseMail" type="email" class="form-control border-0 rounded-0" id="email" />
+        </div>
+      </div>
+
+      <div class="btn-container text-center">
+        <button *ngIf="!isEditing" (click)="toggleEdit()" class="btn btn-outline-primary me-2">Modifier</button>
+        <button *ngIf="isEditing" (click)="updateDemande()" class="btn btn-outline-success me-2">Valider</button>
+        <button *ngIf="isEditing" (click)="toggleEdit()" class="btn btn-outline-danger">Annuler</button>
+      </div>
+    </div>
+  </div>
 </body>
 
 <app-footer-home></app-footer-home>

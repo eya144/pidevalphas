@@ -76,4 +76,8 @@ updateStatusDemande(idDemande: number, newStatus: string): Observable<Demande> {
     params: { newStatus }
   });
 }
+verifierQuantiteMateriel(idDemande: number): Observable<{ suffisant: boolean, message?: string }> {
+  return this.http.get<{ suffisant: boolean, message?: string }>(`${this.baseUrl}/verifierQuantiteMateriel/${idDemande}`);
+}
+
 }

@@ -9,6 +9,8 @@ import { Demande } from '../../model/demande.model';
 })
 export class ListeDemandeDashComponent implements OnInit {
   demandes: Demande[] = [];
+  alertMessage: string | null = null; // Message d'alerte
+  alertClass: string = ''; // Classe CSS pour l'alerte (success, danger, etc.)
 
   constructor(private materielService: MaterielService) {}
 
@@ -29,40 +31,68 @@ export class ListeDemandeDashComponent implements OnInit {
   }
 
   accepterDemande(idDemande: number): void {
-    this.materielService.updateStatusDemande(idDemande, 'Accepte').subscribe(
-      (updatedDemande) => {
-        console.log('Demande acceptée:', updatedDemande);
-        this.loadDemandes(); // Recharger la liste des demandes
+    this.materielService.verifierQuantiteMateriel(idDemande).subscribe(
+      (response: { suffisant: boolean, message?: string }) => {
+        if (response.suffisant) {
+          this.materielService.updateStatusDemande(idDemande, 'Accepte').subscribe(
+            (updatedDemande) => {
+              console.log('Demande acceptée:', updatedDemande);
+              this.showAlert('Demande acceptée avec succès.', 'alert-success'); // Afficher une alerte de succès
+              this.loadDemandes(); // Recharger la liste des demandes
+            },
+            (error) => {
+              console.error('Erreur lors de l\'acceptation de la demande', error);
+              this.showAlert('Erreur lors de l\'acceptation de la demande.', 'alert-danger'); // Afficher une alerte d'erreur
+            }
+          );
+        } else {
+          this.showAlert(response.message || 'Quantité de matériel insuffisante.', 'alert-warning'); // Afficher une alerte d'avertissement
+        }
       },
       (error) => {
-        console.error('Erreur lors de l\'acceptation de la demande', error);
-      }
-    );
-  }
-  // Méthode pour refuser une demande
-  refuserDemande(idDemande: number): void {
-    this.materielService.updateStatusDemande(idDemande, 'Refuse').subscribe(
-      (updatedDemande) => {
-        console.log('Demande acceptée:', updatedDemande);
-        this.loadDemandes(); // Recharger la liste des demandes
-      },
-      (error) => {
-        console.error('Erreur lors de l\'acceptation de la demande', error);
+        console.error('Erreur lors de la vérification de la quantité de matériel', error);
+        this.showAlert('Erreur lors de la vérification de la quantité de matériel.', 'alert-danger'); // Afficher une alerte d'erreur
       }
     );
   }
 
-  // Méthode pour mettre une demande en attente
-  mettreEnAttente(idDemande: number): void {
-    this.materielService.updateStatusDemande(idDemande, 'En_attente').subscribe(
+  refuserDemande(idDemande: number): void {
+    this.materielService.updateStatusDemande(idDemande, 'Refuse').subscribe(
       (updatedDemande) => {
-        console.log('Demande acceptée:', updatedDemande);
+        console.log('Demande refusée:', updatedDemande);
+        this.showAlert('Demande refusée avec succès.', 'alert-success'); // Afficher une alerte de succès
         this.loadDemandes(); // Recharger la liste des demandes
       },
       (error) => {
-        console.error('Erreur lors de l\'acceptation de la demande', error);
+        console.error('Erreur lors du refus de la demande', error);
+        this.showAlert('Erreur lors du refus de la demande.', 'alert-danger'); // Afficher une alerte d'erreur
       }
     );
-  
+  }
+
+  mettreEnAttente(idDemande: number): void {
+    this.materielService.updateStatusDemande(idDemande, 'En_attente').subscribe(
+      (updatedDemande) => {
+        console.log('Demande mise en attente:', updatedDemande);
+        this.showAlert('Demande mise en attente avec succès.', 'alert-success'); // Afficher une alerte de succès
+        this.loadDemandes(); // Recharger la liste des demandes
+      },
+      (error) => {
+        console.error('Erreur lors de la mise en attente de la demande', error);
+        this.showAlert('Erreur lors de la mise en attente de la demande.', 'alert-danger'); // Afficher une alerte d'erreur
+      }
+    );
+  }
+
+  // Méthode pour afficher une alerte
+  showAlert(message: string, alertClass: string): void {
+    this.alertMessage = message;
+    this.alertClass = alertClass;
+  }
+
+  // Méthode pour fermer l'alerte
+  closeAlert(): void {
+    this.alertMessage = null;
+    this.alertClass = '';
   }
 }
