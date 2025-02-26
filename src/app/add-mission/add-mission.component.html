@@ -1,0 +1,74 @@
+<div class="container">
+  <h3>Add a Mission</h3>
+
+  <form [formGroup]="missionForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="nom" class="form-label">Mission Name</label>
+      <input id="nom" formControlName="nom" class="form-control" placeholder="Nom de la mission" required />
+      <div *ngIf="missionForm.get('nom')?.invalid && missionForm.get('nom')?.touched" class="text-danger">
+        Name is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" formControlName="description" class="form-control" placeholder="Description" required></textarea>
+      <div *ngIf="missionForm.get('description')?.invalid && missionForm.get('description')?.touched" class="text-danger">
+        Description is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="etatMission" class="form-label">État</label>
+      <select id="etatMission" formControlName="etatMission" class="form-select" required>
+        <option value="">Select status</option>
+        <option value="TODO">TODO</option>
+        <option value="DOING">DOING</option>
+        <option value="SUSPENDED">SUSPENDED</option>
+        <option value="DONE">DONE</option>
+      </select>
+      <div *ngIf="missionForm.get('etatMission')?.invalid && missionForm.get('etatMission')?.touched" class="text-danger">
+        Please select a status
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="priorite" class="form-label">Priority</label>
+      <select id="priorite" formControlName="priorite" class="form-select">
+        <option value="">Select priority</option>
+        <option value="BASSE">Low</option>
+        <option value="MOYENNE">Medium</option>
+        <option value="HAUTE">High</option>
+      </select>
+      <div *ngIf="missionForm.get('priorite')?.invalid && missionForm.get('priorite')?.touched" class="text-danger">
+        Please select a priority
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="budget" class="form-label">Budget</label>
+      <input id="budget" formControlName="budget" type="number" class="form-control" placeholder="Budget" />
+      <div *ngIf="missionForm.get('budget')?.invalid && missionForm.get('budget')?.touched" class="text-danger">
+        Please enter a valid budget (positive number)
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="startDate" class="form-label">Start Date</label>
+      <input id="startDate" formControlName="startDate" type="date" class="form-control" required />
+      <div *ngIf="missionForm.get('startDate')?.invalid && missionForm.get('startDate')?.touched" class="text-danger">
+        Start date is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="finishDate" class="form-label">Finish Date</label>
+      <input id="finishDate" formControlName="finishDate" type="date" class="form-control" />
+      <div *ngIf="missionForm.get('finishDate')?.invalid && missionForm.get('finishDate')?.touched" class="text-danger">
+        Finish date is required (if applicable)
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="missionForm.invalid">Add Mission</button>
+  </form>
+</div>

@@ -1,169 +1,169 @@
 <app-header></app-header>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div class="container my-5">
-  <h2 class="text-center mb-4">📑 Ajouter un Projet</h2>
+
+<body>
+  <div class="container my-5">
+    <h2 class="text-center mb-4">📑 Add a Project</h2>
   
-
-  <form [formGroup]="projetForm" (ngSubmit)="onSubmit()" class="shadow-lg p-4 rounded">
-    <!-- Nom du projet -->
-    <div class="mb-3">
-      <label for="nom" class="form-label">Nom du Projet</label>
-      <input
-        id="nom"
-        formControlName="nom"
-        class="form-control"
-        placeholder="Entrez le nom du projet"
-        aria-label="Nom du Projet"
-        required
-      />
-      <div *ngIf="projetForm.get('nom')?.invalid && projetForm.get('nom')?.touched" class="text-danger">
-        <small>Le nom est requis.</small>
+    <form [formGroup]="projetForm" (ngSubmit)="onSubmit()" class="shadow-lg p-4 rounded">
+      <!-- Project Name -->
+      <div class="mb-4">
+        <label for="nom" class="form-label">Project Name</label>
+        <input
+          id="nom"
+          formControlName="nom"
+          class="form-control"
+          placeholder="Enter the project name"
+          aria-label="Project Name"
+          required
+        />
+        <div *ngIf="projetForm.get('nom')?.invalid && projetForm.get('nom')?.touched" class="text-danger">
+          <small>The name is required.</small>
+        </div>
       </div>
-    </div>
-
-    <!-- Description du projet -->
-    <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <textarea
-        id="description"
-        formControlName="description"
-        class="form-control"
-        placeholder="Décrivez brièvement le projet"
-        rows="4"
-        aria-label="Description"
-        required
-      ></textarea>
-      <div *ngIf="projetForm.get('description')?.invalid && projetForm.get('description')?.touched" class="text-danger">
-        <small>La description est requise.</small>
+  
+      <!-- Project Description -->
+      <div class="mb-4">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-control"
+          placeholder="Briefly describe the project"
+          rows="4"
+          aria-label="Description"
+          required
+        ></textarea>
+        <div *ngIf="projetForm.get('description')?.invalid && projetForm.get('description')?.touched" class="text-danger">
+          <small>The description is required.</small>
+        </div>
       </div>
-    </div>
-
-    <!-- Type du projet -->
-    <div class="mb-3">
-      <label for="typeProjet" class="form-label">Type de Projet</label>
-      <select id="typeProjet" formControlName="typeProjet" class="form-select" required>
-        <option value="">Sélectionner le type de projet</option>
-        <option value="RESIDENTIEL">Résidentiel</option>
-        <option value="COMMERCIAL">Commercial</option>
-        <option value="INFRASTRUCTURE">Infrastructure</option>
-        <option value="INDUSTRIEL">Industriel</option>
-      </select>
-      <div *ngIf="projetForm.get('typeProjet')?.invalid && projetForm.get('typeProjet')?.touched" class="text-danger">
-        <small>Le type de projet est requis.</small>
+  
+      <!-- Project Type -->
+      <div class="mb-4">
+        <label for="typeProjet" class="form-label">Project Type</label>
+        <select id="typeProjet" formControlName="typeProjet" class="form-select" required>
+          <option value="">Select project type</option>
+          <option value="RESIDENTIAL">Residential</option>
+          <option value="COMMERCIAL">Commercial</option>
+          <option value="INFRASTRUCTURE">Infrastructure</option>
+          <option value="INDUSTRIAL">Industrial</option>
+        </select>
+        <div *ngIf="projetForm.get('typeProjet')?.invalid && projetForm.get('typeProjet')?.touched" class="text-danger">
+          <small>The project type is required.</small>
+        </div>
       </div>
-    </div>
-
-    <!-- Statut -->
-    <div class="mb-3">
-      <label for="status" class="form-label">Statut</label>
-      <select id="status" formControlName="status" class="form-select" required>
-        <option value="">Sélectionner le statut</option>
-        <option value="EN_COURS">En cours</option>
-        <option value="TERMINE">Terminé</option>
-        <option value="SUSPENDU">Suspendu</option>
-        <option value="ANNULE">Annulé</option>
-      </select>
-      <div *ngIf="projetForm.get('status')?.invalid && projetForm.get('status')?.touched" class="text-danger">
-        <small>Le statut est requis.</small>
+  
+      <!-- Status -->
+      <div class="mb-4">
+        <label for="status" class="form-label">Status</label>
+        <select id="status" formControlName="status" class="form-select" required>
+          <option value="">Select status</option>
+          <option value="TODO">To Do</option>
+          <option value="DOING">Doing</option>
+          <option value="SUSPENDED">Suspended</option>
+          <option value="DONE">Done</option>
+        </select>
+        <div *ngIf="projetForm.get('status')?.invalid && projetForm.get('status')?.touched" class="text-danger">
+          <small>The status is required.</small>
+        </div>
       </div>
-    </div>
-
-    
-
-    <!-- Date de début -->
-    <div class="mb-3 mt-3">
-      <label for="dateDebut" class="form-label">Date de début</label>
-      <input
-        type="date"
-        id="dateDebut"
-        formControlName="dateDebut"
-        class="form-control"
-        required
-      />
-      <div *ngIf="projetForm.get('dateDebut')?.invalid && projetForm.get('dateDebut')?.touched" class="text-danger">
-        <small>La date de début est requise.</small>
+  
+      <!-- Start Date -->
+      <div class="mb-4">
+        <label for="dateDebut" class="form-label">Start Date</label>
+        <input
+          type="date"
+          id="dateDebut"
+          formControlName="dateDebut"
+          class="form-control"
+          required
+        />
+        <div *ngIf="projetForm.get('dateDebut')?.invalid && projetForm.get('dateDebut')?.touched" class="text-danger">
+          <small>The start date is required.</small>
+        </div>
       </div>
-    </div>
-
-    <!-- Date de fin prévue -->
-    <div class="mb-3">
-      <label for="dateFinPrevue" class="form-label">Date de fin prévue</label>
-      <input
-        type="date"
-        id="dateFinPrevue"
-        formControlName="dateFinPrevue"
-        class="form-control"
-        required
-      />
-      <div *ngIf="projetForm.get('dateFinPrevue')?.invalid && projetForm.get('dateFinPrevue')?.touched" class="text-danger">
-        <small>La date de fin doit être après la date de début.</small>
+  
+      <!-- Expected End Date -->
+      <div class="mb-4">
+        <label for="dateFinPrevue" class="form-label">Expected End Date</label>
+        <input
+          type="date"
+          id="dateFinPrevue"
+          formControlName="dateFinPrevue"
+          class="form-control"
+          required
+        />
+        <div *ngIf="projetForm.get('dateFinPrevue')?.invalid && projetForm.get('dateFinPrevue')?.touched" class="text-danger">
+          <small>The end date must be after the start date.</small>
+        </div>
       </div>
-    </div>
-
-    <!-- Budget initial -->
-    <div class="mb-3">
-      <label for="budgetInitial" class="form-label">Budget Initial (€)</label>
-      <input
-        type="number"
-        id="budgetInitial"
-        formControlName="budgetInitial"
-        class="form-control"
-        placeholder="Budget du projet"
-        required
-      />
-      <div *ngIf="projetForm.get('budgetInitial')?.invalid && projetForm.get('budgetInitial')?.touched" class="text-danger">
-        <small>Le budget doit être un nombre positif.</small>
+  
+      <!-- Initial Budget -->
+      <div class="mb-4">
+        <label for="budgetInitial" class="form-label">Initial Budget (€)</label>
+        <input
+          type="number"
+          id="budgetInitial"
+          formControlName="budgetInitial"
+          class="form-control"
+          placeholder="Project budget"
+          required
+        />
+        <div *ngIf="projetForm.get('budgetInitial')?.invalid && projetForm.get('budgetInitial')?.touched" class="text-danger">
+          <small>The budget must be a positive number.</small>
+        </div>
       </div>
-    </div>
-
-    <!-- Chef de projet -->
-    <div class="mb-3">
-      <label for="chefProjetId" class="form-label">Chef de Projet</label>
-      <select id="chefProjetId" formControlName="chefProjetId" class="form-select" required>
-        <option value="">Sélectionner un chef de projet</option>
-        <option *ngFor="let chef of chefs" [value]="chef.id">{{ chef.nom }}</option>
-      </select>
-      <div *ngIf="projetForm.get('chefProjetId')?.invalid && projetForm.get('chefProjetId')?.touched" class="text-danger">
-        <small>Le chef de projet est requis.</small>
+  
+      <!-- Project Manager -->
+      <div class="mb-4">
+        <label for="chefProjetId" class="form-label">Project Manager</label>
+        <select id="chefProjetId" formControlName="chefProjetId" class="form-select" required>
+          <option value="">Select a project manager</option>
+          <option *ngFor="let chef of chefs" [value]="chef.id">{{ chef.nom }}</option>
+        </select>
+        <div *ngIf="projetForm.get('chefProjetId')?.invalid && projetForm.get('chefProjetId')?.touched" class="text-danger">
+          <small>The project manager is required.</small>
+        </div>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label for="map">Localisation</label>
-      
-      <div id="map" style="height: 400px;"></div>
-    </div>
-    <!-- Latitude et Longitude -->
-    <div class="row">
-      <div class="col-md-6">
-        <label for="latitude" class="form-label">Latitude</label>
-        <input id="latitude" formControlName="latitude" class="form-control" type="text" readonly />
+  
+      <!-- Location -->
+      <div class="mb-4">
+        <label for="map" class="form-label">Location</label>
+        <div id="map" style="height: 400px;"></div>
       </div>
-      <div class="col-md-6">
-        <label for="longitude" class="form-label">Longitude</label>
-        <input id="longitude" formControlName="longitude" class="form-control" type="text" readonly />
+  
+      <!-- Latitude and Longitude -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <label for="latitude" class="form-label">Latitude</label>
+          <input id="latitude" formControlName="latitude" class="form-control" type="text" readonly />
+        </div>
+        <div class="col-md-6">
+          <label for="longitude" class="form-label">Longitude</label>
+          <input id="longitude" formControlName="longitude" class="form-control" type="text" readonly />
+        </div>
       </div>
+  
+      <!-- Button to open the mission addition form -->
+      <div class="text-center mb-4">
+        <button (click)="openAddMissionForm()" class="btn btn-primary">Add a Mission</button>
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button type="submit" [disabled]="projetForm.invalid" class="btn btn-success">
+          Add Project
+        </button>
+      </div>
+    </form>
+  
+    <!-- Success Messages -->
+    <div *ngIf="formSuccess" class="alert alert-success mt-4 text-center">
+      🎉 The project has been successfully added!
     </div>
-    <!-- Bouton d'envoi -->
-    <div class="text-center">
-      <button type="submit" [disabled]="projetForm.invalid" class="btn btn-success">
-        Ajouter le Projet
-      </button>
+    <div *ngIf="formError" class="alert alert-danger mt-4 text-center">
+      ❌ An error occurred while adding the project.
     </div>
-  </form>
-
-  <!-- Messages de retour -->
-  <div *ngIf="formSuccess" class="alert alert-success mt-4 text-center">
-    🎉 Le projet a été ajouté avec succès !
   </div>
-  <div *ngIf="formError" class="alert alert-danger mt-4 text-center">
-    ❌ Une erreur est survenue lors de l'ajout du projet.
-  </div>
-</div>
+  
+</body>

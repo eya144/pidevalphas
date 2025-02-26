@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Projet } from '../core/models/Projet';
 import { ProjetService } from '../projet.service';
 import * as L from 'leaflet';
+import { Mission } from '../core/models/Mission';
 
 @Component({
   selector: 'app-add-projet',
@@ -16,6 +17,8 @@ export class AddProjetComponent implements OnInit {
   map!: L.Map;
   formSuccess = false;
   formError = false;
+  missions: Mission[] = [];
+  projectId?: number;
 
   chefs = [
     { id: 1, nom: 'Hela Ben Amor' },
@@ -30,6 +33,12 @@ export class AddProjetComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.initForm();
+    this.initMap();
+    this.setupDateValidation();
+  }
+
+  initForm(): void {
     this.projetForm = this.fb.group({
       nom: ['', Validators.required],
       description: ['', Validators.required],
@@ -42,10 +51,6 @@ export class AddProjetComponent implements OnInit {
       latitude: [36.8065, Validators.required],
       longitude: [10.1815, Validators.required]
     });
-
-    this.initMap();
-    this.projetForm.get('dateDebut')?.valueChanges.subscribe(() => this.validateDates());
-    this.projetForm.get('dateFinPrevue')?.valueChanges.subscribe(() => this.validateDates());
   }
 
   initMap(): void {
@@ -66,30 +71,52 @@ export class AddProjetComponent implements OnInit {
     });
 
     this.map.on('click', (event: L.LeafletMouseEvent) => {
-      const lat = event.latlng.lat;
-      const lng = event.latlng.lng;
+      const { lat, lng } = event.latlng;
       this.projetForm.patchValue({ latitude: lat, longitude: lng });
       this.marker.setLatLng([lat, lng]);
     });
   }
 
+  setupDateValidation(): void {
+    this.projetForm.get('dateDebut')?.valueChanges.subscribe(() => this.validateDates());
+    this.projetForm.get('dateFinPrevue')?.valueChanges.subscribe(() => this.validateDates());
+  }
+
   validateDates(): void {
     const dateDebut = new Date(this.projetForm.get('dateDebut')?.value);
     const dateFinPrevue = new Date(this.projetForm.get('dateFinPrevue')?.value);
-    if (dateDebut > dateFinPrevue) {
+
+    if (dateDebut && dateFinPrevue && dateDebut > dateFinPrevue) {
       this.projetForm.get('dateFinPrevue')?.setErrors({ dateInvalide: true });
     } else {
       this.projetForm.get('dateFinPrevue')?.setErrors(null);
     }
   }
 
+  openAddMissionForm(): void {
+    if (this.projectId) {
+      this.router.navigate([`/projet/${this.projectId}/missions`]);
+    } else {
+      alert('Veuillez enregistrer le projet avant d’ajouter une mission.');
+    }
+  }
+
+  onMissionAdded(mission: Mission): void {
+    this.missions.push(mission);
+    console.log('✅ Mission ajoutée :', mission);
+  }
+
   onSubmit(): void {
     if (this.projetForm.valid) {
       const projet: Projet = this.projetForm.value;
       this.projetService.addProjet(projet).subscribe(
-        () => {
+        (createdProjet: Projet) => {
+          this.projectId = createdProjet.idProjet;
           this.formSuccess = true;
           this.formError = false;
+          console.log('✅ Projet créé avec succès :', createdProjet);
+
+          // Redirection après 2 secondes
           setTimeout(() => {
             this.router.navigate(['/projet']);
           }, 2000);
@@ -97,15 +124,22 @@ export class AddProjetComponent implements OnInit {
         (error) => {
           this.formSuccess = false;
           this.formError = true;
-          console.error('Erreur lors de l\'ajout du projet', error);
+          console.error('❌ Erreur lors de l\'ajout du projet :', error);
         }
       );
     } else {
-      alert('Veuillez remplir tous les champs correctement.');
+      this.markAllFieldsAsTouched();
+      alert('❌ Veuillez remplir tous les champs correctement.');
     }
   }
 
-  // Méthode pour obtenir l'objet de contrôle d'un champ spécifique
+  markAllFieldsAsTouched(): void {
+    Object.keys(this.projetForm.controls).forEach(field => {
+      const control = this.projetForm.get(field);
+      control?.markAsTouched();
+    });
+  }
+
   get f() {
     return this.projetForm.controls;
   }

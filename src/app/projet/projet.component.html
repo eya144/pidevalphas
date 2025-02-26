@@ -1,12 +1,5 @@
-<app-header></app-header>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<app-header></app-header> 
+<br><br><br><br><br><br><br><br>
 <div class="container my-4">
   <h2 class="text-center">📋 Liste des Projets</h2>
   
@@ -23,7 +16,7 @@
         <th>Status</th>
         <th>Date Début</th>
         <th>Date Fin Prévue</th>
-        <th>Actions</th>
+        <th colspan="3" class="text-center">Actions</th> <!-- Fusionner les 3 colonnes -->
       </tr>
     </thead>
 
@@ -35,7 +28,14 @@
         <td>{{ projet.status }}</td>
         <td>{{ projet.dateDebut | date:'dd/MM/yyyy' }}</td>
         <td>{{ projet.dateFinPrevue | date:'dd/MM/yyyy' }}</td>
-        <td>
+        <td class="text-center">
+          <button class="btn btn-info" (click)="viewDetails(projet.idProjet)">Voir Détails</button>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-info" (click)="viewMissions(projet.idProjet)">Voir Missions</button>
+        </td>
+        
+        <td class="text-center">
           <button class="btn btn-warning btn-sm me-1" (click)="modifierProjet(projet.idProjet)">
             ✏ Modifier
           </button>

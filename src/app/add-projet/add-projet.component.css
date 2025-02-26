@@ -62,3 +62,6 @@
 .projet-form-container {
   margin-top: 20px; /* Espace pour séparer le formulaire de la carte */
 }
+body{
+  padding-top: 210px;
+}

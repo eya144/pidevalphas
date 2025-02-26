@@ -14,6 +14,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProjetComponent } from './projet/projet.component';
 import { AddProjetComponent } from './add-projet/add-projet.component';
 import { EditProjetComponent } from './edit-projet/edit-projet.component';
+import { MissionComponent } from './mission/mission.component';
+import { DetailsProjetComponent } from './details-projet/details-projet.component';
+import { AddMissionComponent } from './add-mission/add-mission.component';
+import { MissionDetailsComponent } from './mission-details/mission-details.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -30,6 +34,10 @@ const routes: Routes = [
   { path: 'projet', component: ProjetComponent },
   { path: 'add-projet', component: AddProjetComponent },
   { path: 'edit-projet/:id', component: EditProjetComponent},
+  { path: 'details-projet/:id', component: DetailsProjetComponent },
+  { path: 'add-mission/:id', component: AddMissionComponent }, // Ajout de la route pour ajouter une mission
+  { path: 'projets/:id/missions', component: MissionComponent },
+  { path: 'mission-details/:id', component: MissionDetailsComponent },  // Route for mission details
 
   { path: '', redirectTo:'/home', pathMatch: 'full' }
 ];

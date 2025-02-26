@@ -1,3 +1,5 @@
+import { Mission } from "./Mission";
+
 export interface Projet {
   idProjet: number;                  // Identifiant unique du projet
   nom: string;                       // Nom du projet
@@ -20,5 +22,6 @@ export interface Projet {
   permisConstruction: boolean;       // Si le permis de construire a été obtenu
   progression: number;               // Pourcentage de progression du projet (0 à 100)
   risquesIdentifies: string;         // Risques identifiés pour le projet
-  contraintes: string;               // Contraintes et défis associés au projet
+  contraintes: string;
+  missions: Mission[];               // Contraintes et défis associés au projet
 }

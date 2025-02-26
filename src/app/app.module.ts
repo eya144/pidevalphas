@@ -26,6 +26,10 @@ import { HeaderComponent } from './header/header.component';
 import { EditProjetComponent } from './edit-projet/edit-projet.component';
 import { MapComponent } from './map/map.component';
 import { MapSelectorComponentComponent } from './map-selector-component/map-selector-component.component';
+import { MissionComponent } from './mission/mission.component';
+import { AddMissionComponent } from './add-mission/add-mission.component';
+import { DetailsProjetComponent } from './details-projet/details-projet.component';
+import { MissionDetailsComponent } from './mission-details/mission-details.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,11 @@ import { MapSelectorComponentComponent } from './map-selector-component/map-sele
       HeaderComponent,
       EditProjetComponent,
       MapComponent,
-      MapSelectorComponentComponent
+      MapSelectorComponentComponent,
+      MissionComponent,
+      AddMissionComponent,
+      DetailsProjetComponent,
+      MissionDetailsComponent
   ],
   imports: [
     BrowserModule,

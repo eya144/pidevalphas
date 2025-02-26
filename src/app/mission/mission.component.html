@@ -1,0 +1,27 @@
+<div class="container py-5">
+  <h3 class="text-center mb-4 text-primary">Project Missions List</h3>
+
+  <div class="row">
+    <div *ngFor="let mission of missions" class="col-md-4 mb-4">
+      <div class="card shadow-lg rounded-lg border-0">
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{ mission.nom }}</h5>
+          <p class="card-text text-muted">{{ mission.description }}</p>
+          <span class="badge bg-{{ mission.etatMission === 'TODO' ? 'warning' : mission.etatMission === 'DOING' ? 'info' : mission.etatMission === 'SUSPENDED' ? 'secondary' : 'success' }}">
+            {{ mission.etatMission }}
+          </span>
+        </div>
+        <div class="card-footer text-center">
+          <button [routerLink]="['/mission-details', mission.idMission]" class="btn btn-primary">
+            Voir les détails
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button to add a mission -->
+  <div class="text-center mt-4">
+    <button class="btn btn-success btn-lg" (click)="redirectToAddMission()">+ Add Mission</button>
+  </div>
+</div>
