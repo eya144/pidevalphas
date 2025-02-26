@@ -50,13 +50,13 @@ export class AddMissionComponent implements OnInit {
         ...this.missionForm.value,
         projetId: this.projetId
       };
-
+  
       this.missionService.addMission(newMission, this.projetId).subscribe({
         next: (response) => {
-          console.log("✅ Mission ajoutée avec succès !", response);
+          console.log("✅ Mission ajoutée avec succès !");
           this.missionAdded.emit(response);
-          this.router.navigate(['/missions']);
-          this.missionForm.reset(); // Reset uniquement après un succès
+          this.router.navigate([`/projets/${this.projetId}/missions`]); // Correction ici
+          this.missionForm.reset();
         },
         error: (error) => {
           console.error("❌ Erreur lors de l'ajout de la mission : ", error);
@@ -64,4 +64,5 @@ export class AddMissionComponent implements OnInit {
       });
     }
   }
+  
 }

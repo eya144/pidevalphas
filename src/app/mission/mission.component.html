@@ -11,9 +11,18 @@
             {{ mission.etatMission }}
           </span>
         </div>
-        <div class="card-footer text-center">
+        <div class="card-footer text-center d-flex justify-content-between">
           <button [routerLink]="['/mission-details', mission.idMission]" class="btn btn-primary">
-            Voir les détails
+            View Details
+          </button>
+          <button [routerLink]="['/update-mission', mission.idMission, projetId]" class="btn btn-warning">
+            Update Mission
+          </button>
+          <button (click)="deleteMission(mission.idMission)" class="btn btn-danger">
+            Delete
+          </button>
+          <button (click)="viewTasks(mission.idMission)" class="btn btn-info">
+            View Tasks
           </button>
         </div>
       </div>

@@ -18,6 +18,8 @@ import { MissionComponent } from './mission/mission.component';
 import { DetailsProjetComponent } from './details-projet/details-projet.component';
 import { AddMissionComponent } from './add-mission/add-mission.component';
 import { MissionDetailsComponent } from './mission-details/mission-details.component';
+import { UpdateMissionComponent } from './update-mission/update-mission.component';
+import { TaskComponent } from './task/task.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -33,14 +35,18 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'projet', component: ProjetComponent },
   { path: 'add-projet', component: AddProjetComponent },
-  { path: 'edit-projet/:id', component: EditProjetComponent},
+  { path: 'edit-projet/:id', component: EditProjetComponent },
   { path: 'details-projet/:id', component: DetailsProjetComponent },
-  { path: 'add-mission/:id', component: AddMissionComponent }, // Ajout de la route pour ajouter une mission
+  { path: 'add-mission/:id', component: AddMissionComponent },  // L'ID du projet
   { path: 'projets/:id/missions', component: MissionComponent },
-  { path: 'mission-details/:id', component: MissionDetailsComponent },  // Route for mission details
+  { path: 'mission-details/:id', component: MissionDetailsComponent },
+  // Route d'update : on passe l'ID de la mission et l'ID du projet
+  { path: 'update-mission/:idMission/:id', component: UpdateMissionComponent },
+  { path: 'tasks/:missionId', component: TaskComponent }, // Afficher la liste des tâches
 
-  { path: '', redirectTo:'/home', pathMatch: 'full' }
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
