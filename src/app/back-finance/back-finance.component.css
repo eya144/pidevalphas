@@ -1,0 +1,46 @@
+.container {
+    margin: 20px;
+  }
+  
+  .stats-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .stat-card {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    flex: 1 1 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-card h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .stat-card p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0 0;
+  }
+  
+  /* Couleurs personnalisées */
+  .stat-card.paid {
+    background-color: #36A2EB;
+    color: white;
+  }
+  
+  .stat-card.unpaid {
+    background-color: #FF6384;
+    color: white;
+  }
+  
+  .stat-card.total {
+    background-color: #4BC0C0;
+    color: white;
+  }

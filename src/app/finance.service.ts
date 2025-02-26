@@ -74,4 +74,5 @@ export class FinanceService {
 navigateToPaiement(idFacture: number): void {
   this.router.navigate(['/paiement', idFacture]); // Passez l'ID de la facture
 }
+
 }

@@ -1,0 +1,35 @@
+<div class="container-scroller">
+    <!-- Back Menu Admin Start -->
+    <app-back-menu-admin></app-back-menu-admin>
+    <!-- Back Menu Admin End -->
+  
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- navbar Start -->
+      <app-back-header></app-back-header>
+      <!-- navbar End -->
+  
+      <div class="container">
+        <h2>Statistiques des factures</h2>
+        <div class="stats-container">
+          <!-- Carte pour les factures payées -->
+          <div class="stat-card paid">
+            <h3>Factures payées</h3>
+            <p>{{ paidInvoices }}</p>
+          </div>
+  
+          <!-- Carte pour les factures non payées -->
+          <div class="stat-card unpaid">
+            <h3>Factures non payées</h3>
+            <p>{{ unpaidInvoices }}</p>
+          </div>
+  
+          <!-- Carte pour le total des factures -->
+          <div class="stat-card total">
+            <h3>Total des factures</h3>
+            <p>{{ totalInvoices }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

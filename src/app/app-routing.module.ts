@@ -15,10 +15,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddFinanceComponent } from './add-finance/add-finance.component';
 import { EditFinanceComponent } from './edit-finance/edit-finance.component';
 import { PaiementComponent } from './paiement/paiement.component';
-import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepaie-comptable.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
+import { BackFinanceComponent } from './back-finance/back-finance.component';
+import { BackHeaderComponent } from './back-header/back-header.component';
+import { BackMenuAdminComponent } from './back-menu-admin/back-menu-admin.component';
+import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -37,12 +40,13 @@ const routes: Routes = [
    { path: 'add-finance', component:AddFinanceComponent },
    { path: 'edit-finance/:id', component: EditFinanceComponent }, // Nouvelle route pour l'édition
    { path: 'paiement', component: PaiementComponent },
-   { path: 'add-paiement', component:AddPaiementComponent },
+   { path: 'add-paiement', component: AddPaiementComponent },
    { path: 'fichedepaie-comptable', component:FichedepaieComptableComponent },
+   { path: 'back-finance', component:BackFinanceComponent },
+   { path: 'app-back-header', component:BackHeaderComponent },
+   { path: 'app-back-menu-admin', component:BackMenuAdminComponent },
    { path: '', redirectTo:'/home',pathMatch:'full' }
 ];
-
- 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

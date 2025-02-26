@@ -24,7 +24,6 @@ import { BackHeaderComponent } from './back-header/back-header.component';
 import { AddFinanceComponent } from './add-finance/add-finance.component';
 import { EditFinanceComponent } from './edit-finance/edit-finance.component';
 import { PaiementComponent } from './paiement/paiement.component';
-import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 import { EditPaiementComponent } from './edit-paiement/edit-paiement.component';
 import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepaie-comptable.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +31,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
+import { BackFinanceComponent } from './back-finance/back-finance.component';
+import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 
 @NgModule({
   declarations: [
@@ -53,13 +54,14 @@ import { AppFooterComponent } from './app-footer/app-footer.component';
       AddFinanceComponent,
       EditFinanceComponent,
       PaiementComponent,
-      AddPaiementComponent,
       EditPaiementComponent,
       FichedepaieComptableComponent,
       ConfirmationDialogComponent,
       SuccessDialogComponent,
       AppHeaderComponent,
       AppFooterComponent,
+      BackFinanceComponent,
+      AddPaiementComponent,
   ],
   imports: [
     BrowserModule,

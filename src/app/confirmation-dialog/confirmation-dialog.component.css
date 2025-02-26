@@ -1,61 +1,69 @@
-/* Centrer le dialogue */
+/* Style pour le conteneur du dialogue */
 .mat-dialog-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
-  }
-  
-  /* Style pour la boîte de dialogue */
-  .mat-dialog-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    font-size: 1.2em;
-    margin: 20px 0;
-  }
-  
-  /* Style pour le titre */
-  .mat-dialog-title {
-    text-align: center;
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #333; /* Couleur du texte */
-  }
-  
-  /* Style pour les boutons */
-  .mat-dialog-actions {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  /* Style pour les boutons "No" et "Yes" */
-  button.mat-button {
-    padding: 8px 20px;
-    border-radius: 4px;
-    font-size: 1em;
-    cursor: pointer;
-  }
-  
-  button.mat-button:first-child {
-    background-color: #f44336; /* Rouge pour "No" */
-    color: white;
-  }
-  
-  button.mat-button:last-child {
-    background-color: #4caf50; /* Vert pour "Yes" */
-    color: white;
-  }
-  /* Ajuster la largeur du dialogue */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+}
+
+/* Style pour la boîte de dialogue */
 .mat-dialog-content {
-    width: 300px; /* Largeur fixe */
-  }
-  
-  /* Changer la police */
-  .mat-dialog-title, .mat-dialog-content {
-    font-family: 'Arial', sans-serif;
-  }
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 1.2em;
+  margin: 20px 0;
+  width: 300px; /* Largeur fixe */
+}
+
+/* Style pour le titre */
+.mat-dialog-title {
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333; /* Couleur du texte */
+}
+
+/* Style pour les boutons */
+.mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Style général pour les boutons */
+.mat-dialog-actions button.mat-button {
+  padding: 10px 24px; /* Taille du padding */
+  border-radius: 4px; /* Coins arrondis */
+  font-size: 1em; /* Taille de la police */
+  font-weight: 500; /* Poids de la police */
+  cursor: pointer; /* Curseur pointer */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Animation au survol */
+  border: none; /* Supprimer la bordure par défaut */
+  outline: none; /* Supprimer le contour au focus */
+  color: white; /* Texte blanc pour tous les boutons */
+}
+
+/* Style pour le bouton "No" */
+.mat-dialog-actions button.mat-button:first-child {
+  background-color: #f44336; /* Rouge */
+}
+
+/* Style pour le bouton "Yes" */
+.mat-dialog-actions button.mat-button:last-child {
+  background-color: #4caf50; /* Vert */
+}
+
+/* Effet au survol pour tous les boutons */
+.mat-dialog-actions button.mat-button:hover {
+  transform: scale(1.05); /* Légère augmentation de taille */
+  opacity: 0.9; /* Légère transparence */
+}
+
+/* Effet au clic pour tous les boutons */
+.mat-dialog-actions button.mat-button:active {
+  transform: scale(0.95); /* Légère réduction de taille */
+}
