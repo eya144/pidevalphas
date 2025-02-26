@@ -26,7 +26,6 @@ import { EditFinanceComponent } from './edit-finance/edit-finance.component';
 import { PaiementComponent } from './paiement/paiement.component';
 import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 import { EditPaiementComponent } from './edit-paiement/edit-paiement.component';
-import { CommandeComptableComponent } from './commande-comptable/commande-comptable.component';
 import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepaie-comptable.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
@@ -56,7 +55,6 @@ import { AppFooterComponent } from './app-footer/app-footer.component';
       PaiementComponent,
       AddPaiementComponent,
       EditPaiementComponent,
-      CommandeComptableComponent,
       FichedepaieComptableComponent,
       ConfirmationDialogComponent,
       SuccessDialogComponent,

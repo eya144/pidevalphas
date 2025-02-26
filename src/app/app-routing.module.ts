@@ -16,7 +16,6 @@ import { AddFinanceComponent } from './add-finance/add-finance.component';
 import { EditFinanceComponent } from './edit-finance/edit-finance.component';
 import { PaiementComponent } from './paiement/paiement.component';
 import { AddPaiementComponent } from './add-paiement/add-paiement.component';
-import { CommandeComptableComponent } from './commande-comptable/commande-comptable.component';
 import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepaie-comptable.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
@@ -39,7 +38,6 @@ const routes: Routes = [
    { path: 'edit-finance/:id', component: EditFinanceComponent }, // Nouvelle route pour l'édition
    { path: 'paiement', component: PaiementComponent },
    { path: 'add-paiement', component:AddPaiementComponent },
-   { path: 'commandeComptable', component:CommandeComptableComponent },
    { path: 'fichedepaie-comptable', component:FichedepaieComptableComponent },
    { path: '', redirectTo:'/home',pathMatch:'full' }
 ];
