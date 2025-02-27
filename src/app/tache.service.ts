@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TacheService {
   private apiUrl = 'http://localhost:8080/pidev/api/taches'; // Remplacez par votre URL d'API
-
   constructor(private http: HttpClient) {}
 
   // 1. Récupérer toutes les tâches
@@ -20,23 +19,33 @@ export class TacheService {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
-  // 3. Ajouter une nouvelle tâche
-  addTache(tache: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, tache);
+  addTache(tache: any, missionId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/mission/${missionId}`, tache, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
+  
+  
 
   // 4. Mettre à jour une tâche
   updateTache(id: number, tache: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${id}`, tache);
   }
 
-  // 5. Supprimer une tâche
-  deleteTache(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  deleteTache(taskId: number): Observable<void> {
+    console.log(`📡 Envoi de la requête DELETE pour l'ID: ${taskId}`);
+    return this.http.delete<void>(`${this.apiUrl}/${taskId}`);
   }
+  
+  
+  
+  
 
-  // 6. Récupérer les tâches par mission ID
   getTasksByMission(missionId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/mission/${missionId}`);
+    return this.http.get<any[]>(`${this.apiUrl}/mission/${missionId}`).pipe(
+      tap(tasks => console.log("📡 Réponse API des tâches :", tasks))
+    );
   }
+  
+  
 }

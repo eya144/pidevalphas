@@ -1,1 +1,44 @@
-<p>task works!</p>
+<app-header></app-header>
+<br><br><br><br><br><br><br><br>
+
+<body>
+  <div class="container py-5">
+    <h3 class="text-center mb-4 text-primary">Project Tasks List</h3>
+
+    <div class="row">
+      <div *ngFor="let task of tasks" class="col-md-4 mb-4">
+        <div class="card shadow-lg rounded-lg border-0">
+          <div class="card-body">
+            <h5 class="card-title text-primary text-center">{{ task.nom }}</h5>
+            <p class="card-text text-muted text-center">{{ task.description }}</p>
+            <div class="text-center mb-3">
+              <span class="badge bg-{{ task.etatTache === 'TODO' ? 'warning' : task.etatTache === 'DOING' ? 'info' : 'success' }}">
+                {{ task.etatTache }}
+              </span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary w-100">
+                <i class="bi bi-eye"></i> View Details
+              </button>
+              <button class="btn btn-warning w-100">
+                <i class="bi bi-pencil"></i> Update Task
+              </button>
+              <button (click)="deleteTask(task.id)" class="btn btn-danger w-100">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button to add a task -->
+    <div class="text-center mt-4">
+      <button class="btn btn-success btn-lg">
+        <i class="bi bi-plus-circle"></i> Add Task
+      </button>
+    </div>
+  </div>
+</body>

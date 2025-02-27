@@ -1,36 +1,54 @@
-<div class="container py-5">
-  <h3 class="text-center mb-4 text-primary">Project Missions List</h3>
-
-  <div class="row">
-    <div *ngFor="let mission of missions" class="col-md-4 mb-4">
-      <div class="card shadow-lg rounded-lg border-0">
-        <div class="card-body">
-          <h5 class="card-title text-primary">{{ mission.nom }}</h5>
-          <p class="card-text text-muted">{{ mission.description }}</p>
-          <span class="badge bg-{{ mission.etatMission === 'TODO' ? 'warning' : mission.etatMission === 'DOING' ? 'info' : mission.etatMission === 'SUSPENDED' ? 'secondary' : 'success' }}">
-            {{ mission.etatMission }}
-          </span>
-        </div>
-        <div class="card-footer text-center d-flex justify-content-between">
-          <button [routerLink]="['/mission-details', mission.idMission]" class="btn btn-primary">
-            View Details
-          </button>
-          <button [routerLink]="['/update-mission', mission.idMission, projetId]" class="btn btn-warning">
-            Update Mission
-          </button>
-          <button (click)="deleteMission(mission.idMission)" class="btn btn-danger">
-            Delete
-          </button>
-          <button (click)="viewTasks(mission.idMission)" class="btn btn-info">
-            View Tasks
-          </button>
+<app-header></app-header>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<body>
+  <div class="container py-5">
+    <h3 class="text-center mb-4 text-primary">Project Missions List</h3>
+  
+    <div class="row">
+      <div *ngFor="let mission of missions" class="col-md-4 mb-4">
+        <div class="card shadow-lg rounded-lg border-0">
+          <div class="card-body">
+            <h5 class="card-title text-primary text-center">{{ mission.nom }}</h5>
+            <p class="card-text text-muted text-center">{{ mission.description }}</p>
+            <div class="text-center mb-3">
+              <span class="badge bg-{{ mission.etatMission === 'TODO' ? 'warning' : mission.etatMission === 'DOING' ? 'info' : mission.etatMission === 'SUSPENDED' ? 'secondary' : 'success' }}">
+                {{ mission.etatMission }}
+              </span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="d-grid gap-2">
+              <button [routerLink]="['/mission-details', mission.idMission]" class="btn btn-primary w-100">
+                <i class="bi bi-eye"></i> View Details
+              </button>
+              <button [routerLink]="['/update-mission', mission.idMission, projetId]" class="btn btn-warning w-100">
+                <i class="bi bi-pencil"></i> Update Mission
+              </button>
+              <button (click)="deleteMission(mission.idMission)" class="btn btn-danger w-100">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+              <button (click)="viewTasks(mission.idMission)" class="btn btn-info w-100">
+                <i class="bi bi-list-task"></i> View Tasks
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  
+    <!-- Button to add a mission -->
+    <div class="text-center mt-4">
+      <button class="btn btn-success btn-lg" (click)="redirectToAddMission()">
+        <i class="bi bi-plus-circle"></i> Add Mission
+      </button>
+    </div>
   </div>
-
-  <!-- Button to add a mission -->
-  <div class="text-center mt-4">
-    <button class="btn btn-success btn-lg" (click)="redirectToAddMission()">+ Add Mission</button>
-  </div>
-</div>
+  
+</body>

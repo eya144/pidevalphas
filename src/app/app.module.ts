@@ -32,6 +32,7 @@ import { DetailsProjetComponent } from './details-projet/details-projet.componen
 import { MissionDetailsComponent } from './mission-details/mission-details.component';
 import { UpdateMissionComponent } from './update-mission/update-mission.component';
 import { TaskComponent } from './task/task.component';
+import { AddTaskComponent } from './add-task/add-task.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { TaskComponent } from './task/task.component';
       DetailsProjetComponent,
       MissionDetailsComponent,
       UpdateMissionComponent,
-      TaskComponent
+      TaskComponent,
+      AddTaskComponent
   ],
   imports: [
     BrowserModule,
