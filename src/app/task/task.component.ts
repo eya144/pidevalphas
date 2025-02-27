@@ -69,6 +69,22 @@ export class TaskComponent implements OnInit {
       });
     }
   }
+  redirectToTaskDetails(idTache: number): void {
+    if (!idTache) {
+      console.error("❌ ID de tâche invalide pour la redirection vers les détails :", idTache);
+      return;
+    }
+    this.router.navigate([`/task-details/${idTache}`]);
+  }
+  
+  redirectToUpdateTask(idTache: number): void {
+    if (!idTache) {
+      console.error("❌ ID de tâche invalide pour la redirection vers la mise à jour :", idTache);
+      return;
+    }
+    this.router.navigate([`/update-task/${idTache}`]);
+  }
+  
 
   redirectToAddTask(): void {
     this.router.navigate([`/add-task/${this.missionId}`]);

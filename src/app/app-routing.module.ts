@@ -21,6 +21,8 @@ import { MissionDetailsComponent } from './mission-details/mission-details.compo
 import { UpdateMissionComponent } from './update-mission/update-mission.component';
 import { TaskComponent } from './task/task.component';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { TaskDetailsComponent } from './task-details/task-details.component';
+import { UpdateTaskComponent } from './update-task/update-task.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -44,7 +46,8 @@ const routes: Routes = [
   { path: 'update-mission/:idMission/:id', component: UpdateMissionComponent }, // Modifier une mission
   { path: 'tasks/:missionId', component: TaskComponent }, // Liste des tâches
   { path: 'add-task/:missionId', component: AddTaskComponent }, // Ajouter une tâche
-
+  { path: 'task-details/:id', component: TaskDetailsComponent },
+  { path: 'update-task/:id', component: UpdateTaskComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
