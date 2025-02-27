@@ -26,7 +26,6 @@ export class TaskComponent implements OnInit {
       console.error("❌ Mission ID invalide :", this.missionId);
     }
   }
-  
 
   loadTasks(): void {
     this.taskService.getTasksByMission(this.missionId).subscribe({
@@ -38,48 +37,38 @@ export class TaskComponent implements OnInit {
           this.tasks = [];
           return;
         }
-  
-        // Ajoute un ID de secours si `task.id` est absent
+
         this.tasks = tasks.map((task, index) => ({
-          id: task.id ?? index, // Utilise l'ID fourni ou un index comme ID temporaire
+          id: task.id ?? index, // Ajoute un ID temporaire si absent
           ...task
         }));
-  
+
         console.log("🔄 Liste des tâches après ajout des IDs :", this.tasks);
       },
       error: (err) => console.error("❌ Erreur lors du chargement des tâches :", err),
     });
   }
-  
-  
-  
-  
-  
 
-  deleteTask(taskId: number | undefined): void {
-  console.log(`Tentative de suppression de la tâche avec l'ID: ${taskId}`);
+  deleteTask(idTache: number): void {
+    if (!idTache) {
+      console.error("❌ ID de tâche invalide :", idTache);
+      return;
+    }
 
-  if (!taskId) {
-    console.error("❌ L'ID de la tâche est invalide !");
-    alert("Impossible de supprimer la tâche : ID invalide !");
-    return;
+    if (confirm("Are you sure you want to delete this task?")) {
+      this.taskService.deleteTache(idTache).subscribe({
+        next: () => {
+          console.log(`✅ Tâche avec ID ${idTache} supprimée`);
+          
+          // 🔄 Optimisation : Met à jour la liste sans recharger toute l’API
+          this.tasks = this.tasks.filter(task => task.idTache !== idTache);
+        },
+        error: (err) => {
+          console.error("❌ Erreur lors de la suppression de la tâche :", err);
+        },
+      });
+    }
   }
-
-  if (confirm("Êtes-vous sûr de vouloir supprimer cette tâche ?")) {
-    this.taskService.deleteTache(taskId).subscribe({
-      next: () => {
-        console.log(`✅ Tâche avec ID ${taskId} supprimée`);
-        this.loadTasks();
-      },
-      error: (err) => {
-        console.error("❌ Erreur lors de la suppression de la tâche :", err);
-      },
-    });
-  }
-}
-
-  
-  
 
   redirectToAddTask(): void {
     this.router.navigate([`/add-task/${this.missionId}`]);

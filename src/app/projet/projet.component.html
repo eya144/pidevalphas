@@ -1,10 +1,10 @@
 <app-header></app-header> 
 <br><br><br><br><br><br><br><br>
 <div class="container my-4">
-  <h2 class="text-center">📋 Liste des Projets</h2>
+  <h2 class="text-center">📋 Projects List</h2>
   
   <div class="d-flex justify-content-end mb-3">
-    <button class="btn btn-primary" (click)="ajouterProjet()">➕ Ajouter un Projet</button>
+    <button class="btn btn-primary" (click)="ajouterProjet()">➕ Add project</button>
   </div>
 
   <table class="table table-bordered table-hover">
@@ -12,10 +12,10 @@
       <tr>
         <th>Nom</th>
         <th>Description</th>
-        <th>Chef de Projet</th>
+        <th>Project Manager</th>
         <th>Status</th>
-        <th>Date Début</th>
-        <th>Date Fin Prévue</th>
+        <th>Start Date</th>
+        <th>Finish date</th>
         <th colspan="3" class="text-center">Actions</th> <!-- Fusionner les 3 colonnes -->
       </tr>
     </thead>
@@ -29,18 +29,18 @@
         <td>{{ projet.dateDebut | date:'dd/MM/yyyy' }}</td>
         <td>{{ projet.dateFinPrevue | date:'dd/MM/yyyy' }}</td>
         <td class="text-center">
-          <button class="btn btn-info" (click)="viewDetails(projet.idProjet)">Voir Détails</button>
+          <button class="btn btn-info" (click)="viewDetails(projet.idProjet)">View Details</button>
         </td>
         <td class="text-center">
-          <button class="btn btn-info" (click)="viewMissions(projet.idProjet)">Voir Missions</button>
+          <button class="btn btn-info" (click)="viewMissions(projet.idProjet)">View Missions</button>
         </td>
         
         <td class="text-center">
           <button class="btn btn-warning btn-sm me-1" (click)="modifierProjet(projet.idProjet)">
-            ✏ Modifier
+            ✏ Update
           </button>
           <button class="btn btn-danger btn-sm" (click)="supprimerProjet(projet.idProjet)">
-            🗑 Supprimer
+            🗑 Delete
           </button>
         </td>
       </tr>
@@ -48,7 +48,7 @@
       <!-- Message si la liste est vide -->
       <tr *ngIf="projets.length === 0">
         <td colspan="7" class="text-center text-muted">
-          Aucun projet disponible.
+          Any Project is available. Please click on "Add project" button to add a new project.
         </td>
       </tr>
     </tbody>

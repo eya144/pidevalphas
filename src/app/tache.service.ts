@@ -32,9 +32,9 @@ export class TacheService {
     return this.http.put<any>(`${this.apiUrl}/${id}`, tache);
   }
 
-  deleteTache(taskId: number): Observable<void> {
-    console.log(`📡 Envoi de la requête DELETE pour l'ID: ${taskId}`);
-    return this.http.delete<void>(`${this.apiUrl}/${taskId}`);
+  deleteTache(idTache: number): Observable<void> {
+    console.log(`📡 Envoi de la requête DELETE pour l'ID: ${idTache}`);
+    return this.http.delete<void>(`${this.apiUrl}/${idTache}`);
   }
   
   
