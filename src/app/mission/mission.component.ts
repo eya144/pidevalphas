@@ -8,11 +8,16 @@ import { MissionService } from '../mission.service';
   templateUrl: './mission.component.html',
 })
 export class MissionComponent implements OnInit {
-  projetId!: number;  // On récupère l'ID depuis l'URL
+  projetId!: number;
   missions: any[] = [];
   filteredMissions: any[] = [];
+  paginatedMissions: any[] = [];
   searchText: string = '';
   selectedStatus: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 3; // Change this to control how many missions to show per page
+  totalPages: number = 0;
+  pages: number[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -42,21 +47,40 @@ export class MissionComponent implements OnInit {
     this.missionService.getMissionsByProject(this.projetId).subscribe({
       next: (missions) => {
         this.missions = missions;
-        this.filteredMissions = [...missions];  // Initialiser filteredMissions avec toutes les missions
+        this.filteredMissions = [...missions];
+        this.updatePagination();
         console.log("✅ Missions récupérées :", missions);
       },
       error: (err) => console.error('❌ Erreur lors du chargement des missions :', err),
     });
   }
-  
+
   filterMissions(): void {
-    // Appliquer le filtrage seulement si des critères sont spécifiés
     this.filteredMissions = this.missions.filter(mission =>
       (this.searchText ? mission.nom.toLowerCase().includes(this.searchText.toLowerCase()) : true) &&
       (this.selectedStatus ? mission.etatMission === this.selectedStatus : true)
     );
+    this.updatePagination();
   }
-  
+
+  updatePagination(): void {
+    this.totalPages = Math.ceil(this.filteredMissions.length / this.itemsPerPage);
+    this.pages = Array(this.totalPages).fill(0).map((_, i) => i + 1);
+    this.paginate();
+  }
+
+  paginate(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedMissions = this.filteredMissions.slice(startIndex, endIndex);
+  }
+
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.paginate();
+    }
+  }
 
   redirectToAddMission(): void {
     console.log("🔀 Redirection vers l'ajout d'une mission pour le projet :", this.projetId);
@@ -69,12 +93,10 @@ export class MissionComponent implements OnInit {
   }
 
   deleteMission(missionId: number): void {
-    // Demander une confirmation avant suppression
     if (confirm("Are you sure you want to delete this mission?")) {
       this.missionService.deleteMission(missionId).subscribe({
         next: () => {
           console.log("✅ Mission supprimée avec succès !");
-          // Recharger la liste après suppression
           this.loadMissions();
         },
         error: (err) => {
@@ -83,9 +105,9 @@ export class MissionComponent implements OnInit {
       });
     }
   }
+
   viewTasks(missionId: number): void {
     console.log("📜 Affichage des tâches pour la mission :", missionId);
     this.router.navigate([`/tasks/${missionId}`]);
   }
-  
 }

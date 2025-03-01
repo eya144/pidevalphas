@@ -10,7 +10,6 @@ import { LogistiqueComponent } from './logistique/logistique.component';
 import { RHComponent } from './rh/rh.component';
 import { FinanceComponent } from './finance/finance.component';
 import { InspectionComponent } from './inspection/inspection.component';
-
 import { ContactComponent } from './contact/contact.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ServiceComponent } from './service/service.component';
@@ -35,6 +34,8 @@ import { TaskComponent } from './task/task.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { UpdateTaskComponent } from './update-task/update-task.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -46,29 +47,28 @@ import { TaskDetailsComponent } from './task-details/task-details.component';
     RHComponent,
     FinanceComponent,
     InspectionComponent,
- 
     ContactComponent,
-      InscriptionComponent,
-      ServiceComponent,
-      DashboardComponent,
-      BackMenuAdminComponent,
-      BackHeaderComponent,
-      ProjetComponent,
-      AddProjetComponent,
-      FooterHomeComponent,
-      HeaderComponent,
-      EditProjetComponent,
-      MapComponent,
-      MapSelectorComponentComponent,
-      MissionComponent,
-      AddMissionComponent,
-      DetailsProjetComponent,
-      MissionDetailsComponent,
-      UpdateMissionComponent,
-      TaskComponent,
-      AddTaskComponent,
-      UpdateTaskComponent,
-      TaskDetailsComponent
+    InscriptionComponent,
+    ServiceComponent,
+    DashboardComponent,
+    BackMenuAdminComponent,
+    BackHeaderComponent,
+    ProjetComponent,
+    AddProjetComponent,
+    FooterHomeComponent,
+    HeaderComponent,
+    EditProjetComponent,
+    MapComponent,
+    MapSelectorComponentComponent,
+    MissionComponent,
+    AddMissionComponent,
+    DetailsProjetComponent,
+    MissionDetailsComponent,
+    UpdateMissionComponent,
+    TaskComponent,
+    AddTaskComponent,
+    UpdateTaskComponent,
+    TaskDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +76,9 @@ import { TaskDetailsComponent } from './task-details/task-details.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

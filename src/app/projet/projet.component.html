@@ -1,77 +1,81 @@
-<app-header></app-header>  
+<app-header></app-header>
 <br><br><br><br><br><br><br><br>
-
-<div class="container my-4">
-  <h2 class="text-center">📋 Projects List</h2>
+<body>
+  <div class="container my-4">
+    <h2 class="text-center">📋 Projects List</h2>
   
-  <!-- Section de recherche -->
-  <div class="d-flex justify-content-between mb-3">
-    <input 
-      type="text" 
-      class="form-control w-25" 
-      [(ngModel)]="nomRecherche" 
-      placeholder="🔎 Rechercher par nom" 
-    />
-    
-    <select class="form-control w-25" [(ngModel)]="statusRecherche">
-      <option value="">📌 Tous les statuts</option>
-      <option value="TODO">🟡 A Faire</option>
-      <option value="DOING">🟡 En cours</option>
-      <option value="DONE">🟢 Terminé</option>
-      <option value="SUSPENDED">🔴 Suspendu</option>
-    </select>
-
-    <button class="btn btn-primary" (click)="filtrerProjets()">🔍 Rechercher</button>
+    <!-- Section de recherche -->
+    <div class="d-flex justify-content-between mb-3">
+      <input
+        type="text"
+        class="form-control w-25"
+        [(ngModel)]="nomRecherche"
+        placeholder="🔎 Rechercher par nom"
+      />
+  
+      <select class="form-control w-25" [(ngModel)]="statusRecherche">
+        <option value="">📌 Tous les statuts</option>
+        <option value="TODO">🟡 A Faire</option>
+        <option value="DOING">🟡 En cours</option>
+        <option value="DONE">🟢 Terminé</option>
+        <option value="SUSPENDED">🔴 Suspendu</option>
+      </select>
+  
+      <button class="btn btn-primary" (click)="filtrerProjets()">🔍 Rechercher</button>
+    </div>
+  
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-primary" (click)="ajouterProjet()">➕ Add project</button>
+    </div>
+  
+    <table class="table table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Project Manager</th>
+          <th>Status</th>
+          <th>Start Date</th>
+          <th>Finish date</th>
+          <th colspan="3" class="text-center">Actions</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr *ngFor="let projet of projets | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+          <td>{{ projet.nom }}</td>
+          <td>{{ projet.description }}</td>
+          <td>{{ projet.nomChefProjet }}</td>
+          <td>{{ projet.status }}</td>
+          <td>{{ projet.dateDebut | date:'dd/MM/yyyy' }}</td>
+          <td>{{ projet.dateFinPrevue | date:'dd/MM/yyyy' }}</td>
+          <td class="text-center">
+            <button class="btn btn-info" (click)="viewDetails(projet.idProjet)">View Details</button>
+          </td>
+          <td class="text-center">
+            <button class="btn btn-info" (click)="viewMissions(projet.idProjet)">View Missions</button>
+          </td>
+          <td class="text-center">
+            <button class="btn btn-warning btn-sm me-1" (click)="modifierProjet(projet.idProjet)">
+              ✏ Update
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="supprimerProjet(projet.idProjet)">
+              🗑 Delete
+            </button>
+          </td>
+        </tr>
+  
+        <!-- Message si la liste est vide -->
+        <tr *ngIf="projets.length === 0">
+          <td colspan="7" class="text-center text-muted">
+            Any Project is available. Please click on "Add project" button to add a new project.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Pagination controls -->
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
   </div>
-
-  <div class="d-flex justify-content-end mb-3">
-    <button class="btn btn-primary" (click)="ajouterProjet()">➕ Add project</button>
-  </div>
-
-  <table class="table table-bordered table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th>Nom</th>
-        <th>Description</th>
-        <th>Project Manager</th>
-        <th>Status</th>
-        <th>Start Date</th>
-        <th>Finish date</th>
-        <th colspan="3" class="text-center">Actions</th> <!-- Fusionner les 3 colonnes -->
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let projet of projets">
-        <td>{{ projet.nom }}</td>
-        <td>{{ projet.description }}</td>
-        <td>{{ projet.nomChefProjet }}</td>
-        <td>{{ projet.status }}</td>
-        <td>{{ projet.dateDebut | date:'dd/MM/yyyy' }}</td>
-        <td>{{ projet.dateFinPrevue | date:'dd/MM/yyyy' }}</td>
-        <td class="text-center">
-          <button class="btn btn-info" (click)="viewDetails(projet.idProjet)">View Details</button>
-        </td>
-        <td class="text-center">
-          <button class="btn btn-info" (click)="viewMissions(projet.idProjet)">View Missions</button>
-        </td>
-        
-        <td class="text-center">
-          <button class="btn btn-warning btn-sm me-1" (click)="modifierProjet(projet.idProjet)">
-            ✏ Update
-          </button>
-          <button class="btn btn-danger btn-sm" (click)="supprimerProjet(projet.idProjet)">
-            🗑 Delete
-          </button>
-        </td>
-      </tr>
-
-      <!-- Message si la liste est vide -->
-      <tr *ngIf="projets.length === 0">
-        <td colspan="7" class="text-center text-muted">
-          Any Project is available. Please click on "Add project" button to add a new project.
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  
+</body>

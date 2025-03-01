@@ -10,26 +10,26 @@
 <body>
   <div class="container py-5">
     <h3 class="text-center mb-4 text-primary">Project Missions List</h3>
-   <!-- Barre de recherche et filtre -->
-   <div class="row mb-4">
-    <div class="col-md-6">
-      <input type="text" class="form-control" placeholder="Search mission by name" [(ngModel)]="searchText">
+    <!-- Barre de recherche et filtre -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="Search mission by name" [(ngModel)]="searchText">
+      </div>
+      <div class="col-md-4">
+        <select class="form-control" [(ngModel)]="selectedStatus">
+          <option value="">All Statuses</option>
+          <option value="TODO">TODO</option>
+          <option value="DOING">DOING</option>
+          <option value="SUSPENDED">SUSPENDED</option>
+          <option value="DONE">DONE</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary w-100" (click)="filterMissions()">Filter</button>
+      </div>
     </div>
-    <div class="col-md-4">
-      <select class="form-control" [(ngModel)]="selectedStatus">
-        <option value="">All Statuses</option>
-        <option value="TODO">TODO</option>
-        <option value="DOING">DOING</option>
-        <option value="SUSPENDED">SUSPENDED</option>
-        <option value="DONE">DONE</option>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-primary w-100" (click)="filterMissions()">Filter</button>
-    </div>
-  </div>
     <div class="row">
-      <div *ngFor="let mission of filteredMissions" class="col-md-4 mb-4">
+      <div *ngFor="let mission of paginatedMissions" class="col-md-4 mb-4">
         <div class="card shadow-lg rounded-lg border-0">
           <div class="card-body">
             <h5 class="card-title text-primary text-center">{{ mission.nom }}</h5>
@@ -60,6 +60,21 @@
       </div>
     </div>
   
+    <!-- Pagination controls -->
+    <div class="text-center mt-4">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link" (click)="changePage(currentPage - 1)">Previous</button>
+        </li>
+        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+          <button class="page-link" (click)="changePage(page)">{{ page }}</button>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <button class="page-link" (click)="changePage(currentPage + 1)">Next</button>
+        </li>
+      </ul>
+    </div>
+  
     <!-- Button to add a mission -->
     <div class="text-center mt-4">
       <button class="btn btn-success btn-lg" (click)="redirectToAddMission()">
@@ -67,5 +82,4 @@
       </button>
     </div>
   </div>
-  
 </body>
