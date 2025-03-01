@@ -48,6 +48,19 @@ export class TaskComponent implements OnInit {
       error: (err) => console.error("❌ Erreur lors du chargement des tâches :", err),
     });
   }
+  searchTerm: string = '';
+selectedStatus: string = '';
+selectedPriority: string = '';
+
+searchTasks(): void {
+  this.taskService.searchTasks(this.searchTerm, this.selectedStatus, this.selectedPriority).subscribe({
+    next: (tasks) => {
+      this.tasks = tasks;
+    },
+    error: (err) => console.error("❌ Erreur de recherche :", err),
+  });
+}
+
 
   deleteTask(idTache: number): void {
     if (!idTache) {
@@ -77,13 +90,14 @@ export class TaskComponent implements OnInit {
     this.router.navigate([`/task-details/${idTache}`]);
   }
   
-  redirectToUpdateTask(idTache: number): void {
-    if (!idTache) {
-      console.error("❌ ID de tâche invalide pour la redirection vers la mise à jour :", idTache);
+  redirectToUpdateTask(missionId: number, idTache: number): void {
+    if (!idTache || !missionId) {
+      console.error("❌ ID de tâche ou mission invalide pour la redirection vers la mise à jour :", idTache, missionId);
       return;
     }
-    this.router.navigate([`/update-task/${idTache}`]);
+    this.router.navigate([`/tasks/${missionId}/${idTache}`]);
   }
+  
   
 
   redirectToAddTask(): void {

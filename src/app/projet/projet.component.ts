@@ -24,6 +24,21 @@ export class ProjetComponent implements OnInit {
   ngOnInit(): void {
     this.getProjets();
   }
+  nomRecherche: string = '';
+statusRecherche: string = '';
+
+filtrerProjets(): void {
+  this.projetService.searchProjets(this.nomRecherche, this.statusRecherche).subscribe({
+    next: (data: Projet[]) => {
+      this.projets = data.map(projet => ({
+        ...projet,
+        nomChefProjet: this.getChefProjetName(projet.chefProjetId)
+      }));
+    },
+    error: (err) => console.error('❌ Erreur lors de la recherche des projets :', err)
+  });
+}
+
 
   // 🟢 Récupérer la liste des projets
   getProjets(): void {

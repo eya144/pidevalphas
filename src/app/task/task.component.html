@@ -4,7 +4,24 @@
 <body>
   <div class="container py-5">
     <h3 class="text-center mb-4 text-primary">Project Tasks List</h3>
-
+    <div class="mb-4 d-flex justify-content-between">
+      <input [(ngModel)]="searchTerm" class="form-control w-25" placeholder="Search task..." (input)="searchTasks()">
+    
+      <select [(ngModel)]="selectedStatus" class="form-select w-25" (change)="searchTasks()">
+        <option value="">All Statuses</option>
+        <option value="TODO">TODO</option>
+        <option value="DOING">DOING</option>
+        <option value="DONE">DONE</option>
+      </select>
+    
+      <select [(ngModel)]="selectedPriority" class="form-select w-25" (change)="searchTasks()">
+        <option value="">All Priorities</option>
+        <option value="LOW">Low</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="HIGH">High</option>
+      </select>
+    </div>
+    
     <div class="row">
       <div *ngFor="let task of tasks" class="col-md-4 mb-4">
         <div class="card shadow-lg rounded-lg border-0">
@@ -22,9 +39,10 @@
               <button class="btn btn-primary w-100" (click)="redirectToTaskDetails(task.idTache)">
                 <i class="bi bi-eye"></i> View Details
               </button>
-              <button class="btn btn-warning w-100" (click)="redirectToUpdateTask(task.idTache)">
+              <button class="btn btn-warning w-100" (click)="redirectToUpdateTask(missionId, task.idTache)">
                 <i class="bi bi-pencil"></i> Update Task
               </button>
+              
               
               <button (click)="deleteTask(task.idTache)" class="btn btn-danger w-100">
                 <i class="bi bi-trash"></i> Delete

@@ -46,6 +46,14 @@ export class TacheService {
       tap(tasks => console.log("📡 Réponse API des tâches :", tasks))
     );
   }
+  searchTasks(nom: string, etat: string, priorite: string): Observable<any[]> {
+    const params: any = {};
+    if (nom) params.nom = nom;
+    if (etat) params.etat = etat;
+    if (priorite) params.priorite = priorite;
+  
+    return this.http.get<any[]>(`${this.apiUrl}/search`, { params });
+  }
   
   
 }

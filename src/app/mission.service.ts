@@ -34,4 +34,13 @@ export class MissionService {
   getMissionsByProject(projetId: number): Observable<Mission[]> {
     return this.http.get<Mission[]>(`${this.apiUrl}/projet/${projetId}`);
   }
+  searchMissions(projetId: number, etatMission?: string, searchText?: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/search`, {
+      params: {
+        projetId: projetId.toString(),
+        etatMission: etatMission || '',
+        searchText: searchText || ''
+      }
+    });
+  }
 }

@@ -47,4 +47,12 @@ export class ProjetService {
   addMissionToProjet(projetId: number, mission: Mission): Observable<Mission> {  // Mission en paramètre
     return this.http.post<Mission>(`${this.apiUrl}/${projetId}/missions`, mission);
   }
+  searchProjets(nom?: string, status?: string): Observable<Projet[]> {
+    let params: any = {};
+    if (nom) params.nom = nom;
+    if (status) params.status = status;
+  
+    return this.http.get<Projet[]>(`${this.apiUrl}/search`, { params });
+  }
+  
 }

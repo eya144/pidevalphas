@@ -10,6 +10,9 @@ import { MissionService } from '../mission.service';
 export class MissionComponent implements OnInit {
   projetId!: number;  // On récupère l'ID depuis l'URL
   missions: any[] = [];
+  filteredMissions: any[] = [];
+  searchText: string = '';
+  selectedStatus: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -39,11 +42,21 @@ export class MissionComponent implements OnInit {
     this.missionService.getMissionsByProject(this.projetId).subscribe({
       next: (missions) => {
         this.missions = missions;
+        this.filteredMissions = [...missions];  // Initialiser filteredMissions avec toutes les missions
         console.log("✅ Missions récupérées :", missions);
       },
       error: (err) => console.error('❌ Erreur lors du chargement des missions :', err),
     });
   }
+  
+  filterMissions(): void {
+    // Appliquer le filtrage seulement si des critères sont spécifiés
+    this.filteredMissions = this.missions.filter(mission =>
+      (this.searchText ? mission.nom.toLowerCase().includes(this.searchText.toLowerCase()) : true) &&
+      (this.selectedStatus ? mission.etatMission === this.selectedStatus : true)
+    );
+  }
+  
 
   redirectToAddMission(): void {
     console.log("🔀 Redirection vers l'ajout d'une mission pour le projet :", this.projetId);
