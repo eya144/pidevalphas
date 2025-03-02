@@ -7,14 +7,17 @@
 <br>
 <br>
 <br>
-<div class="container">
-  <h2>Project Details</h2>
-  <div *ngIf="projet">
-    <h3>{{ projet.name }}</h3>
-    <p>{{ projet.description }}</p>
-    <p><strong>Project Manager:</strong> {{ projet.managerName }}</p>
-    <p><strong>Status:</strong> {{ projet.status }}</p>
-    <p><strong>Start Date:</strong> {{ projet.startDate | date:'MM/dd/yyyy' }}</p>
-    <p><strong>Expected End Date:</strong> {{ projet.expectedEndDate | date:'MM/dd/yyyy' }}</p>
+<div class="container my-5">
+  <h2 class="text-center">Project Details</h2>
+  <div *ngIf="projet" class="project-details-card">
+    <h3 class="project-title">{{ projet.name }}</h3>
+    <p class="project-description">{{ projet.description }}</p>
+    <div class="project-info">
+      <p><strong>Project Manager:</strong> {{ projet.managerName }}</p>
+      <p><strong>Status:</strong> {{ projet.status }}</p>
+      <p><strong>Start Date:</strong> {{ projet.startDate | date:'MM/dd/yyyy' }}</p>
+      <p><strong>Expected End Date:</strong> {{ projet.expectedEndDate | date:'MM/dd/yyyy' }}</p>
+    </div>
+    <button class="btn btn-primary mt-4" (click)="redirectToAddMission()">Add Mission</button>
   </div>
 </div>

@@ -1,0 +1,44 @@
+/* Add custom styles */
+.project-details-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .project-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .project-description {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .project-info p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .project-info strong {
+    color: #333;
+  }
+  
+  button {
+    font-size: 1rem;
+  }
+  
+  /* Styling for better spacing and typography */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .my-5 {
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+  }
+  
