@@ -54,5 +54,9 @@ export class ProjetService {
   
     return this.http.get<Projet[]>(`${this.apiUrl}/search`, { params });
   }
+   // Récupérer les statistiques des projets par statut
+   getProjetStats(): Observable<{ [key: string]: number }> {
+    return this.http.get<{ [key: string]: number }>(`${this.apiUrl}/stats`);
+  }
   
 }

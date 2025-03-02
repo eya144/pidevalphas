@@ -28,3 +28,15 @@ button {
   justify-content: center;
   margin-top: 20px;
 }
+.chart-container {
+  width: 100%; /* S'adapte à la largeur du parent */
+  max-width: 600px; /* Largeur maximale du graphique */
+  height: 300px; /* Hauteur du graphique */
+  margin: 0 auto; /* Centrer le graphique */
+}
+
+canvas {
+  width: 100% !important; /* Utiliser toute la largeur de .chart-container */
+  height: 100% !important; /* Utiliser toute la hauteur de .chart-container */
+}
+

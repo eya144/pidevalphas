@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Projet } from '../core/models/Projet';
 import { Router } from '@angular/router';
 import { ProjetService } from '../projet.service';
-
-import { PaginationService } from 'ngx-pagination'; // Import the pagination service
+import { ChartConfiguration, ChartType } from 'chart.js';
+import { NgChartsModule } from 'ng2-charts';
 
 @Component({
   selector: 'app-projet',
@@ -12,16 +12,47 @@ import { PaginationService } from 'ngx-pagination'; // Import the pagination ser
 })
 export class ProjetComponent implements OnInit {
   projets: Projet[] = [];
-  currentPage: number = 1; // Current page for pagination
-  itemsPerPage: number = 1; // Number of items per page
-
+  currentPage: number = 1;
+  itemsPerPage: number = 1;
+  stats: any = {};
+  chartData: any = {
+    labels: [],
+    datasets: [{
+      data: [],
+      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50']
+    }]
+  };
+  chartType: ChartType = 'pie';
+  
+  chartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    maintainAspectRatio: true,  // Conserve les proportions du graphique
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        callbacks: {
+          label: (tooltipItem) => {
+            return tooltipItem.raw + ' projects';
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        ticks: {
+        }
+      }
+    }
+  };
+  
   chefProjetMap: { [key: number]: string } = {
     1: 'Hela Ben Amor',
     2: 'Ahmed Zribi',
     3: 'Fares Mansouri',
     4: 'Zaid Khelifi'
   };
-   
 
   constructor(private projetService: ProjetService, private router: Router) {}
 
@@ -39,6 +70,7 @@ export class ProjetComponent implements OnInit {
           ...projet,
           nomChefProjet: this.getChefProjetName(projet.chefProjetId)
         }));
+        this.updateChartData();
       },
       error: (err) => console.error('❌ Erreur lors de la recherche des projets :', err)
     });
@@ -51,9 +83,28 @@ export class ProjetComponent implements OnInit {
           ...projet,
           nomChefProjet: this.getChefProjetName(projet.chefProjetId)
         }));
+        this.updateChartData();
       },
       error: (err) => console.error('❌ Erreur lors de la récupération des projets :', err)
     });
+  }
+
+  updateChartData(): void {
+    const statusCount = {
+      TODO: 0,
+      DOING: 0,
+      DONE: 0,
+      SUSPENDED: 0
+    };
+
+    this.projets.forEach(projet => {
+      if (statusCount[projet.status as keyof typeof statusCount] !== undefined) {
+        statusCount[projet.status as keyof typeof statusCount]++;
+      }
+    });
+
+    this.chartData.labels = Object.keys(statusCount);
+    this.chartData.datasets[0].data = Object.values(statusCount);
   }
 
   getChefProjetName(id: number): string {
@@ -61,7 +112,7 @@ export class ProjetComponent implements OnInit {
   }
 
   pageChanged(page: number): void {
-    this.currentPage = page; // Update the current page
+    this.currentPage = page;
   }
 
   viewMissions(projetId: number): void {

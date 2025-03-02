@@ -36,6 +36,8 @@ import { UpdateTaskComponent } from './update-task/update-task.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -76,7 +78,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgChartsModule
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

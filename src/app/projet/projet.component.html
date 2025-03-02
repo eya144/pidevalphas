@@ -1,5 +1,6 @@
 <app-header></app-header>
 <br><br><br><br><br><br><br><br>
+
 <body>
   <div class="container my-4">
     <h2 class="text-center">📋 Projects List</h2>
@@ -27,6 +28,27 @@
     <div class="d-flex justify-content-end mb-3">
       <button class="btn btn-primary" (click)="ajouterProjet()">➕ Add project</button>
     </div>
+    <div class="d-flex justify-content-between mb-3">
+      <label for="chartType">Choose Chart Type:</label>
+      <select class="form-control w-25" id="chartType" [(ngModel)]="chartType">
+        <option value="pie">📊 Pie Chart</option>
+        <option value="bar">📊 Bar Chart</option>
+        <option value="line">📈 Line Chart (Sinusoïdal)</option>
+      </select>
+    </div>
+    
+   <!-- Graphique des statistiques -->
+<div class="mb-4">
+  <h3 class="text-center">📊 Statistiques des projets</h3>
+  <div class="chart-container">
+    <canvas *ngIf="chartData.labels.length > 0" baseChart 
+            [data]="chartData"
+            [options]="chartOptions"
+            [type]="chartType">
+    </canvas>
+  </div>
+</div>
+
   
     <table class="table table-bordered table-hover">
       <thead class="table-dark">
@@ -77,5 +99,4 @@
     <!-- Pagination controls -->
     <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
   </div>
-  
 </body>
