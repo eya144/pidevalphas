@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -23,7 +23,6 @@ import { BackMenuAdminComponent } from './back-menu-admin/back-menu-admin.compon
 import { BackHeaderComponent } from './back-header/back-header.component';
 import { AddFinanceComponent } from './add-finance/add-finance.component';
 import { EditFinanceComponent } from './edit-finance/edit-finance.component';
-import { EditPaiementComponent } from './edit-paiement/edit-paiement.component';
 import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepaie-comptable.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
@@ -54,16 +53,13 @@ import { AdminBackComponent } from './admin-back/admin-back.component';
       BackHeaderComponent,
       AddFinanceComponent,
       EditFinanceComponent,
-      EditPaiementComponent,
       FichedepaieComptableComponent,
       ConfirmationDialogComponent,
       SuccessDialogComponent,
       AppHeaderComponent,
       AppFooterComponent,
-    //  BackFinanceComponent,
       AddPaiementComponent,
       AdminBackComponent,
-    //  FicheComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +67,8 @@ import { AdminBackComponent } from './admin-back/admin-back.component';
     ReactiveFormsModule ,
     HttpClientModule ,
     MatDialogModule,
-    BrowserAnimationsModule 
+    BrowserAnimationsModule ,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

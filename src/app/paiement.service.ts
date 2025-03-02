@@ -33,7 +33,7 @@ export class PaiementService {
       })
     );
   }
-   
+
 
   
   updatePaiement(id: number, paiement: Paiement): Observable<Paiement> {
