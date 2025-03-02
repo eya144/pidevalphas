@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Facture } from './core/models/Factures';  // Importing the Facture model
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepaie-comptable.component';
 
 @Injectable({
   providedIn: 'root'
@@ -72,7 +73,22 @@ export class FinanceService {
     }
     // Dans votre composant de liste des factures
 navigateToPaiement(idFacture: number): void {
-  this.router.navigate(['/paiement', idFacture]); // Passez l'ID de la facture
+  this.router.navigate(['/add-paiement', idFacture]); // Passez l'ID de la facture
+}
+getAllFichesDePaie(): Observable<FichedepaieComptableComponent[]> {
+  return this.http.get<FichedepaieComptableComponent[]>(`${this.apiUrl}/getAll`);
 }
 
+/* getMinSalary() {
+  return this.http.get<number>('/api/salaries/min');
+}
+
+getMaxSalary() {
+  return this.http.get<number>('/api/salaries/max');
+}
+
+getAverageSalary() {
+  return this.http.get<number>('/api/salaries/average');
+}
+*/ 
 }

@@ -44,3 +44,44 @@
     background-color: #4BC0C0;
     color: white;
   }
+  .stats-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .stat-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    width: 30%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-card h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .stat-card p {
+    margin: 10px 0 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  /* Styles spécifiques pour les cartes de salaire */
+  .min-salary {
+    background-color: #e3f2fd;
+  }
+  
+  .max-salary {
+    background-color: #fff3e0;
+  }
+  
+  .avg-salary {
+    background-color: #f1f8e9;
+  }

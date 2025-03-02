@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { BulletinPaie } from './core/models/FicheDePai';
-
+import { Router } from '@angular/router';
+import { Paiement } from './core/models/Paiement';
 @Injectable({
   providedIn: 'root'
 })
 export class FichedepaieService {
 
 private apiUrl = 'http://localhost:8089/pidev/Api/ficheDePaie'; // Remplacez par l'URL de votre API
+
 
   constructor(private http: HttpClient) { }
 

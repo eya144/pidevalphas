@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BulletinPaie } from '../core/models/FicheDePai';
 import { Router } from '@angular/router';
 import { FichedepaieService } from '../fichedepaie.service';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-fichedepaie-comptable',
@@ -22,6 +24,7 @@ formGroups: any;
     this.fichedepaieService.getFicheDePaie().subscribe(
       (data: BulletinPaie[]) => {
         this.fichesDePaie = data;
+        console.log('Fiches de paie chargées :', this.fichesDePaie); // Pour déboguer
       },
       (error) => {
         console.error('Erreur lors du chargement des fiches de paie', error);
@@ -33,7 +36,7 @@ formGroups: any;
 
   navigateToPaiement(fiche: BulletinPaie): void {
     console.log('Navigation vers le paiement pour la fiche :', fiche);
-    this.router.navigate(['/paiement']);
+    this.router.navigate(['/add-paiement']);
   }
 
   calculerSalaire(fiche: BulletinPaie): void {
@@ -79,5 +82,4 @@ imprimerFiche(fiche: BulletinPaie): void {
       }
   );
 }
-  
 }

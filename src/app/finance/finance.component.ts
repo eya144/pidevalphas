@@ -29,8 +29,13 @@ export class FinanceComponent implements OnInit {
   }
   
   navigateToPaiement(idFacture: number | undefined): void {
-    this.router.navigate(['/paiement']);
+    if (idFacture !== undefined) {
+      this.router.navigate(['/add-paiement', idFacture]); // 🔥 Passage correct de l'ID dans l'URL
+    } else {
+      console.error('ID Facture est undefined, navigation impossible.');
+    }
   }
+  
 
   // Méthode pour récupérer toutes les factures
   private getAllFactures(): void {

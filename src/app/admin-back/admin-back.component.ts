@@ -1,21 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FinanceService } from '../finance.service';
 
 @Component({
-  selector: 'app-back-finance',
-  templateUrl: './back-finance.component.html',
-  styleUrls: ['./back-finance.component.css']
+  selector: 'app-admin-back',
+  templateUrl: './admin-back.component.html',
+  styleUrls: ['./admin-back.component.css']
 })
-export class BackFinanceComponent implements OnInit {
+export class AdminBackComponent implements OnInit {
   // Variables pour stocker les statistiques
   paidInvoices: number = 0;
   unpaidInvoices: number = 0;
   totalInvoices: number = 0;
 
-  constructor(private financeService: FinanceService) {} // Injectez le service
+
+  constructor(private financeService: FinanceService , router: Router) {} // Injectez le service
 
   ngOnInit(): void {
-    this.fetchInvoiceData(); // Récupérez les données au chargement du composant
+    this.fetchInvoiceData(); 
+
   }
 
   fetchInvoiceData() {
@@ -32,4 +35,7 @@ export class BackFinanceComponent implements OnInit {
       }
     );
   }
+
+
+
 }

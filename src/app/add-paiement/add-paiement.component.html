@@ -1,33 +1,53 @@
 <app-app-header></app-app-header>
-<div class="container mt-5">
-    <h2>Ajouter un Paiement</h2>
-    <form [formGroup]="paiementForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="montant" class="form-label">Montant</label>
-        <input type="number" id="montant" class="form-control" formControlName="montant">
-      </div>
-  
-      <div class="mb-3">
-        <label for="datePaiement" class="form-label">Date de Paiement</label>
-        <input type="date" id="datePaiement" class="form-control" formControlName="datePaiement">
-      </div>
-  
-      <div class="mb-3">
-        <label for="methodePaiement" class="form-label">Méthode de Paiement</label>
-        <select id="methodePaiement" class="form-control" formControlName="methodePaiement">
-          <option value="Carte Bancaire">Carte </option>
-          <option value="Virement">Virement</option>
-          <option value="Chèque">Chèque</option>
-        </select>
-      </div>
-  
-      <div class="mb-3">
-        <label for="numeroCarte" class="form-label">Numéro de Carte</label>
-        <input type="text" id="numeroCarte" class="form-control" formControlName="numeroCarte">
-      </div>
-  
-      <button type="submit" class="btn btn-primary" [disabled]="paiementForm.invalid">Ajouter</button>
-      <button type="button" class="btn btn-secondary" (click)="annuler()">Annuler</button>
-    </form>
+<div class="paiement-container">
+  <div class="paiement-header">
+    <h2>Billing</h2>
+    <p>Order #1434733106</p>
+    <p>Amount: 5,00 EUR</p>
   </div>
-  <app-app-footer></app-app-footer>
+  <div class="paiement-methods">
+    <div class="method">
+      <img src="/assets/img/logo/visa-logo.png" alt="VISA">
+      <span>VISA</span>
+    </div>
+    <div class="method">
+      <img src="/assets/img/logo/bancontact-logo.png" alt="Bancontact">
+      <span>Bancontact</span>
+    </div>
+    <div class="method">
+      <img src="/assets/img/logo/vir-logo.png" alt="ING">
+      <span>TRANSFER</span>
+    </div>
+  </div>
+<div class="container mt-5">
+  <form [formGroup]="paiementForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="montant" class="form-label">Amount</label>
+      <input type="number" id="montant" class="form-control" formControlName="montant">
+    </div>
+  
+    <div class="mb-3">
+      <label for="datePaiement" class="form-label">Payment Date</label>
+      <input type="date" id="datePaiement" class="form-control" formControlName="datePaiement">
+    </div>
+  
+    <div class="mb-3">
+      <label for="methodePaiement" class="form-label">Payment Method</label>
+      <select id="methodePaiement" class="form-control" formControlName="methodePaiement">
+        <option value="Carte Bancaire">Card </option>
+        <option value="Virement">Bank Transfer</option>
+        <option value="Chèque">Check</option>
+      </select>
+    </div>
+  
+    <div class="mb-3">
+      <label for="numeroCarte" class="form-label">Card Number</label>
+      <input type="text" id="numeroCarte" class="form-control" formControlName="numeroCarte">
+    </div>
+  
+    <button type="submit" class="btn btn-primary" [disabled]="paiementForm.invalid">Add</button>
+    <button type="button" class="btn btn-secondary" (click)="annuler()">Cancel</button>
+  </form>
+</div>
+</div>
+<app-app-footer></app-app-footer>
