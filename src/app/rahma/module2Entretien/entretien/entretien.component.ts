@@ -47,17 +47,25 @@ export class EntretienComponent {
     }
   }
 
-  refuserDemande(id: number) {
+  refuserDemande(id: number, email: string) {
     if (confirm("Êtes-vous sûr de refuser cette demande ?")) {
       this.demandeEmploiService.changerStatutDemande(id, 'Refuse').subscribe(
         () => {
           alert("Demande refusée !");
+          
+          // Envoyer un email de refus
+          this.demandeEmploiService.envoyerEmailRefus(email).subscribe(
+            () => alert("Email de refus envoyé avec succès !"),
+            error => console.error("Erreur lors de l'envoi de l'email de refus", error)
+          );
+  
           this.ngOnInit(); // Recharger la liste
         },
         error => console.error("Erreur lors du refus de la demande", error)
       );
     }
   }
+  
 
   supprimerDemande(id: number) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cette demande ?")) {

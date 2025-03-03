@@ -45,6 +45,10 @@ getDemandesByDateEntretien(date: string): Observable<any[]> {
 envoyerEmail(email: string): Observable<any> {
   return this.http.post<any>(`${this.apiUrl}/envoyer-email`, { email });
 }
+envoyerEmailRefus(email: string) {
+  return this.http.post(`${this.apiUrl}/envoyer-email-refus`, { email });
+}
+
 
 
 

@@ -40,8 +40,14 @@ export class LogistiqueComponent {
   quantites: { [id: number]: number } = {}; // Stocke la quantité saisie par matériel
   searchTerm: string = '';
   materielsAffiches: any[] = []; // Liste affichée après filtrage
+  
 
  vehiculesAffiches: any[] = []; // Liste affichée après filtrage
+// Ajout des variables pour la pagination
+currentPage: number = 1;
+itemsPerPage: number = 5; // Nombre d'éléments par page
+currentPageVehicules: number = 1;
+itemsPerPageVehicules: number = 5; // Nombre d'éléments par page
 
 
   constructor(
@@ -72,7 +78,8 @@ export class LogistiqueComponent {
     this.vehiculeService.getVehicule().subscribe(
       (data) => { 
         this.vehicules = data;
-        this.vehiculesAffiches = [...this.vehicules]; // Initialiser avec tous les véhicules
+        this.vehiculesAffiches = [...this.vehicules]; 
+        this.setPageVehicules(1); // Réinitialiser à la première page après chargement
       },
       (error) => { console.error('Erreur lors de la récupération des vehicules', error); }
     );
@@ -257,19 +264,61 @@ resetFilters(): void {
 }
 
 filtrerVehicules(event: Event): void {
-  const inputElement = event.target as HTMLInputElement; // Assure que c'est bien un input
-  const searchTerm = inputElement.value.trim().toLowerCase(); // Récupère la valeur en minuscule
+  const inputElement = event.target as HTMLInputElement;
+  const searchTerm = inputElement.value.trim().toLowerCase();
 
   if (!searchTerm) {
-    this.vehiculesAffiches = [...this.vehicules]; // Réinitialise si vide
+    this.vehiculesAffiches = [...this.vehicules];
   } else {
     this.vehiculesAffiches = this.vehicules.filter(vehicule =>
-      vehicule.marque.toLowerCase().includes(searchTerm) // Filtre par nom du véhicule
+      vehicule.marque.toLowerCase().includes(searchTerm)
     );
   }
+  this.setPageVehicules(1); // Réinitialiser à la première page après filtrage
 }
 resetFiltersVehicules(): void {
   this.getVehicules(); // Réinitialise la liste des véhicules
 }
- 
+get materielsPagine(): any[] {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  return this.materielsAffiches.slice(startIndex, startIndex + this.itemsPerPage);
+}
+
+setPage(page: number): void {
+  if (page >= 1 && page <= this.totalPages()) {
+    this.currentPage = page;
+  }
+}
+
+totalPages(): number {
+  return Math.ceil(this.materielsAffiches.length / this.itemsPerPage);
+}
+
+// Génère un tableau des pages disponibles
+getPages(): number[] {
+  return Array.from({ length: this.totalPages() }, (_, i) => i + 1);
+}
+get vehiculesPagine(): any[] {
+  const startIndex = (this.currentPageVehicules - 1) * this.itemsPerPageVehicules;
+  return this.vehiculesAffiches.slice(startIndex, startIndex + this.itemsPerPageVehicules);
+}
+
+setPageVehicules(page: number): void {
+  const total = this.totalPagesVehicules();
+  if (page >= 1 && page <= total) {
+    this.currentPageVehicules = page;
+  } else {
+    console.warn("Page invalide:", page);
+  }
+}
+
+totalPagesVehicules(): number {
+  const totalPages = Math.ceil(this.vehiculesAffiches.length / this.itemsPerPageVehicules);
+  return totalPages || 1; // Retourne 1 si totalPages est 0
+}
+
+getPagesVehicules(): number[] {
+  return Array.from({ length: this.totalPagesVehicules() }, (_, i) => i + 1);
+}
+
 }

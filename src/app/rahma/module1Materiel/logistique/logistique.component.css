@@ -244,7 +244,7 @@ button.export-excel {
   color: white;
   border: none;
   padding: 10px 15px;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
@@ -253,6 +253,7 @@ button.export-excel {
   align-items: center;
   gap: 8px; /* Espacement entre l'icône et le texte */
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 button.export-excel:hover {
@@ -278,10 +279,10 @@ button.export-excel i {
 
 .search-input {
   width: 100%;
-  padding: 14px 50px 14px 20px; /* Plus de padding pour l'icône */
+  padding: 10px 10px 11px 10px; /* Plus de padding pour l'icône */
   border: none;
   outline: none;
-  font-size: 16px;
+  font-size: 13px;
   color: #333;
   background-color: #fff;
   border-radius: 30px;
@@ -306,7 +307,7 @@ button.export-excel i {
 }
 
 .search-icon:hover {
-  color: #4a89e8;
+  color: #334c72;
   transform: translateY(-50%) scale(1.2); /* Légère animation au survol */
 }
 .pagination {
@@ -319,7 +320,7 @@ button.export-excel i {
 .pagination button {
   padding: 8px 15px;
   margin: 0 10px;
-  background-color: #007bff;
+  background-color: #33506e;
   color: white;
   border: none;
   border-radius: 5px;
@@ -333,6 +334,27 @@ button.export-excel i {
 }
 
 .pagination span {
-  font-size: 14px;
+  font-size: 8px;
   margin: 0 10px;
+}
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.pagination-container button {
+  background-color: #293542;
+  color: white;
+  border: none;
+  padding: 5px 5px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.pagination-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }

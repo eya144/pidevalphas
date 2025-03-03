@@ -50,9 +50,10 @@
               <button (click)="passerEntretien(demande.idDemandeEmploi)" class="btn btn-success btn-sm">
                 Passer Entretien
               </button>
-              <button (click)="refuserDemande(demande.idDemandeEmploi)" class="btn btn-danger btn-sm">
+              <button (click)="refuserDemande(demande.idDemandeEmploi, demande.adresseMail)" class="btn btn-danger btn-sm">
                 Refuser
               </button>
+              
               <button (click)="supprimerDemande(demande.idDemandeEmploi)" class="btn btn-warning btn-sm">
                 🗑️
               </button>

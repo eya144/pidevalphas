@@ -43,7 +43,7 @@
       </div>
       
       <div class="materiels-list">
-        <div class="materiel-card" *ngFor="let materiel of materielsAffiches">
+        <div class="materiel-card" *ngFor="let materiel of materielsPagine">
           <div class="materiel-details">
             <h4>Nom: {{ materiel.nomMateriel }}</h4>
             <p>Catégorie: {{ materiel.categorie }}</p>
@@ -70,7 +70,13 @@
           </div>
         </div>
       </div>
-     
+     <!-- Pagination -->
+<div class="pagination-container">
+  <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">Précédent</button>
+  <span>Page {{ currentPage }} / {{ totalPages() }}</span>
+  <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages()">Suivant</button>
+</div>
+
     </div>
   </div>
 
@@ -105,7 +111,7 @@
       
       </div>
       <div class="materiels-list">
-        <div class="materiel-card" *ngFor="let vehicule of vehiculesAffiches">
+        <div class="materiel-card" *ngFor="let vehicule of vehiculesPagine">
           <div class="materiel-details">
             <h4>Nom: {{ vehicule.nomVehicule }}</h4>
             <p>Marque: {{ vehicule.marque }}</p>
@@ -122,6 +128,18 @@
           </div>
         </div>
       </div>
+      <div class="pagination-container">
+        <button (click)="setPageVehicules(currentPageVehicules - 1)" 
+                [disabled]="currentPageVehicules <= 1">
+          Précédent
+        </button>
+        <span>Page {{ currentPageVehicules }} / {{ totalPagesVehicules() }}</span>
+        <button (click)="setPageVehicules(currentPageVehicules + 1)" 
+                [disabled]="currentPageVehicules >= totalPagesVehicules()">
+          Suivant
+        </button>
+      </div>
     </div>
+     
   </div>
 </body>
