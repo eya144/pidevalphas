@@ -4,6 +4,8 @@ import { LigneCommandeService } from 'serviceLogistique/ligne-commande.service';
 import { Router } from '@angular/router';
 import { CommandeService } from 'serviceLogistique/commande.service';
 import { VehiculeService } from 'serviceLogistique/vehicule.service';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-logistique',
@@ -211,5 +213,20 @@ redirectToEditVehicule(idVehicule: number): void {
   this.router.navigate(['/editVehicule', idVehicule]);
 }
 
+
+exporterMateriels(): void {
+  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.materiels);
+  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Materiels');
+  XLSX.writeFile(wb, 'materiels.xlsx');
+}
+
+// Fonction pour exporter les véhicules
+exporterVehicules(): void {
+  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.vehicules);
+  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Vehicules');
+  XLSX.writeFile(wb, 'vehicules.xlsx');
+}
 
 }

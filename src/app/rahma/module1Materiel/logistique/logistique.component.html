@@ -8,6 +8,8 @@
     <button class="btn-add" (click)="redirectToAddVehicule()">
       <i class="fa fa-plus"></i> Ajouter un véhicule
     </button>
+    
+   
     <a routerLink="/dashboardLogistique">
       <img src="assets/img/logistique/6820955.png" alt="image-dashboard" class="dashboard-image">
     </a>
@@ -29,7 +31,7 @@
     <div class="materiels-container">
       <div class="title-container">
         <h2>Liste des Matériels</h2>
-       
+        <button (click)="exporterMateriels()">Exporter en Excel</button>
       </div>
       <div class="materiels-list">
         <div class="materiel-card" *ngFor="let materiel of materiels">
@@ -85,6 +87,7 @@
     <div class="materiels-container">
       <div class="title-container">
         <h2>Liste des Véhicules</h2>
+        <button (click)="exporterVehicules()">Exporter en Excel</button>
       </div>
       <div class="materiels-list">
         <div class="materiel-card" *ngFor="let vehicule of vehicules">

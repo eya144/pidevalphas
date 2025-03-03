@@ -47,6 +47,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { TopMaterielComponent } from './rahma/statistique/top-materiel/top-materiel.component';
+import { PlaningComponent } from './rahma/module2Entretien/planing/planing.component';
 
 
 @NgModule({
@@ -87,6 +89,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
       AddVehiculeComponent,
       EditVehiculeComponent,
       AffectVehiculeComponent,
+      TopMaterielComponent,
+      PlaningComponent,
       
       
   ],

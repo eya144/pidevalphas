@@ -39,6 +39,14 @@ passerEntretien(idDemandeEmploi: number): Observable<any> {
 modifierEntretien(idDemande: number, entretienData: any): Observable<any> {
   return this.http.put(`${this.apiUrl}/modifier/${idDemande}`, entretienData);
 }
+getDemandesByDateEntretien(date: string): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/by-date-entretien?date=${date}`);
+}
+envoyerEmail(email: string): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}/envoyer-email`, { email });
+}
+
+
 
   
 }

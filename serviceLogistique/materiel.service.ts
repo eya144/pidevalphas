@@ -79,5 +79,13 @@ updateStatusDemande(idDemande: number, newStatus: string): Observable<Demande> {
 verifierQuantiteMateriel(idDemande: number): Observable<{ suffisant: boolean, message?: string }> {
   return this.http.get<{ suffisant: boolean, message?: string }>(`${this.baseUrl}/verifierQuantiteMateriel/${idDemande}`);
 }
+// Récupérer les matériels les plus demandés
+getTopMateriels(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrl}/top-materiels`);
+}
+getMaterielsParCategorie(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrl}/categorie`);
+}
+
 
 }

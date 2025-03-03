@@ -28,11 +28,19 @@ onSubmit() {
     this.demandeEmploiService.ajouterDemandeEmploi(this.demandeEmploiForm.value).subscribe(response => {
       console.log('Demande envoyée avec succès', response);
       
-      // Rediriger vers la page des détails avec l'ID de la demande créée
+      // Envoi de l'email après la création de la demande
+      const email = this.demandeEmploiForm.value.adresseMail;
+      this.demandeEmploiService.envoyerEmail(email).subscribe(
+        () => console.log('Email envoyé avec succès'),
+        error => console.error('Erreur lors de l\'envoi de l\'email', error)
+      );
+
+      // Rediriger vers la page des détails
       this.router.navigate(['demandeEmploi/details', response.idDemandeEmploi]);
 
     }, error => {
       console.error('Erreur lors de l\'envoi de la demande', error);
     });
   }
-}}
+}
+}

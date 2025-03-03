@@ -1,0 +1,16 @@
+<body>
+  <div class="container mt-4">
+    <h2>📊 Statistiques des Matériels</h2>
+  
+    <select class="form-select mb-3" [(ngModel)]="selectedStat" (ngModelChange)="updateChart()">
+      <option value="topMateriels">Matériels les Plus Demandés</option>
+      <option value="parCategorie">Matériels par Catégorie</option>
+    </select>
+  
+    <canvas id="myChart" *ngIf="selectedStat === 'topMateriels'"></canvas>
+    <canvas id="materielChart" *ngIf="selectedStat === 'parCategorie'"></canvas>
+  </div>
+  
+  </body>
+
+  

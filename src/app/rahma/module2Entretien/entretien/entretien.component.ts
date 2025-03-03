@@ -9,16 +9,14 @@ import { DemandeEmploiService } from 'serviceEntretien/demande-emploi.service';
   styleUrls: ['./entretien.component.css']
 })
 export class EntretienComponent {
+
   demandes: any[] = [];
   isLoading = true;
-  isCalendarOpen = false;
-  selectedDate: Date | null = null;
-onDateNavigate: any;
+
 
   constructor(
     private router: Router, 
     private demandeEmploiService: DemandeEmploiService,
-    public dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -35,11 +33,6 @@ onDateNavigate: any;
   }
 
   
-
-  closeCalendar() {
-    this.isCalendarOpen = false;
-    document.body.style.filter = "none"; // Retirer le flou sur le corps
-  }
 
   passerEntretien(id: number) {
     if (confirm("Voulez-vous passer cette demande à l'entretien ?")) {
@@ -77,23 +70,7 @@ onDateNavigate: any;
       );
     }
   }
-  openCalendar(): void {
-    // // Ajouter la classe 'blurred' pour flouter l'arrière-plan
-    // document.body.classList.add('blurred');
-  
-    // const dialogRef = this.dialog.open(CalendarModalComponent, {
-    //   width: '400px',   // Ajustez la taille en fonction de votre besoin
-    //   height: '500px',  // Ajustez la hauteur si nécessaire
-    //   disableClose: true
-    // });
-  
-    // dialogRef.afterClosed().subscribe(result => {
-    //   // Retirer le flou de l'arrière-plan lorsque la modale est fermée
-    //   document.body.classList.remove('blurred');
-    //   if (result) {
-    //     this.selectedDate = result;
-    //     alert(`Entretien fixé pour le : ${this.selectedDate!.toLocaleDateString()}`);
-    //   }
-    // });
-  }
-}  
+  redirectToPlaning() {
+    this.router.navigate([`/planning`]);
+    }
+}

@@ -1,0 +1,50 @@
+/* Style général */
+body {
+    background-color: #1e1e1e;
+    color: white;
+    font-family: Arial, sans-serif;
+    padding-top: 50px;
+  }
+
+  
+  .calendar {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+  }
+  
+  .weekdays, .days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+  }
+  
+  .weekday {
+    font-weight: bold;
+    padding: 10px;
+  }
+  
+  .day {
+    background: #f1f1f1;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .day:hover {
+    background: #ddd;
+  }
+  
+  .selected {
+    background: #6c757d !important;
+    color: white !important;
+  }
+  
+  .outside-month {
+    color: #bbb;
+    font-weight: normal;
+  }
+  
