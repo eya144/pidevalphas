@@ -22,8 +22,7 @@
         <li *ngFor="let cat of categories" (click)="filtrerParCategorie(cat)">
           {{ cat }}
         </li>
-        <li class="reset-filter" (click)="getAllMateriels()">Afficher Tous</li>
-       
+        <li class="reset-filter" (click)="resetFilters()">Afficher Tous</li>       
       </ul>
     </div>
 
@@ -31,10 +30,20 @@
     <div class="materiels-container">
       <div class="title-container">
         <h2>Liste des Matériels</h2>
-        <button (click)="exporterMateriels()">Exporter en Excel</button>
+        
+        <div class="search-container">
+          <input type="text" (input)="filtrerMateriels($event)" class="search-input" placeholder="Rechercher un matériel..." />
+          <i class="fa fa-search search-icon"></i>
+        </div>
+        
+      
+        <button class="export-excel" (click)="exporterMateriels()">
+          <i class="fa fa-file-excel"></i> Exporter en Excel
+        </button>
       </div>
+      
       <div class="materiels-list">
-        <div class="materiel-card" *ngFor="let materiel of materiels">
+        <div class="materiel-card" *ngFor="let materiel of materielsAffiches">
           <div class="materiel-details">
             <h4>Nom: {{ materiel.nomMateriel }}</h4>
             <p>Catégorie: {{ materiel.categorie }}</p>
@@ -79,18 +88,24 @@
         <li *ngFor="let type of typeVehicule" (click)="filtrerParType(type)">
           {{ type }}
         </li>
-        <li class="reset-filter" (click)="getVehicules()">Afficher Tous</li>
-      </ul>
+        <li class="reset-filter" (click)="resetFiltersVehicules()">Afficher Tous</li>      </ul>
     </div>
 
     <!-- Liste des véhicules -->
     <div class="materiels-container">
       <div class="title-container">
         <h2>Liste des Véhicules</h2>
-        <button (click)="exporterVehicules()">Exporter en Excel</button>
+        <div class="search-container">
+          <input type="text" (input)="filtrerVehicules($event)" class="search-input" placeholder="Rechercher un véhicule..." />
+          <i class="fa fa-search search-icon"></i>
+        </div>        
+        <button class="export-excel" (click)="exporterVehicules()">
+          <i class="fa fa-file-excel"></i> Exporter en Excel
+      </button>
+      
       </div>
       <div class="materiels-list">
-        <div class="materiel-card" *ngFor="let vehicule of vehicules">
+        <div class="materiel-card" *ngFor="let vehicule of vehiculesAffiches">
           <div class="materiel-details">
             <h4>Nom: {{ vehicule.nomVehicule }}</h4>
             <p>Marque: {{ vehicule.marque }}</p>

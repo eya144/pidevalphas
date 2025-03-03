@@ -4,7 +4,10 @@ body {
   margin: 0;
   background-color: #f8f9fa;
   color: #333;
-  padding-top: 360px; /* Ajustez selon votre header */
+  padding-top: 360px; 
+}
+h2{
+  text-align: center;
 }
 .btns-container {
   display: flex;
@@ -235,4 +238,101 @@ body {
   .materiels-list {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   }
+}
+button.export-excel {
+  background-color: #28a745; /* Vert Excel */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacement entre l'icône et le texte */
+  margin-bottom: 20px;
+}
+
+button.export-excel:hover {
+  background-color: #218838; /* Vert foncé */
+  transform: scale(1.05);
+}
+
+button.export-excel i {
+  font-size: 18px; /* Taille de l'icône */
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7; /* Fond clair pour un contraste doux */
+  padding: 10px 20px;
+  border-radius: 30px;
+  position: relative;
+  max-width: 500px; /* Largeur plus grande pour plus de confort */
+  margin: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère pour profondeur */
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 50px 14px 20px; /* Plus de padding pour l'icône */
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  background-color: #f0f8ff; /* Fond clair au focus */
+  border: 2px solid #6fa3f2; /* Bordure bleue douce */
+  box-shadow: 0 0 12px rgba(111, 163, 242, 0.5);
+}
+
+.search-icon {
+  position: absolute;
+  right: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #222f42;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.search-icon:hover {
+  color: #4a89e8;
+  transform: translateY(-50%) scale(1.2); /* Légère animation au survol */
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 8px 15px;
+  margin: 0 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 14px;
+  margin: 0 10px;
 }

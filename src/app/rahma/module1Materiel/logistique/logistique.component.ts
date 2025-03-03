@@ -13,7 +13,6 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./logistique.component.css']
 })
 export class LogistiqueComponent {
-
   materiels: any[] = [];
   vehicules: any[] = [];
   categories: string[] = [
@@ -37,9 +36,13 @@ export class LogistiqueComponent {
     'FINISSEUR',
   ];
   lignesCommande: any[] = [];  // Liste des lignes de commande sélectionnées
-
   materielSelectionne: { [id: number]: boolean } = {}; // Stocke l'état des checkboxes
   quantites: { [id: number]: number } = {}; // Stocke la quantité saisie par matériel
+  searchTerm: string = '';
+  materielsAffiches: any[] = []; // Liste affichée après filtrage
+
+ vehiculesAffiches: any[] = []; // Liste affichée après filtrage
+
 
   constructor(
     private materielService: MaterielService,
@@ -57,13 +60,20 @@ export class LogistiqueComponent {
 
   getAllMateriels(): void {
     this.materielService.getMateriels().subscribe(
-      (data) => { this.materiels = data; },
+      (data) => { 
+        this.materiels = data;
+        this.materielsAffiches = [...this.materiels]; // Initialiser avec tous les matériels
+      },
       (error) => { console.error('Erreur lors de la récupération des matériels', error); }
     );
-  }
+  }  
+
   getVehicules(): void {
     this.vehiculeService.getVehicule().subscribe(
-      (data) => { this.vehicules = data; },
+      (data) => { 
+        this.vehicules = data;
+        this.vehiculesAffiches = [...this.vehicules]; // Initialiser avec tous les véhicules
+      },
       (error) => { console.error('Erreur lors de la récupération des vehicules', error); }
     );
   }
@@ -229,4 +239,37 @@ exporterVehicules(): void {
   XLSX.writeFile(wb, 'vehicules.xlsx');
 }
 
+filtrerMateriels(event: Event): void {
+  const inputElement = event.target as HTMLInputElement; // Assure que c'est bien un input
+  const searchTerm = inputElement.value.trim().toLowerCase(); // Récupère la valeur en minuscule
+
+  if (!searchTerm) {
+    this.materielsAffiches = [...this.materiels]; // Réinitialise si vide
+  } else {
+    this.materielsAffiches = this.materiels.filter(materiel =>
+      materiel.nomMateriel.toLowerCase().includes(searchTerm)
+    );
+  }
+}
+
+resetFilters(): void {
+  this.getAllMateriels();
+}
+
+filtrerVehicules(event: Event): void {
+  const inputElement = event.target as HTMLInputElement; // Assure que c'est bien un input
+  const searchTerm = inputElement.value.trim().toLowerCase(); // Récupère la valeur en minuscule
+
+  if (!searchTerm) {
+    this.vehiculesAffiches = [...this.vehicules]; // Réinitialise si vide
+  } else {
+    this.vehiculesAffiches = this.vehicules.filter(vehicule =>
+      vehicule.marque.toLowerCase().includes(searchTerm) // Filtre par nom du véhicule
+    );
+  }
+}
+resetFiltersVehicules(): void {
+  this.getVehicules(); // Réinitialise la liste des véhicules
+}
+ 
 }
