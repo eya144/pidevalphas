@@ -63,7 +63,7 @@ export class AddFinanceComponent implements OnInit {
         width: '300px',
         disableClose: true,
       });
-
+  
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
           const factureData = {
@@ -71,19 +71,19 @@ export class AddFinanceComponent implements OnInit {
             idCommande: this.idCommande,
             idResponsableLogistique: this.idResponsableLogistique,
           };
-
+  
           this.financeService.addFacture(factureData).subscribe(
             (response) => {
-              console.log('Facture ajoutée avec succès:', response);
-
+              console.log('Facture ajoutée avec succès:', response); // Debugging
+  
               this.dialog.open(SuccessDialogComponent, {
                 width: '300px',
                 disableClose: true,
               });
-
-              this.factureForm.reset(); // Réinitialiser le formulaire
-              this.factureForm.patchValue({ status: 'Unpaid' }); // Réinitialiser le statut
-              this.router.navigate(['/finance']); // Rediriger vers la liste des factures
+  
+              this.factureForm.reset();
+              this.factureForm.patchValue({ status: 'Unpaid' });
+              this.router.navigate(['/finance']);
             },
             (error) => {
               console.error('Erreur lors de l\'ajout de la facture:', error);

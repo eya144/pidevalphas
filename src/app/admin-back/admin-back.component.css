@@ -1,87 +1,65 @@
-.container {
-    margin: 20px;
+.bar-chart {
+  display: flex;
+  align-items: flex-end; /* Aligner les barres en bas */
+  gap: 20px; /* Espace entre les barres */
+  height: 300px; /* Hauteur du graphique */
+  padding: 20px;
+  border-left: 2px solid #333; /* Axe Y */
+  border-bottom: 2px solid #333; /* Axe X */
+  background-color: none;
+  margin: 20px;
+}
+
+.bar {
+  width: 50px; /* Largeur des barres */
+  background-color: #36A2EB; /* Couleur par défaut des barres */
+  position: relative;
+  text-align: center;
+  border-radius: 4px 4px 0 0;
+  animation: grow 1s ease-in-out; /* Animation pour la croissance des barres */
+  height: var(--bar-height, 0); /* Hauteur dynamique */
+}
+
+.bar::before {
+  content: attr(data-label); /* Afficher le label */
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #333;
+}
+
+.bar::after {
+  content: attr(data-value); /* Afficher la valeur */
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Couleurs personnalisées pour les barres */
+.bar.paid {
+  background-color: #36A2EB;
+}
+
+.bar.unpaid {
+  background-color: #FF6384;
+}
+
+.bar.total {
+  background-color: #4BC0C0;
+}
+
+/* Animation pour la croissance des barres */
+@keyframes grow {
+  from {
+    height: 0;
   }
-  
-  .stats-container {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+  to {
+    height: var(--bar-height);
   }
-  
-  .stat-card {
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    flex: 1 1 200px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .stat-card h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #333;
-  }
-  
-  .stat-card p {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 10px 0 0;
-  }
-  
-  /* Couleurs personnalisées */
-  .stat-card.paid {
-    background-color: #36A2EB;
-    color: white;
-  }
-  
-  .stat-card.unpaid {
-    background-color: #FF6384;
-    color: white;
-  }
-  
-  .stat-card.total {
-    background-color: #4BC0C0;
-    color: white;
-  }
-  .stats-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .stat-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    width: 30%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .stat-card h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #333;
-  }
-  
-  .stat-card p {
-    margin: 10px 0 0;
-    font-size: 24px;
-    font-weight: bold;
-    color: #007bff;
-  }
-  
-  /* Styles spécifiques pour les cartes de salaire */
-  .min-salary {
-    background-color: #e3f2fd;
-  }
-  
-  .max-salary {
-    background-color: #fff3e0;
-  }
-  
-  .avg-salary {
-    background-color: #f1f8e9;
-  }
+}

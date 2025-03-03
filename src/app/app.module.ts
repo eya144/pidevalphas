@@ -32,6 +32,7 @@ import { AppFooterComponent } from './app-footer/app-footer.component';
 //import { BackFinanceComponent } from './back-finance/back-finance.component';
 import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 import { AdminBackComponent } from './admin-back/admin-back.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 //import { FicheComponent } from './fiche/fiche.component';
 
 @NgModule({
@@ -60,7 +61,8 @@ import { AdminBackComponent } from './admin-back/admin-back.component';
       AppFooterComponent,
       AddPaiementComponent,
       AdminBackComponent,
-  ],
+      SearchResultsComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule ,

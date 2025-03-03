@@ -24,6 +24,12 @@ export class FinanceService {
   private facturesSubject = new BehaviorSubject<Facture[]>([]);
   factures$ = this.facturesSubject.asObservable();
 
+  private notificationsSubject = new BehaviorSubject<string[]>([]);
+  notifications$ = this.notificationsSubject.asObservable();
+
+  private messagesSubject = new BehaviorSubject<string[]>([]);
+  messages$ = this.messagesSubject.asObservable();
+
   constructor(private http: HttpClient) { }
 
    // Charger les factures initiales
@@ -45,10 +51,30 @@ export class FinanceService {
   addFacture(facture: Facture): Observable<Facture> {
     return this.http.post<Facture>(this.apiUrl, facture).pipe(
       tap((newFacture) => {
-        const currentFactures = this.facturesSubject.value;
-        this.facturesSubject.next([...currentFactures, newFacture]);
+        console.log('Nouvelle facture ajoutée:', newFacture); // Debugging
+  
+        // Ajouter une notification
+        const notification = `Nouvelle facture ajoutée: ${newFacture.idFacture}`;
+        const currentNotifications = this.notificationsSubject.value;
+        this.notificationsSubject.next([...currentNotifications, notification]);
+        console.log('Notifications mises à jour:', this.notificationsSubject.value); // Debugging
+  
+        // Ajouter un message
+        const message = `Une nouvelle facture a été ajoutée avec l'ID: ${newFacture.idFacture}`;
+        const currentMessages = this.messagesSubject.value;
+        this.messagesSubject.next([...currentMessages, message]);
+        console.log('Messages mis à jour:', this.messagesSubject.value); // Debugging
       })
     );
+  }
+  // Récupérer les notifications
+  getNotifications(): Observable<string[]> {
+    return this.notifications$;
+  }
+
+  // Récupérer les messages
+  getMessages(): Observable<string[]> {
+    return this.messages$;
   }
   // Method to get the static command
   getStaticCommand(): any {
@@ -79,16 +105,4 @@ getAllFichesDePaie(): Observable<FichedepaieComptableComponent[]> {
   return this.http.get<FichedepaieComptableComponent[]>(`${this.apiUrl}/getAll`);
 }
 
-/* getMinSalary() {
-  return this.http.get<number>('/api/salaries/min');
-}
-
-getMaxSalary() {
-  return this.http.get<number>('/api/salaries/max');
-}
-
-getAverageSalary() {
-  return this.http.get<number>('/api/salaries/average');
-}
-*/ 
 }

@@ -1,44 +1,32 @@
 <div class="container-scroller">
-    <!-- Back Menu Admin Start -->
-<app-back-menu-admin> </app-back-menu-admin>   <!-- Back Menu Admin End -->
-  
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-      <!-- navbar Start -->
-      <app-back-header></app-back-header>
-      <!-- navbar End -->
+  <!-- Back Menu Admin Start -->
+  <app-back-menu-admin></app-back-menu-admin>
+  <!-- Back Menu Admin End -->
+
+  <!-- partial -->
+  <div class="container-fluid page-body-wrapper">
+    <!-- navbar Start -->
+    <app-back-header (searchEvent)="onSearch($event)"></app-back-header> <!-- Lier l'événement -->
+    <!-- navbar End -->
+
+    <div class="container">
+      <br><br>
+      <br><br>
       
-      <div class="container">
-        <br><br>
-        <br><br>
-          <div class="row">
-            <div class="col-12 grid-margin stretch-card">
-              <div class="card corona-gradient-card">
-                <div class="card-body py-0 px-0 px-sm-0">
-                  <div class="row align-items-center">
-          <img src="/assets/img/logo/fin.jpg" class="gradient-corona-img img-fluid" alt="" >
+      <h2>Invoice Statistics</h2>
+      <div class="bar-chart">
+        <!-- Barre pour les factures payées -->
+        <div class="bar-chart">
+          <!-- Barre pour les factures payées -->
+          <div *ngIf="showPaid" class="bar paid" id="paid-bar" data-label="Paid"></div>
+        
+          <!-- Barre pour les factures impayées -->
+          <div *ngIf="showUnpaid" class="bar unpaid" id="unpaid-bar" data-label="Unpaid"></div>
+        
+          <!-- Barre pour le total des factures -->
+          <div *ngIf="showTotal" class="bar total" id="total-bar" data-label="Total"></div>
         </div>
-                </div></div></div></div>
-        <h2>Invoice Statistics</h2>
-        <div class="stats-container">
-          <!-- Carte pour les factures payées -->
-          <div class="stat-card paid">
-            <h3>Paid Invoices</h3>
-            <p>{{ paidInvoices }}</p>
-          </div>
-  
-          <!-- Carte pour les factures non payées -->
-          <div class="stat-card unpaid">
-            <h3>Unpaid Invoices</h3>
-            <p>{{ unpaidInvoices }}</p>
-          </div>
-  
-          <!-- Carte pour le total des factures -->
-          <div class="stat-card total">
-            <h3>Total Invoices</h3>
-            <p>{{ totalInvoices }}</p>
-          </div>
-        </div>
+      </div>
     </div>
-</div>
+  </div>
 </div>

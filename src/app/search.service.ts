@@ -1,15 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
-  private searchSubject = new BehaviorSubject<string>(''); // Sujet pour stocker la valeur de recherche
-  search$ = this.searchSubject.asObservable(); // Observable pour écouter les changements
+  private apiUrl = 'http://localhost:8089/pidev/Api/facture'; // Remplacez par l'URL de votre API
 
-  // Méthode pour mettre à jour la valeur de recherche
-  setSearchQuery(query: string) {
-    this.searchSubject.next(query);
+  constructor(private http: HttpClient) {}
+
+  search(query: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}?q=${query}`);
   }
 }

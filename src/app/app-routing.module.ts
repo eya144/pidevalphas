@@ -21,6 +21,7 @@ import { BackMenuAdminComponent } from './back-menu-admin/back-menu-admin.compon
 import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 import { AdminBackComponent } from './admin-back/admin-back.component';
 // import { FicheComponent } from './fiche/fiche.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirection par défaut
@@ -43,7 +44,7 @@ const routes: Routes = [
   { path: 'back-header', component: BackHeaderComponent },
   { path: 'back-menu-admin', component: BackMenuAdminComponent },
   { path: 'admin-back', component: AdminBackComponent },
- // { path: 'fiche', component: FicheComponent },
+  { path: 'search', component: SearchResultsComponent },
   { path: '', component: BackHeaderComponent },
 ];
 
