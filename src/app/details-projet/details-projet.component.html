@@ -9,15 +9,23 @@
 <br>
 <div class="container my-5">
   <h2 class="text-center">Project Details</h2>
-  <div *ngIf="projet" class="project-details-card">
-    <h3 class="project-title">{{ projet.name }}</h3>
-    <p class="project-description">{{ projet.description }}</p>
-    <div class="project-info">
-      <p><strong>Project Manager:</strong> {{ projet.managerName }}</p>
-      <p><strong>Status:</strong> {{ projet.status }}</p>
-      <p><strong>Start Date:</strong> {{ projet.startDate | date:'MM/dd/yyyy' }}</p>
-      <p><strong>Expected End Date:</strong> {{ projet.expectedEndDate | date:'MM/dd/yyyy' }}</p>
+
+  <div *ngIf="projet" class="card project-details-card">
+    <div class="card-body">
+      <h3 class="card-title project-title">{{ projet.nom }}</h3>
+      <p class="card-text project-description">{{ projet.description }}</p>
+  
+      <div class="project-info">
+        <p><strong>Project Manager:</strong> {{ projet.maitreOeuvre }}</p>
+        <p><strong>Status:</strong> {{ projet.status }}</p>
+        <p *ngIf="projet.dateDebut"><strong>Start Date:</strong> {{ projet.dateDebut | date:'MM/dd/yyyy' }}</p>
+        <p *ngIf="projet.dateFinPrevue"><strong>Expected End Date:</strong> {{ projet.dateFinPrevue | date:'MM/dd/yyyy' }}</p>
+      </div>
+  
+      <div class="d-flex justify-content-between mt-4">
+        <button class="btn btn-primary" (click)="redirectToAddMission()">Add Mission</button>
+        <button class="btn btn-success" (click)="exportToPdf()">Exporter en PDF</button>
+      </div>
     </div>
-    <button class="btn btn-primary mt-4" (click)="redirectToAddMission()">Add Mission</button>
   </div>
 </div>

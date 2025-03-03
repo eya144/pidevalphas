@@ -34,11 +34,12 @@ button {
   margin-top: 20px;
 }
 .chart-container {
-  width: 100%; /* S'adapte à la largeur du parent */
-  max-width: 600px; /* Largeur maximale du graphique */
-  height: 300px; /* Hauteur du graphique */
-  margin: 0 auto; /* Centrer le graphique */
+  width: 80%; /* Augmente la largeur */
+  max-width: 500px; /* Réduit la largeur max */
+  height: 500px; /* Augmente la hauteur */
+  margin: 0 auto; /* Centre le graphique */
 }
+
 
 canvas {
   width: 100% !important; /* Utiliser toute la largeur de .chart-container */

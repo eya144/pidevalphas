@@ -37,6 +37,8 @@ import { TaskDetailsComponent } from './task-details/task-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgChartsModule } from 'ng2-charts';
+import { jsPDF } from 'jspdf';
+
 
 
 @NgModule({

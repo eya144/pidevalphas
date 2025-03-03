@@ -58,5 +58,8 @@ export class ProjetService {
    getProjetStats(): Observable<{ [key: string]: number }> {
     return this.http.get<{ [key: string]: number }>(`${this.apiUrl}/stats`);
   }
+  exportProjetToPdf(projetId: number) {
+    return this.http.get(`${this.apiUrl}/${projetId}/export-pdf`, { responseType: 'blob' });
+  }
   
 }
