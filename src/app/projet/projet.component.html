@@ -1,103 +1,126 @@
 <app-header></app-header>
-<br><br><br><br><br><br><br><br>
 
-<body>
-  <div class="container my-4">
-    <h2 class="text-center">📋 List of Projects</h2>
-  
-    <!-- Search Section -->
-    <div class="d-flex justify-content-between mb-3">
-      <input
-        type="text"
-        class="form-control w-50"
-        [(ngModel)]="nomRecherche"
-        placeholder="🔎 Search by name"
-      />
-    
-      <select class="form-control w-25" [(ngModel)]="statusRecherche">
-        <option value="">📌 All statuses</option>
-        <option value="TODO">🟡 To Do</option>
-        <option value="DOING">🟡 Doing </option>
-        <option value="DONE">🟢 Done</option>
-        <option value="SUSPENDED">🔴 Suspended</option>
-      </select>
-    
-      <button class="btn btn-primary ms-2" (click)="filtrerProjets()">🔍 Search</button>
-    </div>
-    
-    <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-primary btn-sm" (click)="ajouterProjet()">➕ Add project</button>
-    </div>
-    <div class="d-flex justify-content-between mb-3">
-      <label for="chartType">Choose Chart Type:</label>
-      <select class="form-control w-25" id="chartType" [(ngModel)]="chartType">
-        <option value="pie">📊 Pie Chart</option>
-        <option value="bar">📊 Bar Chart</option>
-        <option value="line">📈 Line Chart (Sinusoidal)</option>
-      </select>
-    </div>
-    
-    <!-- Project Statistics Graph -->
-    <div class="mb-4">
-      <h3 class="text-center">📊 Project Statistics</h3>
-      <div class="chart-container">
-        <canvas *ngIf="chartData.labels.length > 0" baseChart 
-                [data]="chartData"
-                [options]="chartOptions"
-                [type]="chartType">
-        </canvas>
-      </div>
-    </div>
+<div class="container my-4">
+  <h2 class="text-center">📋 List of Projects</h2>
 
-    <table class="table table-bordered table-striped table-hover table-responsive">
-      <thead class="table-dark">
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Project Manager</th>
-          <th>Status</th>
-          <th>Start Date</th>
-          <th>Finish Date</th>
-          <th colspan="3" class="text-center">Actions</th>
-        </tr>
-      </thead>
-    
-      <tbody>
-        <tr *ngFor="let projet of projets | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
-          <td>{{ projet.nom }}</td>
-          <td>{{ projet.description }}</td>
-          <td>{{ projet.nomChefProjet }}</td>
-          <td>{{ projet.status }}</td>
-          <td>{{ projet.dateDebut | date:'dd/MM/yyyy' }}</td>
-          <td>{{ projet.dateFinPrevue | date:'dd/MM/yyyy' }}</td>
-          <td class="text-center">
-            <button class="btn btn-info" (click)="viewDetails(projet.idProjet)">View Details</button>
-          </td>
-          <td class="text-center">
-            <button class="btn btn-info" (click)="viewMissions(projet.idProjet)">View Missions</button>
-          </td>
-          <td class="text-center">
-            <button class="btn btn-warning btn-sm me-1" (click)="modifierProjet(projet.idProjet)">
-              ✏ Update
-            </button>
-            <button class="btn btn-danger btn-sm" (click)="supprimerProjet(projet.idProjet)">
-              🗑 Delete
-            </button>
-          </td>
-        </tr>
-    
-        <!-- Message if the list is empty -->
-        <tr *ngIf="projets.length === 0">
-          <td colspan="7" class="text-center text-muted">
-            No project available. Please click on "Add project" button to add a new project.
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <!-- Pagination controls -->
-    <div class="pagination-controls d-flex justify-content-center mt-3">
-      <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+  <!-- Search Section -->
+  <div class="d-flex justify-content-between mb-3">
+    <input
+      type="text"
+      class="form-control w-50"
+      [(ngModel)]="nomRecherche"
+      placeholder="🔎 Search by name"
+    />
+
+    <select class="form-control w-25" [(ngModel)]="statusRecherche">
+      <option value="">📌 All statuses</option>
+      <option value="TODO">🟡 To Do</option>
+      <option value="DOING">🟡 Doing</option>
+      <option value="DONE">🟢 Done</option>
+      <option value="SUSPENDED">🔴 Suspended</option>
+    </select>
+
+    <button class="btn btn-primary ms-2" (click)="filtrerProjets()">🔍 Search</button>
+  </div>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-primary btn-sm" (click)="ajouterProjet()">➕ Add project</button>
+  </div>
+
+  <!-- Chart Type Selection -->
+  <div class="d-flex justify-content-between mb-3">
+    <label for="chartType">Choose Chart Type:</label>
+    <select class="form-control w-25" id="chartType" [(ngModel)]="chartType">
+      <option value="pie">📊 Pie Chart</option>
+      <option value="bar">📊 Bar Chart</option>
+      <option value="line">📈 Line Chart (Sinusoidal)</option>
+    </select>
+  </div>
+
+  <!-- Project Statistics Graph -->
+  <div class="mb-4">
+    <h3 class="text-center">📊 Project Statistics</h3>
+    <div class="chart-container">
+      <canvas *ngIf="chartData.labels.length > 0" baseChart
+              [data]="chartData"
+              [options]="chartOptions"
+              [type]="chartType">
+      </canvas>
     </div>
   </div>
-</body>
+
+  <!-- Projects Table -->
+  <table class="table table-bordered table-striped table-hover table-responsive">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Project Manager</th>
+        <th>Status</th>
+        <th>Start Date</th>
+        <th>Finish Date</th>
+        <th colspan="4" class="text-center">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let projet of projets | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+        <td>{{ projet.nom }}</td>
+        <td>{{ projet.description }}</td>
+        <td>{{ projet.nomChefProjet }}</td>
+        <td>{{ projet.status }}</td>
+        <td>{{ projet.dateDebut | date:'dd/MM/yyyy' }}</td>
+        <td>{{ projet.dateFinPrevue | date:'dd/MM/yyyy' }}</td>
+        <td>
+          <button class="btn btn-primary me-2" (click)="onProjectSelect(projet.idProjet)">Weather</button>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-info" (click)="viewDetails(projet.idProjet)">View Details</button>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-info" (click)="viewMissions(projet.idProjet)">View Missions</button>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-warning btn-sm me-1" (click)="modifierProjet(projet.idProjet)">
+            ✏ Update
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="supprimerProjet(projet.idProjet)">
+            🗑 Delete
+          </button>
+        </td>
+      </tr>
+
+      <!-- Message if the list is empty -->
+      <tr *ngIf="projets.length === 0">
+        <td colspan="8" class="text-center text-muted">
+          No project available. Please click on the "Add project" button to add a new project.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="weatherForecast" class="weather-container d-flex justify-content-center mt-4">
+    <div class="weather-card d-flex p-4 rounded shadow-lg">
+      <div class="weather-icon me-4">
+        <!-- Use the FontAwesome icon class dynamically -->
+        <i [class]="weatherIconUrl" aria-hidden="true"></i>
+      </div>
+      <div class="weather-info">
+        <p><strong>Condition:</strong> {{ weatherForecast.condition }}</p>
+        <p><strong>Temperature:</strong> {{ weatherForecast.temperature }}°C</p>
+        <p><strong>Humidity:</strong> {{ weatherForecast.humidity }}%</p>
+        <p><strong>Wind:</strong> {{ weatherForecast.windSpeed }} km/h</p>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div *ngIf="!weatherForecast" class="alert alert-info text-center mt-4">
+    <p>No weather data available for this project.</p>
+  </div>
+
+  <!-- Pagination controls -->
+  <div class="pagination-controls d-flex justify-content-center mt-3">
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+  </div>
+</div>

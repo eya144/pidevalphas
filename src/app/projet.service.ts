@@ -61,5 +61,8 @@ export class ProjetService {
   exportProjetToPdf(projetId: number) {
     return this.http.get(`${this.apiUrl}/${projetId}/export-pdf`, { responseType: 'blob' });
   }
+  getProjectWeather(projetId: number): Observable<string> {
+    return this.http.get<string>(`${this.apiUrl}/${projetId}/weather`);
+  }
   
 }
