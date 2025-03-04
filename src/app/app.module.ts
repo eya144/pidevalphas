@@ -38,6 +38,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgChartsModule } from 'ng2-charts';
 import { jsPDF } from 'jspdf';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 
 
@@ -81,7 +83,8 @@ import { jsPDF } from 'jspdf';
     HttpClientModule,
     FormsModule,
     NgxPaginationModule,
-    NgChartsModule
+    NgChartsModule,
+    DragDropModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

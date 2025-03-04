@@ -1,63 +1,54 @@
-<app-header></app-header>
-<br><br><br><br><br><br><br><br>
+<div class="container py-5">
+  <h3 class="text-center mb-4 text-primary">Project Tasks Board</h3>
 
-<body>
-  <div class="container py-5">
-    <h3 class="text-center mb-4 text-primary">Project Tasks List</h3>
-    <div class="mb-4 d-flex justify-content-between">
-      <input [(ngModel)]="searchTerm" class="form-control w-25" placeholder="Search task..." (input)="searchTasks()">
-    
-      <select [(ngModel)]="selectedStatus" class="form-select w-25" (change)="searchTasks()">
-        <option value="">All Statuses</option>
-        <option value="TODO">TODO</option>
-        <option value="DOING">DOING</option>
-        <option value="DONE">DONE</option>
-      </select>
-    
-      <select [(ngModel)]="selectedPriority" class="form-select w-25" (change)="searchTasks()">
-        <option value="">All Priorities</option>
-        <option value="LOW">Low</option>
-        <option value="MEDIUM">Medium</option>
-        <option value="HIGH">High</option>
-      </select>
-    </div>
-    
-    <div class="row">
-      <div *ngFor="let task of tasks" class="col-md-4 mb-4">
-        <div class="card shadow-lg rounded-lg border-0">
-          <div class="card-body">
-            <h5 class="card-title text-primary text-center">{{ task.nom }}</h5>
-            <p class="card-text text-muted text-center">{{ task.description }}</p>
-            <div class="text-center mb-3">
-              <span class="badge bg-{{ task.etatTache === 'TODO' ? 'warning' : task.etatTache === 'DOING' ? 'info' : 'success' }}">
-                {{ task.etatTache }}
-              </span>
-            </div>
-          </div>
-          <div class="card-footer">
-            <div class="d-grid gap-2">
-              <button class="btn btn-primary w-100" (click)="redirectToTaskDetails(task.idTache)">
-                <i class="bi bi-eye"></i> View Details
-              </button>
-              <button class="btn btn-warning w-100" (click)="redirectToUpdateTask(missionId, task.idTache)">
-                <i class="bi bi-pencil"></i> Update Task
-              </button>
-              
-              
-              <button (click)="deleteTask(task.idTache)" class="btn btn-danger w-100">
-                <i class="bi bi-trash"></i> Delete
-              </button>
+  <!-- Search and Filters Section -->
+  <div class="mb-4 d-flex flex-wrap gap-2 justify-content-between">
+    <input [(ngModel)]="searchTerm" class="form-control w-25" placeholder="Search task..." (input)="searchTasks()" />
+    <select [(ngModel)]="selectedStatus" class="form-select w-25" (change)="searchTasks()">
+      <option value="">All Statuses</option>
+      <option [value]="Status.TODO">To Do</option>
+      <option [value]="Status.DOING">Doing</option>
+      <option [value]="Status.DONE">Done</option>
+      <option [value]="Status.SUSPENDED">Suspended</option>
+    </select>
+    <select [(ngModel)]="selectedPriority" class="form-select w-25" (change)="searchTasks()">
+      <option value="">All Priorities</option>
+      <option value="BASSE">Low</option>
+      <option value="MOYENNE">Medium</option>
+      <option value="HAUTE">High</option>
+    </select>
+    <button class="btn btn-success" (click)="redirectToAddTask()">+ Add Task</button>
+  </div>
+
+  <!-- Task Lists -->
+  <div class="row g-3">
+    <div *ngFor="let category of [
+        { title: 'To Do', tasks: todoTasks, status: Status.TODO },
+        { title: 'Doing', tasks: doingTasks, status: Status.DOING },
+        { title: 'Done', tasks: doneTasks, status: Status.DONE },
+        { title: 'Suspended', tasks: suspendedTasks, status: Status.SUSPENDED }
+      ]" class="col-md-3">
+      <div class="bg-light p-3 rounded shadow-sm">
+        <h5 class="text-center fw-bold text-uppercase text-secondary">{{ category.title }}</h5>
+        <div cdkDropList [cdkDropListData]="category.tasks" (cdkDropListDropped)="onDrop($event, category.status)"
+          class="task-list p-2 border rounded bg-white">
+          <div *ngFor="let task of category.tasks" cdkDrag [cdkDragData]="task" class="task mb-2">
+            <div class="card shadow-sm rounded-lg">
+              <div class="card-body">
+                <h6 class="card-title text-primary fw-bold">{{ task.nom }}</h6>
+                <p class="card-text text-muted small">{{ task.description }}</p>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-info btn-sm" (click)="redirectToTaskDetails(task.idTache ?? 0)">View</button>
+                  <button class="btn btn-warning btn-sm" (click)="redirectToUpdateTask(missionId, task.idTache ?? 0)">
+                    Edit
+                  </button>
+                  <button class="btn btn-danger btn-sm" (click)="deleteTask(task.idTache ?? 0)">Delete</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Button to add a task -->
-    <div class="text-center mt-4">
-      <button class="btn btn-success btn-lg" (click)="redirectToAddTask()">
-        <i class="bi bi-plus-circle"></i> Add Task
-      </button>
-    </div>
   </div>
-</body>
+</div>
