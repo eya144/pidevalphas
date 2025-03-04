@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PaiementService } from '../paiement.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Paiement } from '../core/models/Paiement';
 
 @Component({
   selector: 'app-add-paiement',
@@ -10,62 +11,65 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AddPaiementComponent implements OnInit {
   paiementForm: FormGroup = new FormGroup({});
-  idFacture!: number; // 🔥 Stocke l'ID de la facture depuis l'URL
+  idFacture!: number;
 
   constructor(
     private fb: FormBuilder,
     private paiementService: PaiementService,
     private router: Router,
-    private route: ActivatedRoute // 🔥 Pour récupérer les paramètres de l'URL
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.idFacture = Number(params.get('idFacture')); // 🔥 Récupération de l'ID de la facture
-      console.log('ID Facture récupéré:', this.idFacture);
+      this.idFacture = Number(params.get('idFacture'));
     });
-
     this.initForm();
   }
 
   private initForm(): void {
     this.paiementForm = this.fb.group({
-      montant: [null, [Validators.required, Validators.min(1)]], // Montant doit être supérieur à 0
+      montant: [null, [Validators.required, Validators.min(1)]],
       datePaiement: [null, Validators.required],
       methodePaiement: ['', Validators.required],
-      numeroCarte: ['', [
-        Validators.required,
-        Validators.pattern('^[0-9]{12}$') // Validation du numéro de carte à 12 chiffres
-      ]]
+      numeroCarte: ['', [Validators.required, Validators.pattern('^[0-9]{12}$')]]
     });
   }
 
   onSubmit(): void {
     if (this.paiementForm.invalid) {
-      console.log('Formulaire invalide, veuillez corriger les erreurs.');
-      alert('Veuillez remplir correctement tous les champs.');
+      alert('Formulaire invalide. Veuillez remplir correctement tous les champs.');
       return;
     }
-  
-    const paiementData = {
+
+    // Préparer l'objet paiement avec des conversions explicites
+    const paiement: Paiement = {
       ...this.paiementForm.value,
-      idFacture: this.idFacture
+      montant: Number(this.paiementForm.value.montant), // Assurer que c'est bien un nombre
+      numeroCarte: this.paiementForm.value.numeroCarte ? Number(this.paiementForm.value.numeroCarte) : null, // Convertir en nombre ou null
+      datePaiement: new Date(this.paiementForm.value.datePaiement).toISOString().split('T')[0], // Format 'YYYY-MM-DD'
+      idFacture: this.idFacture,
+      idUtilisateur: 1, // Exemple d'utilisateur connecté
+      idContrat: 2, // Exemple d'idContrat
+      methodePaiement: this.paiementForm.value.methodePaiement
     };
-  
-    console.log("Données envoyées :", paiementData); // 🔥 Vérifiez les données ici
-  
-    this.paiementService.addPaiement(paiementData, this.idFacture).subscribe({
+
+    console.log("Données envoyées :", paiement); // Affiche les données envoyées
+
+    this.paiementService.addPaiement(paiement, this.idFacture).subscribe({
       next: () => {
         alert('Paiement ajouté avec succès !');
         this.router.navigate(['/finance']);
       },
       error: (err) => {
-        console.error("❌ Erreur lors de l'ajout du paiement :", err.error);
-        alert(`Erreur : ${err.error?.message || 'Une erreur est survenue'}`);
+        console.error('Erreur API:', err);
+        const errorMessage = err.error?.message || 'Une erreur est survenue lors de l\'ajout du paiement.';
+        alert(`Erreur : ${errorMessage}`);
       }
     });
   }
+
   annuler(): void {
-    this.router.navigate(['/finance']); // Redirection vers la liste des paiements
+    this.router.navigate(['/finance']);
   }
 }

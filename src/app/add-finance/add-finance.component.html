@@ -1,7 +1,9 @@
 <app-app-header></app-app-header>
   <!-- Slider Area End -->
+<br>
+<br>
 
-    <div class="container mt-5">
+    <div class="container mt-5" >
     <h2>Add Invoice</h2>
     <form (ngSubmit)="addFacture()" [formGroup]="factureForm">
       <div class="mb-3">
@@ -33,26 +35,21 @@
       </div>
       <div class="mb-3">
         <label for="montantTotalHorsTaxe" class="form-label">Total Amount (Excl. Tax):</label>
-        <input type="number" step="0.01" id="montantTotalHorsTaxe" formControlName="montantTotalHorsTaxe" class="form-control" required>
-        <div *ngIf="factureForm.get('montantTotalHorsTaxe')?.hasError('required') && factureForm.get('montantTotalHorsTaxe')?.touched">
-          Le montant total hors taxe est obligatoire.
-        </div>
-        <div *ngIf="factureForm.get('montantTotalHorsTaxe')?.hasError('min') && factureForm.get('montantTotalHorsTaxe')?.touched">
-          Le montant total hors taxe doit être supérieur ou égal à 0.
-        </div>
-
+        <input type="number" step="0.01" id="montantTotalHorsTaxe" formControlName="montantTotalHorsTaxe" class="form-control" readonly>
       </div>
+
       <div class="mb-3">
-        <label for="tva" class="form-label">Tax:</label>
-        <input type="number" step="0.01" id="tva" formControlName="tva" class="form-control" required>
-        <div *ngIf="factureForm.get('tva')?.hasError('required') && factureForm.get('tva')?.touched">
+        <label for="tva" class="form-label">Tax (TVA):</label>
+        <select id="tva" formControlName="tva" class="form-control" required>
+          <option value="5">5%</option>
+          <option value="10">10%</option>
+          <option value="15">15%</option>
+          <option value="20">20%</option>
+          <option value="25">25%</option>
+          <option value="30">30%</option>
+        </select>
+        <div *ngIf="factureForm.get('tva')?.hasError('required') && factureForm.get('tva')?.touched" class="error-message">
           La TVA est obligatoire.
-        </div>
-        <div *ngIf="factureForm.get('tva')?.hasError('min') && factureForm.get('tva')?.touched">
-          La TVA doit être supérieure ou égale à 0.
-        </div>
-        <div *ngIf="factureForm.get('tva')?.hasError('max') && factureForm.get('tva')?.touched">
-          La TVA ne doit pas dépasser 100 %.
         </div>
       </div>
       <div class="mb-3">
@@ -66,6 +63,9 @@
         </div>
       </div>
       <button type="submit" class="btn btn-primary" [disabled]="factureForm.invalid">Add Invoice</button>
+      <div *ngIf="isLoading" class="spinner-overlay">
+        <div class="spinner"></div>
+      </div>
       <button type="button" class="btn btn-secondary" (click)="annuler()">Cancel</button>
     </form>
   </div>

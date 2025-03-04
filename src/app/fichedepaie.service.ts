@@ -25,7 +25,14 @@ private apiUrl = 'http://localhost:8089/pidev/Api/ficheDePaie'; // Remplacez par
     return this.http.post<BulletinPaie>(`${this.apiUrl}/${idBulletinPaie}`, {});
   }
 
+ /*
   imprimerFiche(idBulletinPaie: number): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/${idBulletinPaie}/print`, { responseType: 'blob' });
 }
+    */
+imprimerFiche(idBulletinPaie: number): Observable<Blob> {
+  const url = `${this.apiUrl}/${idBulletinPaie}/print`; // URL pour imprimer la fiche de paie
+  return this.http.get(url, { responseType: 'blob' });
+}
+
 }

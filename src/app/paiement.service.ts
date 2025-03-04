@@ -1,65 +1,37 @@
-import { catchError, Observable, of } from "rxjs";
-import { Paiement } from "./core/models/Paiement";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
+import { Paiement } from './core/models/Paiement';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaiementService {
   private apiUrl = 'http://localhost:8089/pidev/Api/paiement';
-  private httpOptions = { 
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }) 
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(private http: HttpClient) {}
 
-  getAllPaiements(): Observable<Paiement[]> {
-    return this.http.get<Paiement[]>(this.apiUrl).pipe(
-      catchError(error => {
-        console.error("❌ Erreur lors de la récupération des paiements :", error);
-        return of([]); // Retourne un tableau vide en cas d’erreur
-      })
-    );
-  }
-
   addPaiement(paiement: Paiement, idFacture: number): Observable<Paiement> {
-    const url = `${this.apiUrl}/facture/${idFacture}`;
-    console.log('Données envoyées :', paiement); // Affiche les données avant l'envoi
+    const url = `${this.apiUrl}/addPaiement/${idFacture}`;
+    console.log('Données envoyées à l\'API :', JSON.stringify(paiement));
     return this.http.post<Paiement>(url, paiement, this.httpOptions).pipe(
-      catchError(error => {
-        console.error('Erreur lors de l\'ajout du paiement:', error);
-        return of(error.error || { message: "Erreur inconnue lors de l'ajout" });
-      })
+      catchError(this.handleError)
     );
   }
 
-
-  
-  updatePaiement(id: number, paiement: Paiement): Observable<Paiement> {
-    return this.http.put<Paiement>(`${this.apiUrl}/${id}`, paiement, this.httpOptions).pipe(
-      catchError(error => {
-        console.error(`❌ Erreur lors de la mise à jour du paiement ${id}:`, error);
-        return of(error.error || { message: "Erreur lors de la mise à jour" });
-      })
-    );
-  }
-
-  deletePaiement(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, this.httpOptions).pipe(
-      catchError(error => {
-        console.error(`❌ Erreur lors de la suppression du paiement ${id}:`, error);
-        return of();
-      })
-    );
-  }
-
-  getPaiementById(id: number): Observable<Paiement> {
-    return this.http.get<Paiement>(`${this.apiUrl}/${id}`).pipe(
-      catchError(error => {
-        console.error(`❌ Erreur lors de la récupération du paiement ${id}:`, error);
-        return of();
-      })
-    );
+  private handleError(error: HttpErrorResponse) {
+    console.error('Erreur API:', error);
+    let errorMessage = 'Une erreur est survenue lors de l\'ajout du paiement.';
+    if (error.error instanceof ErrorEvent) {
+      // Erreur côté client
+      errorMessage = `Erreur : ${error.error.message}`;
+    } else {
+      // Erreur côté serveur
+      errorMessage = `Code d'erreur : ${error.status}\nMessage : ${error.error.message || error.message}`;
+    }
+    return throwError(() => new Error(errorMessage));
   }
 }

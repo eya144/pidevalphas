@@ -37,14 +37,28 @@ export class AddFinanceComponent implements OnInit {
     const params = this.route.snapshot.queryParams;
     this.idCommande = +params['idCommande'] || null;
     this.idResponsableLogistique = +params['idResponsableLogistique'] || null;
-
+  
     if (!this.idCommande || !this.idResponsableLogistique) {
       const staticCommands = this.financeService.getStaticCommand();
       this.idCommande = staticCommands.idCommande;
       this.idResponsableLogistique = staticCommands.idResponsableLogistique;
     }
+  
+    // Écouter les changements de montantTotal et tva
+    this.factureForm.get('montantTotal')?.valueChanges.subscribe(() => this.calculateMontantHorsTaxe());
+    this.factureForm.get('tva')?.valueChanges.subscribe(() => this.calculateMontantHorsTaxe());
   }
-
+  
+  // Calculer le montant hors taxe
+  calculateMontantHorsTaxe(): void {
+    const montantTotal = this.factureForm.get('montantTotal')?.value;
+    const tva = this.factureForm.get('tva')?.value;
+  
+    if (montantTotal && tva) {
+      const montantHorsTaxe = montantTotal / (1 + tva / 100);
+      this.factureForm.patchValue({ montantTotalHorsTaxe: montantHorsTaxe.toFixed(2) });
+    }
+  }
   // Validateur personnalisé pour la date d'échéance
   dateEcheanceAfterDateFacture(control: AbstractControl): { [key: string]: boolean } | null {
     const dateFacture = control.get('dateFacture')?.value;
@@ -57,8 +71,11 @@ export class AddFinanceComponent implements OnInit {
   }
 
   // Ajouter une facture
+  isLoading = false;
+
   addFacture(): void {
     if (this.factureForm.valid && this.idCommande && this.idResponsableLogistique) {
+      this.isLoading = true;
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         width: '300px',
         disableClose: true,
@@ -74,31 +91,28 @@ export class AddFinanceComponent implements OnInit {
   
           this.financeService.addFacture(factureData).subscribe(
             (response) => {
-              console.log('Facture ajoutée avec succès:', response); // Debugging
-  
+              this.isLoading = false;
               this.dialog.open(SuccessDialogComponent, {
                 width: '300px',
                 disableClose: true,
               });
-  
               this.factureForm.reset();
-              this.factureForm.patchValue({ status: 'Unpaid' });
               this.router.navigate(['/finance']);
             },
             (error) => {
+              this.isLoading = false;
               console.error('Erreur lors de l\'ajout de la facture:', error);
               alert('Erreur lors de l\'ajout de la facture');
             }
           );
         } else {
+          this.isLoading = false;
           console.log('Addition canceled.');
         }
       });
-    } else {
-      console.error('Le formulaire est invalide ou les IDs sont manquants.');
-      this.markFormGroupTouched(this.factureForm);
     }
   }
+  
 
   // Marquer tous les champs du formulaire comme touchés
   markFormGroupTouched(formGroup: FormGroup): void {

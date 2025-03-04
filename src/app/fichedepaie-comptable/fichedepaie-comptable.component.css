@@ -1,64 +1,72 @@
 .fiches-de-paie-container {
   padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
 th, td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px;
   text-align: left;
 }
 
 th {
   background-color: #f2f2f2;
+  font-weight: bold;
 }
 
 button {
-  background-color: none;
-  color: white;
-  border: none;
+  background-color: transparent;
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
   padding: 5px 10px;
   cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.button-hover {
-  background-color: #45a049;
-}
-.fiches-de-paie-container {
-  padding: 20px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-th {
-  background-color: #f2f2f2;
+button:hover {
+  background-color: #4CAF50;
+  color: white;
 }
 
 .button-container {
-  display: flex; /* Aligne les boutons sur une ligne */
-  gap: 10px; /* Ajoute un espacement entre les boutons */
+  display: flex;
+  gap: 10px; /* Adds spacing between buttons */
 }
 
 .button-container button {
-  background: none; /* Supprime l'arrière-plan */
-  border: none; /* Supprime la bordure */
-  font-size: 20px; /* Ajuste la taille des icônes */
-  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+  font-size: 18px;
+  padding: 10px 15px;
 }
 
-.button-container button:hover {
-  opacity: 0.7; /* Ajoute un effet au survol */
+.button-container button:focus {
+  outline: none;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  table, th, td {
+    font-size: 14px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
 }

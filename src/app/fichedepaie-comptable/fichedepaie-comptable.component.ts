@@ -54,32 +54,34 @@ formGroups: any;
     );
 }
 
-imprimerFiche(fiche: BulletinPaie): void {
+ // Imprimer une fiche de paie
+ imprimerFiche(fiche: BulletinPaie): void {
   this.fichedepaieService.imprimerFiche(fiche.idBulletinPaie).subscribe(
-      (response) => {
-          // Create a Blob from the response
-          const blob = new Blob([response], { type: 'application/pdf' });
+    (response) => {
+      // Créer un Blob à partir de la réponse
+      const blob = new Blob([response], { type: 'application/pdf' });
 
-          // Create a link element
-          const link = document.createElement('a');
-          link.href = window.URL.createObjectURL(blob);
+      // Créer un lien pour télécharger le PDF
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
 
-          // Set the filename for the download
-          link.download = `fiche_de_paie_${fiche.idBulletinPaie}.pdf`;
+      // Nom du fichier
+      link.download = `fiche_de_paie_${fiche.idBulletinPaie}.pdf`;
 
-          // Append the link to the body (required for Firefox)
-          document.body.appendChild(link);
+      // Ajouter le lien au corps du document
+      document.body.appendChild(link);
 
-          // Trigger the download
-          link.click();
+      // Déclencher le téléchargement
+      link.click();
 
-          // Clean up and remove the link
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(link.href);
-      },
-      (error) => {
-          console.error('Erreur lors de l\'impression de la fiche', error);
-      }
+      // Nettoyer et retirer le lien
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(link.href);
+    },
+    (error) => {
+      console.error('Erreur lors de l\'impression de la fiche', error);
+    }
   );
 }
+
 }

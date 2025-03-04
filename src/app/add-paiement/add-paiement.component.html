@@ -42,10 +42,10 @@
   
     <div class="mb-3">
       <label for="numeroCarte" class="form-label">Card Number</label>
-      <input type="text" id="numeroCarte" class="form-control" formControlName="numeroCarte">
+      <input type="number" id="numeroCarte" class="form-control" formControlName="numeroCarte">      
     </div>
   
-    <button type="submit" class="btn btn-primary" [disabled]="paiementForm.invalid">Add</button>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="paiementForm.invalid">Add</button>
     <button type="button" class="btn btn-secondary" (click)="annuler()">Cancel</button>
   </form>
 </div>

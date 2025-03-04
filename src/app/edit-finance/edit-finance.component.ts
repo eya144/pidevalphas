@@ -26,6 +26,21 @@ export class EditFinanceComponent implements OnInit {
     this.factureId = +this.route.snapshot.params['id'];
     this.initForm();
     this.loadFacture();
+  
+    // Écouter les changements de montantTotal et tva
+    this.factureForm.get('montantTotal')?.valueChanges.subscribe(() => this.calculateMontantHorsTaxe());
+    this.factureForm.get('tva')?.valueChanges.subscribe(() => this.calculateMontantHorsTaxe());
+  }
+  
+  // Calculer le montant hors taxe
+  calculateMontantHorsTaxe(): void {
+    const montantTotal = this.factureForm.get('montantTotal')?.value;
+    const tva = this.factureForm.get('tva')?.value;
+  
+    if (montantTotal && tva) {
+      const montantHorsTaxe = montantTotal / (1 + tva / 100);
+      this.factureForm.patchValue({ montantTotalHorsTaxe: montantHorsTaxe.toFixed(2) });
+    }
   }
 
   initForm(): void {

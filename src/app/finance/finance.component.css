@@ -1,130 +1,67 @@
-/* Conteneur principal de la facture */
-.facture-container {
-    background-color: #fff;
-    padding: 80px; /* Encore plus d'espace intérieur */
-    border: 1px solid #ddd;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2); /* Ombre encore plus prononcée */
-    max-width: 1400px; /* Largeur maximale encore plus grande */
-    margin: 80px auto; /* Espacement accru autour du conteneur */
-    font-family: Arial, sans-serif;
-    border-radius: 20px; /* Coins encore plus arrondis */
-  }
-  
-  /* Espacement supplémentaire pour le contenu */
-  .facture-container h2 {
-    text-align: center;
-    font-size: 36px; /* Taille de police encore plus grande */
-    margin-bottom: 50px; /* Espacement accru */
-    color: #333;
-  }
-  
-  /* Tableau des factures (minimisé) */
-  .facture-container table {
-    width: 70%; /* Réduire la largeur du tableau */
-    border-collapse: collapse;
-    margin: 0 auto 40px; /* Centrer le tableau et espacement accru en bas */
-  }
-  
-  .facture-container table th,
-  .facture-container table td {
-    border: 1px solid #ddd;
-    padding: 12px; /* Espacement réduit dans les cellules */
-    text-align: center;
-  }
-  
-  .facture-container table th {
-    background-color: #f9f9f9;
-    font-weight: bold;
-    color: #333;
-    font-size: 14px; /* Taille de police réduite pour l'en-tête */
-  }
-  
-  .facture-container table td {
-    color: #555;
-    font-size: 13px; /* Taille de police réduite pour les cellules */
-  }
-  
-  /* Boutons */
-  .facture-container .btn {
-    padding: 10px 15px; /* Espacement réduit */
-    font-size: 14px; /* Taille de police réduite */
-    border-radius: 6px; /* Coins arrondis */
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Transition fluide */
-  }
-  
-  .facture-container .btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-  }
-  
-  .facture-container .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  
-  .facture-container .btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-  }
-  
-  .facture-container .btn-danger:hover {
-    background-color: #a71d2a;
-  }
-  
-  /* Informations supplémentaires */
-  .facture-container .invoice-info {
-    margin-bottom: 40px; /* Espacement accru */
-    text-align: right;
-  }
-  
-  .facture-container .invoice-info p {
-    margin: 10px 0; /* Espacement accru */
-    color: #555;
-    font-size: 16px; /* Taille de police encore plus grande */
-  }
-  
-  /* Total de la facture */
-  .facture-container .invoice-total {
-    text-align: right;
-    margin-bottom: 40px; /* Espacement accru */
-  }
-  
-  .facture-container .invoice-total p {
-    margin: 10px 0; /* Espacement accru */
-    color: #333;
-    font-size: 18px; /* Taille de police encore plus grande */
-  }
-  
-  .facture-container .invoice-total strong {
-    font-weight: bold;
-  }
-  
-  /* Notes de la facture */
-  .facture-container .invoice-notes {
-    border-top: 2px solid #000;
-    padding-top: 40px; /* Espacement accru */
-    margin-top: 40px; /* Espacement accru */
-  }
-  
-  .facture-container .invoice-notes p {
-    margin: 10px 0; /* Espacement accru */
-    color: #555;
-    font-size: 16px; /* Taille de police encore plus grande */
-  }
-  .button-container {
-    display: flex; /* Aligne les boutons sur une ligne */
-    gap: 10px; /* Ajoute un espacement entre les boutons */
-  }
+/* Style pour le tableau */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
 
-  .button-container button {
-    background: none; /* Supprime l'arrière-plan */
-    border: none; /* Supprime la bordure */
-    font-size: 20px; /* Ajuste la taille des icônes */
-    cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
-  }
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
 
-  .button-container button:hover {
-    opacity: 0.7; /* Ajoute un effet au survol */
-  }
+.table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+/* Style pour les boutons */
+.button-container button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-container button:hover {
+  opacity: 0.8;
+}
+
+/* Style pour les boutons de statut */
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Style pour la pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-item.active .page-link {
+  background-color: #007bff;
+  color: white;
+}
+
+.page-item.disabled .page-link {
+  pointer-events: none;
+  background-color: #ccc;
+}
+/* Style pour le texte des jours restants */
+td span {
+  font-weight: bold;
+  color: #007bff;
+}

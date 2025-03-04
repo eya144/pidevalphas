@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FinanceService } from '../finance.service';
-import { Facture } from 'src/app/core/models/Factures';  // Importer le modèle Facture
+import { Facture } from 'src/app/core/models/Factures';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,6 +17,15 @@ export class FinanceComponent implements OnInit {
   isEditing = false;
   editingFactureId: number | null = null;
   idFacture: number | undefined;
+
+  // Pagination
+  currentPage = 1;
+  itemsPerPage = 5;
+  totalItems = 0;
+
+  // Tri
+  sortDirection: 'asc' | 'desc' = 'asc';
+
   constructor(
     private fb: FormBuilder,
     private financeService: FinanceService,
@@ -24,25 +33,31 @@ export class FinanceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initForm(); // Initialiser le formulaire
-    this.getAllFactures(); // Charger les factures au démarrage
+    this.initForm();
+    this.getAllFactures();
   }
-  
+    // Méthode pour calculer les jours restants
+    getDaysRemaining(dueDate: string): number {
+      const currentDate = new Date();
+      const dueDateObj = new Date(dueDate);
+      const timeDiff = dueDateObj.getTime() - currentDate.getTime();
+      return Math.floor(timeDiff / (1000 * 3600 * 24)); // Convertir la différence en jours
+    }
+
   navigateToPaiement(idFacture: number | undefined): void {
     if (idFacture !== undefined) {
-      this.router.navigate(['/add-paiement', idFacture]); // 🔥 Passage correct de l'ID dans l'URL
+      this.router.navigate(['/add-paiement', idFacture]);
     } else {
       console.error('ID Facture est undefined, navigation impossible.');
     }
   }
-  
 
-  // Méthode pour récupérer toutes les factures
   private getAllFactures(): void {
     this.financeService.getAllFactures().subscribe(
       factures => {
         this.factures = factures;
-        console.log('Factures récupérées:', this.factures); // Ajoutez ce log pour vérifier les données
+        this.totalItems = factures.length;
+        console.log('Factures récupérées:', this.factures);
       },
       error => {
         console.error('Erreur lors de la récupération des factures:', error);
@@ -50,7 +65,19 @@ export class FinanceComponent implements OnInit {
     );
   }
 
-  // Initialiser le formulaire réactif
+  get currentPageFactures(): Facture[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.factures.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalItems / this.itemsPerPage);
+  }
+
   initForm(): void {
     this.factureForm = this.fb.group({
       montantTotal: [null, [Validators.required, Validators.min(0)]],
@@ -61,12 +88,10 @@ export class FinanceComponent implements OnInit {
     });
   }
 
-  // Rediriger vers le formulaire d'ajout
   toggleAddForm(): void {
     this.router.navigate(['/add-finance']);
   }
 
-  // Ajouter une facture
   addFacture(): void {
     if (this.factureForm.invalid) {
       return;
@@ -80,36 +105,29 @@ export class FinanceComponent implements OnInit {
     });
   }
 
-// Supprimer une facture avec confirmation
-deleteFacture(idFacture: number | undefined): void {
-  // Vérifier si l'ID de la facture est défini
-  if (idFacture === undefined) {
-    console.error("ID de la facture non défini.");
-    return;
+  deleteFacture(idFacture: number | undefined): void {
+    if (idFacture === undefined) {
+      console.error("ID de la facture non défini.");
+      return;
+    }
+
+    const isConfirmed = confirm('Êtes-vous sûr de vouloir supprimer cette facture ?');
+
+    if (isConfirmed) {
+      this.financeService.deleteFacture(idFacture).subscribe(
+        () => {
+          this.factures = this.factures.filter(f => f.idFacture !== idFacture);
+          console.log('Facture supprimée avec succès');
+        },
+        error => {
+          console.error('Erreur lors de la suppression de la facture:', error);
+        }
+      );
+    } else {
+      console.log('Suppression annulée');
+    }
   }
 
-  // Afficher une boîte de dialogue de confirmation
-  const isConfirmed = confirm('Êtes-vous sûr de vouloir supprimer cette facture ?');
-
-  // Si l'utilisateur confirme la suppression
-  if (isConfirmed) {
-    this.financeService.deleteFacture(idFacture).subscribe(
-      () => {
-        // Filtrer la liste des factures pour exclure celle supprimée
-        this.factures = this.factures.filter(f => f.idFacture !== idFacture);
-        console.log('Facture supprimée avec succès');
-      },
-      error => {
-        console.error('Erreur lors de la suppression de la facture:', error);
-      }
-    );
-  } else {
-    // Si l'utilisateur annule la suppression
-    console.log('Suppression annulée');
-  }
-}
-
-  // Rediriger vers le formulaire de modification
   updateFacture(facture: Facture): void {
     if (facture.idFacture === undefined) {
       console.error("ID de la facture non défini.");
@@ -118,7 +136,6 @@ deleteFacture(idFacture: number | undefined): void {
     this.router.navigate(['/edit-finance', facture.idFacture]);
   }
 
-  // Réinitialiser le formulaire
   private resetForm(): void {
     this.factureForm.reset();
     this.isEditing = false;
@@ -126,12 +143,11 @@ deleteFacture(idFacture: number | undefined): void {
     this.showAddForm = false;
   }
 
-  // Méthode pour basculer le statut
   toggleStatus(facture: Facture): void {
-    const newStatus = facture.status === 'Paid' ? 'Unpaid' : 'Paid'; // Basculer le statut
+    const newStatus = facture.status === 'Paid' ? 'Unpaid' : 'Paid';
     this.financeService.updateFactureStatus(facture.idFacture!, newStatus).subscribe(
       updatedFacture => {
-        facture.status = updatedFacture.status; // Mettre à jour le statut localement
+        facture.status = updatedFacture.status;
         console.log('Statut mis à jour avec succès:', updatedFacture);
       },
       error => {
@@ -139,4 +155,29 @@ deleteFacture(idFacture: number | undefined): void {
       }
     );
   }
+
+// Ajouter une variable pour suivre le champ de tri
+sortField: string | null = null;
+
+// Méthode pour trier les factures par montant
+sortByAmount(field: string): void {
+  if (this.sortField === field) {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+  } else {
+    this.sortField = field;
+    this.sortDirection = 'asc';
+  }
+
+  this.factures.sort((a, b) => {
+    const valueA = (a as any)[field];
+    const valueB = (b as any)[field];
+
+    if (this.sortDirection === 'asc') {
+      return valueA - valueB;
+    } else {
+      return valueB - valueA;
+    }
+  });
+}
+  
 }
