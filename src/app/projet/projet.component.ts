@@ -12,6 +12,7 @@ import { NgChartsModule } from 'ng2-charts';
 })
 export class ProjetComponent implements OnInit {
   projets: Projet[] = [];
+  showWeather: boolean = false; 
   currentPage: number = 1;
   itemsPerPage: number = 1;
   stats: any = {};
@@ -60,7 +61,6 @@ export class ProjetComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProjets();
-    this.getWeatherForProjet(1); 
   }
   
 
@@ -225,6 +225,8 @@ export class ProjetComponent implements OnInit {
   }
 
   onProjectSelect(projetId: number): void {
+    this.showWeather = true; 
+
     this.getWeatherForProjet(projetId);
   }
 }

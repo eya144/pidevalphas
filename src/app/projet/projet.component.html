@@ -106,7 +106,7 @@
     </tbody>
   </table>
 
-  <div *ngIf="weatherForecast" class="weather-container d-flex justify-content-center mt-4">
+  <div *ngIf="showWeather && weatherForecast" class="weather-container d-flex justify-content-center mt-4">
     <div class="weather-card d-flex p-4 rounded shadow-lg">
       <div class="weather-icon me-4">
         <!-- Use the FontAwesome icon class dynamically -->
@@ -119,6 +119,10 @@
         <p><strong>Wind:</strong> {{ weatherForecast.windSpeed }} km/h</p>
       </div>
     </div>
+  </div>
+  
+  <div *ngIf="showWeather && !weatherForecast" class="alert alert-info text-center mt-4">
+    <p>No weather data available for this project.</p>
   </div>
   
   

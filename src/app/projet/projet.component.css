@@ -34,10 +34,10 @@ button {
   margin-top: 20px;
 }
 .chart-container {
-  width: 80%; /* Augmente la largeur */
-  max-width: 500px; /* Réduit la largeur max */
-  height: 500px; /* Augmente la hauteur */
-  margin: 0 auto; /* Centre le graphique */
+  width: 60%; /* Réduire la largeur */
+  max-width: 400px; /* Réduire la largeur maximale */
+  height: 300px; /* Réduire la hauteur */
+  margin: 0 auto; /* Centrer le graphique */
 }
 
 
