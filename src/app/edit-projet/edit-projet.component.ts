@@ -22,11 +22,12 @@ export class EditProjetComponent implements OnInit, AfterViewInit {
   ];
 
   statusList = [
-    { value: 'EN_COURS', label: 'En Cours' },
-    { value: 'TERMINE', label: 'Terminé' },
-    { value: 'SUSPENDU', label: 'Suspendu' },
-    { value: 'ANNULE', label: 'Annulé' }
+    { value: 'TODO', label: 'TODO' },
+    { value: 'DOING', label: 'DOING' },
+    { value: 'SUSPENDED', label: 'SUSPENDED' },
+    { value: 'DONE', label: 'DONE' }
   ];
+ 
 
   constructor(
     private route: ActivatedRoute,
