@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  <div class="container-scroller">
+
+    <!-- Back Menu Admin Start -->
+    <app-back-menu-admin></app-back-menu-admin>
+    <!-- Back Menu Admin End -->
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+
+      <!-- navbar Start -->
+      <app-back-header></app-back-header>
+      <!-- navbar End -->
+
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+
+          <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Add Inspections</h4>
+                <p class="card-description"> Complete the form to add an inspection </p>
+                <form class="forms-sample">
+                  <!-- Inspector Selection -->
+                  <div class="form-group">
+                    <label for="inspecteur">Select Inspector</label>
+                    <select [(ngModel)]="selectedInspecteur" name="inspecteur" class="form-control" required #inspecteur="ngModel">
+                      <option *ngFor="let inspecteur of inspecteurs" [ngValue]="inspecteur">
+                        {{ inspecteur.nomInspecteur }}
+                      </option>
+                    </select>
+                  </div>
+                  
+                  <!-- Project Selection -->
+                  <div class="form-group">
+                    <label for="projet">Select Project</label>
+                    <select [(ngModel)]="selectedProjet" name="projet" class="form-control" required #projet="ngModel">
+                      <option *ngFor="let projet of projets" [ngValue]="projet">
+                        {{ projet.nomProjet }}
+                      </option>
+                    </select>
+                  </div>
+                  
+                  <div *ngFor="let inspection of inspections; let i = index" class="border p-3 mb-3 rounded">
+                    <h5>Inspection {{ i + 1 }}</h5>
+                    
+                    <!-- Date -->
+                    <div class="form-group">
+                      <label>Date</label>
+                      <input type="date" [(ngModel)]="inspection.dateInspection" name="dateInspection" class="form-control" required [min]="today">
+                    </div>
+                    
+                    <!-- Inspection Type -->
+                    <div class="form-group">
+                      <label>Inspection Type</label>
+                      <select [(ngModel)]="inspection.typeInspection" name="typeInspection" class="form-control" required>
+                        <option *ngFor="let type of typeInspection | keyvalue" [value]="type.value">
+                          {{ type.value }}
+                        </option>
+                      </select>
+                    </div>
+                    
+                    <!-- Inspection Status -->
+                    <div class="form-group">
+                      <label>Inspection Status</label>
+                      <select [(ngModel)]="inspection.statusInspection" name="statusInspection" class="form-control" required>
+                        <option *ngFor="let status of statusOptions | keyvalue" [value]="status.value">
+                          {{ status.value }}
+                        </option>
+                      </select>
+                    </div>
+                    
+                    <!-- Delete Button -->
+                    <button type="button" class="btn btn-danger btn-sm" (click)="inspections.splice(i, 1)">
+                      <i class="bi bi-trash"></i> Delete
+                    </button>
+                  </div>
+                  
+                  <!-- Add and Submit Buttons -->
+                  <button type="button" class="btn btn-outline-primary" (click)="ajouterNouvelleInspection()">
+                    <i class="bi bi-plus-circle"></i> Add Inspection
+                  </button>
+                  <button type="submit" class="btn btn-primary ml-2" (click)="ajouterInspection()" [disabled]="formInvalid()">
+                    <i class="bi bi-check2-circle"></i> Submit
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

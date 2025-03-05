@@ -1,0 +1,109 @@
+
+<app-menu-front></app-menu-front>
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 bg-light rounded border-0">
+    <h2 class="text-primary fw-bold mb-4 d-flex align-items-center">
+      <i class="bi bi-clipboard-check me-2"></i> Inspection Details - ID: {{ inspectionId }}
+    </h2>
+
+    <div *ngIf="inspection" class="bg-white p-3 rounded shadow-sm mb-4">
+      <h4 class="text-secondary fw-bold">Inspection Information</h4>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>ID:</strong> {{ inspection.idINS }}</p>
+          <p><strong>Inspection Name:</strong> {{inspection.projet?.nomProjet}}</p>
+          <p><strong>Inspector:</strong> {{inspection.inspecteur?.nomInspecteur}}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Date:</strong> {{ inspection.dateInspection | date: 'MM/dd/yyyy' }}</p>
+          <p><strong>Type:</strong> {{ inspection.typeInspection }}</p>
+          <p><strong>Status:</strong>
+            <span [ngClass]="{
+              'badge bg-success': inspection.statusInspection === 'In_Progress',
+              'badge bg-warning': inspection.statusInspection === 'Completed',
+              'badge bg-danger': inspection.statusInspection === 'Canceled',
+              'badge bg-primary': inspection.statusInspection === 'Planned'
+            }">
+              {{ inspection.statusInspection }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white p-3 rounded shadow-sm">
+      <h3 class="text-danger fw-bold d-flex align-items-center">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i> Non-Conformities
+      </h3>
+      <div class="mb-3">
+        <label for="statusSearch" class="form-label">Search by Non-Conformity Status</label>
+        <input type="text" class="form-control" id="statusSearch" [(ngModel)]="statusFilter" placeholder="Search by status...">
+      </div>
+
+      <div *ngIf="nonConformities.length > 0; else noNonConformities">
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered text-center">
+            <thead class="table-dark">
+              <tr>
+                <th>Detection Date</th>
+                <th>Description</th>
+                <th>Cause</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let nc of filteredNonConformities()">
+                <td>{{ nc.dateDetection | date: 'MM/dd/yyyy' }}</td>
+                <td>{{ nc.description }}</td>
+                <td>{{ nc.typeNonConfirm }}</td>
+                <td>
+                  <span [ngClass]="{
+                    'badge bg-danger': nc.statutNonConfirm === 'Not_Corrected',
+                    'badge bg-warning': nc.statutNonConfirm === 'Pending',
+                    'badge bg-success': nc.statutNonConfirm === 'Corrected'
+                  }">
+                    {{ nc.statutNonConfirm }}
+                  </span>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-warning me-1" (click)="editNonConformity(nc.idNC)">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                  <a class="btn btn-sm btn-info me-1" [routerLink]="['/Nonconform', nc.idNC]">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                  <button class="btn btn-sm btn-primary me-1" (click)="goToAddAction(nc.idNC)">
+                    <i class="bi bi-plus-circle"></i>
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteNonConformity(nc.idNC)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        </div>
+      </div>
+
+      <ng-template #noNonConformities>
+        <p class="text-muted text-center">No non-conformities found for this inspection.</p>
+      </ng-template>
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+      <button class="btn btn-success" (click)="navigateToAddNonConformity()">
+        <i class="bi bi-plus-circle"></i> Add Non-Conformity
+      </button>
+      <a routerLink="/inspections" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Back to List
+      </a>
+    </div>
+  </div>
+</div>
+<br><br>
+<app-footer-front></app-footer-front>

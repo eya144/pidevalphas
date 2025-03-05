@@ -1,0 +1,64 @@
+<app-menu-front></app-menu-front>
+<div class="container mt-4">
+  <h2 class="text-center text-primary">Edit Inspection</h2>
+
+  <form [formGroup]="inspectionForm" (ngSubmit)="updateInspection()" class="border p-4 shadow rounded bg-light">
+    
+   <!-- Inspection Date -->
+<div class="mb-3">
+  <label for="dateInspection" class="form-label">Inspection Date</label>
+  <input type="date" class="form-control" id="dateInspection" formControlName="dateInspection">
+  
+  <!-- Error Display -->
+  <div *ngIf="inspectionForm.controls['dateInspection'].touched && inspectionForm.controls['dateInspection'].invalid" class="text-danger">
+    <small *ngIf="inspectionForm.controls['dateInspection'].errors?.['required']">Date is required.</small>
+    <small *ngIf="inspectionForm.controls['dateInspection'].errors?.['invalidDate']">The date must be today or in the future.</small>
+  </div>
+</div>
+
+
+
+
+
+
+    <!-- Inspection Type -->
+    <div class="mb-3">
+      <label class="form-label">Inspection Type:</label>
+      <select class="form-control" formControlName="typeInspection">
+        <option *ngFor="let type of typeInspection" [value]="type">{{ type }}</option>
+      </select>
+
+      <!-- Error Display -->
+      <div *ngIf="inspectionForm.controls['typeInspection'].touched && inspectionForm.controls['typeInspection'].invalid" class="text-danger">
+        <small *ngIf="inspectionForm.controls['typeInspection'].errors?.['required']">This field is required.</small>
+      </div>
+    </div>
+
+    <!-- Inspection Status -->
+    <div class="mb-3">
+      <label class="form-label">Status:</label>
+      <select class="form-control" formControlName="statusInspection">
+        <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+      </select>
+
+      <!-- Error Display -->
+      <div *ngIf="inspectionForm.controls['statusInspection'].touched && inspectionForm.controls['statusInspection'].invalid" class="text-danger">
+        <small *ngIf="inspectionForm.controls['statusInspection'].errors?.['required']">This field is required.</small>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-primary" [disabled]="inspectionForm.invalid">
+        <i class="bi bi-check-circle"></i> Update
+      </button>
+      <a routerLink="/inspections" class="btn btn-secondary">
+        <i class="bi bi-x-circle"></i> Cancel
+      </a>
+    </div>
+  </form>
+</div>
+<app-footer-front></app-footer-front>
+
+
+

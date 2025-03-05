@@ -1,0 +1,40 @@
+<app-menu-front></app-menu-front>
+<div class="rapport-container">
+  <h2 class="rapport-title">📝 Rapport d'Inspection #{{ idInspection }}</h2>
+
+  <form [formGroup]="rapportForm" (ngSubmit)="submitRapport()" class="rapport-form">
+    
+    <!-- Contenu -->
+    <div class="form-group">
+      <label for="contenu" class="form-label">🖊️ Contenu du Rapport :</label>
+      <textarea id="contenu" formControlName="contenu" class="form-control" rows="5" placeholder="Décrivez les observations..."></textarea>
+      <small class="text-danger" *ngIf="rapportForm.controls['contenu'].invalid && rapportForm.controls['contenu'].touched">
+        Le contenu est obligatoire (min 10 caractères).
+      </small>
+    </div>
+
+    <!-- Date de Création -->
+    <div class="form-group">
+      <label for="dateCreation" class="form-label">📅 Date de Création :</label>
+      <input id="dateCreation" type="date" formControlName="dateCreation" class="form-control">
+      <small class="text-danger" *ngIf="rapportForm.controls['dateCreation'].invalid && rapportForm.controls['dateCreation'].touched">
+        La date doit être aujourd'hui .
+      </small>
+    </div>
+
+    <!-- Photo / Vidéo -->
+    <div class="form-group">
+      <label for="photoVideo" class="form-label">📷 Ajouter une Photo ou Vidéo :</label>
+      <input id="photoVideo" type="file" (change)="onFileChange($event)" class="form-control-file">
+      <small class="text-danger" *ngIf="fileError">{{ fileError }}</small>
+    </div>
+
+    <!-- Bouton Ajouter -->
+    <button type="submit" class="btn btn-success btn-block mt-3" [disabled]="rapportForm.invalid">
+      ✅ Add Report
+    </button>
+  </form>
+</div>
+<br><br>
+<app-footer-front></app-footer-front>
+

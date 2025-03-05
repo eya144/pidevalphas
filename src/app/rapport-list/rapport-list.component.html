@@ -1,0 +1,32 @@
+<app-menu-front></app-menu-front>
+<div class="container">
+  <h2>Liste des Rapports</h2>
+  <button routerLink="/rapport/add" class="btn btn-primary">Ajouter Rapport</button>
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Contenu</th>
+        <th>Date</th>
+        <th>Photo/Video</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rapport of rapports">
+        <td>{{ rapport.idR }}</td>
+        <td>{{ rapport.contenu }}</td>
+        <td>{{ rapport.dateCreation }}</td>
+        <td>
+          <img *ngIf="rapport.photoVideo" [src]="rapport.photoVideo" alt="Photo" width="50">
+        </td>
+        <td>
+          <button routerLink="/rapport/edit/{{ rapport.idR }}" class="btn btn-warning">Modifier</button>
+          <button (click)="deleteRapport(rapport.idR)" class="btn btn-danger">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br><br>
+<app-footer-front></app-footer-front>

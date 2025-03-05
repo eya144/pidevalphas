@@ -1,0 +1,58 @@
+
+<app-menu-front></app-menu-front>
+<div class="container mt-4">
+  <h2 class="text-center text-primary">Add Non-Conformity</h2>
+
+  <form [formGroup]="nonConformityForm" (ngSubmit)="submitNonConformity()" class="border p-4 shadow rounded bg-light">
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <input type="text" class="form-control" formControlName="description">
+      <div *ngIf="nonConformityForm.controls['description'].touched && nonConformityForm.controls['description'].invalid" class="text-danger">
+        <small>Description is required.</small>
+      </div>
+    </div>
+
+    <!-- Type -->
+    <div class="mb-3">
+      <label class="form-label">Cause</label>
+      <select class="form-select" formControlName="typeNonConfirm">
+        <option *ngFor="let type of typeNonConformities" [value]="type">{{ type }}</option>
+      </select>
+      <div *ngIf="nonConformityForm.controls['typeNonConfirm'].touched && nonConformityForm.controls['typeNonConfirm'].invalid" class="text-danger">
+        <small>Please select a cause.</small>
+      </div>
+    </div>
+
+    <!-- Detection Date -->
+    <div class="mb-3">
+      <label class="form-label">Detection Date</label>
+      <input type="date" class="form-control" formControlName="dateDetection">
+      <div *ngIf="nonConformityForm.controls['dateDetection'].touched && nonConformityForm.controls['dateDetection'].invalid" class="text-danger">
+        <small *ngIf="nonConformityForm.controls['dateDetection'].errors?.['required']">The date is required.</small>
+        <small *ngIf="nonConformityForm.controls['dateDetection'].errors?.['invalidDate']">The date must be today or earlier.</small>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="mb-3">
+      <label class="form-label">Status</label>
+      <select class="form-select" formControlName="statutNonConfirm">
+        <option *ngFor="let statut of statutsNonConformity" [value]="statut">{{ statut }}</option>
+      </select>
+      <div *ngIf="nonConformityForm.controls['statutNonConfirm'].touched && nonConformityForm.controls['statutNonConfirm'].invalid" class="text-danger">
+        <small>Please select a status.</small>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-success" [disabled]="nonConformityForm.invalid">Add</button>
+      <a routerLink="/inspections" class="btn btn-secondary">Cancel</a>
+    </div>
+
+  </form>
+</div>
+<br><br><br>
+<app-footer-front></app-footer-front>

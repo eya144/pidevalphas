@@ -1,0 +1,33 @@
+<app-menu-front></app-menu-front>
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Corrective Action Details</h2>
+  
+  <div *ngIf="action" class="card shadow-sm">
+    <div class="card-body">
+      <dl class="row">
+        <dt class="col-sm-3"><strong>ID:</strong></dt>
+        <dd class="col-sm-9">{{ action.idAC }}</dd>
+
+        <dt class="col-sm-3"><strong>Description:</strong></dt>
+        <dd class="col-sm-9">{{ action.description }}</dd>
+
+        <dt class="col-sm-3"><strong>Start Date:</strong></dt>
+        <dd class="col-sm-9">{{ action.dateDebut | date: 'shortDate' }}</dd>
+
+        <dt class="col-sm-3"><strong>End Date:</strong></dt>
+        <dd class="col-sm-9">{{ action.dateFin | date: 'shortDate' }}</dd>
+
+        <dt class="col-sm-3"><strong>Status:</strong></dt>
+        <dd class="col-sm-9">
+          {{ action.statusActionCorrective }}
+        </dd>
+      </dl>
+      
+      <div class="text-center">
+        <button class="btn btn-secondary" (click)="goBack()">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br> <br><br>
+<app-footer-front></app-footer-front>

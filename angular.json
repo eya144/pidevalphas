@@ -16,6 +16,7 @@
             "outputPath": "dist/pidev",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "deployUrl": "/",
             "polyfills": [
               "zone.js"
             ],
@@ -24,7 +25,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-          "styles": [
+            "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.css"
@@ -61,18 +62,22 @@
           },
           "defaultConfiguration": "production"
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "pidev:build:production"
-            },
-            "development": {
-              "browserTarget": "pidev:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
+"serve": {
+  "builder": "@angular-devkit/build-angular:dev-server",
+  "options": {
+    "browserTarget": "pidev:build"
+  },
+  "configurations": {
+    "production": {
+      "browserTarget": "pidev:build:production"
+    },
+    "development": {
+      "browserTarget": "pidev:build:development"
+    }
+  },
+  "defaultConfiguration": "development"
+},
+
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
