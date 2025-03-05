@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CommandeService } from 'serviceLogistique/commande.service';
 import { VehiculeService } from 'serviceLogistique/vehicule.service';
 import * as XLSX from 'xlsx';
+import { NotificationService } from 'serviceLogistique/notification.service';
 
 
 @Component({
@@ -48,6 +49,7 @@ currentPage: number = 1;
 itemsPerPage: number = 5; // Nombre d'éléments par page
 currentPageVehicules: number = 1;
 itemsPerPageVehicules: number = 5; // Nombre d'éléments par page
+notifications: { message: string }[] = []; // Nouvelle propriété pour les notifications
 
 
   constructor(
@@ -55,7 +57,8 @@ itemsPerPageVehicules: number = 5; // Nombre d'éléments par page
     private vehiculeService: VehiculeService,
     private ligneCommandeService: LigneCommandeService,
     private commandeService: CommandeService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
     
   ) {}
 
@@ -63,12 +66,24 @@ itemsPerPageVehicules: number = 5; // Nombre d'éléments par page
     this.getAllMateriels();
     this.getVehicules();
   }
+  verifierStockEtNotifier(): void {
+    this.notifications = []; // Réinitialiser les notifications
+    this.materiels.forEach(materiel => {
+      if (materiel.quantite <= 5) {
+        const message = `Le matériel ${materiel.nomMateriel} a une quantité faible (${materiel.quantite}).`;
+        this.notifications.push({ message });
+        this.notificationService.sendNotification(materiel); // Envoyer une notification via le service
+      }
+    });
+  }
 
   getAllMateriels(): void {
     this.materielService.getMateriels().subscribe(
       (data) => { 
         this.materiels = data;
         this.materielsAffiches = [...this.materiels]; // Initialiser avec tous les matériels
+        this.verifierStockEtNotifier(); // Vérifier le stock après avoir récupéré les matériels
+
       },
       (error) => { console.error('Erreur lors de la récupération des matériels', error); }
     );
@@ -320,5 +335,9 @@ totalPagesVehicules(): number {
 getPagesVehicules(): number[] {
   return Array.from({ length: this.totalPagesVehicules() }, (_, i) => i + 1);
 }
-
+verifierStock(materiel: any): void {
+  if (materiel.quantite <= 5) {
+    this.notificationService.sendNotification(materiel);
+  }
+}
 }

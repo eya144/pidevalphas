@@ -358,3 +358,31 @@ button.export-excel i {
   background-color: #ccc;
   cursor: not-allowed;
 }
+/* Ajoutez ces styles dans votre fichier CSS */
+.notifications-container {
+  background-color: #fff3cd; /* Couleur de fond pour les notifications */
+  border: 1px solid #ffeeba; /* Bordure */
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.notifications-container h3 {
+  margin-top: 0;
+  color: #856404; /* Couleur du texte */
+}
+
+.notifications-container ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.notifications-container li {
+  margin-bottom: 10px;
+  color: #856404; /* Couleur du texte */
+}
+
+.notifications-container i {
+  margin-right: 10px;
+  color: #ffc107; /* Couleur de l'icône */
+}
