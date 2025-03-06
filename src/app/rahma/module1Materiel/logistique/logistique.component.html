@@ -8,21 +8,24 @@
     <button class="btn-add" (click)="redirectToAddVehicule()">
       <i class="fa fa-plus"></i> Ajouter un véhicule
     </button>
+    <button class="btn-notification" (click)="toggleNotifications()">
+      <i class="fa fa-bell"></i>
+      <span class="notification-badge">{{ notifications.length }}</span>
+    </button>
     
+    <div *ngIf="showNotifications" class="notifications-container">
+      <h3>Notifications</h3>
+      <ul>
+        <li *ngFor="let notification of notifications">
+          <i class="fa fa-exclamation-circle"></i> {{ notification.message }}
+        </li>
+      </ul>
+    </div>
    
     <a routerLink="/dashboardLogistique">
       <img src="assets/img/logistique/6820955.png" alt="image-dashboard" class="dashboard-image">
     </a>
   </div>
-  <!-- Section des notifications -->
-<div class="notifications-container" *ngIf="notifications.length > 0">
-  <h3>Notifications</h3>
-  <ul>
-    <li *ngFor="let notification of notifications">
-      <i class="fa fa-exclamation-triangle"></i> {{ notification.message }}
-    </li>
-  </ul>
-</div>
 
   <div class="container">
     <!-- Drawer des catégories -->

@@ -2,19 +2,33 @@
 
 <body>
   <div class="container mt-5">
+    
+    
     <!-- Icônes de notification et calendrier -->
     <div class="text-center mb-4">
-      <button class="btn btn-outline-primary btn-sm mx-2">
+      <!-- Icône de notification -->
+      <button class="btn btn-outline-primary btn-sm mx-2" (click)="afficherNotifications()">
         <i class="bi bi-bell"></i> Notifications
       </button>
+
+      <!-- Liste des notifications -->
+      <div *ngIf="showNotifications" class="notifications-container">
+        <h4>Notifications</h4>
+        <ul>
+          <li *ngFor="let notification of notifications">
+            <i class="bi bi-calendar-event"></i>
+            <span>{{ notification.message }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Bouton Calendrier -->
       <button class="btn btn-outline-secondary btn-sm mx-2" (click)="redirectToPlaning()">
         <i class="bi bi-calendar"></i> Calendrier
-      </button>      
-      
+      </button>
     </div>
-    
 
-
+    <!-- Reste du contenu -->
     <h2 class="text-center mb-4">Liste des Demandes d'Emploi</h2>
 
     <!-- Chargement -->
@@ -53,7 +67,6 @@
               <button (click)="refuserDemande(demande.idDemandeEmploi, demande.adresseMail)" class="btn btn-danger btn-sm">
                 Refuser
               </button>
-              
               <button (click)="supprimerDemande(demande.idDemandeEmploi)" class="btn btn-warning btn-sm">
                 🗑️
               </button>
@@ -65,13 +78,5 @@
 
     <!-- Message si aucune demande -->
     <p *ngIf="!isLoading && demandes.length === 0" class="text-center text-muted">Aucune demande trouvée.</p>
-
-    <!-- Calendar Modal 
-    <div *ngIf="isCalendarOpen" class="calendar-overlay" (click)="closeCalendar()">
-      <div class="calendar-content" (click)="$event.stopPropagation()">
-      </div>
-    </div>-->
   </div>
 </body>
-
-<app-footer-home></app-footer-home>

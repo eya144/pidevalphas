@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { MaterielService } from 'serviceLogistique/materiel.service';
 import { LigneCommandeService } from 'serviceLogistique/ligne-commande.service';
 import { Router } from '@angular/router';
@@ -50,6 +50,7 @@ itemsPerPage: number = 5; // Nombre d'éléments par page
 currentPageVehicules: number = 1;
 itemsPerPageVehicules: number = 5; // Nombre d'éléments par page
 notifications: { message: string }[] = []; // Nouvelle propriété pour les notifications
+showNotifications: boolean = false;  // Contrôler l'affichage des notifications
 
 
   constructor(
@@ -58,13 +59,33 @@ notifications: { message: string }[] = []; // Nouvelle propriété pour les noti
     private ligneCommandeService: LigneCommandeService,
     private commandeService: CommandeService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private renderer: Renderer2, private el: ElementRef
     
   ) {}
 
   ngOnInit(): void {
     this.getAllMateriels();
     this.getVehicules();
+    this.verifierStockEtNotifier(); 
+  
+    this.renderer.listen('document', 'click', (event: MouseEvent) => {
+      const isClickInside = this.el.nativeElement.contains(event.target);
+      if (!isClickInside) {
+        this.showNotifications = false;
+      }
+    });
+  
+    // 🔥 Écoute des notifications en temps réel
+    this.notificationService.getRealTimeNotifications().subscribe(notification => {
+      console.log("Nouvelle notification reçue :", notification);
+      this.notifications.push(notification);
+    });
+  }
+  
+  toggleNotifications(): void {
+    this.showNotifications = !this.showNotifications;
+    console.log('Notifications visibles:', this.showNotifications); // Debug
   }
   verifierStockEtNotifier(): void {
     this.notifications = []; // Réinitialiser les notifications

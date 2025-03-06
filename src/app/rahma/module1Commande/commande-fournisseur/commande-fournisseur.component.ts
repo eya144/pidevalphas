@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommandeService } from 'serviceLogistique/commande.service';
+import { NotificationService } from 'serviceLogistique/notification.service';
 
 @Component({
   selector: 'app-commande-fournisseur',
@@ -11,7 +12,7 @@ export class CommandeFournisseurComponent implements OnInit {
   commandes: any[] = []; // Stocke les commandes
   idFournisseur: number = 1; // ID du fournisseur (à récupérer dynamiquement)
 
-  constructor(private commandeService: CommandeService, private cdr: ChangeDetectorRef) {}
+  constructor(private commandeService: CommandeService, private cdr: ChangeDetectorRef , private notificationService :  NotificationService) {}
 
   ngOnInit(): void {
     this.getCommandesByFournisseur();
@@ -30,22 +31,28 @@ export class CommandeFournisseurComponent implements OnInit {
     );
   }
 
-  // Modifier une commande et rafraîchir la liste immédiatement
   modifierCommande(id: number, status: string): void {
     this.commandeService.modifierCommande(id, status).subscribe(
       (response) => {
-        alert(response); // Afficher le message du backend
-
-        // 🔥 Mise à jour immédiate du statut dans la liste
+        alert(response);
+  
+        // Mise à jour du statut dans la liste
         this.commandes = this.commandes.map(commande =>
           commande.idCommande === id ? { ...commande, status } : commande
         );
-
-        this.cdr.detectChanges(); // 🔥 Forcer Angular à rafraîchir la vue
+      
+  
+        // Envoi de la notification
+        const commandeModifiee = this.commandes.find(c => c.idCommande === id);
+        if (commandeModifiee) {
+          this.notificationService.sendCommandeNotification(commandeModifiee, status);
+        }
+  
+        this.cdr.detectChanges();
       },
       (error) => {
-        alert(error.error); // Afficher l'erreur si déjà accepté ou refusé
+        alert(error.error);
       }
     );
   }
-}
+  }

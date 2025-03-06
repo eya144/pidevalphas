@@ -49,6 +49,9 @@ envoyerEmailRefus(email: string) {
   return this.http.post(`${this.apiUrl}/envoyer-email-refus`, { email });
 }
 
+getDemandesByDateEntretienaujourdhui(date: string): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/aujourdhui?date=${date}`);
+}
 
 
 
