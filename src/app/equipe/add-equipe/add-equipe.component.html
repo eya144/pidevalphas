@@ -1,0 +1,25 @@
+<app-app-header></app-app-header>
+<div class="container mt-5 mb-5">
+  <h2>Add Team</h2>
+  <form (ngSubmit)="addTeam()" [formGroup]="teamForm">
+    <div class="mb-3">
+      <label for="nomEquipe" class="form-label">Team Name:</label>
+      <input type="text" id="nomEquipe" formControlName="nomEquipe" class="form-control" required>
+      <div *ngIf="teamForm.get('nomEquipe')?.hasError('required') && teamForm.get('nomEquipe')?.touched" class="text-danger">
+        Team Name is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="disponibilite" class="form-label">Disponibility:</label>
+      <input type="text" id="disponibilite" formControlName="disponibilite" class="form-control" required>
+      <div *ngIf="teamForm.get('disponibilite')?.hasError('required') && teamForm.get('disponibilite')?.touched" class="text-danger">
+        Disponibility is required.
+      </div>
+    </div>
+    <div class="d-flex flex-row">
+      <button type="submit" class="btn btn-primary mx-1" [disabled]="teamForm.invalid">Add Team</button>
+    <button type="button" class="btn btn-secondary mx-1" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
+<app-app-footer></app-app-footer>

@@ -1,0 +1,26 @@
+/* Centrer le dialogue */
+.mat-dialog-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Style pour le contenu du dialogue */
+  .mat-dialog-content {
+    text-align: center;
+    font-size: 1.2em;
+    margin: 20px 0;
+  }
+  
+  /* Style pour les boutons */
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Style pour le titre */
+  .mat-dialog-title {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }

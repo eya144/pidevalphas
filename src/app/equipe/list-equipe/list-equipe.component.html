@@ -1,0 +1,48 @@
+<app-app-header></app-app-header>
+
+<div class="container mt-5 mb-5">
+  <div class="teams-container">
+    <h2 class="mb-4">Teams List</h2>
+    
+    <div class="d-flex  mb-4">
+      <button class="btn btn-primary" (click)="addTeam()">Add Team</button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>Equipe ID</th>
+            <th>Team Name</th>
+            <th>Disponibility</th>
+            <th>Number of Members</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let equipe of list | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+            <td>{{ equipe.idEquipe }}</td>
+            <td>{{ equipe.nomEquipe }}</td>
+            <td>{{ equipe.disponibilite }}</td>
+            <td>{{ equipe.members?.length }}</td>
+            <td>
+              <div class="d-flex gap-2">
+                <button class="btn btn-warning btn-sm"
+                    (click)="editTeam(equipe.idEquipe)">Edit</button>
+                <button class="btn btn-danger btn-sm" (click)="deleteTeam(equipe.idEquipe)">Delete</button>
+                <button class="btn btn-info btn-sm" (click)="manageMembers(equipe.idEquipe)">Manage Members</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="d-flex justify-content-center mt-4">
+      <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+<app-app-footer></app-app-footer>

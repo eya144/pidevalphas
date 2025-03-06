@@ -18,6 +18,32 @@ import { ServiceComponent } from './service/service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BackMenuAdminComponent } from './back-menu-admin/back-menu-admin.component';
 import { BackHeaderComponent } from './back-header/back-header.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { ListEquipeComponent } from './equipe/list-equipe/list-equipe.component';
+import { AddEquipeComponent } from './equipe/add-equipe/add-equipe.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { AppHeaderComponent } from './app-header/app-header.component';
+import { AppFooterComponent } from './app-footer/app-footer.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { EditEquipeComponent } from './equipe/edit-equipe/edit-equipe.component';
+import { ManageEquipeMembersComponent } from './equipe/manage-equipe-members/manage-equipe-members.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { CongesComponent } from './conges/conges.component';
+import { AddCongesComponent } from './add-conges/add-conges.component';
+import { EditCongesComponent } from './edit-conges/edit-conges.component';
+import { DocumentChatComponent } from './document-chat/document-chat.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -30,17 +56,49 @@ import { BackHeaderComponent } from './back-header/back-header.component';
     RHComponent,
     FinanceComponent,
     InspectionComponent,
- 
+    ListEquipeComponent,
+    AddEquipeComponent,
+    EditEquipeComponent,
+    ManageEquipeMembersComponent,
+
     ContactComponent,
       InscriptionComponent,
       ServiceComponent,
       DashboardComponent,
       BackMenuAdminComponent,
-      BackHeaderComponent
+      BackHeaderComponent,
+      ConfirmationDialogComponent,
+      SuccessDialogComponent,
+      AppHeaderComponent,
+      AppFooterComponent,
+      CongesComponent,
+      AddCongesComponent,
+      EditCongesComponent,
+      DocumentChatComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    NgxPaginationModule,
+    DragDropModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

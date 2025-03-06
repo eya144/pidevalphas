@@ -1,0 +1,129 @@
+/* Conteneur principal de la facture */
+.teams-container {
+    background-color: #fff;
+    padding: 80px; /* Encore plus d'espace intérieur */
+    border: 1px solid #ddd;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2); /* Ombre encore plus prononcée */
+    max-width: 1400px; /* Largeur maximale encore plus grande */
+    margin: 80px auto; /* Espacement accru autour du conteneur */
+    font-family: Arial, sans-serif;
+    border-radius: 20px; /* Coins encore plus arrondis */
+  }
+  
+  /* Espacement supplémentaire pour le contenu */
+  .teams-container h2 {
+    text-align: center;
+    font-size: 36px; /* Taille de police encore plus grande */
+    margin-bottom: 50px; /* Espacement accru */
+    color: #333;
+  }
+  
+  /* Tableau des factures (minimisé) */
+  .teams-container table {
+    width: 100%; /* Réduire la largeur du tableau */
+    border-collapse: collapse;
+  }
+  
+  .teams-container table th,
+  .teams-container table td {
+    border: 1px solid #ddd;
+    padding: 12px; /* Espacement réduit dans les cellules */
+    text-align: center;
+  }
+  
+  .teams-container table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    color: #333;
+    font-size: 14px; /* Taille de police réduite pour l'en-tête */
+  }
+  
+  .teams-container table td {
+    color: #555;
+    font-size: 13px; /* Taille de police réduite pour les cellules */
+  }
+  
+  /* Boutons */
+  .teams-container .btn {
+    padding: 10px 15px; /* Espacement réduit */
+    font-size: 14px; /* Taille de police réduite */
+    border-radius: 6px; /* Coins arrondis */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transition fluide */
+  }
+  
+  .teams-container .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+  }
+  
+  .teams-container .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .teams-container .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+  }
+  
+  .teams-container .btn-danger:hover {
+    background-color: #a71d2a;
+  }
+  
+  /* Informations supplémentaires */
+  .teams-container .invoice-info {
+    margin-bottom: 40px; /* Espacement accru */
+    text-align: right;
+  }
+  
+  .teams-container .invoice-info p {
+    margin: 10px 0; /* Espacement accru */
+    color: #555;
+    font-size: 16px; /* Taille de police encore plus grande */
+  }
+  
+  /* Total de la facture */
+  .teams-container .invoice-total {
+    text-align: right;
+    margin-bottom: 40px; /* Espacement accru */
+  }
+  
+  .teams-container .invoice-total p {
+    margin: 10px 0; /* Espacement accru */
+    color: #333;
+    font-size: 18px; /* Taille de police encore plus grande */
+  }
+  
+  .teams-container .invoice-total strong {
+    font-weight: bold;
+  }
+  
+  /* Notes de la facture */
+  .teams-container .invoice-notes {
+    border-top: 2px solid #000;
+    padding-top: 40px; /* Espacement accru */
+    margin-top: 40px; /* Espacement accru */
+  }
+  
+  .teams-container .invoice-notes p {
+    margin: 10px 0; /* Espacement accru */
+    color: #555;
+    font-size: 16px; /* Taille de police encore plus grande */
+  }
+  .button-container {
+    display: flex; /* Aligne les boutons sur une ligne */
+    gap: 10px; /* Ajoute un espacement entre les boutons */
+  }
+
+  .button-container button {
+    background: none; /* Supprime l'arrière-plan */
+    border: none; /* Supprime la bordure */
+    font-size: 20px; /* Ajuste la taille des icônes */
+    cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+  }
+
+  .button-container button:hover {
+    opacity: 0.7; /* Ajoute un effet au survol */
+  }

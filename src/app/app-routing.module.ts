@@ -12,6 +12,14 @@ import { ContactComponent } from './contact/contact.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ServiceComponent } from './service/service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ListEquipeComponent } from './equipe/list-equipe/list-equipe.component';
+import { AddEquipeComponent } from './equipe/add-equipe/add-equipe.component';
+import { EditEquipeComponent } from './equipe/edit-equipe/edit-equipe.component';
+import { ManageEquipeMembersComponent } from './equipe/manage-equipe-members/manage-equipe-members.component';
+import { CongesComponent } from './conges/conges.component';
+import { AddCongesComponent } from './add-conges/add-conges.component';
+import { EditCongesComponent } from './edit-conges/edit-conges.component';
+import { DocumentChatComponent } from './document-chat/document-chat.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -25,15 +33,48 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'inscrire', component: InscriptionComponent },
   { path: 'service', component: ServiceComponent },
-  { path: 'service', component: ServiceComponent }, 
+  { path: 'service', component: ServiceComponent },
    { path: 'dashboard', component: DashboardComponent },
-  
-  
 
+  // { path : 'equipe',
+  //   loadChildren: () => import('./equipe/equipe.routes').then(m => m.routes),
+  // },
+
+  {
+    path: 'teams',
+    component: ListEquipeComponent
+  },
+  {
+    path: 'add-team',
+    component: AddEquipeComponent
+  },
+  {
+    path: 'edit-team/:id',
+    component: EditEquipeComponent
+  },
+  {
+    path: 'manage-members/:id',
+    component: ManageEquipeMembersComponent
+  },
+  { path: 'conges',
+    component: CongesComponent
+  },
+  {
+    path: 'add-conges',
+    component: AddCongesComponent,
+  },
+  {
+    path: 'edit-conges/:id',
+    component: EditCongesComponent,
+  },
+  {
+    path: 'document-chat',
+    component: DocumentChatComponent,
+  },
   { path: '', redirectTo:'/home',pathMatch:'full' }
 ];
 
- 
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
