@@ -13,8 +13,7 @@ import { FinanceComponent } from './finance/finance.component';
 import { InspectionComponent } from './inspection/inspection.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; 
-import { MatDialogModule } from '@angular/material/dialog'; // Add this import
-
+import { MatDialogModule } from '@angular/material/dialog'; 
 import { ContactComponent } from './contact/contact.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ServiceComponent } from './service/service.component';
@@ -29,11 +28,10 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
-//import { BackFinanceComponent } from './back-finance/back-finance.component';
-import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 import { AdminBackComponent } from './admin-back/admin-back.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
-//import { FicheComponent } from './fiche/fiche.component';
+import { PaiementComponent } from './paiement/paiement.component';
+import { AddFichedepaieComponent } from './add-fichedepaie/add-fichedepaie.component';
 
 @NgModule({
   declarations: [
@@ -59,9 +57,10 @@ import { SearchResultsComponent } from './search-results/search-results.componen
       SuccessDialogComponent,
       AppHeaderComponent,
       AppFooterComponent,
-      AddPaiementComponent,
       AdminBackComponent,
       SearchResultsComponent,
+      PaiementComponent,
+      AddFichedepaieComponent,
     ],
   imports: [
     BrowserModule,

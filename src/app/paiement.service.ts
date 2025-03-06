@@ -14,24 +14,16 @@ export class PaiementService {
 
   constructor(private http: HttpClient) {}
 
+ 
   addPaiement(paiement: Paiement, idFacture: number): Observable<Paiement> {
-    const url = `${this.apiUrl}/addPaiement/${idFacture}`;
-    console.log('Données envoyées à l\'API :', JSON.stringify(paiement));
-    return this.http.post<Paiement>(url, paiement, this.httpOptions).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.post<Paiement>(`${this.apiUrl}/${idFacture}`, paiement, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.error('Erreur API:', error);
-    let errorMessage = 'Une erreur est survenue lors de l\'ajout du paiement.';
-    if (error.error instanceof ErrorEvent) {
-      // Erreur côté client
-      errorMessage = `Erreur : ${error.error.message}`;
-    } else {
-      // Erreur côté serveur
-      errorMessage = `Code d'erreur : ${error.status}\nMessage : ${error.error.message || error.message}`;
-    }
-    return throwError(() => new Error(errorMessage));
+    console.error('An error occurred:', error);
+    return throwError('Something bad happened; please try again later.');
   }
 }

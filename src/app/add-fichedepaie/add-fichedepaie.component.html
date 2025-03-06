@@ -1,0 +1,77 @@
+<app-app-header></app-app-header>
+<br><br>
+
+<div class="container mt-5">
+  <h2>Ajouter une Fiche de Paie</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="ficheForm">
+    <div class="mb-3">
+      <label for="montantInitial" class="form-label">Montant Initial:</label>
+      <input type="number" id="montantInitial" formControlName="montantInitial" class="form-control" required>
+      <div *ngIf="ficheForm.get('montantInitial')?.hasError('required') && ficheForm.get('montantInitial')?.touched" class="text-danger">
+        Le montant initial est obligatoire.
+      </div>
+      <div *ngIf="ficheForm.get('montantInitial')?.hasError('min') && ficheForm.get('montantInitial')?.touched" class="text-danger">
+        Le montant initial doit être supérieur ou égal à 0.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nom:</label>
+      <input type="text" id="nom" formControlName="nom" class="form-control" required>
+      <div *ngIf="ficheForm.get('nom')?.hasError('required') && ficheForm.get('nom')?.touched" class="text-danger">
+        Le nom est obligatoire.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="joursNonTravailles" class="form-label">Jours Non Travaillés:</label>
+      <input type="number" id="joursNonTravailles" formControlName="joursNonTravailles" class="form-control" required>
+      <div *ngIf="ficheForm.get('joursNonTravailles')?.hasError('required') && ficheForm.get('joursNonTravailles')?.touched" class="text-danger">
+        Les jours non travaillés sont obligatoires.
+      </div>
+      <div *ngIf="ficheForm.get('joursNonTravailles')?.hasError('min') && ficheForm.get('joursNonTravailles')?.touched" class="text-danger">
+        Les jours non travaillés doivent être supérieurs ou égaux à 0.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="typePaiement" class="form-label">Type de Paiement:</label>
+      <select id="typePaiement" formControlName="typePaiement" class="form-control" required>
+        <option value="ESPECES">Espèces</option>
+        <option value="CHÈQUE">Chèque</option>
+        <option value="VIREMENT">Virement Bancaire</option>
+        <option value="CARTE">CARTE</option>
+      </select>
+      <div *ngIf="ficheForm.get('typePaiement')?.hasError('required') && ficheForm.get('typePaiement')?.touched" class="text-danger">
+        Le type de paiement est obligatoire.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="datePaiement" class="form-label">Date de Paiement:</label>
+      <input type="date" id="datePaiement" formControlName="datePaiement" class="form-control" required>
+      <div *ngIf="ficheForm.get('datePaiement')?.hasError('required') && ficheForm.get('datePaiement')?.touched" class="text-danger">
+        La date de paiement est obligatoire.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="statutPaiementL" class="form-label">Statut de Paiement:</label>
+      <select id="statutPaiementL" formControlName="statutPaiementL" class="form-control" required>
+        <option value="Paid">Payé</option>
+        <option value="Unpaid">Non Payé</option>
+      </select>
+      <div *ngIf="ficheForm.get('statutPaiementL')?.hasError('required') && ficheForm.get('statutPaiementL')?.touched" class="text-danger">
+        Le statut de paiement est obligatoire.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="ficheForm.invalid">Ajouter</button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="annuler()">Annuler</button>
+
+    <div *ngIf="isLoading" class="spinner-overlay">
+      <div class="spinner"></div>
+    </div>
+  </form>
+</div>
+
+<app-app-footer></app-app-footer>

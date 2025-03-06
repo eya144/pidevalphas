@@ -15,16 +15,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddFinanceComponent } from './add-finance/add-finance.component';
 import { EditFinanceComponent } from './edit-finance/edit-finance.component';
 import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepaie-comptable.component';
-//import { BackFinanceComponent } from './back-finance/back-finance.component';
 import { BackHeaderComponent } from './back-header/back-header.component';
 import { BackMenuAdminComponent } from './back-menu-admin/back-menu-admin.component';
-import { AddPaiementComponent } from './add-paiement/add-paiement.component';
 import { AdminBackComponent } from './admin-back/admin-back.component';
-// import { FicheComponent } from './fiche/fiche.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { PaiementComponent } from './paiement/paiement.component';
+import { AddFichedepaieComponent } from './add-fichedepaie/add-fichedepaie.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirection par défaut
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, 
   { path: 'home', component: HomeComponent },
   { path: 'produit', component: ProductComponent },
   { path: 'about', component: AboutComponent },
@@ -38,13 +37,14 @@ const routes: Routes = [
   { path: 'service', component: ServiceComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'add-finance', component: AddFinanceComponent },
-  { path: 'edit-finance/:id', component: EditFinanceComponent }, // Route avec paramètre
-  { path: 'add-paiement/:idFacture', component: AddPaiementComponent }, // 🔥 ID Facture passé dynamiquement
+  { path: 'edit-finance/:id', component: EditFinanceComponent }, 
   { path: 'fichedepaie-comptable', component: FichedepaieComptableComponent },
   { path: 'back-header', component: BackHeaderComponent },
   { path: 'back-menu-admin', component: BackMenuAdminComponent },
   { path: 'admin-back', component: AdminBackComponent },
   { path: 'search', component: SearchResultsComponent },
+  { path: 'paiement/:idFacture', component: PaiementComponent },
+  { path: 'add-fichedepaie', component: AddFichedepaieComponent },
   { path: '', component: BackHeaderComponent },
 ];
 

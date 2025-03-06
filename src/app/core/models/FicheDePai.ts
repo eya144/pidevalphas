@@ -1,12 +1,11 @@
 export interface BulletinPaie {
   idBulletinPaie: number;
-  idRapport: number;
-  idContrat: number;
-  idUtilisateur: number;
+  idContrat?: number;
+  idUtilisateur?: number;
   montantInitial: number;
   nom: string;
-  joursTravailles: number;
-  typePaiement: 'ESPECES' | 'CHEQUE' | 'VIREMENT_BANCAIRE';
+  joursNonTravailles: number;
+  typePaiement: 'ESPECES' | 'CHÈQUE' | 'VIREMENT' | 'CARTE'; 
   datePaiement: Date;
   statutPaiementL: 'Paid' | 'Unpaid'; 
   montantFinal?: number;

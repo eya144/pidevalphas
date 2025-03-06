@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BulletinPaie } from '../core/models/FicheDePai';
 import { Router } from '@angular/router';
 import { FichedepaieService } from '../fichedepaie.service';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs'; 
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -14,6 +14,11 @@ export class FichedepaieComptableComponent implements OnInit {
   fichesDePaie: BulletinPaie[] = [];
 formGroups: any;
 
+  // Pagination
+  currentPage = 1;
+  itemsPerPage = 5;
+  totalItems = 0;
+
   constructor(private fichedepaieService: FichedepaieService, private router: Router) {}
 
   ngOnInit(): void {
@@ -24,15 +29,14 @@ formGroups: any;
     this.fichedepaieService.getFicheDePaie().subscribe(
       (data: BulletinPaie[]) => {
         this.fichesDePaie = data;
-        console.log('Fiches de paie chargées :', this.fichesDePaie); // Pour déboguer
+        console.log('Fiches de paie chargées :', this.fichesDePaie);
       },
       (error) => {
         console.error('Erreur lors du chargement des fiches de paie', error);
       }
     );
   }
-
-
+  
 
   navigateToPaiement(fiche: BulletinPaie): void {
     console.log('Navigation vers le paiement pour la fiche :', fiche);
@@ -54,29 +58,15 @@ formGroups: any;
     );
 }
 
+
+
  // Imprimer une fiche de paie
  imprimerFiche(fiche: BulletinPaie): void {
   this.fichedepaieService.imprimerFiche(fiche.idBulletinPaie).subscribe(
     (response) => {
-      // Créer un Blob à partir de la réponse
       const blob = new Blob([response], { type: 'application/pdf' });
-
-      // Créer un lien pour télécharger le PDF
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-
-      // Nom du fichier
-      link.download = `fiche_de_paie_${fiche.idBulletinPaie}.pdf`;
-
-      // Ajouter le lien au corps du document
-      document.body.appendChild(link);
-
-      // Déclencher le téléchargement
-      link.click();
-
-      // Nettoyer et retirer le lien
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(link.href);
+      const url = window.URL.createObjectURL(blob);
+      window.open(url, '_blank');
     },
     (error) => {
       console.error('Erreur lors de l\'impression de la fiche', error);
@@ -84,4 +74,47 @@ formGroups: any;
   );
 }
 
+ // Naviguer vers la page d'ajout de fiche de paie
+ openAddFicheDePaieModal(): void {
+  this.router.navigate(['/add-fichedepaie']);
+}
+
+closeModal(): void {
+  const modal = document.getElementById('addFicheDePaieModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+onFicheAdded(newFiche: BulletinPaie): void {
+  this.fichesDePaie.push(newFiche);
+}
+
+updateStatutPaiement(fiche: BulletinPaie): void {
+  this.fichedepaieService.updateFicheDePaie(fiche).subscribe(
+    (updatedFiche) => {
+      console.log('Statut de paiement mis à jour avec succès', updatedFiche);
+      const index = this.fichesDePaie.findIndex(f => f.idBulletinPaie === updatedFiche.idBulletinPaie);
+      if (index !== -1) {
+        this.fichesDePaie[index] = updatedFiche;
+      }
+    },
+    (error) => {
+      console.error('Erreur lors de la mise à jour du statut de paiement', error);
+    }
+  );
+}
+
+changePage(page: number): void {
+  this.currentPage = page;
+}
+
+get totalPages(): number {
+  return Math.ceil(this.totalItems / this.itemsPerPage);
+}
+
+ get currentfichesDePaie(): BulletinPaie[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.fichesDePaie.slice(startIndex, startIndex + this.itemsPerPage);
+  }
 }

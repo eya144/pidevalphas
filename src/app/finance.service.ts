@@ -99,7 +99,7 @@ export class FinanceService {
     }
     // Dans votre composant de liste des factures
 navigateToPaiement(idFacture: number): void {
-  this.router.navigate(['/add-paiement', idFacture]); // Passez l'ID de la facture
+  this.router.navigate(['/paiement', idFacture]); // Passez l'ID de la facture
 }
 getAllFichesDePaie(): Observable<FichedepaieComptableComponent[]> {
   return this.http.get<FichedepaieComptableComponent[]>(`${this.apiUrl}/getAll`);

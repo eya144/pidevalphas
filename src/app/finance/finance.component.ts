@@ -16,7 +16,7 @@ export class FinanceComponent implements OnInit {
   showAddForm = false;
   isEditing = false;
   editingFactureId: number | null = null;
-  idFacture: number | undefined;
+  idFacture!: number;
 
   // Pagination
   currentPage = 1;
@@ -44,13 +44,13 @@ export class FinanceComponent implements OnInit {
       return Math.floor(timeDiff / (1000 * 3600 * 24)); // Convertir la différence en jours
     }
 
-  navigateToPaiement(idFacture: number | undefined): void {
-    if (idFacture !== undefined) {
-      this.router.navigate(['/add-paiement', idFacture]);
-    } else {
-      console.error('ID Facture est undefined, navigation impossible.');
+    navigateToPaiement(idFacture: number | undefined): void {
+      if (idFacture !== undefined) {
+        this.router.navigate(['/paiement', idFacture]);
+      } else {
+        console.error('ID Facture est undefined, navigation impossible.');
+      }
     }
-  }
 
   private getAllFactures(): void {
     this.financeService.getAllFactures().subscribe(
@@ -135,6 +135,7 @@ export class FinanceComponent implements OnInit {
     }
     this.router.navigate(['/edit-finance', facture.idFacture]);
   }
+  
 
   private resetForm(): void {
     this.factureForm.reset();

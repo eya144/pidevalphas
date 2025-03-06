@@ -70,3 +70,29 @@ h2 {
     padding: 8px 12px;
   }
 }
+/* Style pour la pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-item.active .page-link {
+  background-color: #007bff;
+  color: white;
+}
+
+.page-item.disabled .page-link {
+  pointer-events: none;
+  background-color: #ccc;
+}
+/* Style pour le texte des jours restants */
+td span {
+  font-weight: bold;
+  color: #007bff;
+}
+
