@@ -38,7 +38,7 @@
       <select id="typePaiement" formControlName="typePaiement" class="form-control" required>
         <option value="ESPECES">Espèces</option>
         <option value="CHÈQUE">Chèque</option>
-        <option value="VIREMENT">Virement Bancaire</option>
+        <option value="VIREMENT">Virement </option>
         <option value="CARTE">CARTE</option>
       </select>
       <div *ngIf="ficheForm.get('typePaiement')?.hasError('required') && ficheForm.get('typePaiement')?.touched" class="text-danger">

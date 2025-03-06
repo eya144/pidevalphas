@@ -13,6 +13,7 @@ export class FichedepaieService {
 private apiUrl = 'http://localhost:8089/pidev/Api/ficheDePaie'; // Remplacez par l'URL de votre API
 
 
+
   constructor(private http: HttpClient) { }
 
   addFicheDePaie(fiche: BulletinPaie): Observable<BulletinPaie> {
@@ -23,10 +24,7 @@ private apiUrl = 'http://localhost:8089/pidev/Api/ficheDePaie'; // Remplacez par
     return this.http.get<BulletinPaie[]>(this.apiUrl);
   }
 
-
-  
-
-  calculerSalaire(idBulletinPaie: number): Observable<BulletinPaie> {
+ calculerSalaire(idBulletinPaie: number): Observable<BulletinPaie> {
     return this.http.post<BulletinPaie>(`${this.apiUrl}/${idBulletinPaie}`, {});
   }
 
@@ -47,4 +45,7 @@ getFicheById(id: number): Observable<BulletinPaie> {
   return this.http.get<BulletinPaie>(`${this.apiUrl}/${id}`);
 }
 
+deleteFicheDePaie(idBulletinPaie: number): Observable<any> {
+  return this.http.delete<void>(`${this.apiUrl}/${idBulletinPaie}`);
+}
 }

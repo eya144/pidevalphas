@@ -37,12 +37,6 @@ formGroups: any;
     );
   }
   
-
-  navigateToPaiement(fiche: BulletinPaie): void {
-    console.log('Navigation vers le paiement pour la fiche :', fiche);
-    this.router.navigate(['/add-paiement']);
-  }
-
   calculerSalaire(fiche: BulletinPaie): void {
     this.fichedepaieService.calculerSalaire(fiche.idBulletinPaie).subscribe(
         (updatedFiche) => {
@@ -58,7 +52,23 @@ formGroups: any;
     );
 }
 
-
+deleteFiche(fiche: BulletinPaie): void {
+  if (confirm('Êtes-vous sûr de vouloir supprimer cette fiche de paie ?')) {
+    this.fichedepaieService.deleteFicheDePaie(fiche.idBulletinPaie).subscribe(
+      () => {
+        // Remove the fiche from the list
+        const index = this.fichesDePaie.findIndex(f => f.idBulletinPaie === fiche.idBulletinPaie);
+        if (index !== -1) {
+          this.fichesDePaie.splice(index, 1);
+        }
+        console.log('Fiche de paie supprimée avec succès');
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression de la fiche de paie', error);
+      }
+    );
+  }
+}
 
  // Imprimer une fiche de paie
  imprimerFiche(fiche: BulletinPaie): void {
