@@ -64,5 +64,9 @@ export class ProjetService {
   getProjectWeather(projetId: number): Observable<string> {
     return this.http.get<string>(`${this.apiUrl}/${projetId}/weather`);
   }
+  exportProjetToExcel() {
+    return this.http.get(`${this.apiUrl}/export-excel`, { responseType: 'blob' });
+  }
+  
   
 }
