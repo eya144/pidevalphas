@@ -50,24 +50,26 @@
             <td>
               <button class="btn btn-outline-success btn-sm rounded-circle" 
                       (click)="generateRapport(inspection.idINS)" 
-                      title="generate Report">
+                      title="Generate Report"
+                      [disabled]="inspection.statusInspection === 'Canceled'">
                 <i class="bi bi-file-earmark-plus"></i>
               </button>
             </td>
             <td>
               <div class="d-flex justify-content-center gap-2">
-               
                 <button class="btn btn-warning btn-sm rounded-circle" 
                         (click)="goToAddNonConformity(inspection.idINS)" 
-                        title="Add Non-Conformity">
+                        title="Add Non-Conformity"
+                        [disabled]="inspection.statusInspection === 'Canceled'">
                   <i class="bi bi-plus-circle"></i>
                 </button>
                 <a class="btn btn-info btn-sm rounded-circle" 
                    [routerLink]="['/inspection-detail', inspection.idINS]" 
-                   title="Show Details">
+                   title="Show Details"
+                   [class.disabled]="inspection.statusInspection === 'Canceled'"
+                   [attr.aria-disabled]="inspection.statusInspection === 'Canceled' ? 'true' : null">
                   <i class="bi bi-eye"></i>
                 </a>
-              
               </div>
             </td>
           </tr>

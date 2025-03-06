@@ -88,7 +88,7 @@ export enum TypeNonConformity {
   Hidden_defects = 'Hidden_defects',
   Insulation_and_ventilation = 'Insulation_and_ventilation',
   Installation_and_flashing_placement = 'Installation_and_flashing_placement',
-  Installation_and_Placement_of_Flashings = 'Installation_and_Placement_of_Flashings',
+
   Deficient_plumbing_installation = 'Deficient_plumbing_installation',
   Fire_partition = 'Fire_partition',
   Installation_and_placement_of_exterior_cladding = 'Installation_and_placement_of_exterior_cladding',

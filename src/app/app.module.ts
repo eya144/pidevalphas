@@ -1,5 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule ,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgChartsModule } from 'ng2-charts'
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,6 +48,9 @@ import { ShowinspectionsComponent } from './showinspections/showinspections.comp
 import { ListadmininspectionComponent } from './listadmininspection/listadmininspection.component';
 import { UpdateadmininspectionComponent } from './updateadmininspection/updateadmininspection.component';
 
+import { StatistiqueComponent } from './statistique/statistique.component';
+import { StatistiqueadminComponent } from './statistiqueadmin/statistiqueadmin.component';
+
 
 
 
@@ -55,6 +60,7 @@ import { UpdateadmininspectionComponent } from './updateadmininspection/updatead
     HomeComponent,
     ProductComponent,
     AboutComponent,
+    StatistiqueComponent,
   
     LogistiqueComponent,
     RHComponent,
@@ -91,20 +97,24 @@ import { UpdateadmininspectionComponent } from './updateadmininspection/updatead
       UpdateRapportComponent,
       ShowinspectionsComponent,
       ListadmininspectionComponent,
-      UpdateadmininspectionComponent, 
+      UpdateadmininspectionComponent,
+      StatistiqueadminComponent,
+      
   ],
   imports: [
     FontAwesomeModule,
     BrowserModule,
-  
     AppRoutingModule,
     NgxPaginationModule,
     HttpClientModule ,
     FormsModule, // 
-    ReactiveFormsModule, //
+    ReactiveFormsModule,
+    NgChartsModule
+
     
 
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -34,6 +34,8 @@ import { UpdateRapportComponent } from './update-rapport/update-rapport.componen
 import { ShowinspectionsComponent } from './showinspections/showinspections.component';
 import { ListadmininspectionComponent } from './listadmininspection/listadmininspection.component';
 import { UpdateadmininspectionComponent } from './updateadmininspection/updateadmininspection.component';
+import { StatistiqueComponent } from './statistique/statistique.component';
+import { StatistiqueadminComponent } from './statistiqueadmin/statistiqueadmin.component';
 
 
 const routes: Routes = [
@@ -67,11 +69,13 @@ const routes: Routes = [
   { path: 'NonConformityEdit/:id', component: NonConformityEditComponent },
   { path: 'Nonconform/:id', component: NonConformityDetailComponent},
   { path: 'addinspection', component: InspectionAddComponent },
-  { path: 'rapport-detail/:id', component: RapportDetailComponent },
+  { path: 'rapport-detail/:id', component: RapportDetailComponent }, 
+   { path: 'statadmin', component: StatistiqueadminComponent },
   
   { path: 'showinspections', component: ShowinspectionsComponent},
   { path: 'listadmininspection', component: ListadmininspectionComponent},
   { path: 'updateadmin/:id', component: UpdateadmininspectionComponent},
+  { path: 'statistique', component: StatistiqueComponent},
 
 
   { path: 'inspection-detail/:id', component: InspectionDetailComponent },
@@ -83,7 +87,7 @@ const routes: Routes = [
  
    { path: 'edit-Rapport/:id', component: RapportAddComponent },
    { path: 'RapportList', component: RapportListComponent },
-    { path: 'addRapport/:id', component: RapportAddComponent },
+    { path: 'report/:id', component: RapportAddComponent },
     { path: 'menu', component: MenuFrontComponent },
   
       { path: 'addnonconformity/:id', component: AddNonconformityComponent },

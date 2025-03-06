@@ -17,6 +17,9 @@ export class NonconformityService {
   getNonConformityById(id: number): Observable<NonConformity> {
     return this.http.get<NonConformity>(`${this.apiUrl}/getNonConfirmityById/${id}`);
   }
+  getNonConformityCountByType(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/non-conformity-count-by-type`);
+  }
 
   addNonConformity(idInspection: number, nonConformity: NonConformity): Observable<NonConformity> {
     return this.http.post<NonConformity>(`${this.apiUrl}/addNonConfirmity`, nonConformity);
