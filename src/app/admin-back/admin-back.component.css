@@ -63,3 +63,34 @@
     height: var(--bar-height);
   }
 }
+/* Ajouter un style pour les barres */
+.bar {
+  width: 50px; /* Largeur de la barre */
+  margin: 10px;
+  background-color: #4CAF50; /* Couleur par défaut pour les barres */
+  display: inline-block;
+  vertical-align: bottom;
+  height: 0; /* La hauteur initiale est 0 */
+  transition: height 0.5s ease; /* Animation pour rendre l'effet de hauteur plus fluide */
+}
+
+.paid {
+  background-color: #4CAF50; /* Vert pour les payées */
+}
+
+.unpaid {
+  background-color: #f44336; /* Rouge pour les impayées */
+}
+
+.total {
+  background-color: #2196F3; /* Bleu pour le total */
+}
+
+/* Ajouter une classe pour les barres de fiches de paie */
+.paid-fiche {
+  background-color: #4CAF50; /* Vert pour les fiches de paie payées */
+}
+
+.unpaid-fiche {
+  background-color: #f44336; /* Rouge pour les fiches de paie impayées */
+}

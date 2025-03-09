@@ -16,17 +16,21 @@
       <h2>Invoice Statistics</h2>
       <div class="bar-chart">
         <!-- Barre pour les factures payées -->
-        <div class="bar-chart">
-          <!-- Barre pour les factures payées -->
-          <div *ngIf="showPaid" class="bar paid" id="paid-bar" data-label="Paid"></div>
+        <div *ngIf="showPaid" class="bar paid" id="paid-bar" data-label="Paid"></div>
         
-          <!-- Barre pour les factures impayées -->
-          <div *ngIf="showUnpaid" class="bar unpaid" id="unpaid-bar" data-label="Unpaid"></div>
+        <!-- Barre pour les factures impayées -->
+        <div *ngIf="showUnpaid" class="bar unpaid" id="unpaid-bar" data-label="Unpaid"></div>
         
-          <!-- Barre pour le total des factures -->
-          <div *ngIf="showTotal" class="bar total" id="total-bar" data-label="Total"></div>
-        </div>
+        <!-- Barre pour le total des factures -->
+        <div *ngIf="showTotal" class="bar total" id="total-bar" data-label="Total"></div>
       </div>
+<!--
+      <h2>Fiche de Paie Statistics</h2>
+      <div class="bar-chart">
+        <div *ngIf="showPaidFiche" class="bar paid" id="paid-fiche-bar" data-label="Paid"></div>
+        <div *ngIf="showUnpaidFiche" class="bar unpaid" id="unpaid-fiche-bar" data-label="Unpaid"></div>
+      </div>
+    -->
     </div>
   </div>
 </div>
