@@ -21,6 +21,7 @@ import { AdminBackComponent } from './admin-back/admin-back.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { PaiementComponent } from './paiement/paiement.component';
 import { AddFichedepaieComponent } from './add-fichedepaie/add-fichedepaie.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, 

@@ -32,9 +32,10 @@ import { AdminBackComponent } from './admin-back/admin-back.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { PaiementComponent } from './paiement/paiement.component';
 import { AddFichedepaieComponent } from './add-fichedepaie/add-fichedepaie.component';
-
+import { NgChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
+   
     AppComponent,
     HomeComponent,
     ProductComponent,
@@ -61,8 +62,10 @@ import { AddFichedepaieComponent } from './add-fichedepaie/add-fichedepaie.compo
       SearchResultsComponent,
       PaiementComponent,
       AddFichedepaieComponent,
+    
     ],
   imports: [
+   
     BrowserModule,
     AppRoutingModule ,
     ReactiveFormsModule ,
@@ -70,6 +73,7 @@ import { AddFichedepaieComponent } from './add-fichedepaie/add-fichedepaie.compo
     MatDialogModule,
     BrowserAnimationsModule ,
     FormsModule,
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
