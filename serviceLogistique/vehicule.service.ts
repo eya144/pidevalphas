@@ -29,10 +29,31 @@ export class VehiculeService {
     modifierVehicule(id: number, vehicule: any): Observable<any> {
       return this.http.put(`${this.baseUrl}/modifierVehicule/${id}`, vehicule);
     }
-   
-   
 
-    
-    
-      
+    affecterChauffeurAVehicule(idVehicule: number, idChauffeur: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/vehicules/${idVehicule}/affecter/${idChauffeur}`, {});
+  }
+
+  desaffecterChauffeurDuVehicule(idVehicule: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/vehicules/${idVehicule}/desaffecter`, {});
+  }
+  getAllChauffeurs(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/getAllChauffeur`);
+  }
+  getPositionByChauffeur(idChauffeur: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/getPositionByChauffeur/${idChauffeur}`);
+  }
+
+  getVehiculeByChauffeurId(idChauffeur: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/chauffeur/${idChauffeur}`);
+  }
+
+  updatePositionVehicule(idVehicule: number, latitude: number, longitude: number): Observable<any> {
+    return this.http.put(`${this.baseUrl}/vehicules/${idVehicule}/updatePosition`, { latitude, longitude });
+  }
+  
+  getVehiculesDisponibles(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/disponibles`);
+  }
+  
 }

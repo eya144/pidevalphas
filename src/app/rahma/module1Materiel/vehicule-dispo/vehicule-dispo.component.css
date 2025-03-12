@@ -1,0 +1,25 @@
+.container {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-weight: bold;
+    color: #343a40;
+  }
+  
+  .table {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  td img {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  td img:hover {
+    transform: scale(1.2);
+  }
+  

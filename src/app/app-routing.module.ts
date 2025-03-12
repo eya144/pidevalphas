@@ -33,6 +33,8 @@ import { EditVehiculeComponent } from './rahma/module1Materiel/edit-vehicule/edi
 import { AffectVehiculeComponent } from './rahma/module1Materiel/affect-vehicule/affect-vehicule.component';
 import { TopMaterielComponent } from './rahma/statistique/top-materiel/top-materiel.component';
 import { PlaningComponent } from './rahma/module2Entretien/planing/planing.component';
+import { ChauffeurInterfaceComponent } from './rahma/module1Materiel/chauffeur-interface/chauffeur-interface.component';
+import { VehiculeDispoComponent } from './rahma/module1Materiel/vehicule-dispo/vehicule-dispo.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -54,11 +56,12 @@ const routes: Routes = [
   {path: 'dashboardLogistique',
     component: DashboardLogistiqueComponent,
     children: [
-      { path: 'overview', component: StocksComponent }, // Vue d'ensemble des stocks
+      { path: 'logistique', component: LogistiqueComponent }, // Vue d'ensemble des stocks
       { path: 'orders', component: CommandeDashComponent }, 
       { path: 'listDemandeDash', component: ListeDemandeDashComponent },
       { path: 'affectVehicule', component: AffectVehiculeComponent },
       { path: 'statistique', component: TopMaterielComponent },  
+      { path: 'logistique/editMateriel/:id', component: EditMaterielComponent },  
     ],
   },
   { path: 'commandeFournisseur', component: CommandeFournisseurComponent },
@@ -73,6 +76,8 @@ const routes: Routes = [
   { path: 'addVehicule', component: AddVehiculeComponent },
   { path: 'editVehicule/:id', component: EditVehiculeComponent },
   { path: 'planning', component: PlaningComponent },  
+  { path: 'chauffeurInterface', component: ChauffeurInterfaceComponent },  
+  { path: 'vehiculeDispo', component: VehiculeDispoComponent },  
   
 
   { path: '', redirectTo:'/home',pathMatch:'full' }

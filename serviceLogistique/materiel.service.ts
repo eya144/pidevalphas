@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Demande } from 'src/app/rahma/model/demande.model';
 
 @Injectable({
@@ -86,6 +86,17 @@ getTopMateriels(): Observable<any[]> {
 getMaterielsParCategorie(): Observable<any[]> {
   return this.http.get<any[]>(`${this.baseUrl}/categorie`);
 }
+getMaterielsParTemps(type: string): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/materielss?type=${type}`);
+}
+getStatistiquesParAnnee(): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/statistiquesParAnnee`).pipe(
+    tap(data => {
+      console.log('Données des statistiques par année:', data);
+    })
+  );
+}
+
 
 
 }

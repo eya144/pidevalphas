@@ -49,6 +49,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TopMaterielComponent } from './rahma/statistique/top-materiel/top-materiel.component';
 import { PlaningComponent } from './rahma/module2Entretien/planing/planing.component';
+import { ChauffeurInterfaceComponent } from './rahma/module1Materiel/chauffeur-interface/chauffeur-interface.component';
+import { VehiculeDispoComponent } from './rahma/module1Materiel/vehicule-dispo/vehicule-dispo.component';
 
 
 @NgModule({
@@ -91,6 +93,8 @@ import { PlaningComponent } from './rahma/module2Entretien/planing/planing.compo
       AffectVehiculeComponent,
       TopMaterielComponent,
       PlaningComponent,
+      ChauffeurInterfaceComponent,
+      VehiculeDispoComponent,
       
       
   ],

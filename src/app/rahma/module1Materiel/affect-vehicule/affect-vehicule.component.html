@@ -1,49 +1,56 @@
 <div class="container-fluid mt-5">
-    <h2 class="text-center text-primary mb-4">Gestion des Véhicules</h2>
-  
-    <!-- Tableau des véhicules avec design moderne -->
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped table-hover custom-table">
-        <thead>
-          <tr class="table-header">
-            <th scope="col">ID</th>
-            <th scope="col">Nom du Véhicule</th>
-            <th scope="col">Chauffeur</th>
-            <th scope="col">Marque</th>
-            <th scope="col">Modèle</th>
-            <th scope="col">Immatriculation</th>
-            <th scope="col">Type</th>
-            <th scope="col">Disponible</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let vehicule of vehicules" class="table-row">
-            <td>{{ vehicule.idVehicule }}</td>
-            <td>{{ vehicule.nomVehicule }}</td>
-            <td>{{ vehicule.idChauffeur ? vehicule.idChauffeur : 'Aucun' }}</td>
-            <td>{{ vehicule.marque }}</td>
-            <td>{{ vehicule.modele }}</td>
-            <td>{{ vehicule.immatriculation }}</td>
-            <td>{{ vehicule.typeVehicule }}</td>
-            <td>
-              <input type="checkbox" [(ngModel)]="vehicule.disponible" (change)="updateDisponibilite(vehicule)" class="form-check-input" />
-              <span class="ml-2">{{ vehicule.disponible ? 'Disponible' : 'Indisponible' }}</span>
-            </td>
-            <td class="action-buttons">
-              <select [(ngModel)]="vehicule.idChauffeur" (change)="updateChauffeur(vehicule)" class="form-select">
-                <option value="">Aucun</option>
-                <option *ngFor="let chauffeur of chauffeur" [value]="chauffeur">{{ chauffeur }}</option>
-              </select>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <!-- Message si aucun véhicule n'est disponible -->
-    <div *ngIf="vehicules.length === 0" class="alert alert-warning text-center">
-      Aucun véhicule disponible pour le moment.
-    </div>
+  <div class="d-flex justify-content-between align-items-center">
+    <!-- Titre -->
+    <h2 class="text-center text-white mb-4">Gestion des Véhicules</h2>
+    
+    <!-- Image à côté du titre -->
+    <img src="/assets/img/logistique/1063342location.png" alt="Véhicule" class="img-fluid" style="height: 80px; width: 80px;" />
   </div>
-  
+
+  <!-- Tableau des véhicules avec design moderne -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover custom-table">
+      <thead>
+        <tr class="table-header">
+          <th scope="col">ID</th>
+          <th scope="col">Nom du Véhicule</th>
+          <th scope="col">Chauffeur</th>
+          <th scope="col">Marque</th>
+          <th scope="col">Modèle</th>
+          <th scope="col">Immatriculation</th>
+          <th scope="col">Type</th>
+          <th scope="col">Disponible</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicule of vehicules" class="table-row">
+          <td>{{ vehicule.idVehicule }}</td>
+          <td>{{ vehicule.nomVehicule }}</td>
+          <td>{{ vehicule.idChauffeur ? vehicule.idChauffeur : 'Aucun' }}</td>
+          <td>{{ vehicule.marque }}</td>
+          <td>{{ vehicule.modele }}</td>
+          <td>{{ vehicule.immatriculation }}</td>
+          <td>{{ vehicule.typeVehicule }}</td>
+          <td>
+            <input type="checkbox" [(ngModel)]="vehicule.disponible" (change)="updateDisponibilite(vehicule)" class="form-check-input" />
+            <span class="ml-2">{{ vehicule.disponible ? 'Disponible' : 'Indisponible' }}</span>
+          </td>
+          <td class="action-buttons">
+            <select [(ngModel)]="vehicule.idChauffeur" (change)="updateChauffeur(vehicule)" class="form-select">
+              <option value="">Aucun</option>
+              <option *ngFor="let chauffeur of chauffeurs" [value]="chauffeur.idChauffeur">
+                {{ chauffeur.nomChauffeur }}
+              </option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Message si aucun véhicule n'est disponible -->
+  <div *ngIf="vehicules.length === 0" class="alert alert-warning text-center">
+    Aucun véhicule disponible pour le moment.
+  </div>
+</div>

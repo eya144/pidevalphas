@@ -1,7 +1,7 @@
 /* Style général du body */
 body {
     font-family: 'Inter', sans-serif; /* Police moderne */
-    background-color: #f0f2f5; /* Fond léger */
+    background-color: #181f26; /* Fond léger */
     color: #333;
     display: flex;
     flex-direction: column;
@@ -9,6 +9,6 @@ body {
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    padding-top: 360px;
+    padding-top: 60px;
 }
 

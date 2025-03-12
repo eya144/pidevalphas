@@ -1,0 +1,43 @@
+body {
+  margin-top: 80px;
+  padding-top: 80px;
+  background-color: #181929;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+/* Carte avec effet verre dépoli */
+.vehicule-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(0, 173, 181, 0.5);
+  }
+  
+  /* Effet néon pour le titre */
+  .neon-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00e0ff;
+  }
+  
+  /* Bouton personnalisé */
+  .btn-custom {
+    background: #00adb5;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+  }
+  
+  /* Effet au survol du bouton */
+  .btn-custom:hover {
+    background: #008c96;
+    box-shadow: 0px 0px 10px #00e0ff;
+    transform: scale(1.05);
+  }
+  
