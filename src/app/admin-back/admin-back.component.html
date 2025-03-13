@@ -1,36 +1,69 @@
-<div class="container-scroller">
+<div class="container-scroller bg-black text-white min-h-screen p-4">
   <!-- Back Menu Admin Start -->
   <app-back-menu-admin></app-back-menu-admin>
   <!-- Back Menu Admin End -->
 
-  <!-- partial -->
   <div class="container-fluid page-body-wrapper">
     <!-- navbar Start -->
-    <app-back-header (searchEvent)="onSearch($event)"></app-back-header> <!-- Lier l'événement -->
+    <app-back-header (searchEvent)="onSearch($event)"></app-back-header>
     <!-- navbar End -->
+    <div class="w-full">
+    <div class="container mt-4">
+      <div class="flex flex-col items-center gap-2 mb-4 text-center">
+        <h2 class="text-xl font-bold">Invoice Statistics</h2>
+        <select [(ngModel)]="selectedChart"  class="bg-gray-800 text-white border border-gray-600 rounded-lg p-2">
+          <option value="bar">Bar Chart</option>
+          <option value="line">Sine Wave</option>
+          <option value="pie">Circular Chart</option>
+        </select>
+      </div>
 
-    <div class="container">
-      <br><br>
-      <br><br>
-      
-      <h2>Invoice Statistics</h2>
-      <div class="bar-chart">
-        <!-- Barre pour les factures payées -->
-        <div *ngIf="showPaid" class="bar paid" id="paid-bar" data-label="Paid"></div>
-        
-        <!-- Barre pour les factures impayées -->
-        <div *ngIf="showUnpaid" class="bar unpaid" id="unpaid-bar" data-label="Unpaid"></div>
-        
-        <!-- Barre pour le total des factures -->
-        <div *ngIf="showTotal" class="bar total" id="total-bar" data-label="Total"></div>
+      <div class="max-w-md mx-auto">
+        <canvas *ngIf="selectedChart === 'bar'" baseChart
+                [data]="barChartData"
+                [type]="barChartType"
+                [options]="barChartOptions">
+        </canvas>
+
+        <canvas *ngIf="selectedChart === 'line'" baseChart
+                [data]="lineChartData"
+                [type]="lineChartType"
+                [options]="lineChartOptions">
+        </canvas>
+
+        <canvas *ngIf="selectedChart === 'pie'" baseChart
+                [data]="pieChartData"
+                [type]="pieChartType"
+                [options]="pieChartOptions">
+        </canvas>
       </div>
-<!--
-      <h2>Fiche de Paie Statistics</h2>
-      <div class="bar-chart">
-        <div *ngIf="showPaidFiche" class="bar paid" id="paid-fiche-bar" data-label="Paid"></div>
-        <div *ngIf="showUnpaidFiche" class="bar unpaid" id="unpaid-fiche-bar" data-label="Unpaid"></div>
-      </div>
-    -->
     </div>
+<br><br><br>
+    <!-- NEW SECTION: PaySlip Statistics -->
+<div class="container mt-10">
+  <div class="flex flex-col items-center gap-2 mb-4 text-center">
+    <h2 class="text-xl font-bold">Pay Slip Statistics</h2>
+    <select [(ngModel)]="selectedPayChart" class="bg-gray-800 text-white border border-gray-600 rounded-lg p-2">
+      <option value="bar">Bar Chart</option>
+      <option value="pie">Circular Chart</option>
+    </select>
   </div>
+
+  <div class="max-w-md mx-auto">
+    <canvas *ngIf="selectedPayChart === 'bar'" baseChart
+            [data]="payBarChartData"
+            [type]="payBarChartType"
+            [options]="payBarChartOptions">
+    </canvas>
+
+    <canvas *ngIf="selectedPayChart === 'pie'" baseChart
+            [data]="payPieChartData"
+            [type]="payPieChartType"
+            [options]="payPieChartOptions">
+    </canvas>
+  </div>
+</div>
+
+  </div>
+</div>
 </div>

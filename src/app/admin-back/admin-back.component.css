@@ -1,96 +1,72 @@
-.bar-chart {
-  display: flex;
-  align-items: flex-end; /* Aligner les barres en bas */
-  gap: 20px; /* Espace entre les barres */
-  height: 300px; /* Hauteur du graphique */
+/* Fond noir global */
+body, .container-scroller, .container-fluid {
+  background-color: #000;
+  color: #f1f1f1;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Conteneur principal */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
-  border-left: 2px solid #333; /* Axe Y */
-  border-bottom: 2px solid #333; /* Axe X */
-  background-color: none;
-  margin: 20px;
+  background-color: #111;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
 }
 
-.bar {
-  width: 50px; /* Largeur des barres */
-  background-color: #36A2EB; /* Couleur par défaut des barres */
-  position: relative;
+/* Titres */
+.container h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #d8b4fe;
   text-align: center;
-  border-radius: 4px 4px 0 0;
-  animation: grow 1s ease-in-out; /* Animation pour la croissance des barres */
-  height: var(--bar-height, 0); /* Hauteur dynamique */
 }
 
-.bar::before {
-  content: attr(data-label); /* Afficher le label */
-  position: absolute;
-  bottom: -25px;
-  left: 50%;
-  transform: translateX(-50%);
+/* Canvas charts */
+canvas {
+  max-width: 100% !important;
+  height: 250px !important;
+  margin-bottom: 30px;
+  background-color: #222;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* Dropdown */
+.chart-select-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+select {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(to right, #7e57c2, #ba68c8);
+  color: white;
   font-size: 14px;
-  color: #333;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 0 10px rgba(138, 43, 226, 0.4);
+  transition: 0.3s ease-in-out;
 }
 
-.bar::after {
-  content: attr(data-value); /* Afficher la valeur */
-  position: absolute;
-  top: -25px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
+select:hover {
+  background: linear-gradient(to right, #8e44ad, #9b59b6);
 }
 
-/* Couleurs personnalisées pour les barres */
-.bar.paid {
-  background-color: #36A2EB;
-}
-
-.bar.unpaid {
-  background-color: #FF6384;
-}
-
-.bar.total {
-  background-color: #4BC0C0;
-}
-
-/* Animation pour la croissance des barres */
-@keyframes grow {
-  from {
-    height: 0;
+/* Responsive padding */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
   }
-  to {
-    height: var(--bar-height);
+
+  canvas {
+    height: 200px !important;
   }
 }
-/* Ajouter un style pour les barres */
-.bar {
-  width: 50px; /* Largeur de la barre */
-  margin: 10px;
-  background-color: #4CAF50; /* Couleur par défaut pour les barres */
-  display: inline-block;
-  vertical-align: bottom;
-  height: 0; /* La hauteur initiale est 0 */
-  transition: height 0.5s ease; /* Animation pour rendre l'effet de hauteur plus fluide */
+h2 {
+  color: #4CAF50;
 }
 
-.paid {
-  background-color: #4CAF50; /* Vert pour les payées */
-}
-
-.unpaid {
-  background-color: #f44336; /* Rouge pour les impayées */
-}
-
-.total {
-  background-color: #2196F3; /* Bleu pour le total */
-}
-
-/* Ajouter une classe pour les barres de fiches de paie */
-.paid-fiche {
-  background-color: #4CAF50; /* Vert pour les fiches de paie payées */
-}
-
-.unpaid-fiche {
-  background-color: #f44336; /* Rouge pour les fiches de paie impayées */
-}
