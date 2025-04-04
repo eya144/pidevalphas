@@ -6,8 +6,8 @@
   <div class="form-group mb-3">
     <label for="inspecteur">Select Inspector:</label>
     <select [(ngModel)]="selectedInspecteur" name="inspecteur" class="form-control" required #inspecteur="ngModel">
-      <option *ngFor="let inspecteur of inspecteurs" [ngValue]="inspecteur">
-        {{ inspecteur.nomInspecteur }}
+      <option *ngFor="let user of users" [ngValue]="inspecteur">
+        {{ user.nom }}
       </option>
     </select>
     <div *ngIf="inspecteur.invalid && inspecteur.touched" class="text-danger">

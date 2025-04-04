@@ -13,7 +13,7 @@
         <div class="col-md-6">
           <p><strong>ID:</strong> {{ inspection.idINS }}</p>
           <p><strong>Inspection Name:</strong> {{inspection.projet?.nomProjet}}</p>
-          <p><strong>Inspector:</strong> {{inspection.inspecteur?.nomInspecteur}}</p>
+          <p><strong>Inspector:</strong> {{inspection.user?.nom}}</p>
         </div>
         <div class="col-md-6">
           <p><strong>Date:</strong> {{ inspection.dateInspection | date: 'MM/dd/yyyy' }}</p>
@@ -54,7 +54,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let nc of filteredNonConformities()">
+              <tr *ngFor="let nc of filteredNonConformities() | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
+
                 <td>{{ nc.dateDetection | date: 'MM/dd/yyyy' }}</td>
                 <td>{{ nc.description }}</td>
                 <td>{{ nc.typeNonConfirm }}</td>
@@ -86,7 +87,8 @@
           </table>
         </div>
         <div class="d-flex justify-content-center mt-3">
-          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+          <pagination-controls (pageChange)="page = $event" [responsive]="true"></pagination-controls>
+
         </div>
       </div>
 

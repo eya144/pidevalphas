@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { InspecteurService } from '../services/inspecteur.service';
+
 import { ProjetService } from '../services/projet.service';
-import { Inspection, Inspecteur, Projet, StatusInspection, TypeInspection } from '../models/Inspection.model';
+import { Inspection, Projet, StatusInspection, TypeInspection, User } from '../models/Inspection.model';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // Ajout du Router pour la redirection
 import Swal from 'sweetalert2'; // Import SweetAlert2
+import { UserService } from '../services/user-service.service';
 
 @Component({
   selector: 'app-showinspections',
@@ -13,9 +14,9 @@ import Swal from 'sweetalert2'; // Import SweetAlert2
 })
 export class ShowinspectionsComponent implements OnInit {
 
-  inspecteurs: Inspecteur[] = [];
+  inspecteurs: User[] = [];
   projets: Projet[] = [];
-  selectedInspecteur!: Inspecteur;
+  selectedInspecteur!: User;
   selectedProjet!: Projet;
   inspections: Inspection[] = [];
   today: string = new Date().toISOString().split('T')[0]; // Date d'aujourd'hui pour la validation de la date
@@ -28,8 +29,7 @@ export class ShowinspectionsComponent implements OnInit {
     statusInspection: StatusInspection.Completed,
     nonConformities: [],
     projet: null as any,
-    inspecteur: null as any,
-    idInspecteur: undefined,
+    user: null,
     idProjet: undefined
   };
 
@@ -38,7 +38,7 @@ export class ShowinspectionsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private inspecteurService: InspecteurService,
+    private inspecteurService: UserService,
     private projetService: ProjetService,
     private router: Router // Injection du Router
   ) {
@@ -63,7 +63,7 @@ export class ShowinspectionsComponent implements OnInit {
   }
 
   loadInspecteurs(): void {
-    this.inspecteurService.getInspecteurs().subscribe((data) => {
+    this.inspecteurService.getAllInspecteurs().subscribe((data) => {
       this.inspecteurs = data;
     });
   }
@@ -74,79 +74,112 @@ export class ShowinspectionsComponent implements OnInit {
     });
   }
 
-  ajouterInspection(): void {
-    if (this.inspections.some(inspection => !inspection.dateInspection || !inspection.typeInspection || !inspection.statusInspection)) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please fill in all fields.',
-      });
-      return;
-    }
+ ajouterInspection(): void {
+  console.log('Selected Inspector:', this.selectedInspecteur);  // Check if selectedInspecteur is populated
+  console.log('Selected Project:', this.selectedProjet);
+  console.log('Inspections:', this.inspections);
 
-    if (!this.selectedInspecteur || !this.selectedProjet || this.inspections.length === 0) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please fill in all fields.',
-      });
-      return;
-    }
-
-    this.inspecteurService.addInspectionsToInspecteur(
-      this.selectedInspecteur.idInspecteur,
-      this.selectedProjet.idProjet,
-      this.inspections
-    ).subscribe({
-      next: () => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Success!',
-          text: 'Inspections added successfully.',
-        }).then(() => {
-          this.router.navigate(['/listadmininspection']); 
-        });
-      },
-      error: () => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error!',
-          text: 'Error adding inspections.',
-        });
-      }
+  if (!this.selectedInspecteur || !this.selectedInspecteur.idUSER || !this.selectedProjet || this.inspections.length === 0) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Please fill in all fields.',
     });
+    return;
   }
+
+  const inspectionsToSend: Inspection[] = this.inspections.map(inspection => ({
+    idINS: inspection.idINS,
+    dateInspection: inspection.dateInspection,
+    typeInspection: inspection.typeInspection,
+    statusInspection: inspection.statusInspection,
+    nonConformities: inspection.nonConformities,
+    idProjet: this.selectedProjet.idProjet,
+    projet: { 
+      idProjet: this.selectedProjet.idProjet, 
+      nomProjet: this.selectedProjet.nomProjet 
+    }, 
+    user: { 
+      idUSER: this.selectedInspecteur.idUSER,
+      nom: this.selectedInspecteur.nom,
+      adresse: this.selectedInspecteur.adresse,
+      telephone: this.selectedInspecteur.telephone,
+      email: this.selectedInspecteur.email,
+      userRole: this.selectedInspecteur.userRole
+    }
+  }));
+
+  console.log('Data sent to API:', inspectionsToSend);
+
+  this.inspecteurService.addInspectionsToUser(
+    this.selectedInspecteur.idUSER,
+    inspectionsToSend,
+    this.selectedProjet.idProjet
+  )
+  .subscribe({
+    next: (response) => {
+      console.log('Response:', response);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: 'Inspections added successfully.',
+      }).then(() => {
+        this.router.navigate(['/listadmininspection']);
+      });
+    },
+    error: (error) => {
+      console.error('API Error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'Error adding inspections.',
+      });
+    }
+  });
+}
+
+  
 
   ajouterNouvelleInspection(): void {
-    const today = new Date().toISOString().split('T')[0]; // Today's date
-
-    // Using 'selectedDate' as the selected date
-    const selectedDate = this.inspectionForm.get('dateInspection')?.value;
-
-    // Apply logic to update the status based on the selected date
-    if (selectedDate === today) {
-      this.statusOptions = [StatusInspection.In_Progress, StatusInspection.Completed];
-      this.inspectionForm.get('statusInspection')?.setValue(StatusInspection.In_Progress);
-      this.inspectionForm.get('statusInspection')?.enable();
-    } else if (selectedDate > today) {
-      this.statusOptions = [StatusInspection.Planned, StatusInspection.Completed];
-      this.inspectionForm.get('statusInspection')?.setValue(StatusInspection.Planned);
-      this.inspectionForm.get('statusInspection')?.enable();
+    if (!this.selectedInspecteur || !this.selectedProjet) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please select an inspector and a project before adding an inspection.',
+      });
+      return;
     }
-
-    // Add the new inspection with the selected date and appropriate status
-    this.inspections.push({
+  
+    const today = new Date().toISOString().split('T')[0]; // Today's date
+    const selectedDate = this.inspectionForm.get('dateInspection')?.value || today;
+  
+    let status = StatusInspection.Planned; // Default status
+    if (selectedDate === today) {
+      status = StatusInspection.In_Progress;
+    } else if (selectedDate > today) {
+      status = StatusInspection.Planned;
+    }
+  
+    // Créer une nouvelle instance de l'inspection
+    const newInspection: Inspection = {
       idINS: 0,
-      dateInspection: selectedDate, // Use the selected date
-      typeInspection: TypeInspection.Security,
-      statusInspection: this.inspectionForm.get('statusInspection')?.value || StatusInspection.Planned, // Status based on logic
+      dateInspection: selectedDate,
+      typeInspection: this.inspectionForm.get('typeInspection')?.value || TypeInspection.Security,
+      statusInspection: status,
       nonConformities: [],
       projet: this.selectedProjet,
-      inspecteur: this.selectedInspecteur,
-      idInspecteur: undefined,
-      idProjet: undefined
-    });
+      user: this.selectedInspecteur,
+  
+      idProjet: this.selectedProjet.idProjet
+    };
+  
+    // Ajouter la nouvelle inspection sans écraser les précédentes
+    this.inspections = [...this.inspections, newInspection];
+  
+    // Réinitialiser le formulaire pour une nouvelle entrée
+    this.inspectionForm.reset();
   }
+  
 
   formInvalid(): boolean {
     return this.inspections.some(inspection =>

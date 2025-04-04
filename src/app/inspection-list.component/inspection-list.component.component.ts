@@ -110,7 +110,7 @@ deleteInspection(id: number | undefined): void {
     } else {
       this.filteredInspections = this.inspections.filter(inspection =>
         inspection.projet?.nomProjet.toLowerCase().includes(this.searchText.toLowerCase()) ||
-        inspection.inspecteur?.nomInspecteur.toLowerCase().includes(this.searchText.toLowerCase())
+        inspection.user?.nom.toLowerCase().includes(this.searchText.toLowerCase())
       );
     }
   }

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { InspecteurService } from '../services/inspecteur.service';
+
 import { ProjetService } from '../services/projet.service';
-import { Inspection, Inspecteur, Projet, StatusInspection, TypeInspection } from '../models/Inspection.model';
+import { Inspection, Projet, StatusInspection, TypeInspection, User } from '../models/Inspection.model';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // Ajout du Router pour la redirection
 import Swal from 'sweetalert2'; // Import SweetAlert2
+import { UserService } from '../services/user-service.service';
 
 @Component({
   selector: 'app-inspection-add',
@@ -13,9 +14,9 @@ import Swal from 'sweetalert2'; // Import SweetAlert2
 })
 export class InspectionAddComponent implements OnInit {
 
-  inspecteurs: Inspecteur[] = [];
+  users: User[] = [];
   projets: Projet[] = [];
-  selectedInspecteur!: Inspecteur;
+  selectedInspecteur!: User;
   selectedProjet!: Projet;
   inspections: Inspection[] = [];
   today: string = new Date().toISOString().split('T')[0]; // Date d'aujourd'hui pour la validation de la date
@@ -28,9 +29,10 @@ export class InspectionAddComponent implements OnInit {
     statusInspection: StatusInspection.Completed,
     nonConformities: [],
     projet: null as any,
-    inspecteur: null as any,
-    idInspecteur: undefined,
-    idProjet: undefined
+    user: null as any,
+
+    idProjet: undefined,
+  
   };
 
   statusOptions = Object.values(StatusInspection);
@@ -38,7 +40,7 @@ export class InspectionAddComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private inspecteurService: InspecteurService,
+    private inspecteurService: UserService,
     private projetService: ProjetService,
     private router: Router // Injection du Router
   ) {
@@ -63,8 +65,8 @@ export class InspectionAddComponent implements OnInit {
   }
 
   loadInspecteurs(): void {
-    this.inspecteurService.getInspecteurs().subscribe((data) => {
-      this.inspecteurs = data;
+    this.inspecteurService.getAllInspecteurs().subscribe((data) => {
+      this.users = data;
     });
   }
 
@@ -93,10 +95,10 @@ export class InspectionAddComponent implements OnInit {
       return;
     }
 
-    this.inspecteurService.addInspectionsToInspecteur(
-      this.selectedInspecteur.idInspecteur,
-      this.selectedProjet.idProjet,
-      this.inspections
+    this.inspecteurService.addInspectionsToUser(
+      this.selectedInspecteur.idUSER,
+      this.inspections,
+      this.selectedProjet.idProjet
     ).subscribe({
       next: () => {
         Swal.fire({
@@ -142,8 +144,7 @@ export class InspectionAddComponent implements OnInit {
       statusInspection: this.inspectionForm.get('statusInspection')?.value || StatusInspection.Planned, // Status based on logic
       nonConformities: [],
       projet: this.selectedProjet,
-      inspecteur: this.selectedInspecteur,
-      idInspecteur: undefined,
+      user: this.selectedInspecteur,
       idProjet: undefined
     });
   }

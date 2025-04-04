@@ -50,6 +50,10 @@ import { UpdateadmininspectionComponent } from './updateadmininspection/updatead
 
 import { StatistiqueComponent } from './statistique/statistique.component';
 import { StatistiqueadminComponent } from './statistiqueadmin/statistiqueadmin.component';
+import { CahierDesChargesAddComponent } from './cahier-des-charges-add/cahier-des-charges-add.component';
+import { ListecahierpararchitectComponent } from './listecahierpararchitect/listecahierpararchitect.component';
+
+import { UpdatecahierComponent } from './updatecahier/updatecahier.component';
 
 
 
@@ -57,6 +61,7 @@ import { StatistiqueadminComponent } from './statistiqueadmin/statistiqueadmin.c
 @NgModule({
   declarations: [
     AppComponent,
+  
     HomeComponent,
     ProductComponent,
     AboutComponent,
@@ -99,6 +104,9 @@ import { StatistiqueadminComponent } from './statistiqueadmin/statistiqueadmin.c
       ListadmininspectionComponent,
       UpdateadmininspectionComponent,
       StatistiqueadminComponent,
+      CahierDesChargesAddComponent,
+      ListecahierpararchitectComponent,
+      UpdatecahierComponent,
       
   ],
   imports: [

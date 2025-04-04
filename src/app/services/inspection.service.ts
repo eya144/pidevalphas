@@ -17,6 +17,10 @@ export class InspectionService {
     return this.http.post<Inspection>(`${this.apiUrl}/ajouterInspection`, inspection);
   }
 
+  addInspections(inspecteurId: number, inspections: Inspection[]): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${inspecteurId}/inspections`, inspections);
+  }
+
   addInspectionsToInspecteur(inspecteurId: number, projetId: number, inspections: Inspection[]): Observable<any> {
     return this.http.post(`${this.apiUrl}/${inspecteurId}/inspections?projetId=${projetId}`, inspections);
   }

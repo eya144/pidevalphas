@@ -36,6 +36,9 @@ import { ListadmininspectionComponent } from './listadmininspection/listadminins
 import { UpdateadmininspectionComponent } from './updateadmininspection/updateadmininspection.component';
 import { StatistiqueComponent } from './statistique/statistique.component';
 import { StatistiqueadminComponent } from './statistiqueadmin/statistiqueadmin.component';
+import { CahierDesChargesAddComponent } from './cahier-des-charges-add/cahier-des-charges-add.component';
+import { ListecahierpararchitectComponent } from './listecahierpararchitect/listecahierpararchitect.component';
+import { UpdatecahierComponent } from './updatecahier/updatecahier.component';
 
 
 const routes: Routes = [
@@ -43,8 +46,10 @@ const routes: Routes = [
   { path: 'produit', component: ProductComponent },
   { path: 'about', component: AboutComponent },
   { path: 'RH', component: RHComponent },
+  { path: 'cahiercharge/:architecteId', component: CahierDesChargesAddComponent },
   { path: 'edit-action/:id', component: EditActionComponent },
-  
+  { path: 'cahierspararchitecte/:architecteId', component: ListecahierpararchitectComponent },
+
   { path: 'action-detail/:id', component: ActionDetailComponent },
   
   { path: 'logistique', component: LogistiqueComponent },
@@ -93,6 +98,7 @@ const routes: Routes = [
       { path: 'addnonconformity/:id', component: AddNonconformityComponent },
       { path: 'nonConformities/:id/add-action', component: AddActionComponent } ,
       { path: 'update-rapport/:id', component: UpdateRapportComponent },
+      { path: 'editcahier/:id', component: UpdatecahierComponent },
     
   { path: '', redirectTo:'/home',pathMatch:'full' },
 

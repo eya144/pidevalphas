@@ -1,0 +1,49 @@
+<app-menu-front></app-menu-front>
+
+<div class="container">
+  <h2>📜 List of Specification Documents</h2>
+
+  <!-- Add Cahier de Charge Button -->
+  <button class="btn btn-success" (click)="addCahier()">➕ Add a Specification Document</button>
+
+  <!-- Search Bar -->
+  <input type="text" [(ngModel)]="searchQuery" (input)="searchCahiers()" placeholder="🔍 Search by title or project..." class="search-box">
+
+  <div *ngIf="filteredCahiers.length > 0; else noCahiersTemplate">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Project</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cahier of filteredCahiers | slice:(page-1)*pageSize:(page*pageSize)">
+          <td>{{ cahier.titre }}</td>
+          <td>{{ cahier.description }}</td>
+          <td>{{ cahier.projetNom }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="viewPdf(cahier.id)">📄 View PDF</button>
+            <button class="btn btn-warning" (click)="editCahier(cahier.id)">✏️ Edit</button>
+            <button class="btn btn-danger" (click)="deleteCahier(cahier.id)">🗑️ Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination-controls">
+      <button (click)="page = page - 1" [disabled]="page <= 1">⬅️ Previous</button>
+      <span>Page {{ page }}</span>
+      <button (click)="page = page + 1" [disabled]="page * pageSize >= filteredCahiers.length">Next ➡️</button>
+    </div>
+  </div>
+
+  <ng-template #noCahiersTemplate>
+    <p>No specification documents found.</p>
+  </ng-template>
+</div>
+
+<app-footer-front></app-footer-front>

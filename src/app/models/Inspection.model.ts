@@ -48,7 +48,7 @@ export interface Projet {
 }
 
 export interface Inspection {
-  idInspecteur: any;
+
   idProjet: any;
   idINS: number;
   dateInspection: string; 
@@ -57,18 +57,11 @@ export interface Inspection {
   nonConformities:[]
   rapportQualite?: RapportQualite; 
   projet:Projet | null | undefined;
-  inspecteur: Inspecteur | null | undefined;
+  user: User | null | undefined;
 }
 
 
-export interface Inspecteur {
-  idInspecteur: number;
-  nomInspecteur: string; 
-  adresseInspecteur: string;
-  telephoneInspecteur: string;
-  emailInspecteur:string;
 
-}
 
 export enum StatutNonConfirmity {
   Not_Corrected = "Not_Corrected",
@@ -102,6 +95,31 @@ export interface ActionCorrective {
   dateDebut: string; // Date de début de l'action corrective
   dateFin: string; // Date de fin de l'action corrective
   statusActionCorrective: StatusInspection; // Statut de l'action corrective (Enum)
+}
+
+
+export interface CahierDeCharge {
+  id?: number; // Facultatif, car il est généré automatiquement
+  titre: string;
+  description: string;
+  pdfData?: string | ArrayBuffer | null; // Stockage du fichier sous forme de base64 ou buffer
+  user?: User; // Relation avec l'utilisateur
+}
+
+export interface User {
+  idUSER: number;
+  nom: string;
+  adresse: string;
+  telephone: string;
+  email: string;
+  userRole: UserRole;
+}
+
+export enum UserRole {
+  ARCHITECTE = 'ARCHITECTE',
+  INGENIEUR = 'INGENIEUR',
+  CLIENT = 'CLIENT',
+  INSPECTEUR = 'Inspecteur'
 }
 
 

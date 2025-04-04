@@ -19,9 +19,9 @@ export class UpdateadmininspectionComponent implements OnInit {
     statusInspection: StatusInspection.Completed,
     nonConformities: [],
     projet: null as any,
-    inspecteur: null as any,
+    user: null as any,
     rapportQualite: null as any,
-    idInspecteur: undefined,
+
     idProjet: undefined
   };
 
