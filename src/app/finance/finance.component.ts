@@ -225,4 +225,25 @@ generatePDF(): void {
     complete: () => this.isGeneratingPdf = false
   });
 }
+exportToExcel(): void {
+  this.financeService.exportToExcel().subscribe({
+    next: (excelBlob: Blob) => {
+      const blobUrl = URL.createObjectURL(excelBlob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = 'invoices.xlsx';
+      
+      document.body.appendChild(link);
+      link.click();
+      setTimeout(() => {
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+      }, 100);
+    },
+    error: (err) => {
+      console.error(err);
+      alert(`Export failed: ${err.message || 'Please check console for details'}`);
+    }
+  });
+}
 }

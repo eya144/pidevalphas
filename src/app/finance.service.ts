@@ -156,4 +156,19 @@ generatePdf(idFacture: number): Observable<Blob> {
     })
   );
 }
+exportToExcel(): Observable<Blob> {
+  const headers = new HttpHeaders({
+    'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  });
+
+  return this.http.get(`${this.apiUrl}/excel`, {
+    headers: headers,
+    responseType: 'blob'
+  }).pipe(
+    catchError(error => {
+      console.error('Error exporting to Excel:', error);
+      return throwError(() => new Error('Failed to export to Excel'));
+    })
+  );
+}
 }
