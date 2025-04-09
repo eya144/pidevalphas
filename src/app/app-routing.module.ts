@@ -21,7 +21,10 @@ import { AdminBackComponent } from './admin-back/admin-back.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { PaiementComponent } from './paiement/paiement.component';
 import { AddFichedepaieComponent } from './add-fichedepaie/add-fichedepaie.component';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { AppHeaderComponent } from './app-header/app-header.component';
+import { PaiementSuccessComponentComponent } from './paiement-success-component/paiement-success-component.component';
+import { PaiementCancelComponentComponent } from './paiement-cancel-component/paiement-cancel-component.component';
+import { jsPDF } from 'jspdf';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, 
@@ -37,6 +40,7 @@ const routes: Routes = [
   { path: 'inscrire', component: InscriptionComponent },
   { path: 'service', component: ServiceComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'app-app-header', component: AppHeaderComponent },
   { path: 'add-finance', component: AddFinanceComponent },
   { path: 'edit-finance/:id', component: EditFinanceComponent }, 
   { path: 'fichedepaie-comptable', component: FichedepaieComptableComponent },
@@ -44,8 +48,10 @@ const routes: Routes = [
   { path: 'back-menu-admin', component: BackMenuAdminComponent },
   { path: 'admin-back', component: AdminBackComponent },
   { path: 'search', component: SearchResultsComponent },
-  { path: 'paiement/:idFacture', component: PaiementComponent },
+  { path: 'paiement/:id', component: PaiementComponent },
   { path: 'add-fichedepaie', component: AddFichedepaieComponent },
+  { path: 'paiement/success', component: PaiementSuccessComponentComponent},
+  { path: 'paiement/cancel', component: PaiementCancelComponentComponent },
   { path: '', component: BackHeaderComponent },
 ];
 

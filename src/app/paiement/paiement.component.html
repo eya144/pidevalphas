@@ -1,53 +1,39 @@
+ 
 <app-app-header></app-app-header>
-<div class="paiement-container">
-  <div class="paiement-header">
-    <h2>Billing</h2>
-    <p>Order #1434733106</p>
-    <p>Amount: 5,00 EUR</p>
-  </div>
-  <div class="paiement-methods">
-    <div class="method">
-      <img src="/assets/img/logo/visa-logo.png" alt="VISA">
-      <span>VISA</span>
-    </div>
-    <div class="method">
-      <img src="/assets/img/logo/bancontact-logo.png" alt="Bancontact">
-      <span>Bancontact</span>
-    </div>
-    <div class="method">
-      <img src="/assets/img/logo/vir-logo.png" alt="ING">
-      <span>TRANSFER</span>
+<div class="container mt-5">
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
   </div>
-  <div class="container mt-5">
-    <form [formGroup]="paiementForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="montant" class="form-label">Amount</label>
-        <input type="number" id="montant" class="form-control" formControlName="montant">
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="facture && !isLoading" class="card">
+    <div class="card-header">
+      <h2>Paiement de la facture #{{ facture.idFacture }}</h2>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <p><strong>Date de facturation:</strong> {{ facture.dateFacture | date }}</p>
+          <p><strong>Date d'échéance:</strong> {{ facture.dateEcheance | date }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Montant HT:</strong> {{ facture.montantTotalHorsTaxe | currency:'EUR' }}</p>
+          <p><strong>TVA:</strong> {{ facture.tva | currency:'EUR' }}</p>
+          <p><strong>Montant TTC:</strong> {{ facture.montantTotal | currency:'EUR' }}</p>
+        </div>
       </div>
-    
-      <div class="mb-3">
-        <label for="datePaiement" class="form-label">Payment Date</label>
-        <input type="date" id="datePaiement" class="form-control" formControlName="datePaiement">
+
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary btn-lg" (click)="proceedToPayment()">
+          Payer avec Stripe
+        </button>
       </div>
-    
-      <div class="mb-3">
-        <label for="payment" class="form-label">Payment Method</label>
-        <select id="payment" class="form-control" formControlName="payment">
-          <option value="CARTE">Card</option>
-          <option value="VIREMENT">Bank Transfer</option>
-          <option value="CHÈQUE">Check</option>
-        </select>
-      </div>
-    
-      <div class="mb-3">
-        <label for="numeroCarte" class="form-label">Card Number</label>
-        <input type="number" id="numeroCarte" class="form-control" formControlName="numeroCarte">      
-      </div>
-    
-      <button type="submit" class="btn btn-primary" [disabled]="paiementForm.invalid">Add</button>
-      <button type="button" class="btn btn-secondary" (click)="annuler()">Cancel</button>
-    </form>
+    </div>
   </div>
 </div>
-<app-app-footer></app-app-footer>
+<app-app-footer></app-app-footer>  

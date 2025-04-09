@@ -13,7 +13,6 @@ import { FinanceComponent } from './finance/finance.component';
 import { InspectionComponent } from './inspection/inspection.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; 
-import { MatDialogModule } from '@angular/material/dialog'; 
 import { ContactComponent } from './contact/contact.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ServiceComponent } from './service/service.component';
@@ -24,8 +23,6 @@ import { AddFinanceComponent } from './add-finance/add-finance.component';
 import { EditFinanceComponent } from './edit-finance/edit-finance.component';
 import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepaie-comptable.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
-import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
 import { AdminBackComponent } from './admin-back/admin-back.component';
@@ -33,6 +30,10 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { PaiementComponent } from './paiement/paiement.component';
 import { AddFichedepaieComponent } from './add-fichedepaie/add-fichedepaie.component';
 import { NgChartsModule } from 'ng2-charts';
+import { PaiementSuccessComponentComponent } from './paiement-success-component/paiement-success-component.component';
+import { PaiementCancelComponentComponent } from './paiement-cancel-component/paiement-cancel-component.component';
+import { StripeService } from './stripe.service';
+import { jsPDF } from 'jspdf';
 @NgModule({
   declarations: [
    
@@ -54,28 +55,28 @@ import { NgChartsModule } from 'ng2-charts';
       AddFinanceComponent,
       EditFinanceComponent,
       FichedepaieComptableComponent,
-      ConfirmationDialogComponent,
-      SuccessDialogComponent,
       AppHeaderComponent,
       AppFooterComponent,
       AdminBackComponent,
       SearchResultsComponent,
       PaiementComponent,
       AddFichedepaieComponent,
+      PaiementSuccessComponentComponent,
+      PaiementCancelComponentComponent,
     
     ],
   imports: [
-   
     BrowserModule,
     AppRoutingModule ,
     ReactiveFormsModule ,
     HttpClientModule ,
-    MatDialogModule,
     BrowserAnimationsModule ,
     FormsModule,
     NgChartsModule,
+    
   ],
-  providers: [],
+  providers: [
+     { provide: 'STRIPE_PUBLISHABLE_KEY', useValue: 'pk_test_51Qy2JjKpCQHkABgKARu62V68rkleu9aMJPS5sPQhG0i7llQ52C9wsHm5sPtwyg0C7sice93CFKXKVCqAAJhMX03X00oOdAFYjL' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

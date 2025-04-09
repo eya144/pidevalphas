@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Facture } from './core/models/Factures';  // Importing the Facture model
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepaie-comptable.component';
 
 @Injectable({
@@ -43,9 +43,28 @@ export class FinanceService {
     return this.http.get<Facture[]>(`${this.apiUrl}`);
   }
   // Récupère une facture par son ID
-  getFactureById(idFacture: number): Observable<Facture> {
+/*  getFactureById(idFacture: number): Observable<Facture> {
     return this.http.get<Facture>(`${this.apiUrl}/${idFacture}`);
-  }
+  }*/
+
+  /*  getFactureById(idFacture: number): Observable<Facture> {
+      if (isNaN(idFacture)) {
+        return throwError(() => new Error('Invalid invoice ID'));
+      }
+      return this.http.get<Facture>(`${this.apiUrl}/${idFacture}`);
+    } */
+      getFactureById(idFacture: number): Observable<Facture> {
+        if (!idFacture || isNaN(idFacture)) {
+          console.error('Invalid ID passed to getFactureById:', idFacture);
+          return throwError(() => new Error('Invalid invoice ID'));
+        }
+        return this.http.get<Facture>(`${this.apiUrl}/${idFacture}`).pipe(
+          catchError(err => {
+            console.error('API Error:', err);
+            return throwError(() => new Error('Failed to load invoice'));
+          })
+        );
+      }
 
   // Ajouter une facture et mettre à jour la liste
   addFacture(facture: Facture): Observable<Facture> {
@@ -92,17 +111,49 @@ export class FinanceService {
     return this.http.put<Facture>(url, facture);
   }
   
-    // Méthode pour mettre à jour le statut d'une facture
-  updateFactureStatus(idFacture: number, status: 'Paid' | 'Unpaid'): Observable<Facture> {
-      const url = `${this.apiUrl}/${idFacture}/status`; // Endpoint pour mettre à jour le statut
-      return this.http.put<Facture>(url, { status }); // Envoyer une requête PUT avec le nouveau statut
-    }
-    // Dans votre composant de liste des factures
-navigateToPaiement(idFacture: number): void {
-  this.router.navigate(['/paiement', idFacture]); // Passez l'ID de la facture
+
+      updateFactureStatus(idFacture: number, status: 'Paid' | 'Unpaid'): Observable<Facture> {
+        return this.http.put<Facture>(
+          `${this.apiUrl}/${idFacture}/status`,
+          { status }
+        );
+      }   
+
+  navigateToPaiement(idFacture: number | undefined) {
+  if (idFacture !== undefined) {
+    this.router.navigate(['/paiement', idFacture]);
+  }
 }
 getAllFichesDePaie(): Observable<FichedepaieComptableComponent[]> {
   return this.http.get<FichedepaieComptableComponent[]>(`${this.apiUrl}/getAll`);
 }
 
+generatePdf(idFacture: number): Observable<Blob> {
+  console.log('Requête PDF envoyée pour ID:', idFacture);
+  
+  // Ajoutez des headers si nécessaire
+  const headers = new HttpHeaders({
+    'Accept': 'application/pdf'
+  });
+
+  return this.http.get(`${this.apiUrl}/${idFacture}/pdf`, {
+    headers: headers,
+    responseType: 'blob'
+  }).pipe(
+    tap((response) => {
+      console.log('Réponse PDF reçue', response);
+    }),
+    catchError(error => {
+      console.error('Erreur lors de la génération du PDF:', error);
+      // Transformez l'erreur en un message plus lisible
+      let errorMsg = 'Erreur lors de la génération du PDF';
+      if (error.status === 404) {
+        errorMsg = 'Facture non trouvée';
+      } else if (error.status === 500) {
+        errorMsg = 'Erreur serveur lors de la génération';
+      }
+      return throwError(() => new Error(errorMsg));
+    })
+  );
+}
 }

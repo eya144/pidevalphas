@@ -48,4 +48,7 @@ getFicheById(id: number): Observable<BulletinPaie> {
 deleteFicheDePaie(idBulletinPaie: number): Observable<any> {
   return this.http.delete<void>(`${this.apiUrl}/${idBulletinPaie}`);
 }
+getUserInfo(nom: string): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/user/${nom}`);
+}
 }

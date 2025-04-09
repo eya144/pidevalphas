@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FinanceService } from '../finance.service';
 import { Facture } from 'src/app/core/models/Factures';
 import { Router } from '@angular/router';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-finance',
@@ -17,11 +18,14 @@ export class FinanceComponent implements OnInit {
   isEditing = false;
   editingFactureId: number | null = null;
   idFacture!: number;
-
+  selectedFacture: Facture | null = null;
   // Pagination
   currentPage = 1;
   itemsPerPage = 5;
   totalItems = 0;
+
+  // PDF Generation
+  isGeneratingPdf = false;
 
   // Tri
   sortDirection: 'asc' | 'desc' = 'asc';
@@ -44,13 +48,13 @@ export class FinanceComponent implements OnInit {
       return Math.floor(timeDiff / (1000 * 3600 * 24)); // Convertir la différence en jours
     }
 
-    navigateToPaiement(idFacture: number | undefined): void {
-      if (idFacture !== undefined) {
-        this.router.navigate(['/paiement', idFacture]);
-      } else {
-        console.error('ID Facture est undefined, navigation impossible.');
+      navigateToPaiement(idFacture: number | undefined): void {
+        if (idFacture === undefined || isNaN(idFacture)) {
+          console.error('Invalid invoice ID:', idFacture);
+          return;
+        }
+        this.router.navigate(['/paiement', idFacture.toString()]); 
       }
-    }
 
   private getAllFactures(): void {
     this.financeService.getAllFactures().subscribe(
@@ -157,10 +161,7 @@ export class FinanceComponent implements OnInit {
     );
   }
 
-// Ajouter une variable pour suivre le champ de tri
 sortField: string | null = null;
-
-// Méthode pour trier les factures par montant
 sortByAmount(field: string): void {
   if (this.sortField === field) {
     this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
@@ -181,4 +182,47 @@ sortByAmount(field: string): void {
   });
 }
   
+viewFacture(facture: Facture): void {
+  this.selectedFacture = facture;
+}
+
+closeModal(): void {
+  this.selectedFacture = null;
+}
+
+printInvoice(): void {
+  window.print();
+}
+
+generatePDF(): void {
+  if (!this.selectedFacture?.idFacture) {
+    alert('Veuillez sélectionner une facture valide');
+    return;
+  }
+
+  this.isGeneratingPdf = true; // Ajoutez cette variable de classe
+
+  this.financeService.generatePdf(this.selectedFacture.idFacture).subscribe({
+    next: (pdfBlob: Blob) => {
+      const blobUrl = URL.createObjectURL(pdfBlob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = `Facture_${this.selectedFacture?.idFacture ?? 'unknown'}.pdf`;
+      
+      // Solution plus fiable pour Firefox
+      document.body.appendChild(link);
+      link.click();
+      setTimeout(() => {
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+      }, 100);
+    },
+    error: (err) => {
+      console.error(err);
+      alert(`Échec du téléchargement: ${err.message || 
+            'Veuillez vérifier la console pour les détails'}`);
+    },
+    complete: () => this.isGeneratingPdf = false
+  });
+}
 }

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { FinanceService } from '../finance.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+// import { MatDialog } from '@angular/material/dialog';
+// import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+// import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 
 @Component({
   selector: 'app-add-finance',
@@ -15,13 +15,13 @@ export class AddFinanceComponent implements OnInit {
   factureForm: FormGroup;
   idCommande: number | null = null;
   idResponsableLogistique: number | null = null;
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
     private financeService: FinanceService,
     private router: Router,
-    private route: ActivatedRoute,
-    private dialog: MatDialog
+    private route: ActivatedRoute
   ) {
     this.factureForm = this.fb.group({
       montantTotal: ['', [Validators.required, Validators.min(0)]],
@@ -44,12 +44,10 @@ export class AddFinanceComponent implements OnInit {
       this.idResponsableLogistique = staticCommands.idResponsableLogistique;
     }
   
-    // Écouter les changements de montantTotal et tva
     this.factureForm.get('montantTotal')?.valueChanges.subscribe(() => this.calculateMontantHorsTaxe());
     this.factureForm.get('tva')?.valueChanges.subscribe(() => this.calculateMontantHorsTaxe());
   }
   
-  // Calculer le montant hors taxe
   calculateMontantHorsTaxe(): void {
     const montantTotal = this.factureForm.get('montantTotal')?.value;
     const tva = this.factureForm.get('tva')?.value;
@@ -59,7 +57,7 @@ export class AddFinanceComponent implements OnInit {
       this.factureForm.patchValue({ montantTotalHorsTaxe: montantHorsTaxe.toFixed(2) });
     }
   }
-  // Validateur personnalisé pour la date d'échéance
+
   dateEcheanceAfterDateFacture(control: AbstractControl): { [key: string]: boolean } | null {
     const dateFacture = control.get('dateFacture')?.value;
     const dateEcheance = control.get('dateEcheance')?.value;
@@ -70,51 +68,38 @@ export class AddFinanceComponent implements OnInit {
     return null;
   }
 
-  // Ajouter une facture
-  isLoading = false;
-
   addFacture(): void {
     if (this.factureForm.valid && this.idCommande && this.idResponsableLogistique) {
       this.isLoading = true;
-      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-        width: '300px',
-        disableClose: true,
-      });
+      
+      // Remplacement de la boîte de dialogue de confirmation par une confirmation simple
+      if (confirm('Êtes-vous sûr de vouloir ajouter cette facture ?')) {
+        const factureData = {
+          ...this.factureForm.value,
+          idCommande: this.idCommande,
+          idResponsableLogistique: this.idResponsableLogistique,
+        };
   
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          const factureData = {
-            ...this.factureForm.value,
-            idCommande: this.idCommande,
-            idResponsableLogistique: this.idResponsableLogistique,
-          };
-  
-          this.financeService.addFacture(factureData).subscribe(
-            (response) => {
-              this.isLoading = false;
-              this.dialog.open(SuccessDialogComponent, {
-                width: '300px',
-                disableClose: true,
-              });
-              this.factureForm.reset();
-              this.router.navigate(['/finance']);
-            },
-            (error) => {
-              this.isLoading = false;
-              console.error('Erreur lors de l\'ajout de la facture:', error);
-              alert('Erreur lors de l\'ajout de la facture');
-            }
-          );
-        } else {
-          this.isLoading = false;
-          console.log('Addition canceled.');
-        }
-      });
+        this.financeService.addFacture(factureData).subscribe(
+          (response) => {
+            this.isLoading = false;
+            // Remplacement du dialogue de succès par une alerte simple
+            alert('Facture ajoutée avec succès !');
+            this.factureForm.reset();
+            this.router.navigate(['/finance']);
+          },
+          (error) => {
+            this.isLoading = false;
+            console.error('Erreur lors de l\'ajout de la facture:', error);
+            alert('Erreur lors de l\'ajout de la facture');
+          }
+        );
+      } else {
+        this.isLoading = false;
+      }
     }
   }
-  
 
-  // Marquer tous les champs du formulaire comme touchés
   markFormGroupTouched(formGroup: FormGroup): void {
     Object.values(formGroup.controls).forEach((control) => {
       control.markAsTouched();
@@ -125,7 +110,6 @@ export class AddFinanceComponent implements OnInit {
     });
   }
 
-  // Annuler et revenir à la liste des factures
   annuler(): void {
     this.router.navigate(['/finance']);
   }

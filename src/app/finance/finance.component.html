@@ -68,6 +68,7 @@
               <button (click)="deleteFacture(facture.idFacture)">🗑️</button>
               <button (click)="updateFacture(facture)" [disabled]="!facture.idFacture">✏️</button>
               <button (click)="navigateToPaiement(facture.idFacture)">💳</button>
+              <button (click)="viewFacture(facture)">👁️</button> 
             </div>
           </td>
         </tr>
@@ -98,5 +99,53 @@
 
   </div>
 </div>
-
+<!-- View Modal -->
+<div class="modal-overlay" *ngIf="selectedFacture" [class.active]="selectedFacture">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3>Invoice Details</h3>
+      <button class="close-btn" (click)="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="invoice-details">
+      <div class="invoice-header">
+        <div class="invoice-info">
+          <p><strong>Date:</strong> {{selectedFacture.dateFacture | date}}</p>
+          <p><strong>Due Date:</strong> {{selectedFacture.dateEcheance | date}}</p>
+        </div>
+        <div class="status-badge" [ngClass]="{'paid': selectedFacture.status === 'Paid', 'unpaid': selectedFacture.status === 'Unpaid'}">
+          {{selectedFacture.status}}
+        </div>
+      </div>
+      
+      <div class="invoice-amounts">
+        <div class="amount-row">
+          <span>Subtotal:</span>
+          <span>{{selectedFacture.montantTotalHorsTaxe | currency}}</span>
+        </div>
+        <div class="amount-row">
+          <span>Tax (TVA):</span>
+          <span>{{selectedFacture.tva | currency}}</span>
+        </div>
+        <div class="amount-row total">
+          <span>Total Amount:</span>
+          <span>{{selectedFacture.montantTotal | currency}}</span>
+        </div>
+      </div>
+      
+      <div class="days-remaining" *ngIf="getDaysRemaining(selectedFacture.dateEcheance) >= 0">
+        <i class="fas fa-clock"></i> {{getDaysRemaining(selectedFacture.dateEcheance)}} days remaining
+      </div>
+      <div class="days-overdue" *ngIf="getDaysRemaining(selectedFacture.dateEcheance) < 0">
+        <i class="fas fa-exclamation-triangle"></i> Payment overdue by {{-getDaysRemaining(selectedFacture.dateEcheance)}} days
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-print" (click)="printInvoice()"><i class="fas fa-print"></i> Print</button>
+      <button class="btn-pdf" (click)="generatePDF()" [disabled]="!selectedFacture.idFacture">
+        <i class="fas fa-file-pdf"></i> PDF
+      </button>
+      <button class="btn-cancel" (click)="closeModal()"><i class="fas fa-times"></i> Cancel</button>
+    </div>
+  </div>
+</div>
 <app-app-footer></app-app-footer>

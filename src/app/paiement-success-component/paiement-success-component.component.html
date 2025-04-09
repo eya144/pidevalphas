@@ -1,0 +1,8 @@
+<div class="container mt-5">
+    <div class="alert alert-success text-center">
+      <h2>Paiement réussi!</h2>
+      <p>Merci pour votre paiement. Votre transaction a été complétée avec succès.</p>
+      <p *ngIf="sessionId">ID de session: {{ sessionId }}</p>
+      <a routerLink="/" class="btn btn-primary">Retour à l'accueil</a>
+    </div>
+  </div>
