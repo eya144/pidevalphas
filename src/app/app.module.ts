@@ -34,6 +34,7 @@ import { PaiementSuccessComponentComponent } from './paiement-success-component/
 import { PaiementCancelComponentComponent } from './paiement-cancel-component/paiement-cancel-component.component';
 import { StripeService } from './stripe.service';
 import { jsPDF } from 'jspdf';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 @NgModule({
   declarations: [
    
@@ -73,6 +74,7 @@ import { jsPDF } from 'jspdf';
     BrowserAnimationsModule ,
     FormsModule,
     NgChartsModule,
+    ZXingScannerModule,
     
   ],
   providers: [

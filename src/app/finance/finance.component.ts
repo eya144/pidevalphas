@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FinanceService } from '../finance.service';
 import { Facture } from 'src/app/core/models/Factures';
 import { Router } from '@angular/router';
 import { jsPDF } from 'jspdf';
-
+import * as QRCode from 'qrcode';
+import { ZXingScannerComponent } from '@zxing/ngx-scanner/lib/zxing-scanner.component';
+import { BarcodeFormat } from '@zxing/library';
 @Component({
   selector: 'app-finance',
   templateUrl: './finance.component.html',
@@ -30,6 +32,16 @@ export class FinanceComponent implements OnInit {
   // Tri
   sortDirection: 'asc' | 'desc' = 'asc';
 
+
+    // Propriétés pour le QR code
+    showQR = false;
+    showScanner = false;
+    qrData = '';
+
+
+    @ViewChild('scanner')
+    scanner!: ZXingScannerComponent;
+    
   constructor(
     private fb: FormBuilder,
     private financeService: FinanceService,
@@ -214,5 +226,58 @@ exportToExcel(): void {
       alert(`Export failed: ${err.message || 'Please check console for details'}`);
     }
   });
+}
+allowedFormats = [ BarcodeFormat.QR_CODE ];
+ // Méthodes pour le QR code
+ showQRCode(): void {
+  if (this.selectedFacture) {
+    this.qrData = JSON.stringify({
+      idFacture: this.selectedFacture.idFacture,
+      montant: this.selectedFacture.montantTotal,
+      date: this.selectedFacture.dateFacture,
+      dateEcheance: this.selectedFacture.dateEcheance,
+      tva: this.selectedFacture.tva,
+      status: this.selectedFacture.status,
+      montantTotalHorsTaxe: this.selectedFacture.montantTotalHorsTaxe,
+
+    });
+    
+    const canvas = document.getElementById('qrCanvas') as HTMLCanvasElement;
+    QRCode.toCanvas(canvas, this.qrData, { width: 200 }, (error) => {
+      if (error) console.error(error);
+    });
+    
+    this.showQR = true;
+  }
+}
+ 
+hideQRCode(): void {
+  this.showQR = false;
+}
+
+
+
+onScanSuccess(result: string): void {
+  try {
+    const data = JSON.parse(result);
+    console.log('QR Code scanned:', data);
+    
+    // Vous pouvez implémenter ici la logique pour charger la facture scannée
+    this.financeService.getFactureById(data.id).subscribe(facture => {
+      this.selectedFacture = facture;
+      this.stopScanner();
+    });
+    
+  } catch (e) {
+    console.error('Invalid QR code', e);
+  }
+}
+// Méthodes pour le scanner
+startScanner(): void {
+  this.showScanner = true;
+}
+
+stopScanner(): void {
+  this.showScanner = false;
 }
 }

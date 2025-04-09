@@ -142,8 +142,27 @@
     </div>
     <div class="modal-footer">
       <button class="btn-print" (click)="printInvoice()"><i class="fas fa-print"></i> Print</button>
+      <button class="btn-qr" (click)="showQRCode()"><i class="fas fa-qrcode"></i> Show QR</button>
       <button class="btn-cancel" (click)="closeModal()"><i class="fas fa-times"></i> Cancel</button>
     </div>
+    <!-- Ajoutez cette section après votre modal-footer pour afficher le QR code -->
+<div class="qr-container" *ngIf="showQR">
+  <h4>Invoice QR Code</h4>
+  <canvas id="qrCanvas"></canvas>
+  <button class="btn-close-qr" (click)="hideQRCode()">Close</button>
+</div>
+
+<!-- Ajoutez cette section pour le scanner -->
+<div class="scanner-container" *ngIf="showScanner">
+  <h4>Scan Invoice QR Code</h4>
+  <zxing-scanner 
+    [enable]="showScanner"
+    (scanSuccess)="onScanSuccess($event)"
+    [formats]="allowedFormats">
+  </zxing-scanner>
+  <button (click)="stopScanner()">Close Scanner</button>
+</div>
   </div>
+  
 </div>
 <app-app-footer></app-app-footer>

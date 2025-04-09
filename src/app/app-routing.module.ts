@@ -25,6 +25,8 @@ import { AppHeaderComponent } from './app-header/app-header.component';
 import { PaiementSuccessComponentComponent } from './paiement-success-component/paiement-success-component.component';
 import { PaiementCancelComponentComponent } from './paiement-cancel-component/paiement-cancel-component.component';
 import { jsPDF } from 'jspdf';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, 
