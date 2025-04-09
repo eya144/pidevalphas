@@ -24,108 +24,61 @@ export class PaiementComponent implements OnInit {
     private stripeService: StripeService
   ) {}
 
- /*  ngOnInit(): void {
-    const idFacture = this.route.snapshot.paramMap.get('id');
-    if (idFacture) {
-      this.loadFacture(+idFacture); // Conversion en number
-    } else {
-      this.error = 'ID de facture non fourni';
-      this.isLoading = false;
-    }
-  }*/
-    ngOnInit(): void {
-      const idParam = this.route.snapshot.paramMap.get('id');
-      
-      // Add proper validation
-      if (!idParam || isNaN(Number(idParam))) {
-        this.error = 'Invalid invoice ID format';
-        this.isLoading = false;
-        return;
-      }
+  ngOnInit(): void {
+    const idParam = this.route.snapshot.paramMap.get('id');
     
-      const idFacture = Number(idParam);
-      this.loadFacture(idFacture);
+    if (!idParam || isNaN(Number(idParam))) {
+      this.error = 'Invalid invoice ID format';
+      this.isLoading = false;
+      return;
     }
+  
+    const idFacture = Number(idParam);
+    this.loadFacture(idFacture);
+  }
 
-/*  private loadFacture(idFacture: number): void {
+  private loadFacture(idFacture: number): void {
+    this.isLoading = true;
+    this.error = null;
+
     this.financeService.getFactureById(idFacture).subscribe({
       next: (facture) => {
-        if (!facture) {
-          throw new Error('Facture non trouvée');
-        }
         this.facture = facture;
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Erreur complète:', err);
-        this.error = err.error?.message || 'Erreur lors du chargement de la facture';
+        console.error('Error loading invoice:', err);
+        this.error = err.error?.message || err.message || 'Error loading invoice';
         this.isLoading = false;
       }
     });
   }
-*/
-private loadFacture(idFacture: number): void {
-  this.isLoading = true;
-  this.error = null;
 
-  this.financeService.getFactureById(idFacture).subscribe({
-      next: (facture) => {
-          if (!facture) {
-              throw new Error('Réponse vide du serveur');
-          }
-          this.facture = facture;
-          this.isLoading = false;
-      },
-      error: (err) => {
-          console.error('Détails de l\'erreur:', err);
-          this.error = err.error?.message || 
-                      err.message || 
-                      'Erreur serveur lors du chargement';
-          this.isLoading = false;
-          
-          // Journalisation supplémentaire
-          if (err.status === 404) {
-              console.warn('Facture introuvable - ID:', idFacture);
-          }
-      }
-  });
-}
-
-  proceedToPayment(): void {
+  async proceedToPayment(): Promise<void> {
     if (!this.facture) return;
 
     this.isLoading = true;
     this.error = null;
 
-    this.stripeService.createCheckoutSession(
-      this.facture.idFacture!,
-      this.facture.montantTotal
-    ).subscribe({
-      next: (session) => {
-        this.stripeService.redirectToCheckout(session.id).subscribe({
-          next: () => {
-            // Mettre à jour le statut après paiement réussi
-            this.financeService.updateFactureStatus(
-              this.facture!.idFacture!,
-              'Paid'
-            ).subscribe({
-              error: (err) => console.error('Erreur mise à jour statut:', err)
-            });
-          },
-          error: (err) => {
-            this.handleError('Erreur lors de la redirection Stripe', err);
-          }
-        });
-      },
-      error: (err) => {
-        this.handleError('Erreur lors de la création de la session', err);
-      }
-    });
-  }
+    try {
+      const session = await this.stripeService.createCheckoutSession(
+        this.facture.idFacture!,
+        this.facture.montantTotal
+      ).toPromise();
 
-  private handleError(message: string, err: any): void {
-    console.error(message, err);
-    this.error = message;
-    this.isLoading = false;
+      await this.stripeService.redirectToCheckout(session.id);
+      
+      // Update invoice status after successful payment
+      this.financeService.updateFactureStatus(
+        this.facture.idFacture!,
+        'Paid'
+      ).subscribe({
+        error: (err) => console.error('Error updating invoice status:', err)
+      });
+    } catch (err) {
+      console.error('Payment error:', err);
+      this.error = 'Payment failed. Please try again.';
+      this.isLoading = false;
+    }
   }
 }

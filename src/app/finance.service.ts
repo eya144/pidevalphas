@@ -42,17 +42,7 @@ export class FinanceService {
   getAllFactures(): Observable<Facture[]> {
     return this.http.get<Facture[]>(`${this.apiUrl}`);
   }
-  // Récupère une facture par son ID
-/*  getFactureById(idFacture: number): Observable<Facture> {
-    return this.http.get<Facture>(`${this.apiUrl}/${idFacture}`);
-  }*/
 
-  /*  getFactureById(idFacture: number): Observable<Facture> {
-      if (isNaN(idFacture)) {
-        return throwError(() => new Error('Invalid invoice ID'));
-      }
-      return this.http.get<Facture>(`${this.apiUrl}/${idFacture}`);
-    } */
       getFactureById(idFacture: number): Observable<Facture> {
         if (!idFacture || isNaN(idFacture)) {
           console.error('Invalid ID passed to getFactureById:', idFacture);
@@ -128,34 +118,6 @@ getAllFichesDePaie(): Observable<FichedepaieComptableComponent[]> {
   return this.http.get<FichedepaieComptableComponent[]>(`${this.apiUrl}/getAll`);
 }
 
-generatePdf(idFacture: number): Observable<Blob> {
-  console.log('Requête PDF envoyée pour ID:', idFacture);
-  
-  // Ajoutez des headers si nécessaire
-  const headers = new HttpHeaders({
-    'Accept': 'application/pdf'
-  });
-
-  return this.http.get(`${this.apiUrl}/${idFacture}/pdf`, {
-    headers: headers,
-    responseType: 'blob'
-  }).pipe(
-    tap((response) => {
-      console.log('Réponse PDF reçue', response);
-    }),
-    catchError(error => {
-      console.error('Erreur lors de la génération du PDF:', error);
-      // Transformez l'erreur en un message plus lisible
-      let errorMsg = 'Erreur lors de la génération du PDF';
-      if (error.status === 404) {
-        errorMsg = 'Facture non trouvée';
-      } else if (error.status === 500) {
-        errorMsg = 'Erreur serveur lors de la génération';
-      }
-      return throwError(() => new Error(errorMsg));
-    })
-  );
-}
 exportToExcel(): Observable<Blob> {
   const headers = new HttpHeaders({
     'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'

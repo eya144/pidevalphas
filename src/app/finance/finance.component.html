@@ -142,9 +142,6 @@
     </div>
     <div class="modal-footer">
       <button class="btn-print" (click)="printInvoice()"><i class="fas fa-print"></i> Print</button>
-      <button class="btn-pdf" (click)="generatePDF()" [disabled]="!selectedFacture.idFacture">
-        <i class="fas fa-file-pdf"></i> PDF
-      </button>
       <button class="btn-cancel" (click)="closeModal()"><i class="fas fa-times"></i> Cancel</button>
     </div>
   </div>

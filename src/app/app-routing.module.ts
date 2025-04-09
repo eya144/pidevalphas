@@ -50,8 +50,8 @@ const routes: Routes = [
   { path: 'search', component: SearchResultsComponent },
   { path: 'paiement/:id', component: PaiementComponent },
   { path: 'add-fichedepaie', component: AddFichedepaieComponent },
-  { path: 'paiement/success', component: PaiementSuccessComponentComponent},
-  { path: 'paiement/cancel', component: PaiementCancelComponentComponent },
+  { path: 'success', component: PaiementSuccessComponentComponent},
+  { path: 'cancel', component: PaiementCancelComponentComponent },
   { path: '', component: BackHeaderComponent },
 ];
 

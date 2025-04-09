@@ -69,4 +69,10 @@ select:hover {
 h2 {
   color: #4CAF50;
 }
+.flex-row-wrapper {
+  display: flex;
+  gap: 20px;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
 

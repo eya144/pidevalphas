@@ -194,37 +194,6 @@ printInvoice(): void {
   window.print();
 }
 
-generatePDF(): void {
-  if (!this.selectedFacture?.idFacture) {
-    alert('Veuillez sélectionner une facture valide');
-    return;
-  }
-
-  this.isGeneratingPdf = true; // Ajoutez cette variable de classe
-
-  this.financeService.generatePdf(this.selectedFacture.idFacture).subscribe({
-    next: (pdfBlob: Blob) => {
-      const blobUrl = URL.createObjectURL(pdfBlob);
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = `Facture_${this.selectedFacture?.idFacture ?? 'unknown'}.pdf`;
-      
-      // Solution plus fiable pour Firefox
-      document.body.appendChild(link);
-      link.click();
-      setTimeout(() => {
-        document.body.removeChild(link);
-        URL.revokeObjectURL(blobUrl);
-      }, 100);
-    },
-    error: (err) => {
-      console.error(err);
-      alert(`Échec du téléchargement: ${err.message || 
-            'Veuillez vérifier la console pour les détails'}`);
-    },
-    complete: () => this.isGeneratingPdf = false
-  });
-}
 exportToExcel(): void {
   this.financeService.exportToExcel().subscribe({
     next: (excelBlob: Blob) => {
