@@ -54,8 +54,9 @@ export class UpdateTaskComponent implements OnInit {
         console.log('Tâche récupérée :', task); // Vérifier la structure de la tâche récupérée
     
         if (task) {
-          const startDate = this.formatDate(task.startDate);
-          const finishDate = this.formatDate(task.finishDate);
+          // Ensure task.startDate and task.finishDate are Date objects
+          const startDate = this.formatDate(new Date(task.startDate));  // Convert to Date
+          const finishDate = this.formatDate(new Date(task.finishDate));  // Convert to Date
     
           // Pré-remplir le formulaire avec les données de la tâche
           this.taskForm.patchValue({
@@ -76,12 +77,12 @@ export class UpdateTaskComponent implements OnInit {
       }
     );
   }
-
-  private formatDate(date: string): string {
+  
+  private formatDate(date: Date): string {
     if (!date) return '';
-    const d = new Date(date);
-    return d.toISOString().split('T')[0]; // Retourne au format yyyy-MM-dd
+    return date.toISOString().split('T')[0]; // Retourne au format yyyy-MM-dd
   }
+  
 
   onSubmit(): void {
     if (this.taskForm.valid) {

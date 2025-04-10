@@ -1,42 +1,196 @@
-.container {
-  max-width: 1100px;
-  width: 90%;
-  margin: auto;
-  padding: 20px;
+/* Main Container */
+.task-board-container {
+  min-height: calc(100vh - 120px);
+  padding: 80px 0 60px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
 }
 
-.card {
-  transition: transform 0.3s, box-shadow 0.3s;
+/* Header Styles */
+.board-header {
+  background: white;
+  border-left: 6px solid #3f51b5;
 }
 
-.card:hover {
+.text-gradient {
+  background: linear-gradient(45deg, #3f51b5, #2196f3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* Glass Morphism Effect */
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Kanban Board */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.kanban-column {
+  transition: all 0.3s ease;
+}
+
+/* Column Headers */
+.column-header {
+  transition: all 0.3s ease;
+}
+
+.bg-gradient-todo {
+  background: linear-gradient(135deg, #5c6bc0 0%, #3949ab 100%);
+}
+
+.bg-gradient-doing {
+  background: linear-gradient(135deg, #26c6da 0%, #00acc1 100%);
+}
+
+.bg-gradient-done {
+  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+}
+
+.bg-gradient-suspended {
+  background: linear-gradient(135deg, #78909c 0%, #546e7a 100%);
+}
+
+.column-title {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Task Cards */
+.task-card {
+  cursor: pointer;
+  background: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-left: 4px solid;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.task-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-.card-header {
-  font-size: 1.25rem;
-  font-weight: bold;
+.task-title {
+  font-weight: 600;
+  color: #2c3e50;
 }
 
-.card-body {
-  padding: 20px;
+.task-description {
+  color: #7f8c8d;
+  line-height: 1.6;
 }
 
-.card-footer {
-  padding: 10px;
+/* Priority Styles */
+.priority-haute {
+  border-left-color: #ef5350;
 }
 
-@media (max-width: 900px) {
-  .col-md-4 {
-    flex: 0 0 50%;
-    max-width: 50%;
+.priority-moyenne {
+  border-left-color: #ffa726;
+}
+
+.priority-basse {
+  border-left-color: #66bb6a;
+}
+
+.priority-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priority-haute .priority-badge {
+  background: #ef5350;
+  color: white;
+}
+
+.priority-moyenne .priority-badge {
+  background: #ffa726;
+  color: white;
+}
+
+.priority-basse .priority-badge {
+  background: #66bb6a;
+  color: white;
+}
+
+/* Status Badges in Select */
+.status-badge {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-badge.todo {
+  background: #5c6bc0;
+}
+
+.status-badge.doing {
+  background: #26c6da;
+}
+
+.status-badge.done {
+  background: #66bb6a;
+}
+
+.status-badge.suspended {
+  background: #78909c;
+}
+
+/* Empty State */
+.empty-state {
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.empty-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #bdc3c7;
+}
+
+/* Drag & Drop */
+.cdk-drag-preview {
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  opacity: 0.9;
+  transform: scale(1.02);
+  z-index: 1000;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.5;
+  background: #f5f7fa;
+  border: 2px dashed #cfd8dc;
+}
+
+.cdk-drag-animating {
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.task-list.cdk-drop-list-dragging .task-card:not(.cdk-drag-placeholder) {
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .kanban-board {
+    grid-template-columns: 1fr;
   }
-}
-
-@media (max-width: 600px) {
-  .col-md-4 {
-    flex: 0 0 100%;
-    max-width: 100%;
+  
+  .kanban-column {
+    margin-bottom: 24px;
   }
 }

@@ -7,7 +7,7 @@ import { Mission } from './core/models/Mission';
   providedIn: 'root'
 })
 export class MissionService {
-  private apiUrl = 'http://localhost:8080/pidev/api/missions';
+  private apiUrl = 'http://localhost:8087/pidev/api/missions';
 
   constructor(private http: HttpClient) {}
 

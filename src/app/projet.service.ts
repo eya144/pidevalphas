@@ -9,7 +9,7 @@ import { Mission } from './core/models/Mission';  // Assurez-vous de définir un
 })
 export class ProjetService {
 
-  private apiUrl = 'http://localhost:8080/pidev/api/projets'; // URL de l'API
+  private apiUrl = 'http://localhost:8087/pidev/api/projets'; // URL de l'API
 
   constructor(private http: HttpClient) {}
 

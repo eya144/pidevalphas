@@ -7,43 +7,44 @@ import { Status, Tache } from "./core/models/Tache";
   providedIn: 'root',
 })
 export class TacheService {
-  private apiUrl = 'http://localhost:8080/pidev/api/taches'; // Replace with your actual API URL
+  private apiUrl = 'http://localhost:8087/pidev/api/taches'; 
 
   constructor(private http: HttpClient) {}
 
-  // 1. Get all tasks
-  getAllTaches(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  // 1. Récupérer toutes les tâches
+  getAllTaches(): Observable<Tache[]> {
+    return this.http.get<Tache[]>(this.apiUrl);
   }
 
-  // 2. Get a task by ID
-  getTacheById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  // 2. Récupérer une tâche par ID
+  getTacheById(id: number): Observable<Tache> {
+    return this.http.get<Tache>(`${this.apiUrl}/${id}`);
   }
 
-  // 3. Add a task
-  addTache(tache: any, missionId: number): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/mission/${missionId}`, tache, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  // 3. Ajouter une tâche
+  addTache(tache: Tache, missionId: number): Observable<Tache> {
+    return this.http.post<Tache>(`${this.apiUrl}/mission/${missionId}`, tache, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     });
   }
 
-  // 4. Update a task
-  updateTache(id: number, tache: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, tache);
+  // 4. Mettre à jour une tâche
+  updateTache(id: number, tache: Tache): Observable<Tache> {
+    return this.http.put<Tache>(`${this.apiUrl}/${id}`, tache);
   }
 
-  // 5. Delete a task
+  // 5. Supprimer une tâche
   deleteTache(idTache: number): Observable<void> {
-    console.log(`📡 Sending DELETE request for ID: ${idTache}`);
+    console.log(`📡 Envoi de la requête DELETE pour l'ID : ${idTache}`);
     return this.http.delete<void>(`${this.apiUrl}/${idTache}`);
   }
 
-  // 6. Get tasks by mission ID
+  // 6. Récupérer les tâches par mission ID
   getTasksByMission(missionId: number): Observable<Tache[]> {
     return this.http.get<Tache[]>(`${this.apiUrl}/mission/${missionId}`);
   }
 
+  // 7. Rechercher des tâches
   searchTasks(nom: string, etat: Status, priorite: string): Observable<Tache[]> {
     return this.http.get<Tache[]>(`${this.apiUrl}/search`, {
       params: {
@@ -54,8 +55,24 @@ export class TacheService {
     });
   }
 
-  // 8. Update task status (new method added)
   updateTaskStatus(idTache: number, status: Status): Observable<Tache> {
-    return this.http.put<Tache>(`${this.apiUrl}/${idTache}/status`, status);
+    const encodedStatus = encodeURIComponent(status); // Sécurité si jamais le status a un caractère spécial
+    const url = `${this.apiUrl}/${idTache}/status?status=${encodedStatus}`;
+    console.log('📡 Envoi du statut via URL :', url);
+  
+    return this.http.put<Tache>(url, null, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    }).pipe(
+      tap({
+        next: (response) => {
+          console.log('✅ Statut mis à jour :', response);
+        },
+        error: (err) => {
+          console.error('❌ Erreur lors de la mise à jour du statut de la tâche :', err);
+        }
+      })
+    );
   }
+  
+  
 }

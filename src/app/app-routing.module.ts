@@ -45,7 +45,7 @@ const routes: Routes = [
   { path: 'mission-details/:id', component: MissionDetailsComponent },
   { path: 'update-mission/:idMission/:id', component: UpdateMissionComponent }, // Modifier une mission
   { path: 'tasks/:missionId', component: TaskComponent }, // Liste des tâches
-  { path: 'add-task/:missionId', component: AddTaskComponent }, // Ajouter une tâche
+  { path: 'tasks/add/:missionId', component: AddTaskComponent },
   { path: 'task-details/:id', component: TaskDetailsComponent },
   { path: 'tasks/:missionId/:idTache', component: UpdateTaskComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }

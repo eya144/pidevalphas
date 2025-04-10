@@ -36,12 +36,28 @@ import { UpdateTaskComponent } from './update-task/update-task.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ToastrModule } from 'ngx-toastr';
 import { NgChartsModule } from 'ng2-charts';
-import { jsPDF } from 'jspdf';
+
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatSelectModule } from '@angular/material/select'; // Manquant
+import { MatDatepickerModule } from '@angular/material/datepicker'; // Recommandé
+import { MatNativeDateModule } from '@angular/material/core'; // Recommandé
+import { MatMenuModule } from '@angular/material/menu'; // Pour les menus
+import { MatTooltipModule } from '@angular/material/tooltip'; // Pour les tooltips
+import { MatSnackBarModule } from '@angular/material/snack-bar'; // Pour les notifications
+import { MatCheckboxModule } from '@angular/material/checkbox'; // Pour les cases à cocher
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'; // Pour les interrupteurs
+import { MatRadioModule } from '@angular/material/radio'; // Pour les boutons radio
 
 @NgModule({
   declarations: [
@@ -77,15 +93,57 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     TaskDetailsComponent
   ],
   imports: [
+    // Core Modules
     BrowserModule,
-    AppRoutingModule,
+    BrowserAnimationsModule,
+    
+    // Functional Modules
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule,
-    NgxPaginationModule,
+    
+    // Material Modules (grouped by functionality)
+    // Form Controls
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    
+    // Navigation & Layout
+    MatMenuModule,
+    LayoutModule,
+    
+    // Buttons & Indicators
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    
+    // Popups & Modals
+    MatDialogModule,
+    MatSnackBarModule,
+    MatTooltipModule,
+    
+    // Data Table
+    MatCardModule,
+    
+    // CDK
+    DragDropModule,
+    
+    // Third-party
     NgChartsModule,
-    DragDropModule
-
+    NgxPaginationModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+    
+    // App Routing (should be last)
+    AppRoutingModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
