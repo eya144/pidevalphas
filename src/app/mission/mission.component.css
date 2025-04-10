@@ -1,3 +1,117 @@
-body{
-    padding-top: 100px;
-  }
+/* Conteneur principal centré */
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Aligne le contenu en haut de la page */
+  min-height: 100vh; /* Garantit que le conteneur prend toute la hauteur de la page */
+  padding: 20px 0; /* Ajout d'un peu d'espacement pour éviter que le contenu soit collé aux bords */
+  width: 100%;
+}
+
+/* Conteneur de la liste des missions */
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto; /* Centrer horizontalement */
+}
+
+/* Flexbox pour aligner les cartes */
+.mission-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));  /* Utilisation de Grid avec des colonnes flexibles */
+  gap: 20px; /* Espacement entre les cartes */
+  justify-items: center; /* Centrer les cartes horizontalement */
+}
+
+/* Style des cartes */
+.minimalist-card {
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.3s ease;
+  background-color: #f9f9f9;  /* Couleur de fond pastel claire */
+  overflow: hidden;
+  height: 100%;
+}
+
+.minimalist-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Header */
+.card-body {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  color: #007bff;  /* Couleur bleue claire */
+  font-weight: 600;
+}
+
+/* Text */
+.card-text {
+  font-size: 1rem;
+  color: #6c757d;  /* Texte gris clair */
+}
+
+.badge {
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
+/* Card Footer */
+.card-footer {
+  padding: 10px;
+  background-color: #f7f7f7;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Boutons */
+.btn-sm {
+  padding: 8px 15px;  /* Taille des boutons réduite */
+  font-size: 16px;     /* Taille du texte */
+  border-radius: 50%;  /* Boutons circulaires */
+  width: auto;
+  height: auto;
+}
+
+.btn-outline-primary, .btn-outline-warning, .btn-outline-danger, .btn-outline-info {
+  border: 1px solid transparent; /* Supprimer les bordures visibles */
+  background-color: transparent;
+}
+
+.card-footer .btn {
+  margin: 5px;  /* Réduire l'écart entre les boutons */
+}
+
+.pagination .page-link {
+  font-size: 14px;  /* Taille des numéros de page */
+}
+
+/* Style pour les couleurs pastel */
+.bg-warning {
+  background-color: #fce4b1 !important;  /* Jaune pastel */
+}
+
+.bg-info {
+  background-color: #b3e5fc !important;  /* Bleu pastel */
+}
+
+.bg-secondary {
+  background-color: #e0e0e0 !important;  /* Gris clair */
+}
+
+.bg-success {
+  background-color: #a5d6a7 !important;  /* Vert pastel */
+}
+
+/* Pagination style */
+.pagination {
+  margin-top: 20px;
+  font-size: 16px;
+}

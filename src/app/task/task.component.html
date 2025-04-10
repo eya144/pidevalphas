@@ -1,7 +1,8 @@
 <app-header></app-header>
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<!-- Body Section with a container for better framing -->
 <div class="task-board-container">
-  <div class="container-fluid py-4">
+  <div class="container py-4">
     <!-- Header Section -->
     <div class="board-header mb-5 p-4 rounded-lg shadow">
       <div class="d-flex justify-content-between align-items-center">
@@ -55,16 +56,7 @@
           </mat-form-field>
         </div>
 
-        <div class="col-lg-4 d-flex align-items-center">
-          <button mat-stroked-button (click)="changeSorting('startDate')" class="sort-btn me-2">
-            <mat-icon>event</mat-icon>
-            {{ sortField === 'startDate' ? (sortDirection === 'asc' ? '↑ Date' : '↓ Date') : 'Sort by Date' }}
-          </button>
-          <button mat-stroked-button (click)="changeSorting('priorite')" class="sort-btn">
-            <mat-icon>priority_high</mat-icon>
-            {{ sortField === 'priorite' ? (sortDirection === 'asc' ? '↑ Priority' : '↓ Priority') : 'Sort by Priority' }}
-          </button>
-        </div>
+      
       </div>
     </div>
 
@@ -95,7 +87,6 @@
              [cdkDropListConnectedTo]="boardColumnIds"
              [id]="column.id"
              class="task-list p-3">
-             
           <div *ngFor="let task of column.tasks"
                cdkDrag
                [cdkDragData]="task"

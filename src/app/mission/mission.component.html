@@ -1,15 +1,8 @@
-<app-header></app-header>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<body>
+<app-header></app-header> <br><br><br><br><br><br><br><br><br>
+<div class="center-container">
   <div class="container py-5">
-    <h3 class="text-center mb-4 text-primary">Project Missions List</h3>
+    <h1 class="text-center mb-4 text-primary">Project Missions List</h1>
+
     <!-- Barre de recherche et filtre -->
     <div class="row mb-4">
       <div class="col-md-6">
@@ -25,15 +18,19 @@
         </select>
       </div>
       <div class="col-md-2">
-        <button class="btn btn-primary w-100" (click)="filterMissions()">Filter</button>
+        <button class="btn btn-primary btn-sm" (click)="filterMissions()">
+          <i class="bi bi-funnel"></i>
+        </button>
       </div>
     </div>
-    <div class="row">
-      <div *ngFor="let mission of paginatedMissions" class="col-md-4 mb-4">
-        <div class="card shadow-lg rounded-lg border-0">
+
+    <!-- Liste des missions -->
+    <div class="mission-cards">
+      <div *ngFor="let mission of paginatedMissions" class="mission-card">
+        <div class="card minimalist-card">
           <div class="card-body">
-            <h5 class="card-title text-primary text-center">{{ mission.nom }}</h5>
-            <p class="card-text text-muted text-center">{{ mission.description }}</p>
+            <h5 class="card-title text-center text-primary">{{ mission.nom }}</h5>
+            <p class="card-text text-center text-muted">{{ mission.description }}</p>
             <div class="text-center mb-3">
               <span class="badge bg-{{ mission.etatMission === 'TODO' ? 'warning' : mission.etatMission === 'DOING' ? 'info' : mission.etatMission === 'SUSPENDED' ? 'secondary' : 'success' }}">
                 {{ mission.etatMission }}
@@ -41,45 +38,49 @@
             </div>
           </div>
           <div class="card-footer">
-            <div class="d-grid gap-2">
-              <button [routerLink]="['/mission-details', mission.idMission]" class="btn btn-primary w-100">
-                <i class="bi bi-eye"></i> View Details
+            <div class="d-flex justify-content-center gap-2">
+              <button [routerLink]="['/mission-details', mission.idMission]" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-eye"></i>
               </button>
-              <button [routerLink]="['/update-mission', mission.idMission, projetId]" class="btn btn-warning w-100">
-                <i class="bi bi-pencil"></i> Update Mission
+              <button [routerLink]="['/update-mission', mission.idMission, projetId]" class="btn btn-outline-warning btn-sm">
+                <i class="bi bi-pencil"></i>
               </button>
-              <button (click)="deleteMission(mission.idMission)" class="btn btn-danger w-100">
-                <i class="bi bi-trash"></i> Delete
+              <button (click)="deleteMission(mission.idMission)" class="btn btn-outline-danger btn-sm">
+                <i class="bi bi-trash"></i>
               </button>
-              <button (click)="viewTasks(mission.idMission)" class="btn btn-info w-100">
-                <i class="bi bi-list-task"></i> View Tasks
+              <button (click)="viewTasks(mission.idMission)" class="btn btn-outline-info btn-sm">
+                <i class="bi bi-list-task"></i>
               </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  
+
     <!-- Pagination controls -->
     <div class="text-center mt-4">
-      <ul class="pagination">
+      <ul class="pagination justify-content-center">
         <li class="page-item" [class.disabled]="currentPage === 1">
-          <button class="page-link" (click)="changePage(currentPage - 1)">Previous</button>
+          <button class="page-link" (click)="changePage(currentPage - 1)">
+            <i class="bi bi-chevron-left"></i>
+          </button>
         </li>
         <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
           <button class="page-link" (click)="changePage(page)">{{ page }}</button>
         </li>
         <li class="page-item" [class.disabled]="currentPage === totalPages">
-          <button class="page-link" (click)="changePage(currentPage + 1)">Next</button>
+          <button class="page-link" (click)="changePage(currentPage + 1)">
+            <i class="bi bi-chevron-right"></i>
+          </button>
         </li>
       </ul>
     </div>
-  
+
     <!-- Button to add a mission -->
     <div class="text-center mt-4">
       <button class="btn btn-success btn-lg" (click)="redirectToAddMission()">
-        <i class="bi bi-plus-circle"></i> Add Mission
+        <i class="bi bi-plus-circle"></i>
       </button>
     </div>
   </div>
-</body>
+</div>

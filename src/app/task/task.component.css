@@ -1,16 +1,23 @@
 /* Main Container */
+/* Main Container */
 .task-board-container {
   min-height: calc(100vh - 120px);
-  padding: 80px 0 60px;
+  padding: 0 20px 60px; /* Remove extra padding at the top */
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+  max-width: 1400px; /* Elargir le conteneur à 1400px */
+  margin: 0 auto; /* Center the content horizontally */
 }
+
 
 /* Header Styles */
 .board-header {
   background: white;
   border-left: 6px solid #3f51b5;
+  padding: 20px 0; /* Adjust header padding */
+  position: relative; /* Make sure it's part of the flow, not fixed */
 }
 
+/* Text Gradient */
 .text-gradient {
   background: linear-gradient(45deg, #3f51b5, #2196f3);
   -webkit-background-clip: text;
@@ -31,10 +38,19 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .kanban-column {
   transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.85); /* Semi-transparent white background */
+  border-radius: 8px;
+  padding: 15px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.kanban-column:hover {
+  transform: scale(1.02); /* Add hover scale effect */
 }
 
 /* Column Headers */
@@ -70,6 +86,7 @@
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   border-left: 4px solid;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin: 10px 0;
 }
 
 .task-card:hover {
@@ -193,4 +210,104 @@
   .kanban-column {
     margin-bottom: 24px;
   }
+}
+
+.task-card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.task-card.cdk-dragging {
+  transform: scale(1.05); /* Slightly enlarge the card during dragging */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Adding more noticeable shadow */
+}
+
+.task-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.task-card:active {
+  transform: scale(0.98); /* Slightly shrink when clicked */
+}
+
+/* Modernize Background */
+.task-board-container {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+}
+
+/* Add subtle shadow to task containers */
+.kanban-board {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.kanban-column {
+  background: rgba(255, 255, 255, 0.85); /* Semi-transparent white background */
+  border-radius: 8px;
+  padding: 15px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.kanban-column:hover {
+  transform: scale(1.02); /* Add hover scale effect */
+}
+
+.sort-btn, .add-task-btn, .filters-section mat-select {
+  border-radius: 20px;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.sort-btn:hover, .add-task-btn:hover, .filters-section mat-select:hover {
+  background-color: #e3f2fd;
+  transform: scale(1.05);
+}
+
+.task-board {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-column {
+  width: 23%;
+}
+
+.task-list {
+  min-height: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.task-card {
+  margin: 10px 0;
+  transition: transform 200ms ease;
+}
+
+.task-card.dragging {
+  opacity: 0.5;
+}
+
+mat-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-title {
+  font-weight: bold;
+}
+
+mat-card-content {
+  font-size: 14px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  margin-left: 10px;
+}
+
+mat-icon {
+  font-size: 16px;
 }

@@ -5,6 +5,7 @@ import { TacheService } from '../tache.service';
 import { Status, Priorite, Tache } from '../core/models/Tache';
 import { debounceTime, Subject } from 'rxjs';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -23,13 +24,13 @@ import { animate, query, stagger, style, transition, trigger } from '@angular/an
     ]),
     trigger('itemAnimation', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'scale(0.9)' }),
-        animate('150ms cubic-bezier(0.4, 0, 0.2, 1)', 
+        style({ opacity: 0, transform: 'scale(0.95)' }),
+        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', 
           style({ opacity: 1, transform: 'scale(1)' }))
       ]),
       transition(':leave', [
-        animate('100ms cubic-bezier(0.4, 0, 0.2, 1)', 
-          style({ opacity: 0, transform: 'scale(0.9)' }))
+        animate('150ms cubic-bezier(0.4, 0, 0.2, 1)', 
+          style({ opacity: 0, transform: 'scale(0.95)' }))
       ])
     ])
   ]
@@ -105,13 +106,15 @@ export class TaskComponent implements OnInit {
   onDragStarted() {
     this.isDragging = true;
   }
-
+  
   onDragEnded() {
-    setTimeout(() => this.isDragging = false, 100);
+    setTimeout(() => {
+      this.isDragging = false;
+    }, 150); // Increased delay to allow animations to finish
   }
+  
 
   isDraggingDisabled(task: Tache): boolean {
-    // Exemple: Désactiver le drag pour les tâches terminées
     return task.etatTache === Status.DONE;
   }
 
@@ -144,16 +147,13 @@ export class TaskComponent implements OnInit {
     this.updateBoardColumns(filtered);
   }
 
-   // Nouvelle méthode pour le tri
    private sortTasks(tasks: Tache[]): Tache[] {
     return tasks.sort((a, b) => {
-      // Tri par date
       if (this.sortField === 'startDate') {
         const dateA = this.getDateValue(a.startDate);
         const dateB = this.getDateValue(b.startDate);
         return this.sortDirection === 'asc' ? dateA - dateB : dateB - dateA;
       }
-      // Tri par priorité
       else {
         const priorityOrder = { 
           [Priorite.HAUTE]: 3, 
@@ -167,7 +167,6 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  // Helper pour convertir les dates
   private getDateValue(date: any): number {
     if (!date) return 0;
     if (date instanceof Date) return date.getTime();
@@ -175,7 +174,6 @@ export class TaskComponent implements OnInit {
     return 0;
   }
 
-  // Mise à jour des colonnes
   private updateBoardColumns(filteredTasks: Tache[]): void {
     this.boardColumns.forEach(col => {
       col.tasks = filteredTasks.filter(t => 
@@ -241,6 +239,7 @@ export class TaskComponent implements OnInit {
   redirectToTaskDetails(idTache: number): void {
     this.router.navigate([`/tasks/details/${idTache}`]);
   }
+
   truncateText(text: string, limit: number = 50): string {
     if (!text) return '';
     return text.length > limit ? text.substring(0, limit) + '...' : text;
@@ -252,7 +251,7 @@ export class TaskComponent implements OnInit {
       case Status.DOING: return 'autorenew';
       case Status.DONE: return 'check_circle';
       case Status.SUSPENDED: return 'pause_circle';
-      default: return 'help';
+      default: return 'help_outline';
     }
-}
+  }
 }

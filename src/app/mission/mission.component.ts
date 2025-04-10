@@ -6,6 +6,8 @@ import { MissionService } from '../mission.service';
 @Component({
   selector: 'app-mission',
   templateUrl: './mission.component.html',
+  styleUrls: ['./mission.component.css'],
+
 })
 export class MissionComponent implements OnInit {
   projetId!: number;
@@ -15,7 +17,7 @@ export class MissionComponent implements OnInit {
   searchText: string = '';
   selectedStatus: string = '';
   currentPage: number = 1;
-  itemsPerPage: number = 3; // Change this to control how many missions to show per page
+  itemsPerPage: number = 4; // Change this to control how many missions to show per page
   totalPages: number = 0;
   pages: number[] = [];
 
