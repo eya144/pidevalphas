@@ -23,6 +23,7 @@ import { TaskComponent } from './task/task.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { UpdateTaskComponent } from './update-task/update-task.component';
+import { RapportProjetComponent } from './rapport-projet/rapport-projet.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'tasks/add/:missionId', component: AddTaskComponent },
   { path: 'task-details/:id', component: TaskDetailsComponent },
   { path: 'tasks/:missionId/:idTache', component: UpdateTaskComponent },
+  { path: 'rapport/:id', component: RapportProjetComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

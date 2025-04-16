@@ -1,7 +1,13 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
+// Routing
 import { AppRoutingModule } from './app-routing.module';
+
+// Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -17,12 +23,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BackMenuAdminComponent } from './back-menu-admin/back-menu-admin.component';
 import { BackHeaderComponent } from './back-header/back-header.component';
 import { ProjetComponent } from './projet/projet.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { AddProjetComponent } from './add-projet/add-projet.component';
+import { EditProjetComponent } from './edit-projet/edit-projet.component';
 import { FooterHomeComponent } from './footer-home/footer-home.component';
 import { HeaderComponent } from './header/header.component';
-import { EditProjetComponent } from './edit-projet/edit-projet.component';
 import { MapComponent } from './map/map.component';
 import { MapSelectorComponentComponent } from './map-selector-component/map-selector-component.component';
 import { MissionComponent } from './mission/mission.component';
@@ -34,30 +38,38 @@ import { TaskComponent } from './task/task.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { UpdateTaskComponent } from './update-task/update-task.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ToastrModule } from 'ngx-toastr';
-import { NgChartsModule } from 'ng2-charts';
 
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// Angular Material Modules
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatExpansionModule } from '@angular/material/expansion';
+
+// CDK & others
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatSelectModule } from '@angular/material/select'; // Manquant
-import { MatDatepickerModule } from '@angular/material/datepicker'; // Recommandé
-import { MatNativeDateModule } from '@angular/material/core'; // Recommandé
-import { MatMenuModule } from '@angular/material/menu'; // Pour les menus
-import { MatTooltipModule } from '@angular/material/tooltip'; // Pour les tooltips
-import { MatSnackBarModule } from '@angular/material/snack-bar'; // Pour les notifications
-import { MatCheckboxModule } from '@angular/material/checkbox'; // Pour les cases à cocher
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'; // Pour les interrupteurs
-import { MatRadioModule } from '@angular/material/radio'; // Pour les boutons radio
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
+// Third-party
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ToastrModule } from 'ngx-toastr';
+import { NgChartsModule } from 'ng2-charts';
+import { RapportProjetComponent } from './rapport-projet/rapport-projet.component';
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   declarations: [
@@ -77,9 +89,9 @@ import { MatRadioModule } from '@angular/material/radio'; // Pour les boutons ra
     BackHeaderComponent,
     ProjetComponent,
     AddProjetComponent,
+    EditProjetComponent,
     FooterHomeComponent,
     HeaderComponent,
-    EditProjetComponent,
     MapComponent,
     MapSelectorComponentComponent,
     MissionComponent,
@@ -90,20 +102,17 @@ import { MatRadioModule } from '@angular/material/radio'; // Pour les boutons ra
     TaskComponent,
     AddTaskComponent,
     UpdateTaskComponent,
-    TaskDetailsComponent
+    TaskDetailsComponent,
+    RapportProjetComponent
   ],
   imports: [
-    // Core Modules
     BrowserModule,
     BrowserAnimationsModule,
-    
-    // Functional Modules
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    
-    // Material Modules (grouped by functionality)
-    // Form Controls
+
+    // Material Modules
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
@@ -112,28 +121,23 @@ import { MatRadioModule } from '@angular/material/radio'; // Pour les boutons ra
     MatSlideToggleModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    
-    // Navigation & Layout
     MatMenuModule,
-    LayoutModule,
-    
-    // Buttons & Indicators
     MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule,
-    
-    // Popups & Modals
+    MatCardModule,
+    MatProgressBarModule,
+    MatExpansionModule,
     MatDialogModule,
     MatSnackBarModule,
     MatTooltipModule,
-    
-    // Data Table
-    MatCardModule,
-    
-    // CDK
+    MatProgressSpinnerModule,
+    MatTableModule,
+
+    // CDK & layout
+    LayoutModule,
     DragDropModule,
-    
-    // Third-party
+
+    // External modules
     NgChartsModule,
     NgxPaginationModule,
     ToastrModule.forRoot({
@@ -141,12 +145,13 @@ import { MatRadioModule } from '@angular/material/radio'; // Pour les boutons ra
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
-    
-    // App Routing (should be last)
-    AppRoutingModule
+
+    // Routing last
+    AppRoutingModule,
+    NgxPrintModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -229,4 +229,9 @@ export class ProjetComponent implements OnInit {
 
     this.getWeatherForProjet(projetId);
   }
+  voirRapport(idProjet: number) {
+    // Redirection vers la page de rapport
+    this.router.navigate(['/rapport', idProjet]);
+  }
+  
 }
