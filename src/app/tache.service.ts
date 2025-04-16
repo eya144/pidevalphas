@@ -73,6 +73,9 @@ export class TacheService {
       })
     );
   }
+  notifyTaskUpdate(tacheId: number) {
+    return this.http.post(`${this.apiUrl}/${tacheId}/notify-update`, {});
+  }
   
   
 }

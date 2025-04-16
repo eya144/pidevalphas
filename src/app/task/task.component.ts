@@ -5,6 +5,7 @@ import { TacheService } from '../tache.service';
 import { Status, Priorite, Tache } from '../core/models/Tache';
 import { debounceTime, Subject } from 'rxjs';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-task',
@@ -79,7 +80,8 @@ export class TaskComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private taskService: TacheService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService 
   ) {}
 
   ngOnInit(): void {
@@ -202,23 +204,39 @@ export class TaskComponent implements OnInit {
 
   onDrop(event: CdkDragDrop<Tache[]>, newStatus: Status): void {
     if (event.previousContainer === event.container) return;
-
+  
     const task: Tache = event.item.data;
     const prevStatus = task.etatTache;
-
+  
     // Mise à jour optimiste
     task.etatTache = newStatus;
     this.applyFiltersAndSorting();
-
-    // Appel API
+  
+    // Appel API de mise à jour
     this.taskService.updateTaskStatus(task.idTache!, newStatus).subscribe({
+      next: () => {
+        // ➕ Appel à la notification backend
+        this.notifyUpdateToBackend(task.idTache!);
+      },
       error: () => {
-        // Rollback en cas d'erreur
         task.etatTache = prevStatus;
         this.applyFiltersAndSorting();
       }
     });
   }
+  notifyUpdateToBackend(taskId: number): void {
+    this.taskService.notifyTaskUpdate(taskId).subscribe({
+      next: () => {
+        console.log('✅ Notification envoyée pour la tâche ID', taskId);
+        this.toastr.success('Le chef de projet a été notifié.');
+      },
+      error: (err) => {
+        console.warn('❌ Échec de la notification', err);
+      }
+    });
+  }
+  
+  
 
   deleteTask(idTache: number): void {
     if (confirm('Are you sure you want to delete this task?')) {
