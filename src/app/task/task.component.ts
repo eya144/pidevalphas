@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TacheService } from '../tache.service';
@@ -6,6 +7,7 @@ import { Status, Priorite, Tache } from '../core/models/Tache';
 import { debounceTime, Subject } from 'rxjs';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { ToastrService } from 'ngx-toastr';
+import { WebsocketService } from '../websocket.service';
 
 @Component({
   selector: 'app-task',
@@ -40,7 +42,7 @@ export class TaskComponent implements OnInit {
   missionId!: number;
   tasks: Tache[] = [];
   isDragging = false;
-  
+
   // Pour les filtres et tris
   searchTerm = '';
   searchTermSubject = new Subject<string>();
@@ -80,8 +82,10 @@ export class TaskComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private taskService: TacheService,
-    private router: Router,
-    private toastr: ToastrService 
+    private toastr: ToastrService,
+    private http: HttpClient,
+    private websocketService: WebsocketService,
+    private router: Router // Correction de l'injection du service Router
   ) {}
 
   ngOnInit(): void {
@@ -104,17 +108,16 @@ export class TaskComponent implements OnInit {
       error: (err) => console.error('Error loading tasks', err)
     });
   }
-  
+
   onDragStarted() {
     this.isDragging = true;
   }
-  
+
   onDragEnded() {
     setTimeout(() => {
       this.isDragging = false;
     }, 150); // Increased delay to allow animations to finish
   }
-  
 
   isDraggingDisabled(task: Tache): boolean {
     return task.etatTache === Status.DONE;
@@ -149,7 +152,7 @@ export class TaskComponent implements OnInit {
     this.updateBoardColumns(filtered);
   }
 
-   private sortTasks(tasks: Tache[]): Tache[] {
+  private sortTasks(tasks: Tache[]): Tache[] {
     return tasks.sort((a, b) => {
       if (this.sortField === 'startDate') {
         const dateA = this.getDateValue(a.startDate);
@@ -204,26 +207,26 @@ export class TaskComponent implements OnInit {
 
   onDrop(event: CdkDragDrop<Tache[]>, newStatus: Status): void {
     if (event.previousContainer === event.container) return;
-  
+
     const task: Tache = event.item.data;
     const prevStatus = task.etatTache;
-  
-    // Mise à jour optimiste
+
     task.etatTache = newStatus;
     this.applyFiltersAndSorting();
-  
-    // Appel API de mise à jour
+
     this.taskService.updateTaskStatus(task.idTache!, newStatus).subscribe({
       next: () => {
-        // ➕ Appel à la notification backend
         this.notifyUpdateToBackend(task.idTache!);
+        this.toastr.success('La Tache a été deplacée par un employé  🚀');
       },
       error: () => {
         task.etatTache = prevStatus;
         this.applyFiltersAndSorting();
+        this.toastr.error("Erreur lors du déplacement de la tâche ❌");
       }
     });
   }
+
   notifyUpdateToBackend(taskId: number): void {
     this.taskService.notifyTaskUpdate(taskId).subscribe({
       next: () => {
@@ -235,8 +238,6 @@ export class TaskComponent implements OnInit {
       }
     });
   }
-  
-  
 
   deleteTask(idTache: number): void {
     if (confirm('Are you sure you want to delete this task?')) {

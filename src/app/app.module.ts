@@ -70,6 +70,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgChartsModule } from 'ng2-charts';
 import { RapportProjetComponent } from './rapport-projet/rapport-projet.component';
 import { NgxPrintModule } from 'ngx-print';
+import { SocketIoModule } from 'ngx-socket-io';
+import { SocketIoConfig } from 'ngx-socket-io';
 
 @NgModule({
   declarations: [
@@ -104,6 +106,7 @@ import { NgxPrintModule } from 'ngx-print';
     UpdateTaskComponent,
     TaskDetailsComponent,
     RapportProjetComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -145,6 +148,7 @@ import { NgxPrintModule } from 'ngx-print';
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    SocketIoModule.forRoot({ url: 'http://localhost:3000', options: {} }),
 
     // Routing last
     AppRoutingModule,
