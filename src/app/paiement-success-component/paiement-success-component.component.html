@@ -1,8 +1,11 @@
+<app-app-header></app-app-header>
 <div class="container mt-5">
     <div class="alert alert-success text-center">
-      <h2>Paiement réussi!</h2>
-      <p>Merci pour votre paiement. Votre transaction a été complétée avec succès.</p>
-      <p *ngIf="sessionId">ID de session: {{ sessionId }}</p>
-      <a routerLink="/" class="btn btn-primary">Retour à l'accueil</a>
+      <h2> Payment Successful!</h2>
+      <p>  Thank you for your payment. </p>
+      <p>  Your transaction has been completed successfully. </p>
+      <p *ngIf="sessionId">Session ID:  {{ sessionId }}</p>
+      <a routerLink="/finance" class="btn btn-primary"> Back </a>
     </div>
   </div>
+  <app-app-footer></app-app-footer>  

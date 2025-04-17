@@ -26,6 +26,7 @@ import { PaiementSuccessComponentComponent } from './paiement-success-component/
 import { PaiementCancelComponentComponent } from './paiement-cancel-component/paiement-cancel-component.component';
 import { jsPDF } from 'jspdf';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { SignaturePadComponent } from './signature-pad/signature-pad.component';
 
 
 const routes: Routes = [
@@ -54,6 +55,7 @@ const routes: Routes = [
   { path: 'add-fichedepaie', component: AddFichedepaieComponent },
   { path: 'success', component: PaiementSuccessComponentComponent},
   { path: 'cancel', component: PaiementCancelComponentComponent },
+  { path: 'signature-pad', component: SignaturePadComponent },
   { path: '', component: BackHeaderComponent },
 ];
 

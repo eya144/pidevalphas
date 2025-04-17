@@ -7,6 +7,8 @@ import { jsPDF } from 'jspdf';
 import * as QRCode from 'qrcode';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner/lib/zxing-scanner.component';
 import { BarcodeFormat } from '@zxing/library';
+import { ElementRef } from '@angular/core';
+import SignaturePad from 'signature_pad';
 @Component({
   selector: 'app-finance',
   templateUrl: './finance.component.html',
@@ -41,6 +43,10 @@ export class FinanceComponent implements OnInit {
 
     @ViewChild('scanner')
     scanner!: ZXingScannerComponent;
+
+    @ViewChild('signaturePad', { static: false }) signaturePadElement!: ElementRef;
+signaturePad!: SignaturePad;
+signatureImg!: string;
     
   constructor(
     private fb: FormBuilder,
@@ -183,19 +189,17 @@ sortByAmount(field: string): void {
   }
 
   this.factures.sort((a, b) => {
-    const valueA = (a as any)[field];
-    const valueB = (b as any)[field];
-
-    if (this.sortDirection === 'asc') {
-      return valueA - valueB;
-    } else {
-      return valueB - valueA;
-    }
+    const valueA = a[field as keyof Facture] as number;
+    const valueB = b[field as keyof Facture] as number;
+    return this.sortDirection === 'asc' ? valueA - valueB : valueB - valueA;
   });
 }
   
 viewFacture(facture: Facture): void {
   this.selectedFacture = facture;
+  setTimeout(() => {
+    this.initSignaturePad();
+  }, 100);
 }
 
 closeModal(): void {
@@ -203,8 +207,57 @@ closeModal(): void {
 }
 
 printInvoice(): void {
-  window.print();
+  // Créer un clone du contenu à imprimer
+  const invoiceContent = document.getElementById('invoice-details')?.cloneNode(true) as HTMLElement;
+  
+  if (!invoiceContent) return;
+
+  // Ajouter la signature si elle existe
+  if (this.signatureImg) {
+    const signatureDiv = document.createElement('div');
+    signatureDiv.style.marginTop = '50px';
+    signatureDiv.style.borderTop = '1px solid #000';
+    signatureDiv.style.paddingTop = '20px';
+    
+    const signatureTitle = document.createElement('h3');
+    signatureTitle.textContent = 'Signature';
+    
+    const signatureImage = document.createElement('img');
+    signatureImage.src = this.signatureImg;
+    signatureImage.style.maxWidth = '200px';
+    
+    signatureDiv.appendChild(signatureTitle);
+    signatureDiv.appendChild(signatureImage);
+    invoiceContent.appendChild(signatureDiv);
+  }
+
+  const popupWin = window.open('', '_blank', 'width=800,height=600');
+  if (popupWin) {
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Invoice Print</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            .invoice-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+            .invoice-amounts { margin-top: 20px; }
+            .amount-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+            .total { font-weight: bold; font-size: 1.1em; }
+          </style>
+        </head>
+        <body onload="window.print();window.close()">
+          ${invoiceContent.innerHTML}
+        </body>
+      </html>
+    `);
+    popupWin.document.close();
+  }
 }
+
 
 exportToExcel(): void {
   this.financeService.exportToExcel().subscribe({
@@ -279,5 +332,70 @@ startScanner(): void {
 
 stopScanner(): void {
   this.showScanner = false;
+}
+// Initialise le pad de signature
+initSignaturePad() {
+  const canvas: HTMLCanvasElement = this.signaturePadElement.nativeElement;
+  this.signaturePad = new SignaturePad(canvas, {
+    backgroundColor: 'rgb(255, 255, 255)',
+    penColor: 'rgb(0, 0, 0)'
+  });
+}
+
+// Efface la signature
+clearSignature() {
+  this.signaturePad.clear();
+}
+
+// Sauvegarde la signature
+saveSignature() {
+  if (this.signaturePad.isEmpty()) {
+    alert('Please provide a signature first.');
+    return;
+  }
+  
+  const signatureData = this.signaturePad.toDataURL('image/png');
+  this.signatureImg = signatureData;
+  
+  // Vous pouvez maintenant inclure cette signature dans l'impression
+  alert('Signature saved! You can now print the invoice with the signature.');
+}
+
+// Modifiez la méthode printInvoice pour inclure la signature
+printInvoices(): void {
+  let printContents = document.getElementById('invoice-details')?.innerHTML;
+  
+  if (!printContents) return;
+
+  // Ajoutez la signature si elle existe
+  if (this.signatureImg) {
+    printContents += `
+      <div style="margin-top: 50px; border-top: 1px solid #000; padding-top: 20px;">
+        <h3>Signature</h3>
+        <img src="${this.signatureImg}" style="max-width: 200px;"/>
+      </div>
+    `;
+  }
+
+  const popupWin = window.open('', '_blank', 'width=800,height=600');
+  if (popupWin) {
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Invoice Print</title>
+          <style>
+            body { font-family: Arial, sans-serif; }
+            .signature-area { margin-top: 50px; }
+            .signature-img { max-width: 200px; border-top: 1px solid #000; }
+          </style>
+        </head>
+        <body onload="window.print();window.close()">
+          ${printContents}
+        </body>
+      </html>
+    `);
+    popupWin.document.close();
+  }
 }
 }

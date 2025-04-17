@@ -35,6 +35,7 @@ import { PaiementCancelComponentComponent } from './paiement-cancel-component/pa
 import { StripeService } from './stripe.service';
 import { jsPDF } from 'jspdf';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { SignaturePadComponent } from './signature-pad/signature-pad.component';
 @NgModule({
   declarations: [
    
@@ -64,6 +65,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
       AddFichedepaieComponent,
       PaiementSuccessComponentComponent,
       PaiementCancelComponentComponent,
+      SignaturePadComponent,
     
     ],
   imports: [

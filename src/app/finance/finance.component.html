@@ -144,6 +144,17 @@
       <button class="btn-print" (click)="printInvoice()"><i class="fas fa-print"></i> Print</button>
       <button class="btn-qr" (click)="showQRCode()"><i class="fas fa-qrcode"></i> Show QR</button>
       <button class="btn-cancel" (click)="closeModal()"><i class="fas fa-times"></i> Cancel</button>
+      <!-- Signature Section -->
+<div class="signature-container" *ngIf="selectedFacture">
+  <h4>Digital Signature</h4>
+  <div class="signature-pad">
+    <canvas #signaturePad width="400" height="200" class="signature-canvas"></canvas>
+  </div>
+  <div class="signature-buttons">
+    <button class="btn-clear" (click)="clearSignature()">Clear</button>
+    <button class="btn-save" (click)="saveSignature()">Save Signature</button>
+  </div>
+</div>
     </div>
     <!-- Ajoutez cette section après votre modal-footer pour afficher le QR code -->
 <div class="qr-container" *ngIf="showQR">
@@ -163,6 +174,6 @@
   <button (click)="stopScanner()">Close Scanner</button>
 </div>
   </div>
-  
+
 </div>
 <app-app-footer></app-app-footer>

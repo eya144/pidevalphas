@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StripeService } from '../stripe.service';
 import { FinanceService } from '../finance.service';
 import { Facture } from '../core/models/Factures';
+import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
+import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
 
 @Component({
   selector: 'app-paiement',
@@ -56,28 +58,31 @@ export class PaiementComponent implements OnInit {
 
   async proceedToPayment(): Promise<void> {
     if (!this.facture) return;
-
+  
     this.isLoading = true;
     this.error = null;
-
+  
     try {
-      const session = await this.stripeService.createCheckoutSession(
-        this.facture.idFacture!,
-        this.facture.montantTotal
-      ).toPromise();
-
-      await this.stripeService.redirectToCheckout(session.id);
+      const response = await lastValueFrom(
+        this.stripeService.createCheckoutSession(
+          this.facture.idFacture!,
+          this.facture.montantTotal
+        )
+      );
+  
+      await this.stripeService.redirectToCheckout(response.id);
       
-      // Update invoice status after successful payment
+      // Only update if redirect succeeds
       this.financeService.updateFactureStatus(
         this.facture.idFacture!,
         'Paid'
       ).subscribe({
-        error: (err) => console.error('Error updating invoice status:', err)
+        error: (err) => console.error('Status update error:', err)
       });
-    } catch (err) {
+      
+    } catch (err: any) {
       console.error('Payment error:', err);
-      this.error = 'Payment failed. Please try again.';
+      this.error = err.error?.message || err.message || 'Payment failed';
       this.isLoading = false;
     }
   }
