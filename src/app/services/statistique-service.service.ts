@@ -38,4 +38,18 @@ export class StatistiqueServiceService {
     return this.http.get<any>(`${this.apiUrl}/status`);
   }
 
+  // cahier-des-charges.service.ts
+
+getStats(): Observable<{ validated: number, notValidated: number }> {
+  return this.http.get<{ validated: number, notValidated: number }>(`${this.apiUrl}/stats`);
+}
+
+getCahierParUserStats(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/cahier-par-user`);
+}
+
+
+
+
+
 }

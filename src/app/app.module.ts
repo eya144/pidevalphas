@@ -54,6 +54,9 @@ import { CahierDesChargesAddComponent } from './cahier-des-charges-add/cahier-de
 import { ListecahierpararchitectComponent } from './listecahierpararchitect/listecahierpararchitect.component';
 
 import { UpdatecahierComponent } from './updatecahier/updatecahier.component';
+import { ListeAllcahierdechargeComponent } from './liste-allcahierdecharge/liste-allcahierdecharge.component';
+import { ProjectStatistiquesComponent } from './project-statistiques/project-statistiques.component';
+import { CahiernavbarComponent } from './cahiernavbar/cahiernavbar.component';
 
 
 
@@ -107,6 +110,9 @@ import { UpdatecahierComponent } from './updatecahier/updatecahier.component';
       CahierDesChargesAddComponent,
       ListecahierpararchitectComponent,
       UpdatecahierComponent,
+      ListeAllcahierdechargeComponent,
+      ProjectStatistiquesComponent,
+      CahiernavbarComponent,
       
   ],
   imports: [
@@ -117,8 +123,8 @@ import { UpdatecahierComponent } from './updatecahier/updatecahier.component';
     HttpClientModule ,
     FormsModule, // 
     ReactiveFormsModule,
-    NgChartsModule
-
+    NgChartsModule,
+  
     
 
   ],

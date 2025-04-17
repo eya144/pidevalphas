@@ -74,14 +74,13 @@ export class CahierDesChargesAddComponent implements OnInit {
  
 
     this.http.post(`http://localhost:8083/pidev/api/cahier-de-charge/create-with-pdf/${architecteId}/${projetId}`, formData)
-      .subscribe(
-        () => {
-          Swal.fire({ icon: 'success', title: 'Document Added', text: 'The specification document has been successfully added!' })
-            .then(() => { this.router.navigate([`/cahierspararchitecte/${architecteId}`]); });
-        },
-        (error: HttpErrorResponse) => {
-          Swal.fire({ icon: 'error', title: 'Error', text: error.error?.message || 'Error while adding the specification document' });
-        }
-      );
-  }
-}
+    .subscribe(
+      (response: any) => {
+        Swal.fire({ icon: 'success', title: 'Document Added', text: response.message })
+          .then(() => this.router.navigate([`/cahierspararchitecte/${architecteId}`]));
+      },
+      (error: HttpErrorResponse) => {
+        Swal.fire({ icon: 'error', title: 'Error', text: error.error?.message || 'Erreur lors de l\'ajout du document' });
+      }
+    );
+}}

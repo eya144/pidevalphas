@@ -103,7 +103,7 @@ export interface CahierDeCharge {
   titre: string;
   description: string;
   pdfData?: string | ArrayBuffer | null; // Stockage du fichier sous forme de base64 ou buffer
-  user?: User; // Relation avec l'utilisateur
+  user: User; // Relation avec l'utilisateur
 }
 
 export interface User {

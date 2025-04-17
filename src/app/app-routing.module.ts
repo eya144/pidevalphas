@@ -39,6 +39,9 @@ import { StatistiqueadminComponent } from './statistiqueadmin/statistiqueadmin.c
 import { CahierDesChargesAddComponent } from './cahier-des-charges-add/cahier-des-charges-add.component';
 import { ListecahierpararchitectComponent } from './listecahierpararchitect/listecahierpararchitect.component';
 import { UpdatecahierComponent } from './updatecahier/updatecahier.component';
+import { ListeAllcahierdechargeComponent } from './liste-allcahierdecharge/liste-allcahierdecharge.component';
+import { ProjectStatistiquesComponent } from './project-statistiques/project-statistiques.component';
+import { CahiernavbarComponent } from './cahiernavbar/cahiernavbar.component';
 
 
 const routes: Routes = [
@@ -99,6 +102,10 @@ const routes: Routes = [
       { path: 'nonConformities/:id/add-action', component: AddActionComponent } ,
       { path: 'update-rapport/:id', component: UpdateRapportComponent },
       { path: 'editcahier/:id', component: UpdatecahierComponent },
+      { path: 'listeCahier', component: ListeAllcahierdechargeComponent },
+      { path: 'projetStatistique', component: ProjectStatistiquesComponent },
+      
+      { path: 'app-cahiernavbar', component: CahiernavbarComponent },
     
   { path: '', redirectTo:'/home',pathMatch:'full' },
 
