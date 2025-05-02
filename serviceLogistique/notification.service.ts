@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class NotificationService {
   private oneSignalApiUrl = 'https://onesignal.com/api/v1/notifications';
-   appId = '81b1fdc2-fde1-4f47-991c-0483ece01220';  // Remplace avec ton OneSignal App ID
+   appId = '81b1fdc2-fde1-4f47-991c-0483ece01220'; 
   private apiKey = 'os_v2_app_qgy73qx54fhupgi4asb6zyasecspf734t73ef6v5gj4eugrpted5gmksztzsa54sacywixg67ueub4hfijt4uhku3o4qvbylff3sepi';  // Remplace avec ta OneSignal REST API Key
   private notificationsSubject = new Subject<any>();
 

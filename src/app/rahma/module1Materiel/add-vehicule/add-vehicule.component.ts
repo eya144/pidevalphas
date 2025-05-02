@@ -36,7 +36,7 @@ export class AddVehiculeComponent implements OnInit {
     if (this.vehiculeForm.valid) {
       this.vehiculeService.ajouterVehicule(this.vehiculeForm.value).subscribe(response => {
         this.successMessage = 'Le véhicule a été ajouté avec succès!';
-        this.router.navigate(['/logistique']);
+        this.router.navigate(['dashboardLogistique/logistique']);
   
         setTimeout(() => {
           this.successMessage = '';

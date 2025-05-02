@@ -1,77 +1,77 @@
 <app-back-header></app-back-header>
-<body class="bg-light">
+<body class="bg-Dark">
   <div class="container mt-5">
-    <div class="card shadow-lg p-4">
-      <h2 class="text-center mb-4">Modifier un Véhicule</h2>
+    <div class="card shadow-lg p-4 bg-white">
+      <h2 class="text-center mb-4 text-dark">Edit Vehicle</h2>
       <form [formGroup]="vehiculeForm" (ngSubmit)="onSubmit()">
-        
-        <!-- Première ligne (Nom et Chauffeur ID) -->
+
+        <!-- First row (Vehicle Name and Driver ID) -->
         <div class="row">
           <div class="col-md-6">
             <div class="form-group mb-3">
-              <label class="form-label"><i class="fas fa-car"></i> Nom du véhicule</label>
-              <input type="text" class="form-control" formControlName="nomVehicule" placeholder="Entrez le nom" />
+              <label class="form-label text-dark"><i class="fas fa-car"></i> Vehicle Name</label>
+              <input type="text" class="form-control bg-light text-dark border-dark" formControlName="nomVehicule" placeholder="Enter name" />
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group mb-3">
-              <label class="form-label"><i class="fas fa-user"></i> Chauffeur ID</label>
-              <input type="number" class="form-control" formControlName="idChauffeur" placeholder="ID du chauffeur" />
+              <label class="form-label text-dark"><i class="fas fa-user"></i> Driver ID</label>
+              <input type="number" class="form-control bg-light text-dark border-dark" formControlName="idChauffeur" placeholder="Enter driver ID" />
             </div>
           </div>
         </div>
 
-        <!-- Deuxième ligne (Marque et Modèle) -->
+        <!-- Second row (Brand and Model) -->
         <div class="row">
           <div class="col-md-6">
             <div class="form-group mb-3">
-              <label class="form-label"><i class="fas fa-industry"></i> Marque</label>
-              <input type="text" class="form-control" formControlName="marque" placeholder="Ex: Toyota" />
+              <label class="form-label text-dark"><i class="fas fa-industry"></i> Brand</label>
+              <input type="text" class="form-control bg-light text-dark border-dark" formControlName="marque" placeholder="Ex: Toyota" />
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group mb-3">
-              <label class="form-label"><i class="fas fa-car-side"></i> Modèle</label>
-              <input type="text" class="form-control" formControlName="modele" placeholder="Ex: Corolla" />
+              <label class="form-label text-dark"><i class="fas fa-car-side"></i> Model</label>
+              <input type="text" class="form-control bg-light text-dark border-dark" formControlName="modele" placeholder="Ex: Corolla" />
             </div>
           </div>
         </div>
 
-        <!-- Troisième ligne (Immatriculation et Type de véhicule) -->
+        <!-- Third row (License Plate and Vehicle Type) -->
         <div class="row">
           <div class="col-md-6">
             <div class="form-group mb-3">
-              <label class="form-label"><i class="fas fa-id-card"></i> Immatriculation</label>
-              <input type="text" class="form-control" formControlName="immatriculation" placeholder="123-ABC" />
+              <label class="form-label text-dark"><i class="fas fa-id-card"></i> License Plate</label>
+              <input type="text" class="form-control bg-light text-dark border-dark" formControlName="immatriculation" placeholder="123-ABC" />
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group mb-3">
-              <label class="form-label"><i class="fas fa-truck"></i> Type de véhicule</label>
-              <select class="form-select" formControlName="typeVehicule">
+              <label class="form-label text-dark"><i class="fas fa-truck"></i> Vehicle Type</label>
+              <select class="form-select bg-light text-dark border-dark" formControlName="typeVehicule">
                 <option *ngFor="let type of typesVehicule" [value]="type">{{ type }}</option>
               </select>
             </div>
           </div>
         </div>
 
-        <!-- Case à cocher (Disponibilité) -->
+        <!-- Availability checkbox -->
         <div class="form-check form-switch mb-3">
           <input class="form-check-input" type="checkbox" formControlName="disponible" />
-          <label class="form-check-label"><i class="fas fa-check-circle"></i> Disponible</label>
+          <label class="form-check-label text-dark"><i class="fas fa-check-circle"></i> Available</label>
         </div>
 
-        <!-- Boutons de soumission et annulation -->
+        <!-- Submit and Cancel buttons -->
         <div class="text-center mt-4">
           <button type="submit" class="btn btn-primary btn-lg" [disabled]="vehiculeForm.invalid">
-            <i class="fas fa-save"></i> Mettre à jour
+            <i class="fas fa-save"></i> Update
           </button>
           <button type="button" class="btn btn-secondary btn-lg ms-3" (click)="onCancel()">
-            <i class="fas fa-times"></i> Annuler
+            <i class="fas fa-times"></i> Cancel
           </button>
         </div>
 
-        <!-- Message de succès -->
+        <!-- Success message -->
         <div *ngIf="successMessage" class="alert alert-success text-center mt-3">
           {{ successMessage }}
         </div>

@@ -2,7 +2,7 @@
 body {
     font-family: 'Inter', sans-serif; /* Police moderne */
     background-color: #181f26; /* Fond léger */
-    color: #333;
+    color: #fffcfc;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,3 +12,15 @@ body {
     padding-top: 60px;
 }
 
+.card {
+    background-color: #ffffff; /* Fond blanc pour le container */
+    color: #000000;            /* Texte noir dans la carte (lisible sur blanc) */
+    border-radius: 0.75rem;
+  }
+  .card input,
+  .card select,
+  .card textarea {
+    background-color: #f9f9f9;
+    color: #000000;
+  }
+    

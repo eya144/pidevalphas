@@ -1,45 +1,39 @@
-<div class="container-fluid mt-5">
-  <div class="d-flex justify-content-between align-items-center">
-    <!-- Titre -->
-    <h2 class="text-center text-white mb-4">Gestion des Véhicules</h2>
-    
-    <!-- Image à côté du titre -->
-    <img src="/assets/img/logistique/1063342location.png" alt="Véhicule" class="img-fluid" style="height: 80px; width: 80px;" />
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-white fw-bold">Vehicle Management</h2>
+    <img src="/assets/img/logistique/1063342location.png" alt="Vehicle" class="img-fluid location-icon" (click)="redirectToDispo()">
   </div>
 
-  <!-- Tableau des véhicules avec design moderne -->
   <div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover custom-table">
-      <thead>
-        <tr class="table-header">
-          <th scope="col">ID</th>
-          <th scope="col">Nom du Véhicule</th>
-          <th scope="col">Chauffeur</th>
-          <th scope="col">Marque</th>
-          <th scope="col">Modèle</th>
-          <th scope="col">Immatriculation</th>
-          <th scope="col">Type</th>
-          <th scope="col">Disponible</th>
-          <th scope="col">Actions</th>
+    <table class="table table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>License Plate</th>
+          <th>Type</th>
+          <th>Availability</th>
+          <th>Driver</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let vehicule of vehicules" class="table-row">
-          <td>{{ vehicule.idVehicule }}</td>
+        <tr *ngFor="let vehicule of vehicules">
           <td>{{ vehicule.nomVehicule }}</td>
-          <td>{{ vehicule.idChauffeur ? vehicule.idChauffeur : 'Aucun' }}</td>
           <td>{{ vehicule.marque }}</td>
           <td>{{ vehicule.modele }}</td>
           <td>{{ vehicule.immatriculation }}</td>
           <td>{{ vehicule.typeVehicule }}</td>
           <td>
-            <input type="checkbox" [(ngModel)]="vehicule.disponible" (change)="updateDisponibilite(vehicule)" class="form-check-input" />
-            <span class="ml-2">{{ vehicule.disponible ? 'Disponible' : 'Indisponible' }}</span>
+            <span class="badge" [ngClass]="vehicule.disponible ? 'bg-success' : 'bg-danger'">
+              {{ vehicule.disponible ? 'Available' : 'Assigned' }}
+            </span>
           </td>
-          <td class="action-buttons">
+          <td>
             <select [(ngModel)]="vehicule.idChauffeur" (change)="updateChauffeur(vehicule)" class="form-select">
-              <option value="">Aucun</option>
-              <option *ngFor="let chauffeur of chauffeurs" [value]="chauffeur.idChauffeur">
+              <option value="">None</option>
+              <option *ngFor="let chauffeur of chauffeurs" [value]="chauffeur.idChauffeur"
+                      [disabled]="isChauffeurAffecte(chauffeur.idChauffeur) && vehicule.idChauffeur !== chauffeur.idChauffeur">
                 {{ chauffeur.nomChauffeur }}
               </option>
             </select>
@@ -49,8 +43,7 @@
     </table>
   </div>
 
-  <!-- Message si aucun véhicule n'est disponible -->
-  <div *ngIf="vehicules.length === 0" class="alert alert-warning text-center">
-    Aucun véhicule disponible pour le moment.
+  <div *ngIf="vehicules.length === 0" class="alert alert-warning text-center mt-4">
+    No vehicles available at the moment.
   </div>
 </div>

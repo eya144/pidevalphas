@@ -24,7 +24,6 @@ import { DetailsDemandeEmploiComponent } from './rahma/module2Entretien/details-
 import { EntretienComponent } from './rahma/module2Entretien/entretien/entretien.component';
 import { OrganisationEntretienComponent } from './rahma/module2Entretien/organisation-entretien/organisation-entretien.component';
 import { DemandeMaterielComponent } from './rahma/module1Demande/demande-materiel/demande-materiel.component';
-import { DetailDemandeComponent } from './rahma/module1Demande/detail-demande/detail-demande.component';
 import { ListDemandeComponent } from './rahma/module1Demande/list-demande/list-demande.component';
 import { ListeDemandeByUserComponent } from './rahma/module1Demande/liste-demande-by-user/liste-demande-by-user.component';
 import { ListeDemandeDashComponent } from './rahma/module1Demande/liste-demande-dash/liste-demande-dash.component';
@@ -50,6 +49,7 @@ const routes: Routes = [
   { path: 'service', component: ServiceComponent },
   { path: 'service', component: ServiceComponent }, 
   { path: 'dashboard', component: DashboardComponent },
+  //RAHMA
   { path: 'addMateriel', component: AddMaterielComponent },
   { path: 'editMateriel/:id', component: EditMaterielComponent }, 
   { path: 'commande/:idCommande', component: CommandeComponent },
@@ -61,24 +61,25 @@ const routes: Routes = [
       { path: 'listDemandeDash', component: ListeDemandeDashComponent },
       { path: 'affectVehicule', component: AffectVehiculeComponent },
       { path: 'statistique', component: TopMaterielComponent },  
-      { path: 'logistique/editMateriel/:id', component: EditMaterielComponent },  
+      { path: 'vehiculeDispo', component: VehiculeDispoComponent },  
+      
     ],
   },
   { path: 'commandeFournisseur', component: CommandeFournisseurComponent },
-  { path: 'demandeEmploi', component: DemandeEmploiComponent },
-  { path: 'demandeEmploi/details/:id', component: DetailsDemandeEmploiComponent },
-  { path: 'demandesEmploi', component : EntretienComponent },
-  { path: 'entretientOrg/:id', component: OrganisationEntretienComponent },
-  { path: 'demandeMateriel', component: DemandeMaterielComponent },
-  { path: 'detailDemande/:id', component: DetailDemandeComponent },
-  { path: 'listDemande', component: ListeDemandeDashComponent },
-  { path: 'listDemandeByUser', component: ListeDemandeByUserComponent },
-  { path: 'addVehicule', component: AddVehiculeComponent },
-  { path: 'editVehicule/:id', component: EditVehiculeComponent },
-  { path: 'planning', component: PlaningComponent },  
   { path: 'chauffeurInterface', component: ChauffeurInterfaceComponent },  
   { path: 'vehiculeDispo', component: VehiculeDispoComponent },  
-  
+  { path: 'demandeEmploi', component: DemandeEmploiComponent },
+  { path: 'demandeEmploi/details/:id', component: DetailsDemandeEmploiComponent },
+  { path: 'addVehicule', component: AddVehiculeComponent },
+  { path: 'editVehicule/:id', component: EditVehiculeComponent },
+  { path: 'demandeMateriel', component: DemandeMaterielComponent },
+
+  { path: 'demandesEmploi', component : EntretienComponent },
+  { path: 'entretientOrg/:id', component: OrganisationEntretienComponent },
+  { path: 'listDemande', component: ListeDemandeDashComponent },
+  { path: 'planning', component: PlaningComponent },  
+
+  //RAHMA
 
   { path: '', redirectTo:'/home',pathMatch:'full' }
 ];

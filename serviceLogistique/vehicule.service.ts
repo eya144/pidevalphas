@@ -31,11 +31,11 @@ export class VehiculeService {
     }
 
     affecterChauffeurAVehicule(idVehicule: number, idChauffeur: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/vehicules/${idVehicule}/affecter/${idChauffeur}`, {});
+    return this.http.post(`${this.baseUrl}/${idVehicule}/affecter/${idChauffeur}`, {});
   }
 
   desaffecterChauffeurDuVehicule(idVehicule: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/vehicules/${idVehicule}/desaffecter`, {});
+    return this.http.post(`${this.baseUrl}/${idVehicule}`, {});
   }
   getAllChauffeurs(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/getAllChauffeur`);

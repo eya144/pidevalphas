@@ -71,7 +71,7 @@ export class EditVehiculeComponent implements OnInit {
           this.successMessage = 'Le véhicule a été mis à jour avec succès!';
           setTimeout(() => {
             this.successMessage = '';
-            this.router.navigate(['/logistique']);
+            this.router.navigate(['/dashboardLogistique/logistique']);
           }, 3000);
         },
         (error) => {
@@ -85,6 +85,6 @@ export class EditVehiculeComponent implements OnInit {
   
   onCancel(): void {
     this.vehiculeForm.reset();
-    this.router.navigate(['/logistique']);
+    this.router.navigate(['/dashboardLogistique/logistique']);
   }
 }

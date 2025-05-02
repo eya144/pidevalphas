@@ -3,15 +3,14 @@
 <body>
   <div class="container mt-5">
     
-    
-    <!-- Icônes de notification et calendrier -->
+    <!-- Notification and Calendar Icons -->
     <div class="text-center mb-4">
-      <!-- Icône de notification -->
+      <!-- Notification Icon -->
       <button class="btn btn-outline-primary btn-sm mx-2" (click)="afficherNotifications()">
         <i class="bi bi-bell"></i> Notifications
       </button>
 
-      <!-- Liste des notifications -->
+      <!-- Notifications List -->
       <div *ngIf="showNotifications" class="notifications-container">
         <h4>Notifications</h4>
         <ul>
@@ -22,33 +21,33 @@
         </ul>
       </div>
 
-      <!-- Bouton Calendrier -->
+      <!-- Calendar Button -->
       <button class="btn btn-outline-secondary btn-sm mx-2" (click)="redirectToPlaning()">
-        <i class="bi bi-calendar"></i> Calendrier
+        <i class="bi bi-calendar"></i> Calendar
       </button>
     </div>
 
-    <!-- Reste du contenu -->
-    <h2 class="text-center mb-4">Liste des Demandes d'Emploi</h2>
+    <!-- Main Title -->
+    <h2 class="text-center mb-4">Job Applications List</h2>
 
-    <!-- Chargement -->
+    <!-- Loading Spinner -->
     <div *ngIf="isLoading" class="text-center">
       <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Chargement...</span>
+        <span class="visually-hidden">Loading...</span>
       </div>
     </div>
 
-    <!-- Tableau des demandes -->
+    <!-- Applications Table -->
     <div *ngIf="!isLoading && demandes.length > 0">
       <table class="table table-bordered table-striped table-hover">
         <thead class="table-dark">
           <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Âge</th>
-            <th>Spécialité</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Age</th>
+            <th>Specialty</th>
             <th>Email</th>
-            <th>Statut</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -62,10 +61,10 @@
             <td>{{ demande.status }}</td>
             <td class="d-flex justify-content-around">
               <button (click)="passerEntretien(demande.idDemandeEmploi)" class="btn btn-success btn-sm">
-                Passer Entretien
+                Schedule Interview
               </button>
               <button (click)="refuserDemande(demande.idDemandeEmploi, demande.adresseMail)" class="btn btn-danger btn-sm">
-                Refuser
+                Reject
               </button>
               <button (click)="supprimerDemande(demande.idDemandeEmploi)" class="btn btn-warning btn-sm">
                 🗑️
@@ -76,7 +75,7 @@
       </table>
     </div>
 
-    <!-- Message si aucune demande -->
-    <p *ngIf="!isLoading && demandes.length === 0" class="text-center text-muted">Aucune demande trouvée.</p>
+    <!-- No Application Message -->
+    <p *ngIf="!isLoading && demandes.length === 0" class="text-center text-muted">No applications found.</p>
   </div>
 </body>

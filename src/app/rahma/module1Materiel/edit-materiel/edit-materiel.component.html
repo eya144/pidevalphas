@@ -1,7 +1,7 @@
 <app-back-header></app-back-header>
 <body>
   <div class="edit-materiel-container">
-    <h2>Modifier le Matériel</h2>
+    <h2>Edit Material</h2>
     <form (ngSubmit)="saveMateriel()">
       <!-- Champ Nom du Matériel -->
       <div class="form-group">
@@ -14,7 +14,7 @@
           placeholder=" "
           required 
         />
-        <label for="nomMateriel">Nom du Matériel</label>
+        <label for="nomMateriel">Material Name</label>
       </div>
 
       <!-- Champ Catégorie -->
@@ -31,7 +31,7 @@
             {{ categorie }}
           </option>
         </select>
-        <label for="categorie">Catégorie</label>
+        <label for="categorie">Category</label>
       </div>
 
       <!-- Champ Quantité -->
@@ -44,7 +44,7 @@
           placeholder=" "
           required 
         />
-        <label for="quantite">Quantité</label>
+        <label for="quantite">Quantity</label>
       </div>
 
       <!-- Champ Prix Unitaire -->
@@ -57,18 +57,18 @@
           placeholder=" "
           required 
         />
-        <label for="prixMateriel">Prix Unitaire</label>
+        <label for="prixMateriel">Price</label>
       </div>
   
       <!-- Boutons -->
       <div class="form-actions">
-        <button type="submit" class="btn-save">Sauvegarder</button>
+        <button type="submit" class="btn-save">Save</button>
         <button 
           type="button" 
           class="btn-cancel" 
           (click)="router.navigate(['/dashboardLogistique/logistique'])"
         >
-          Annuler
+          Cancel
         </button>
       </div>
     </form>

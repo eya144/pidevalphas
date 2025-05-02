@@ -47,7 +47,7 @@ export class EditMaterielComponent implements OnInit {
   saveMateriel(): void {
     this.materielService.updateMateriel(this.materiel.idMateriel, this.materiel).subscribe(
       () => {
-        this.router.navigate(['/logistique']);  // Redirige vers la page de gestion des matériels après modification
+        this.router.navigate(['/dashboardLogistique/logistique']);  // Redirige vers la page de gestion des matériels après modification
       },
       (error) => {
         console.error('Erreur lors de la sauvegarde du matériel', error);

@@ -122,14 +122,25 @@ showNotifications: boolean = false;  // Contrôler l'affichage des notifications
   }
   filtrerParCategorie(categorie: string): void {
     this.materielService.getMaterielsByCategorie(categorie).subscribe(
-      (data) => { this.materiels = data; },
+      (data) => { 
+        this.materiels = data;
+        this.materielsAffiches = [...data]; // Mettre à jour les matériels affichés
+        this.currentPage = 1; // Réinitialiser à la première page
+      },
       (error) => { console.error(`Erreur lors de la récupération des matériels de la catégorie ${categorie}`, error); }
     );
   }
+
   filtrerParType(typeVehicule: string): void {
     this.vehiculeService.getVehiculesByType(typeVehicule).subscribe(
-      (data) => { this.vehicules = data; },
-      (error) => { console.error(`Erreur lors de la récupération des véhicules du type ${typeVehicule}`, error); }
+      (data) => { 
+        this.vehicules = data;
+        this.vehiculesAffiches = [...data]; // Mettre à jour les véhicules affichés
+        this.currentPageVehicules = 1; // Réinitialiser à la première page
+      },
+      (error) => { 
+        console.error(`Erreur lors de la récupération des véhicules du type ${typeVehicule}`, error); 
+      }
     );    
   }
 
@@ -296,7 +307,14 @@ filtrerMateriels(event: Event): void {
 }
 
 resetFilters(): void {
-  this.getAllMateriels();
+  this.materielService.getMateriels().subscribe(
+    (data) => {
+      this.materiels = data;
+      this.materielsAffiches = [...data]; // Réinitialiser les matériels affichés
+      this.currentPage = 1; // Réinitialiser à la première page
+    },
+    (error) => console.error('Erreur lors de la récupération des matériels', error)
+  );
 }
 
 filtrerVehicules(event: Event): void {
@@ -307,13 +325,25 @@ filtrerVehicules(event: Event): void {
     this.vehiculesAffiches = [...this.vehicules];
   } else {
     this.vehiculesAffiches = this.vehicules.filter(vehicule =>
-      vehicule.marque.toLowerCase().includes(searchTerm)
+      vehicule.marque.toLowerCase().includes(searchTerm) ||
+      vehicule.nomVehicule.toLowerCase().includes(searchTerm) ||
+      vehicule.modele.toLowerCase().includes(searchTerm)
     );
   }
-  this.setPageVehicules(1); // Réinitialiser à la première page après filtrage
+  this.currentPageVehicules = 1; // Réinitialiser à la première page après filtrage
 }
+
 resetFiltersVehicules(): void {
-  this.getVehicules(); // Réinitialise la liste des véhicules
+  this.vehiculeService.getVehicule().subscribe(
+    (data) => {
+      this.vehicules = data;
+      this.vehiculesAffiches = [...data]; // Réinitialiser les véhicules affichés
+      this.currentPageVehicules = 1; // Réinitialiser à la première page
+    },
+    (error) => {
+      console.error('Erreur lors de la récupération des véhicules', error);
+    }
+  );
 }
 get materielsPagine(): any[] {
   const startIndex = (this.currentPage - 1) * this.itemsPerPage;

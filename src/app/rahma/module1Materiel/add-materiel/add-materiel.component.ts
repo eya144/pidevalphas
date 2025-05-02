@@ -34,7 +34,7 @@ export class AddMaterielComponent {
     this.materielService.addMateriel(this.materiel).subscribe(
       (data) => {
         console.log('Matériel ajouté', data);
-        this.router.navigate(['/']);  // Rediriger vers la page d'accueil après ajout
+        this.router.navigate(['dashboardLogistique/logistique']);  // Rediriger vers la page d'accueil après ajout
       },
       (error) => {
         console.error('Erreur lors de l\'ajout du matériel', error);
