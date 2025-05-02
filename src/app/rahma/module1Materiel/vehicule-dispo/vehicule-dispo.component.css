@@ -1,0 +1,29 @@
+.container {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  .table {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  td img {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  td img:hover {
+    transform: scale(1.2);
+  }
+  .table thead th, .jsgrid .jsgrid-table thead th {
+    border-top: 0;
+    border-bottom-width: 1px;
+    font-weight: 500;
+    color: #a1a8d2;
+}

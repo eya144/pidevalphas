@@ -25,10 +25,12 @@
               "src/assets"
             ],
           "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/font-awesome/css/font-awesome.min.css",
-              "src/styles.css"
-            ],
+            "@angular/material/prebuilt-themes/indigo-pink.css",
+            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+            "node_modules/font-awesome/css/font-awesome.min.css",
+            "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+            "src/styles.css"
+          ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/owl.carousel/dist/owl.carousel.min.js"
@@ -61,18 +63,22 @@
           },
           "defaultConfiguration": "production"
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "pidev:build:production"
-            },
-            "development": {
-              "browserTarget": "pidev:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
+       "serve": {
+  "builder": "@angular-devkit/build-angular:dev-server",
+  "options": {
+    "browserTarget": "pidev:build"
+  },
+  "configurations": {
+    "production": {
+      "browserTarget": "pidev:build:production"
+    },
+    "development": {
+      "browserTarget": "pidev:build:development"
+    }
+  },
+  "defaultConfiguration": "development"
+},
+
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
@@ -92,7 +98,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.css",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": []
           }

@@ -1,0 +1,175 @@
+body{
+  padding-top: 9%;
+}
+
+.blurred {
+  filter: blur(5px);
+  transition: filter 0.3s ease-in-out;
+}
+.calendar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour l'arrière-plan */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.calendar-content {
+  background-color: #000000; /* Couleur de fond claire pour le contenu du calendrier */
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Légère ombre autour du calendrier */
+  overflow: hidden;
+  border: 1px solid #ddd; /* Ajouter une bordure autour du calendrier */
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.calendar-header button {
+  background-color: #476f88;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.calendar-header button:hover {
+  background-color: #476f88; /* Changer la couleur au survol */
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Une colonne par jour */
+  gap: 10px;
+}
+
+.calendar-day {
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.calendar-day:hover {
+  background-color: #17a2b8; /* Couleur de fond du jour sélectionné */
+  color: white;
+}
+
+body.blur {
+  filter: blur(5px); /* Appliquer un flou sur le fond de l'écran */
+}
+/* Style pour le conteneur des notifications */
+.notifications-container {
+  position: absolute;
+  padding-top: 20px; /* Positionné juste en dessous du bouton */
+  margin-top: 20px;
+  right: 20px; /* Aligné à droite */
+  background-color: #ffffff; /* Fond blanc */
+  border: 1px solid #ddd; /* Bordure légère */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  width: 300px; /* Largeur fixe */
+  max-height: 400px; /* Hauteur maximale */
+  overflow-y: auto; /* Défilement si trop de notifications */
+  z-index: 1000; /* S'assurer qu'il est au-dessus des autres éléments */
+  padding: 15px; /* Espace intérieur */
+}
+
+/* Style pour le titre des notifications */
+.notifications-container h4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333; /* Couleur du texte */
+}
+
+/* Style pour la liste des notifications */
+.notifications-container ul {
+  list-style-type: none; /* Supprimer les puces */
+  padding: 0;
+  margin: 0;
+}
+
+/* Style pour chaque élément de notification */
+.notifications-container li {
+  padding: 10px;
+  border-bottom: 1px solid #eee; /* Séparateur entre les notifications */
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease; /* Animation au survol */
+}
+
+/* Style pour l'icône de notification */
+.notifications-container li i {
+  margin-right: 10px;
+  color: #17a2b8; /* Couleur de l'icône */
+}
+
+/* Style pour le texte de la notification */
+.notifications-container li span {
+  font-size: 14px;
+  color: #555; /* Couleur du texte */
+}
+
+/* Effet de survol sur les notifications */
+.notifications-container li:hover {
+  background-color: #f8f9fa; /* Fond légèrement gris au survol */
+  cursor: pointer;
+}
+
+/* Style pour le bouton de notification */
+.btn-outline-primary {
+  position: relative; /* Pour positionner le conteneur des notifications */
+}
+/* Animation pour l'affichage des notifications */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notifications-container {
+  animation: slideDown 0.3s ease-in-out; /* Appliquer l'animation */
+}
+/* Style pour la superposition */
+.statistiques-container {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent noir */
+  filter: blur(5px); /* Flou */
+  z-index: 1;
+}
+
+canvas {
+  position: relative;
+  z-index: 2;
+  margin-top: 20px;
+}

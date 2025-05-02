@@ -1,0 +1,76 @@
+<app-back-header></app-back-header>
+<body>
+  <div class="edit-materiel-container">
+    <h2>Edit Material</h2>
+    <form (ngSubmit)="saveMateriel()">
+      <!-- Champ Nom du Matériel -->
+      <div class="form-group">
+        <!-- Le placeholder vide (" ") est nécessaire pour déclencher :placeholder-shown -->
+        <input 
+          type="text" 
+          id="nomMateriel" 
+          [(ngModel)]="materiel.nomMateriel" 
+          name="nomMateriel" 
+          placeholder=" "
+          required 
+        />
+        <label for="nomMateriel">Material Name</label>
+      </div>
+
+      <!-- Champ Catégorie -->
+      <div class="form-group">
+        <!-- On ajoute une option vide par défaut pour le floating label -->
+        <select 
+          id="categorie" 
+          [(ngModel)]="materiel.categorie" 
+          name="categorie" 
+          required
+        >
+          <option value="" disabled selected hidden></option>
+          <option *ngFor="let categorie of categories" [value]="categorie">
+            {{ categorie }}
+          </option>
+        </select>
+        <label for="categorie">Category</label>
+      </div>
+
+      <!-- Champ Quantité -->
+      <div class="form-group">
+        <input 
+          type="number" 
+          id="quantite" 
+          [(ngModel)]="materiel.quantite" 
+          name="quantite" 
+          placeholder=" "
+          required 
+        />
+        <label for="quantite">Quantity</label>
+      </div>
+
+      <!-- Champ Prix Unitaire -->
+      <div class="form-group">
+        <input 
+          type="number" 
+          id="prixMateriel" 
+          [(ngModel)]="materiel.prixMateriel" 
+          name="prixMateriel" 
+          placeholder=" "
+          required 
+        />
+        <label for="prixMateriel">Price</label>
+      </div>
+  
+      <!-- Boutons -->
+      <div class="form-actions">
+        <button type="submit" class="btn-save">Save</button>
+        <button 
+          type="button" 
+          class="btn-cancel" 
+          (click)="router.navigate(['/dashboardLogistique/logistique'])"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</body>

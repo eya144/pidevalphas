@@ -1,0 +1,66 @@
+<app-back-header></app-back-header>
+<body>
+  <div class="container mt-5">
+    <div class="card shadow-lg p-4">
+      <h2 class="text-center mb-4">Add a material</h2>
+      <form (ngSubmit)="addMateriel()" #materielForm="ngForm">
+        
+        <!-- Nom du Matériel -->
+        <div class="mb-3">
+          <label for="nomMateriel" class="form-label">Material Name</label>
+          <input type="text" id="nomMateriel" class="form-control" 
+                 [(ngModel)]="materiel.nomMateriel" name="nomMateriel" 
+                 required #nomMateriel="ngModel"
+                 [class.is-invalid]="nomMateriel.invalid && nomMateriel.touched">
+          <div *ngIf="nomMateriel.invalid && nomMateriel.touched" class="invalid-feedback">
+            Material name is required.
+          </div>
+        </div>
+
+        <!-- Catégorie -->
+        <div class="mb-3">
+          <label for="categorie" class="form-label">Category</label>
+          <select id="categorie" class="form-select" 
+                  [(ngModel)]="materiel.categorie" name="categorie" 
+                  required #categorie="ngModel"
+                  [class.is-invalid]="categorie.invalid && categorie.touched">
+            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+          </select>
+          <div *ngIf="categorie.invalid && categorie.touched" class="invalid-feedback">
+            Category is required.
+          </div>
+        </div>
+
+        <!-- Quantité -->
+        <div class="mb-3">
+          <label for="quantite" class="form-label">Quantity</label>
+          <input type="number" id="quantite" class="form-control" 
+                 [(ngModel)]="materiel.quantite" name="quantite" 
+                 required min="1" #quantite="ngModel"
+                 [class.is-invalid]="quantite.invalid && quantite.touched">
+          <div *ngIf="quantite.invalid && quantite.touched" class="invalid-feedback">
+            Quantity must be greater than 1.
+          </div>
+        </div>
+
+        <!-- Prix -->
+        <div class="mb-3">
+          <label for="prixMateriel" class="form-label">Price</label>
+          <input type="number" id="prixMateriel" class="form-control" 
+                 [(ngModel)]="materiel.prixMateriel" name="prixMateriel" 
+                 required min="1" step="0.01" #prixMateriel="ngModel"
+                 [class.is-invalid]="prixMateriel.invalid && prixMateriel.touched">
+          <div *ngIf="prixMateriel.invalid && prixMateriel.touched" class="invalid-feedback">
+            Price must be greater than 1.
+          </div>
+        </div>
+
+        <!-- Bouton Ajouter -->
+        <button type="submit" class="btn btn-primary w-100" [disabled]="materielForm.invalid">
+          <i class="fa fa-plus"></i> Add a material
+        </button>
+
+      </form>
+    </div>
+  </div>
+</body>
