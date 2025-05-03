@@ -3,19 +3,19 @@
 <br>
 <br>
         <div class="fiches-de-paie-container">
-            <h2>Liste des Fiches de Paie</h2>
-            <button (click)="openAddFicheDePaieModal()" class="button-hover">Ajouter une Fiche de Paie</button>
+            <h2>Payslip List</h2>
+            <button (click)="openAddFicheDePaieModal()" class="button-hover">Add a Payslip</button>
 
             <table>
               <thead>
                 <tr>
-                  <th>Montant Initial</th>
-                  <th>Jours Non Travaillés</th>
-                  <th>Type de Paiement</th>
-                  <th>Date de Paiement</th>
-                  <th>Statut de Paiement</th>
-                  <th>Montant Final</th>
-                  <th>Nom Utilisateur</th>
+                  <th>Initial Amount</th>
+                  <th>Non-Worked Days</th>
+                  <th>Payment Type</th>
+                  <th>Payment Date</th>
+                  <th>Payment Status</th>
+                  <th>Final Amount</th>
+                  <th>Username</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -35,7 +35,7 @@
                   <td>{{ fiche.montantFinal }}</td>
                   <td>{{ fiche.nom }}</td>
                   <td> 
-                    <button (click)="calculerSalaire(fiche)" class="button-hover" >Calculer Salaire</button>
+                    <button (click)="calculerSalaire(fiche)" class="button-hover" >Calculate Salary</button>
                     <button (click)="imprimerFiche(fiche)" > 📑</button>    
                     <button (click)="deleteFiche(fiche)" class="button-hover">🗑️</button>
               

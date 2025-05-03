@@ -1,7 +1,8 @@
 export interface RapportFinancier {
     idRapport: number; 
     idUtilisateur: number; 
-    dépense: number; 
+    depense: number; 
+    budget: number;
     salaire: number; 
-    statut: 'RENTABLE' | 'DEFICIT' ;
+    status: 'RENTABLE' | 'DEFICIT' ;
   }

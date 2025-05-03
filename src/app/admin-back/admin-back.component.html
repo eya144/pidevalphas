@@ -13,7 +13,27 @@
       <!-- navbar End -->
     <!-- Wrapper pour les deux blocs côte à côte -->
 <div class="flex justify-center gap-6 flex-wrap md:flex-nowrap w-full p-4">
-  
+   <!-- Bloc des totaux -->
+   <div class="totals-container">
+    <div class="total-card">
+      <h1> 🧾 Total Invoices</h1>
+      <div class="total-value" style="color : yellow"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{totalInvoices}} </div>
+    </div>
+    <div class="total-card">
+      <h1> 💰 Paid    Invoices</h1>
+      <div class="total-value" style="color:green;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{paidInvoices}}  </div>
+
+    </div>
+    <div class="total-card">
+      <h1> 📑 generated PaySlips</h1>
+      <div class="total-value" style="color:red;" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{generatedPaySlips}}  </div>
+    </div>
+    <div class="total-card">
+      <h1> 📑 Total Payslips</h1>
+      <div class="total-value" style="color:blue;" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{totalPaySlips}} </div>
+      
+    </div>
+  </div>
   <!-- Invoice Statistics -->
   <div class="container w-full md:w-1/2">
     <div class="flex flex-col items-center gap-2 mb-4 text-center">

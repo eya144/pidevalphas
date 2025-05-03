@@ -1,0 +1,64 @@
+<app-app-header></app-app-header>
+<br><br>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Financial Reports</h2>
+    <button class="btn btn-primary" (click)="genererRapport()" [disabled]="isLoading">
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+      Generate a new report
+    </button>
+  </div>
+
+  <!-- Message d'erreur -->
+  <div *ngIf="error" class="alert alert-danger alert-dismissible fade show">
+    {{error}}
+    <button type="button" class="btn-close" (click)="error = null"></button>
+  </div>
+
+  <!-- Liste des rapports -->
+  <div *ngIf="rapports.length > 0; else noReports" class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>ID Rapport</th>
+          <th>ID Utilisateur</th>
+          <th>Dépenses</th>
+          <th>Salaires</th>
+          <th>Budget</th>
+          <th>Status</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rapport of rapports">
+          <td>{{rapport.idRapport}}</td>
+          <td>{{rapport.idUtilisateur}}</td>
+          <td>{{rapport.depense | currency:'EUR'}}</td>
+          <td>{{rapport.salaire | currency:'EUR'}}</td>
+          <td>{{rapport.budget | currency:'EUR'}}</td>
+          <td>
+            <span class="badge" [ngClass]="{
+              'bg-success': rapport.status === 'RENTABLE',
+              'bg-danger': rapport.status === 'DEFICIT'
+            }">
+              {{rapport.status}}
+            </span>
+          </td>
+          <td [ngClass]="{
+            'text-success': calculateBalance(rapport) > 0,
+            'text-danger': calculateBalance(rapport) < 0
+          }">
+            {{calculateBalance(rapport) | currency:'EUR'}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noReports>
+    <div class="alert alert-info">
+      No financial reports available. Click 'Generate a new report' to create one.
+    </div>
+  </ng-template>
+</div>
+<app-app-footer></app-app-footer>

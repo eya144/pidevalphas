@@ -8,7 +8,33 @@ import { ChartOptions, ChartType, ChartData } from 'chart.js';
 export class AdminBackComponent  implements OnInit {
 
   selectedChart: string = 'bar'; // Default selected chart
-
+  percentageChartType: ChartType = 'doughnut';
+  percentageChartData: ChartData<'doughnut'> = {
+    labels: ['Completed', 'Remaining'],
+    datasets: [{
+      data: [45, 55],
+      backgroundColor: ['#f39c12', '#ecf0f1']
+    }]
+  };
+  
+  percentageChartOptions: ChartOptions<'doughnut'> = {
+    responsive: true,
+    cutout: '70%',
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const label = context.label || '';
+            const value = context.raw || 0;
+            return `${label}: ${value}%`;
+          }
+        }
+      }
+    }
+  };
   // Bar Chart
   barChartType: ChartType = 'bar';
   barChartLabels: string[] = ['Total', 'Paid', 'Unpaid'];
@@ -206,7 +232,13 @@ calculatePaySlipStatistics() {
   this.generatedPaySlips = this.paySlips.filter(p => p.status === 'Generated').length;
   this.notGeneratedPaySlips = this.paySlips.filter(p => p.status === 'Not Generated').length;
   this.totalPaySlips = this.paySlips.length;
+// Dans calculateStatistics()
+this.totalInvoices = this.filteredInvoices.length;
+this.paidInvoices = this.filteredInvoices.filter(f => f.status === 'Paid').length;
 
+// Dans calculatePaySlipStatistics()
+this.totalPaySlips = this.paySlips.length;
+this.generatedPaySlips = this.paySlips.filter(p => p.status === 'Generated').length;
   this.payBarChartData = {
     labels: ['Total', 'Generated', 'Not Generated'],
     datasets: [

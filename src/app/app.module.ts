@@ -36,6 +36,7 @@ import { StripeService } from './stripe.service';
 import { jsPDF } from 'jspdf';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { SignaturePadComponent } from './signature-pad/signature-pad.component';
+import { RapportFinancierComponentComponent } from './rapport-financier-component/rapport-financier-component.component';
 @NgModule({
   declarations: [
    
@@ -66,6 +67,7 @@ import { SignaturePadComponent } from './signature-pad/signature-pad.component';
       PaiementSuccessComponentComponent,
       PaiementCancelComponentComponent,
       SignaturePadComponent,
+      RapportFinancierComponentComponent,
     
     ],
   imports: [

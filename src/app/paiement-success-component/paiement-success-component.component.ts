@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StripeService } from '../stripe.service';
+import { FinanceService } from '../finance.service';
 
 @Component({
   selector: 'app-paiement-success-component',
@@ -9,7 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 export class PaiementSuccessComponentComponent implements OnInit {
   sessionId: string | null = null;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private stripeService: StripeService,
+    private financeService: FinanceService
+  ) {}
 
   ngOnInit(): void {
     this.sessionId = this.route.snapshot.queryParamMap.get('session_id');

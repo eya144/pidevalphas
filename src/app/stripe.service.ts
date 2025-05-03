@@ -16,20 +16,19 @@ export class StripeService {
 
   createCheckoutSession(factureId: number, amount: number): Observable<{id: string}> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Content-Type': 'application/json'
+     // 'Accept': 'application/json'
     });
   
     const body = {
       factureId,
       amount: Math.round(amount * 100), // Stripe expects the amount in cents
       currency: 'eur',
-      successUrl: `${window.location.origin}/success`,
-      cancelUrl: `${window.location.origin}/cancel`
+      successUrl: `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancelUrl: `${window.location.origin}/cancel`,
+      metadata: { factureId: factureId.toString() }
     };
   
-    console.log('Sending data to backend:', body);
-
     return this.http.post<{id: string}>(
       `${this.backendUrl}/create-checkout-session`,
       body,

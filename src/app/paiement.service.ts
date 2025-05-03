@@ -14,12 +14,14 @@ export class PaiementService {
 
   constructor(private http: HttpClient) {}
 
- 
+  verifyPayment(sessionId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/verify-payment`, { sessionId }, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
   addPaiement(paiement: Paiement, idFacture: number): Observable<Paiement> {
     return this.http.post<Paiement>(`${this.apiUrl}/${idFacture}`, paiement, this.httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
