@@ -1,0 +1,32 @@
+<app-app-header></app-app-header>
+
+<div class="container mt-5 mb-5">
+  <h2>Edit Reclamation</h2>
+  <form (ngSubmit)="updateReclamation()" [formGroup]="reclamationForm">
+
+    <div class="mb-3">
+      <label for="typeReclamation" class="form-label">Type:</label>
+      <select id="typeReclamation" formControlName="typeReclamation" class="form-control" required>
+        <option *ngFor="let type of reclamationTypes" [value]="type">{{ type.replace('_', ' ') }}</option>
+      </select>
+      <div *ngIf="reclamationForm.get('typeReclamation')?.hasError('required') && reclamationForm.get('typeReclamation')?.touched" class="text-danger">
+        Type is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description:</label>
+      <textarea id="description" formControlName="description" class="form-control" required></textarea>
+      <div *ngIf="reclamationForm.get('description')?.hasError('required') && reclamationForm.get('description')?.touched" class="text-danger">
+        Description is required.
+      </div>
+    </div>
+
+    <div class="d-flex flex-row">
+      <button type="submit" class="btn btn-primary mx-1" [disabled]="reclamationForm.invalid">Update</button>
+      <button type="button" class="btn btn-secondary mx-1" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<app-app-footer></app-app-footer>

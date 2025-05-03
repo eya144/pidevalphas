@@ -1,0 +1,68 @@
+<app-app-header></app-app-header>
+<div class="chat-container">
+  <div class="sidebar">
+    <h3>Documents</h3>
+
+    <div class="upload-section">
+      <button mat-raised-button color="primary" (click)="triggerFileInput()">Select File</button>
+      <input #fileInput type="file" hidden (change)="handleFileSelection($event)" accept=".pdf">
+
+      <div *ngIf="selectedFile()">
+        <p><strong>Selected:</strong> {{ selectedFile()?.name ?? 'No file selected' }} ({{ ((selectedFile()?.size ?? 0) / 1024).toFixed(1) }} KB)</p>
+        <button mat-raised-button color="accent" (click)="uploadFile()" [disabled]="isUploading()">Upload</button>
+      </div>
+
+      <p class="error-message" *ngIf="fileError()">{{ fileError() }}</p>
+    </div>
+
+    <div class="doc-list">
+      <div
+        *ngFor="let doc of documents()"
+        class="doc-item"
+        [class.selected]="doc.id === selectedDocumentId()"
+        (click)="fetchChatHistory(doc.id)">
+        <mat-icon>description</mat-icon>
+        <span>{{ doc.fileName }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-panel">
+    <div *ngIf="!selectedDocumentId()" class="no-doc">
+      <p>No document selected</p>
+    </div>
+
+    <div *ngIf="selectedDocumentId()" class="chat-content">
+      <div #chatContainer class="chat-box">
+        <div *ngIf="chatMessages().length === 0 && !loading()" class="no-messages">
+          <p>No messages yet. Ask something about the document.</p>
+        </div>
+
+        <div *ngFor="let msg of chatMessages()" class="message">
+          <div class="user-message mb-2">
+            <strong>You:</strong> {{ msg.question }}
+          </div>
+          <div class="ai-message mt-2">
+            <strong>AI:</strong> {{ msg.response }}
+          </div>
+        </div>
+
+        <div *ngIf="loading()" class="loading">
+          <mat-progress-spinner diameter="30" mode="indeterminate"></mat-progress-spinner>
+        </div>
+      </div>
+
+      <div class="chat-input">
+<mat-form-field class="full-width">
+  <mat-label>Ask about the document...</mat-label>
+  <input matInput [ngModel]="question()" (ngModelChange)="question.set($event)" (keyup.enter)="sendQuestion()">
+</mat-form-field>
+
+        <button mat-icon-button color="primary" (click)="sendQuestion()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-app-footer></app-app-footer>

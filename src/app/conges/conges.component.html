@@ -1,0 +1,46 @@
+<app-app-header></app-app-header>
+
+<div class="container mt-5 mb-5">
+  <div class="conges-card">
+    <div class="conges-header">
+      <h2>Liste des Congés</h2>
+      <button class="btn btn-primary" (click)="addConges()">+ Ajouter Congé</button>
+    </div>
+
+    <div class="table-responsive mt-4">
+      <table class="table custom-table">
+        <thead>
+          <tr>
+            <th>Employé</th>
+            <th>Date début</th>
+            <th>Date fin</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let conges of list | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+            <td>{{ conges.utilisateur.nomUtilisateur }} {{ conges.utilisateur.prenomUtilisateur }} - {{ conges.utilisateur.matricule }}</td>
+            <td>{{ conges.dateDebut }}</td>
+            <td>{{ conges.dateFin }}</td>
+            <td>
+              <div class="button-container">
+                <button (click)="editConges(conges.idConges)" title="Modifier">
+                  ✏️
+                </button>
+                <button (click)="deleteConges(conges.idConges)" title="Supprimer">
+                  🗑️
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+      <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+<app-app-footer></app-app-footer>

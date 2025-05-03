@@ -1,0 +1,24 @@
+<app-app-header></app-app-header>
+
+<div class="container mt-5 mb-5">
+  <h2>Add Reclamation</h2>
+  <form (ngSubmit)="addReclamation()" [formGroup]="reclamationForm">
+
+    <div class="mb-3">
+      <label for="typeReclamation" class="form-label">Type:</label>
+      <select id="typeReclamation" formControlName="typeReclamation" class="form-control" required>
+        <option *ngFor="let type of reclamationTypes" [value]="type">{{ type.replace('_', ' ') }}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description:</label>
+      <textarea id="description" formControlName="description" class="form-control" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary mr-2" [disabled]="reclamationForm.invalid">Add</button>
+    <button type="button" class="btn btn-secondary ml-2" (click)="router.navigate(['/reclamations'])">Cancel</button>
+  </form>
+</div>
+
+<app-app-footer></app-app-footer>

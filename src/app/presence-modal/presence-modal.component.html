@@ -1,0 +1,128 @@
+<!--<h2 mat-dialog-title>Ajouter une Présence
+    
+</h2>
+<form (ngSubmit)="addPresence()" #presenceForm="ngForm">
+  <mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput [(ngModel)]="newPresence.dateP" name="dateP" required type="date">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Heure d'Entrée</mat-label>
+      <input matInput [(ngModel)]="newPresence.heureentre" name="heureentre" required type="time">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Heure de Sortie</mat-label>
+      <input matInput [(ngModel)]="newPresence.heuresortie" name="heuresortie" required type="time">
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Annuler</button>
+    <button mat-button type="submit" [disabled]="!presenceForm.valid">Ajouter</button>
+  </mat-dialog-actions>
+</form>-->
+<!--<h2>Ajouter une Présence</h2>
+<button id="close-button" mat-icon-button (click)="onNoClick()" aria-label="Fermer">
+    <i class="fas fa-times"></i> 
+  </button>
+<form (ngSubmit)="addPresence()">
+  <mat-form-field appearance="fill">
+    <mat-label>Date</mat-label>
+    <input matInput [(ngModel)]="newPresence.dateP" name="date" required type="date">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Heure d'entrée</mat-label>
+    <input matInput [(ngModel)]="newPresence.heureentre" name="heureentre" required type="time">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Heure de sortie</mat-label>
+    <input matInput [(ngModel)]="newPresence.heuresortie" name="heuresortie" required type="time">
+  </mat-form-field>
+
+  <div>
+    <button mat-button type="submit">Ajouter</button>
+    <button mat-button (click)="onNoClick()">Annuler</button>
+  </div>
+</form>
+
+<h3>Liste des Présences</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Heure d'entrée</th>
+      <th>Heure de sortie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let presence of presences">
+      <td>{{ presence.dateP | date:'shortDate' }}</td>
+      <td>{{ presence.heureentre }}</td>
+      <td>{{ presence.heuresortie }}</td>
+      <td>
+        <td>
+            <button mat-button (click)="deletePresence(presence.idP)">Supprimer</button>
+          
+      </td>
+    </tr>
+  </tbody>
+</table>-->
+<h2>{{ editingPresenceId ? 'Modifier une Présence' : 'Ajouter une Présence' }}</h2>
+<button id="close-button" mat-icon-button (click)="onNoClick()" aria-label="Fermer">
+  <i class="fas fa-times"></i>
+</button>
+
+<form (ngSubmit)="editingPresenceId ? updatePresence() : addPresence()">
+  <mat-form-field appearance="fill">
+    <mat-label>Date</mat-label>
+    <input matInput [(ngModel)]="newPresence.dateP" name="date" required type="date">
+  </mat-form-field>
+  
+
+  <mat-form-field appearance="fill">
+    <mat-label>Heure d'entrée</mat-label>
+    <input matInput [(ngModel)]="newPresence.heureentre" name="heureentre" required type="time">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Heure de sortie</mat-label>
+    <input matInput [(ngModel)]="newPresence.heuresortie" name="heuresortie" required type="time">
+  </mat-form-field>
+
+  <div>
+    <button mat-button type="submit">{{ editingPresenceId ? 'Mettre à jour' : 'Ajouter' }}</button>
+    <button mat-button (click)="onNoClick()">Annuler</button>
+  </div>
+</form>
+
+<h3>Liste des Présences</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Heure d'entrée</th>
+      <th>Heure de sortie</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let presence of presences">
+      <td>{{ presence.dateP | date:'shortDate' }}</td>
+      <td>{{ presence.heureentre }}</td>
+      <td>{{ presence.heuresortie }}</td>
+      <td>
+        <button mat-button (click)="editPresence(presence)">Modifier</button>
+        <td>
+            <button mat-button (click)="presence.idP ? deletePresence(presence.idP) : null">
+              Supprimer
+            </button>
+          
+      </td>
+    </tr>
+  </tbody>
+</table>

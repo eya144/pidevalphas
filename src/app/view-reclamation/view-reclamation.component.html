@@ -1,0 +1,33 @@
+<app-app-header></app-app-header>
+
+<div class="container mt-5 mb-5">
+  <h2 class="mb-4">Reclamation Details</h2>
+
+  <div *ngIf="reclamation">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ reclamation.typeReclamation.replace('_', ' ') }}</h5>
+        <p class="card-text"><strong>Description:</strong> {{ reclamation.description }}</p>
+        <p class="card-text"><strong>Date:</strong> {{ reclamation.dateReclamation | date:'yyyy-MM-dd HH:mm' }}</p>
+        <p class="card-text">
+          <strong>Status:</strong>
+          <span class="badge" [ngClass]="{'badge-success': reclamation.statusReclamation === 'RESOLVED', 'badge-danger': reclamation.statusReclamation === 'UNRESOLVED'}">
+            {{ reclamation.statusReclamation }}
+          </span>
+        </p>
+        <p class="card-text"><strong>Submitted by:</strong> {{ reclamation.utilisateur?.nomUtilisateur }} {{ reclamation.utilisateur?.prenomUtilisateur }}</p>
+
+        <div class="d-flex mt-3">
+          <button *ngIf="reclamation.statusReclamation === 'UNRESOLVED'" class="btn btn-success mx-1" (click)="markAsResolved()">Mark as Resolved</button>
+          <button class="btn btn-primary" (click)="openDetailsDialog()">Details</button>
+          <button class="btn btn-primary" (click)="speakReclamation()">Speech</button>
+
+          <button *ngIf="reclamation.statusReclamation === 'RESOLVED'" class="btn btn-secondary mx-1" (click)="markAsUnresolved()">Mark as Unresolved</button>
+          <button class="btn btn-primary mx-1" (click)="goBack()">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-app-footer></app-app-footer>

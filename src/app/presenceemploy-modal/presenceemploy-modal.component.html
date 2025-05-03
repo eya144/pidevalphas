@@ -1,0 +1,245 @@
+<!-- presenceemploy-modal.component.html 
+<div *ngIf="isModalVisible" class="modal-overlay">
+  <div class="modal-content">
+    <h2>Enregistrement de la présence</h2>
+
+    
+    <div class="presence-form">
+      <div>
+        <label for="heureEntree">Heure d'entrée :</label>
+        <input type="text" id="heureEntree" [(ngModel)]="presence.heureentre" disabled />
+      </div>
+
+      <div>
+        <label for="heureSortie">Heure de sortie :</label>
+        <input type="text" id="heureSortie" [(ngModel)]="presence.heuresortie" disabled />
+      </div>
+
+      <div>
+        <label for="dateP">Date :</label>
+        <input type="text" id="dateP" [(ngModel)]="presence.dateP" disabled />
+      </div>
+    </div>
+
+   
+    <div class="modal-actions">
+      <button (click)="savePresence()" class="save-btn">Enregistrer la présence</button>
+      <button (click)="closeModal()" class="close-btn">Fermer</button>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .presence-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .presence-form div {
+    margin-bottom: 10px;
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 14px;
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .save-btn, .close-btn {
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .save-btn {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .close-btn {
+    background-color: #f44336;
+    color: white;
+  }
+</style>-->
+<!-- presenceemploy-modal.component.html -->
+<div *ngIf="isModalVisible" class="modal-overlay">
+    <div class="modal-content">
+        <h2>Enregistrement de la présence</h2>
+
+        <!-- Message si la présence est déjà enregistrée -->
+        <div *ngIf="isPresenceRecorded" class="alert-message">
+            <p>Vous avez déjà enregistré votre présence pour aujourd'hui.</p>
+        </div>
+
+        <!-- Formulaire de présence -->
+        <div class="presence-form" *ngIf="!isPresenceRecorded">
+            <div>
+                <label for="heureEntree">Heure d'entrée :</label>
+                <input type="text" id="heureEntree" [(ngModel)]="presence.heureentre" disabled />
+            </div>
+
+            <div>
+                <label for="heureSortie">Heure de sortie :</label>
+                <input type="text" id="heureSortie" [(ngModel)]="presence.heuresortie" disabled />
+            </div>
+
+            <div>
+                <label for="dateP">Date :</label>
+                <input type="text" id="dateP" [(ngModel)]="presence.dateP" disabled />
+            </div>
+        </div>
+
+        <!-- Boutons de contrôle -->
+        <div class="modal-actions" *ngIf="!isPresenceRecorded">
+            <button (click)="savePresence()" class="save-btn">Enregistrer la présence</button>
+            <button (click)="closeModal()" class="close-btn">Fermer</button>
+        </div>
+
+        <button (click)="closeModal()" class="close-btn" *ngIf="isPresenceRecorded">Fermer</button>
+        
+      </div>
+      <div class="map-container" *ngIf="showMap">
+        
+        <div id="map"></div>
+    </div>
+    <a *ngIf="googleMapsLink" [href]="googleMapsLink" target="_blank" rel="noopener">
+      📍 Voir l'emplacement sur Google Maps
+    </a>
+
+</div>
+
+<!-- Styles du modal -->
+<style>
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .presence-form {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .presence-form div {
+        margin-bottom: 10px;
+    }
+
+    label {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        font-size: 14px;
+    }
+
+    .modal-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .save-btn, .close-btn {
+        padding: 10px;
+        font-size: 14px;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .save-btn {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .close-btn {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .alert-message {
+        color: #f44336; /* Couleur rouge pour le message d'alerte */
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    /* Dans presenceemploy-modal.component.css */
+    .map-container {
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+  margin: 20px auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+</style>

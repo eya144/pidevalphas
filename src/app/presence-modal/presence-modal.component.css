@@ -1,0 +1,14 @@
+#close-button {
+    position: absolute; /* Permet de le placer dans le coin supérieur droit */
+    top: 10px;         /* Ajustez la position verticale */
+    right: 10px;       /* Ajustez la position horizontale */
+    background: none;  /* Supprime le fond par défaut */
+    border: none;      /* Supprime la bordure par défaut */
+    color: #f44336;    /* Couleur rouge pour l'icône */
+    cursor: pointer;   /* Change le curseur au survol */
+    font-size: 24px;   /* Taille de l'icône */
+  }
+  
+  #close-button:hover {
+    color: #d32f2f;    /* Couleur légèrement plus foncée au survol */
+  }

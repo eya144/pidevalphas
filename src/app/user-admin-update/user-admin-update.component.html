@@ -1,0 +1,87 @@
+<!--<mat-card>
+    <mat-card-header>
+      <mat-card-title>Mettre à Jour l'Utilisateur</mat-card-title>
+      <button mat-icon-button (click)="dialogRef.close()" class="close-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+        <mat-form-field appearance="fill">
+          <mat-label>Nom</mat-label>
+          <input matInput id="nom" name="nom" ngModel [value]="data.nomU" required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Prénom</mat-label>
+          <input matInput id="prenom" name="prenom" ngModel [value]="data.prenomU" required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput id="email" name="email" type="email" ngModel [value]="data.emailU" required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput id="motdepasse" name="motdepasse" type="password" ngModel required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Salaire</mat-label>
+          <input matInput id="salaire" name="salaire" type="number" ngModel [value]="data.salaireU" required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Rôle</mat-label>
+          <mat-select id="role" name="role" ngModel [value]="data.role" required>
+            <mat-option value="ADMIN">Admin</mat-option>
+            <mat-option value="USER">User</mat-option>
+            <mat-option value="GUEST">Guest</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" type="submit">Mettre à Jour l'Utilisateur</button>
+      </form>
+    </mat-card-content>
+  </mat-card>-->
+  <h2 mat-dialog-title>Mettre à jour l'utilisateur</h2>
+  <button mat-icon-button (click)="dialogRef.close()" class="close-button">
+    <mat-icon>close</mat-icon> <!-- Icône de fermeture -->
+  </button>
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+   
+  <mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Nom" [(ngModel)]="updatedUser.nomU" name="nom" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Prénom" [(ngModel)]="updatedUser.prenomU" name="prenom" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" [(ngModel)]="updatedUser.emailU" name="email" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Mot de passe" [(ngModel)]="updatedUser.motdepasseU" name="motdepasse">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Salaire" [(ngModel)]="updatedUser.salaireU" name="salaire" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Rôle" [(ngModel)]="updatedUser.role" name="role" required>
+        <mat-option value="ROLE_ADMIN">Admin</mat-option>
+            <mat-option value="ROLE_USER">User</mat-option>
+            <mat-option value="ROLE_GUEST">Guest</mat-option>
+            <mat-option value="ROLE_RESPONSABLELOG"> RESPONSABLELOG</mat-option>
+            <mat-option value="ROLE_INSPECTER">INSPECTER</mat-option>
+            <mat-option value="ROLE_RH">RH</mat-option>
+            <mat-option value="ROLE_PROJECTMANAGER">PROJECTMANAGER</mat-option>
+            <mat-option value="ROLE_EMPLOYE">EMPLOYE</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="submit">Mettre à jour</button>
+    <button mat-button (click)="dialogRef.close()">Annuler</button>
+  </mat-dialog-actions>
+</form>

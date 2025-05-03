@@ -1,0 +1,126 @@
+<div class="container-scroller">
+
+    <!-- Back Menu Admin Start -->
+    <app-back-menu-admin></app-back-menu-admin>
+    <!-- Back Menu Admin End -->
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+
+        <!-- navbar Start -->
+        <app-back-header></app-back-header>
+        <!-- navbar End -->
+
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+
+                <!-- Section pour la gestion des utilisateurs -->
+                <div class="row">
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card corona-gradient-card">
+                            <div class="card-body py-0 px-0 px-sm-3">
+                                <div class="row align-items-center">
+                                    <div class="col-4 col-sm-3 col-xl-2">
+                                        <img src="/assets/templateback/images/dashboard/Group126@2x.png" class="gradient-corona-img img-fluid" alt="">
+                                    </div>
+                                    <div class="col-5 col-sm-7 col-xl-8 p-0">
+                                        <h4 class="mb-1 mb-sm-0">Gestion des Utilisateurs</h4>
+                                        <p class="mb-0 font-weight-normal d-none d-sm-block">Gérez vos utilisateurs ici.</p>
+                                    </div>
+                                    <div class="col-3 col-sm-2 col-xl-2 pl-0 text-center">
+                                        <span>
+                                            <div class="col-3 col-sm-2 col-xl-2 pl-0 text-center">
+                                                <span>
+                                                    <button mat-button (click)="openDialog()" class="btn btn-outline-light btn-rounded get-started-btn">
+                                                        Ajouter un Utilisateur
+                                                    </button>
+                                                    <button (click)="logout()" class="btn btn-primary"></button>
+                                                </span>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                   <!-- Section pour les tentatives de connexion en attente -->
+                   <div class="row">
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card corona-gradient-card">
+                            <div class="card-body">
+                                <h4 class="mb-3">Tentatives de Connexion en Attente</h4>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let attempt of pendingAttempts">
+                                            <td>{{ attempt.email }}</td>
+                                            <td>
+                                                <button mat-button (click)="acceptLogin(attempt.email)">Accepter</button>
+                                                <button mat-button (click)="blockLogin(attempt.email)">Bloquer</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ici, vous pouvez ajouter le composant UserListComponent -->
+                <app-user-list></app-user-list>
+                
+                <!-- Ajoutez d'autres sections ou composants nécessaires ici -->
+
+            </div>
+             <!-- Section pour afficher les présences des utilisateurs -->
+             <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card corona-gradient-card">
+                        <div class="card-body">
+                            <h4 class="mb-3">Présences des Utilisateurs</h4>
+                            <input type="text" [(ngModel)]="filterText" placeholder="Rechercher..." class="form-control mb-3" />
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th (click)="sort('user.nomU')">firstName</th>
+                                        <th (click)="sort('user.prenomU')">lastName</th>
+                                        <th (click)="sort('dateP')">Date of Attendance</th>
+                                        <th (click)="sort('heureentre')">check-in Time</th>
+                                        <th (click)="sort('heuresortie')">check-out</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let presence of filteredPresences()">
+                                        <td>{{ presence.user.nomU }}</td>
+                                        <td>{{ presence.user.prenomU }}</td>
+                                        <td>{{ presence.dateP | date }}</td>
+                                        <td>{{ presence.heureentre }}</td>
+                                        <td>{{ presence.heuresortie }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
+                </div>
+            </footer>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
