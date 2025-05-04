@@ -1,0 +1,49 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-white fw-bold">Vehicle Management</h2>
+    <img src="/assets/img/logistique/1063342location.png" alt="Vehicle" class="img-fluid location-icon" (click)="redirectToDispo()">
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>License Plate</th>
+          <th>Type</th>
+          <th>Availability</th>
+          <th>Driver</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicule of vehicules">
+          <td>{{ vehicule.nomVehicule }}</td>
+          <td>{{ vehicule.marque }}</td>
+          <td>{{ vehicule.modele }}</td>
+          <td>{{ vehicule.immatriculation }}</td>
+          <td>{{ vehicule.typeVehicule }}</td>
+          <td>
+            <span class="badge" [ngClass]="vehicule.disponible ? 'bg-success' : 'bg-danger'">
+              {{ vehicule.disponible ? 'Available' : 'Assigned' }}
+            </span>
+          </td>
+          <td>
+            <select [(ngModel)]="vehicule.idChauffeur" (change)="updateChauffeur(vehicule)" class="form-select">
+              <option value="">None</option>
+              <option *ngFor="let chauffeur of chauffeurs" [value]="chauffeur.idChauffeur"
+                      [disabled]="isChauffeurAffecte(chauffeur.idChauffeur) && vehicule.idChauffeur !== chauffeur.idChauffeur">
+                {{ chauffeur.nomChauffeur }}
+              </option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="vehicules.length === 0" class="alert alert-warning text-center mt-4">
+    No vehicles available at the moment.
+  </div>
+</div>

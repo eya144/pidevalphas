@@ -1,0 +1,83 @@
+/* Conteneur général */
+.container {
+  max-width: 90%;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre avec gradient */
+.text-gradient {
+  background: linear-gradient(90deg, #007bff, #6610f2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Style du tableau */
+.table {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-custom-header {
+  background: linear-gradient(90deg, #2a3d53, #3b5998);
+  color: white;
+  font-size: 1rem;
+}
+
+/* Lignes du tableau */
+.table-row {
+  transition: all 0.3s ease-in-out;
+}
+
+.table-row:hover {
+  background: #63707e !important;
+}
+
+/* Badges colorés pour les statuts */
+.badge {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: 0.3s ease;
+}
+
+/* Boutons avec effet de hover */
+.btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Icônes */
+.btn i {
+  font-size: 1rem;
+}
+
+/* Animation pour l'affichage des lignes de commande */
+.animated-row {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Effet d’apparition */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-5px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Alertes */
+.alert {
+  font-size: 1rem;
+  border-radius: 10px;
+}

@@ -1,0 +1,69 @@
+<app-back-header></app-back-header>
+<body>
+  <div class="container mt-4">
+    <div class="calendar card shadow-sm p-3">
+      <div class="header d-flex justify-content-between align-items-center mb-3">
+        <button class="btn btn-outline-secondary" (click)="prevMonth()">←</button>
+        <h4 class="text-uppercase fw-bold">{{ currentDate | date:'MMMM yyyy' }}</h4>
+        <button class="btn btn-outline-secondary" (click)="nextMonth()">→</button>
+      </div>
+  
+      <div class="weekdays d-grid">
+        <div *ngFor="let day of weekDays" class="weekday">{{ day }}</div>
+      </div>
+  
+      <div class="days-grid d-grid">
+        <div *ngFor="let day of daysInMonth"
+             [class.outside-month]="!day.currentMonth"
+             [class.selected]="selectedDate?.toDateString() === day.date.toDateString()"
+             [class.has-entretien]="day.hasEntretien" 
+             class="day p-2 rounded"
+             (click)="onDateSelected(day.date)">
+          {{ day.date.getDate() }}
+        </div>
+      </div>
+</div>
+<!-- Liste des entretiens -->
+<div class="card mt-4 shadow-sm" *ngIf="demandes.length > 0">
+  <div class="card-header bg-white text-black text-center">
+    <h5 class="fw-bold mb-0">Entretiens du {{ selectedDate | date:'fullDate' }}</h5>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">👤 Nom</th>
+          <th scope="col">🎓 Spécialité</th>
+          <th scope="col">🕒 Type d'entretien</th>
+          <th scope="col">🔗 Lien</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let demande of demandes">
+          <td><b>{{ demande[1] }} {{ demande[2] }}</b></td> <!-- Nom + Prénom -->
+          <td>{{ demande[3] }}</td> <!-- Spécialité -->
+          <td>
+            <span class="badge" [ngClass]="{'bg-success': demande[0] === 'Présentiel', 'bg-info': demande[0] === 'EnLigne'}">
+              {{ demande[0] }}
+            </span>
+          </td>
+          
+          <td>
+            <a *ngIf="demande[0] === 'EnLigne'" [href]="demande[4]" class="btn btn-sm btn-outline-primary" target="_blank">
+              📎 Lien Meet
+            </a>
+            <span *ngIf="demande[0] === 'Présentiel'" class="text-black">🏢 Sur place</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Message si aucun entretien n'est prévu -->
+<div class="alert alert-info mt-4" *ngIf="selectedDate && demandes.length === 0">
+  Aucun entretien prévu pour cette date.
+</div>
+</div> 
+  
+</body>
