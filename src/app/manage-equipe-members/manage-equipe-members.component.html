@@ -1,0 +1,73 @@
+<app-app-header></app-app-header>
+
+<div class="my-5 container">
+    <div cdkDropListGroup class="row justify-content-center">
+        
+        <!-- Not Members List -->
+        <div class="col-md-5 example-container">
+          <h2 class="list-title">Not in Team</h2>
+      
+          <div
+            cdkDropList
+            id="notMembersList"
+            [cdkDropListData]="notMembers"
+            class="example-list"
+            (cdkDropListDropped)="onRemoveFromTeam($event)">
+            
+            <div *ngFor="let user of notMembers; trackBy: trackByFn" 
+                 class="example-box" 
+                 [class.in-other-team]="user.equipe_id && user.equipe_id !== teamId" 
+                 cdkDrag>
+              
+              <img [src]="user.avatar || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyDgkPQavzX7KwcLzeAsf0fgOx_-D51F3fag&s'" class="avatar" alt="User Avatar">
+              
+              <div class="user-info">
+                <div class="user-name">
+                  {{ user.nomUtilisateur }} {{ user.prenomUtilisateur }}
+                </div>
+                <div class="user-role">
+                  {{ user.role }}
+                  <span *ngIf="user.equipe_id && user.equipe_id !== teamId" class="team-label">
+                    (Currently in Team {{ user.equipe_id }})
+                  </span>
+                </div>
+              </div>
+
+              <span class="drag-icon">☰</span>
+            </div>
+
+          </div>
+        </div>
+      
+        <!-- Members List -->
+        <div class="col-md-5 example-container">
+          <h2 class="list-title">Team Members</h2>
+      
+          <div
+            cdkDropList
+            id="membersList"
+            [cdkDropListData]="members"
+            class="example-list"
+            (cdkDropListDropped)="onAddToTeam($event)">
+            
+            <div *ngFor="let user of members; trackBy: trackByFn" class="example-box" cdkDrag>
+              
+              <img [src]="user.avatar || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyDgkPQavzX7KwcLzeAsf0fgOx_-D51F3fag&s'" class="avatar" alt="User Avatar">
+              
+              <div class="user-info">
+                <div class="user-name">
+                  {{ user.nomUtilisateur }} {{ user.prenomUtilisateur }}
+                </div>
+                <div class="user-role">{{ user.role }}</div>
+              </div>
+
+              <span class="drag-icon">☰</span>
+            </div>
+
+          </div>
+        </div>
+
+    </div>
+</div>
+
+<app-app-footer></app-app-footer>

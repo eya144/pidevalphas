@@ -1,0 +1,65 @@
+<app-app-header></app-app-header>
+<br>
+
+<div class="container mt-5">
+  <div class="form-container">
+    <h2 class="form-title">Edit Invoice</h2>
+    <form (ngSubmit)="onSubmit()" [formGroup]="factureForm" class="invoice-form">
+      <!-- Montant Total -->
+      <div class="form-group">
+        <label for="montantTotal" class="form-label">Total Amount:</label>
+        <input type="number" step="0.01" id="montantTotal" formControlName="montantTotal" class="form-control" required>
+      </div>
+
+      <!-- Date Facture -->
+      <div class="form-group">
+        <label for="dateFacture" class="form-label">Invoice Date:</label>
+        <input type="date" id="dateFacture" formControlName="dateFacture" class="form-control" required>
+      </div>
+
+      <!-- Date Échéance -->
+      <div class="form-group">
+        <label for="dateEcheance" class="form-label">Due Date:</label>
+        <input type="date" id="dateEcheance" formControlName="dateEcheance" class="form-control" required>
+      </div>
+
+      <!-- Montant Total Hors Taxe -->
+      <div class="form-group">
+        <label for="montantTotalHorsTaxe" class="form-label">Total Amount (Excl. Tax):</label>
+        <input type="number" step="0.01" id="montantTotalHorsTaxe" formControlName="montantTotalHorsTaxe" class="form-control" readonly>
+      </div>
+
+      <!-- TVA -->
+      <div class="form-group">
+        <label for="tva" class="form-label">Tax (TVA):</label>
+        <select id="tva" formControlName="tva" class="form-control" required>
+          <option value="5">5%</option>
+          <option value="10">10%</option>
+          <option value="15">15%</option>
+          <option value="20">20%</option>
+          <option value="25">25%</option>
+          <option value="30">30%</option>
+        </select>
+        <div *ngIf="factureForm.get('tva')?.hasError('required') && factureForm.get('tva')?.touched" class="error-message">
+          La TVA est obligatoire.
+        </div>
+      </div>
+
+      <!-- Statut de la facture -->
+      <div class="form-group">
+        <label for="status" class="form-label">Status:</label>
+        <select id="status" formControlName="status" class="form-control" required>
+          <option value="Paid">Paid</option>
+          <option value="Unpaid">Unpaid</option>
+        </select>
+      </div>
+
+      <!-- Bouton de soumission -->
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="factureForm.invalid">Update</button>
+        <button type="button" class="btn btn-secondary" (click)="annuler()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+<app-app-footer></app-app-footer>

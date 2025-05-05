@@ -1,0 +1,70 @@
+<div class="container mt-5">
+  <h2 class="text-center text-gradient fw-bold">📦 Order List</h2>
+
+  <div class="table-responsive mt-4">
+    <table class="table table-borderless table-hover align-middle shadow-sm rounded">
+      <thead class="table-custom-header">
+        <tr>
+          <th>Total Price</th>
+          <th>Creation Date</th>
+          <th>Status</th>
+          <th>Supplier</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let commande of commandes">
+          <!-- Order line details -->
+          <tr *ngIf="lignesCommandeVisible[commande.idCommande]" class="table-light animated-row">
+            <td colspan="5">
+              <div class="p-3 border rounded-3 bg-white shadow-sm">
+                <h6 class="fw-bold text-secondary mb-3">📜 Order Details</h6>
+                <table class="table table-sm">
+                  <thead class="table-secondary">
+                    <tr>
+                      <th>Material</th>
+                      <th>Quantity</th>
+                      <th>Unit Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let ligne of lignesCommande[commande.idCommande]">
+                      <td>{{ ligne.materiel?.nomMateriel }}</td>
+                      <td>{{ ligne.quantite }}</td>
+                      <td>{{ ligne.prixUnitaire | currency:'Dt ':'symbol':'1.2-2' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Main order row -->
+          <tr class="table-row">
+            <td class="fw-bold text-primary">{{ commande.prixTotal | currency:'Dt ':'symbol':'1.2-2' }}</td>
+            <td>{{ commande.dateCreation | date:'dd/MM/yyyy' }}</td>
+            <td>
+              <span class="status" 
+                    [ngClass]="{'bg-success': commande.status === 'Validée', 'bg-warning': commande.status === 'En attente', 'bg-danger': commande.status === 'Annulée'}">
+                {{ commande.status }}
+              </span>
+            </td>
+            <td>{{ commande.idfournisseur }}</td>
+            <td>
+              <button class="btn btn-outline-dark btn-sm me-2 shadow-sm" (click)="toggleLignesCommande(commande.idCommande)">
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <button class="btn btn-outline-danger btn-sm shadow-sm" (click)="supprimerCommande(commande.idCommande)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="commandes.length === 0" class="alert alert-info text-center mt-3 shadow-sm">
+    🚨 No orders available at the moment.
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<app-app-header></app-app-header>
+<br>
+<br>
+<br>
+        <div class="fiches-de-paie-container">
+            <h2>Payslip List</h2>
+            <button (click)="openAddFicheDePaieModal()" class="button-hover">Add a Payslip</button>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Initial Amount</th>
+                  <th>Non-Worked Days</th>
+                  <th>Payment Type</th>
+                  <th>Payment Date</th>
+                  <th>Payment Status</th>
+                  <th>Final Amount</th>
+                  <th>Username</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let fiche of currentfichesDePaie">
+                  <td>{{ fiche.montantInitial }}</td>
+                  <td>{{ fiche.joursNonTravailles }}</td>
+                  <td>{{ fiche.typePaiement }}</td>
+                  <td>{{ fiche.datePaiement | date: 'dd/MM/yyyy'  }}</td>
+                  <td>
+                    <select [(ngModel)]="fiche.statutPaiementL" (change)="updateStatutPaiement(fiche)" [ngStyle]="{'color': fiche.statutPaiementL === 'Paid' ? 'green' : 'red'}">
+                      <option value="Paid">Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                    </select>
+                  
+                  </td>
+                  <td>{{ fiche.montantFinal }}</td>
+                  <td>{{ fiche.nom }}</td>
+                  <td> 
+                    <button (click)="calculerSalaire(fiche)" class="button-hover" >Calculate Salary</button>
+                    <button (click)="imprimerFiche(fiche)" > 📑</button>    
+                    <button (click)="deleteFiche(fiche)" class="button-hover">🗑️</button>
+              
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+             <!-- Pagination -->
+<nav>
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="changePage(currentPage - 1)">
+        <i class="fas fa-chevron-left"></i> <!-- Flèche gauche -->
+      </a>
+    </li>
+    <li *ngFor="let page of [].constructor(totalPages); let i = index" class="page-item" [class.active]="currentPage === i + 1">
+      <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+    </li>
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="changePage(currentPage + 1)">
+        <i class="fas fa-chevron-right"></i> <!-- Flèche droite -->
+      </a>
+    </li>
+    
+  </ul>
+</nav>
+        </div>
+   <app-app-footer></app-app-footer>
+   

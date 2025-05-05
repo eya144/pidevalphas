@@ -1,0 +1,61 @@
+<h1 mat-dialog-title class="dialog-title">Détails de la réclamation</h1>
+
+<div class="dialog-body">
+  <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear" class="toggle-button">
+    {{ isLinear ? 'Désactiver le mode linéaire' : 'Activer le mode linéaire' }}
+  </button>
+
+  <mat-horizontal-stepper [linear]="isLinear" [(selectedIndex)]="step">
+    
+    <!-- Step 1: Reclamation Sent -->
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>
+          <span [ngClass]="{ 'step-complete': reclamationSent, 'step-pending': !reclamationSent }">
+            Claim Sent
+            <mat-icon *ngIf="reclamationSent" class="tick-icon">check_circle</mat-icon>
+          </span>
+        </ng-template>
+
+        <div class="step-buttons">
+          <button mat-button matStepperNext (click)="onNextStep()">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Step 2: Email Validation -->
+    <mat-step [stepControl]="secondFormGroup" (click)="showPendingMessage()">
+      <ng-template matStepLabel>
+        <span [ngClass]="{ 
+            'step-complete-green': isResolved, 
+            'step-pending-orange': !isResolved 
+          }">
+           In Progress
+          <mat-icon>{{ isResolved ? 'check_circle' : 'hourglass_empty' }}</mat-icon>
+        </span>
+      </ng-template>
+      <form [formGroup]="secondFormGroup">
+        <div class="step-buttons">
+          <button mat-button matStepperPrevious>Previous</button>
+          <button mat-button color="primary" (click)="closeDialog()">Finish</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Step 3: Response Received -->
+    <mat-step>
+      <ng-template matStepLabel>
+        <span [ngClass]="{ 
+            'step-complete-green': isResolved, 
+            'step-pending-orange': !isResolved 
+          }">
+          Response Received
+        </span>
+      </ng-template>
+      <div class="step-buttons">
+        <button mat-button matStepperPrevious>Retour</button>
+        <button mat-button color="primary" (click)="openResponseDialog()">See the Response</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

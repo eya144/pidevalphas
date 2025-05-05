@@ -1,0 +1,57 @@
+<app-headeer></app-headeer>
+<body>
+  <h2 class="section-title">Liste des demandes pour l'utilisateur {{ userId }}</h2>
+  <table class="demande-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Status</th>
+        <th>Date Demande</th>
+        <th>Lignes de Demande</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let demande of demandes">
+        <td>{{ demande.idDemande }}</td>
+        <td>{{ demande.status }}</td>
+        <td>{{ demande.dateDemande | date: 'dd/MM/yyyy' }}</td>
+        <td>
+          <!-- Zone de suppression de la commande -->
+          <div class="delete-btn-container">
+            <button *ngIf="demande.status === 'envoye' || demande.status === 'refuse' || demande.status === 'accepte'" 
+                    (click)="deleteDemande(demande.idDemande)" class="delete-commande-btn">
+              <i class="fas fa-trash"></i> Supprimer la commande
+            </button>
+          </div>
+          <ul class="ligne-demande-list">
+            <li *ngFor="let ligne of demande.ligneDemandes" class="ligne-demande-item">
+              <div class="action-icons">
+                <!-- Affiche l'icône "edit" seulement si le statut de la demande est "Envoye" -->
+                <button *ngIf="demande.status === 'envoye'" (click)="editLigne(ligne)" class="edit-btn">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button (click)="deleteLigne(ligne.idLigneDemande)" class="delete-btn">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+              <div *ngIf="ligne.isEditing">
+                <label for="quantite">Quantité:</label>
+                <input 
+                    type="number" 
+                    [(ngModel)]="ligne.quantite" 
+                    id="quantite" 
+                    class="quantite-input"
+                    (keydown.enter)="onEnter(ligne)" 
+                />
+            </div>
+              <div *ngIf="!ligne.isEditing">
+                <strong>Quantité:</strong> {{ ligne.quantite }} <br>
+              </div>
+              <strong>Nom matériel:</strong> {{ ligne.materiel.nomMateriel }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>

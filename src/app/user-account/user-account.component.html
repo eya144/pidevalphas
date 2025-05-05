@@ -1,0 +1,335 @@
+<!--<div *ngIf="user">
+    <h2>Mon Compte</h2>
+    <form (ngSubmit)="updateUser()">
+        <div>
+            <label>Nom:</label>
+            <input [(ngModel)]="user.nomU" name="nomU" required>
+        </div>
+        <div>
+            <label>Prénom:</label>
+            <input [(ngModel)]="user.prenomU" name="prenomU" required>
+        </div>
+        <div>
+            <label>Email:</label>
+            <input [(ngModel)]="user.emailU" name="emailU" required type="email">
+        </div>
+        <div>
+            <label>Salaire:</label>
+            <input [(ngModel)]="user.salaireU" name="salaireU" required type="number">
+        </div>
+        <button type="submit">Mettre à jour</button>
+    </form>
+</div>-->
+<!--<main>
+    <div class="slider-area">
+        <div class="slider-active">
+            <div class="single-slider hero-overly slider-height d-flex align-items-center" 
+                style="background-image: url('assets/img/hero/h1_hero.jpg');">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-6 col-sm-8">
+                            User Account Form Card 
+                            <div class="card p-4 shadow rounded bg-light">
+                                <h3 class="text-center mb-3">Mon Compte</h3>
+                                <form (ngSubmit)="updateUser()" *ngIf="user">
+                                    <div class="form-group">
+                                        <label for="name">Nom</label>
+                                        <input type="text" class="form-control" id="name" 
+                                               name="nomU" [(ngModel)]="user.nomU" required>
+                                    </div>
+
+                                    <div class="form-group mt-3">
+                                        <label for="firstName">Prénom</label>
+                                        <input type="text" class="form-control" id="firstName" 
+                                               name="prenomU" [(ngModel)]="user.prenomU" required>
+                                    </div>
+
+                                    <div class="form-group mt-3">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" 
+                                               name="emailU" [(ngModel)]="user.emailU" required>
+                                    </div>
+
+                                    <div class="form-group mt-3">
+                                        <label for="salary">Salaire</label>
+                                        <input type="number" class="form-control" id="salary" 
+                                               name="salaireU" [(ngModel)]="user.salaireU" required>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary w-100 mt-4">Mettre à jour</button>
+                                </form>
+
+                                <div *ngIf="!user" class="text-center mt-3">
+                                    <p>Chargement des informations de l'utilisateur...</p>
+                                </div>
+                            </div>
+                             End User Account Form Card 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>-->
+<!--<main>
+  <div class="slider-area">
+    <div class="slider-active">
+      <div class="single-slider hero-overly slider-height d-flex align-items-center"
+           style="background-image: url('assets/img/hero/h1_hero.jpg');">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 col-sm-8">
+
+              
+              <div class="card p-4 shadow rounded bg-light">
+                <h3 class="text-center mb-3">Mon Compte</h3>
+
+              
+                <form *ngIf="user && !showCompletionForm" (ngSubmit)="updateUser()">
+                  <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" class="form-control" id="name"
+                           name="nomU" [(ngModel)]="user.nomU" required>
+                  </div>
+
+                  <div class="form-group mt-3">
+                    <label for="firstName">Prénom</label>
+                    <input type="text" class="form-control" id="firstName"
+                           name="prenomU" [(ngModel)]="user.prenomU" required>
+                  </div>
+
+                  <div class="form-group mt-3">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email"
+                           name="emailU" [(ngModel)]="user.emailU" required>
+                  </div>
+
+                  <div class="form-group mt-3">
+                    <label for="salary">Salaire</label>
+                    <input type="number" class="form-control" id="salary"
+                           name="salaireU" [(ngModel)]="user.salaireU" required>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary w-100 mt-4">Mettre à jour</button>
+                </form>
+
+                
+                <div *ngIf="!user && !showCompletionForm" class="text-center mt-3">
+                  <p>Chargement des informations de l'utilisateur...</p>
+                </div>
+
+                
+                <div *ngIf="user && !showCompletionForm" class="mt-4">
+                  <p>Progression du profil : {{ profileCompletion }}%</p>
+                  <div class="progress">
+                    <div class="progress-bar"
+                         role="progressbar"
+                         [style.width.%]="profileCompletion"
+                         [attr.aria-valuenow]="profileCompletion"
+                         aria-valuemin="0"
+                         aria-valuemax="100">
+                    </div>
+                  </div>
+                  <p class="mt-2" [ngClass]="{'text-success': isVerified, 'text-danger': !isVerified}">
+                    {{ isVerified ? '✔ Profil vérifié !' : 'Profil non vérifié.' }}
+                  </p>
+                </div>
+
+                
+                <button *ngIf="profileCompletion < 100 && !showCompletionForm"
+                        (click)="toggleCompletionForm()"
+                        class="btn btn-warning w-100 mt-3">
+                  Compléter mon profil
+                </button>
+
+                
+                <div *ngIf="user && showCompletionForm">
+                  <form (ngSubmit)="updateUserProfile()">
+                    <div class="form-group">
+                      <label for="etude">Études</label>
+                      <input type="text" class="form-control" id="etude"
+                             name="etude" [(ngModel)]="user.etude">
+                    </div>
+                    <div class="form-group mt-3">
+                      <label for="passion">Passions</label>
+                      <input type="text" class="form-control" id="passion"
+                             name="passion" [(ngModel)]="user.passion">
+                    </div>
+                    <div class="form-group mt-3">
+                      <label for="experience">Expérience</label>
+                      <input type="text" class="form-control" id="experience"
+                             name="experience" [(ngModel)]="user.experience">
+                    </div>
+                    <div class="form-group mt-3">
+                      <label for="competences">Compétences</label>
+                      <input type="text" class="form-control" id="competences"
+                             name="competences" [(ngModel)]="user.competences">
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 mt-4">Sauvegarder</button>
+                  </form>
+                </div>
+              </div>
+             
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>-->
+<main>
+    <div class="slider-area">
+      <div class="slider-active">
+        <div class="single-slider hero-overly slider-height d-flex align-items-center"
+             style="background-image: url('assets/img/hero/h1_hero.jpg');">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-4 col-md-6 col-sm-8">
+  
+                <!-- User Account Form Card -->
+                <div class="card p-4 shadow rounded bg-light">
+                  <h3 class="text-center mb-3">My Account</h3>
+  
+                  <!-- Affichage de l'avatar -->
+                  <div class="text-center mb-3">
+                    <img [src]="getAvatarUrl()" alt="Avatar de {{ user?.nomU }}" class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
+                  </div>
+  
+                  <!-- Formulaire de mise à jour de l'utilisateur -->
+                  <form *ngIf="user && !showCompletionForm" (ngSubmit)="updateUser()">
+                    <div class="form-group">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" id="name"
+                             name="nomU" [(ngModel)]="user.nomU" required>
+                    </div>
+  
+                    <div class="form-group mt-3">
+                      <label for="firstName">family name</label>
+                      <input type="text" class="form-control" id="firstName"
+                             name="prenomU" [(ngModel)]="user.prenomU" required>
+                    </div>
+  
+                    <div class="form-group mt-3">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control" id="email"
+                             name="emailU" [(ngModel)]="user.emailU" required>
+                    </div>
+  
+                    <!--<div class="form-group mt-3">
+                      <label for="salary">Salary</label>
+                      <input type="number" class="form-control" id="salary"
+                             name="salaireU" [(ngModel)]="user.salaireU" required>
+                    </div>-->
+  
+                    <button type="submit" class="btn btn-primary w-100 mt-4">Update</button>
+                  </form>
+  
+                  <!-- Chargement -->
+                  <div *ngIf="!user && !showCompletionForm" class="text-center mt-3">
+                    <p>Load user information ...</p>
+                  </div>
+  
+                  <!-- Progression du profil -->
+                  <div *ngIf="user && !showCompletionForm" class="mt-4">
+                    <!--<p>Progression  profil : {{ profileCompletion }}%</p>-->
+                    <div class="progress-circle-container">
+                      <div class="progress-circle" [ngStyle]="{ 'stroke-dasharray': (profileCompletion / 100) * 440 }">
+                        <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="60" cy="60" r="55" stroke="#e6e6e6" stroke-width="10" fill="none"></circle>
+                          <circle cx="60" cy="60" r="55" stroke="#4dbd74" stroke-width="10" fill="none" stroke-dasharray="440" stroke-dashoffset="0"></circle>
+                        </svg>
+                        <!--<div class="circle-text">
+                          {{ profileCompletion }}%
+                        </div>-->
+                        <div class="circle-text" *ngIf="!showCheckIcon">
+                          {{ profileCompletion }}%
+                        </div>
+                        <div class="circle-text verified-icon" *ngIf="showCheckIcon">
+                          <i class="fa fa-check-circle text-success"></i>
+                        </div>
+                        
+  
+                      </div>
+                    </div>
+                    <p class="mt-2" [ngClass]="{'text-success': isVerified, 'text-danger': !isVerified}">
+                      <i class="fa" [ngClass]="{'fa-check-circle': isVerified, 'fa-times-circle': !isVerified}"></i>
+                      {{ isVerified ? '✔ Profil vérifié !' : 'Profil non vérifié.' }}
+                    </p>
+                  </div>
+  
+                  <!-- Bouton afficher/cacher le formulaire de complétion -->
+                  <button *ngIf="profileCompletion < 100 && !showCompletionForm"
+                          (click)="toggleCompletionForm()"
+                          class="btn btn-warning w-100 mt-3">
+                    Complete  profile
+                  </button>
+  
+                  <!-- Formulaire de complétion de profil -->
+                  <div *ngIf="user && showCompletionForm">
+                    <form (ngSubmit)="updateUserProfile()">
+                      <!-- Études -->
+                      <div class="form-group">
+                        <label for="etude">Education</label>
+                        <select class="form-control" id="etude" name="etude" [(ngModel)]="user.etude" required>
+                          <option value="" disabled>Select your education level</option>
+                          <option value="Bac">Bac</option>
+                          <option value="Bac+2">Bac+2</option>
+                          <option value="Licence">Licence</option>
+                          <option value="Master">Master</option>
+                          <option value="Doctorat">Doctorat</option>
+                        </select>
+                      </div>
+  
+                      <!-- Passions -->
+                      <div class="form-group mt-3">
+                        <label for="passion">Passions</label>
+                        <select class="form-control" id="passion" name="passion" [(ngModel)]="user.passion" required>
+                          <option value="" disabled>Sélectionnez une passion</option>
+                          <option value="Technologie">Technologie</option>
+                          <option value="Sport">Sport</option>
+                          <option value="Musique">Musique</option>
+                          <option value="Voyage">Voyage</option>
+                        </select>
+                      </div>
+  
+                      <!-- Expérience -->
+                      <div class="form-group mt-3">
+                        <label for="experience">Experience</label>
+                        <select class="form-control" id="experience" name="experience" [(ngModel)]="user.experience" required>
+                          <option value="" disabled>Select your experience level</option>
+                          <option value="Débutant">Beginner</option>
+                          <option value="Intermédiaire">Intermediate</option>
+                          <option value="Avancé">Advanced</option>
+                        </select>
+                      </div>
+  
+                      <!-- Compétences -->
+                      <div class="form-group mt-3">
+                        <label for="competences">Skills</label>
+                        <select class="form-control" id="competences" name="competences" [(ngModel)]="user.competences" required>
+                          <option value="" disabled>Select your skills</option>
+                          <option value="JavaScript">JavaScript</option>
+                          <option value="Java">Java</option>
+                          <option value="Python">Python</option>
+                          <option value="C++">C++</option>
+                        </select>
+                      </div>
+  
+                      <!-- Bouton de soumission -->
+                      <button  type="submit"   class="btn btn-success w-100 mt-4">Save</button>
+                    </form>
+                  </div>
+                  <a routerLink="/" class="btn btn-primary">🏠 Go Home</a>
+  
+                </div>
+                <!-- End User Account Form Card -->
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  

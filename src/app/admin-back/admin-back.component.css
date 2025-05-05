@@ -1,0 +1,223 @@
+/* Styles globaux avec fond noir */
+body, .container-scroller, .container-fluid {
+  background-color: #121212; /* Fond noir profond */
+  color: #e0e0e0; /* Texte clair pour contraste */
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+}
+
+/* Conteneur principal */
+.dashboard-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Blocs d'informations */
+.info-blocks {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.info-block {
+  background-color: #1e1e1e; /* Fond gris très foncé */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  flex: 1;
+  text-align: center;
+  border: 1px solid #333; /* Bordure subtile */
+}
+
+.info-block .label {
+  color: #aaa; /* Texte gris clair */
+  font-size: 0.9em;
+  margin-bottom: 5px;
+}
+
+/* Couleurs des valeurs */
+.info-block.earning .value { color: #27ae60; } /* Vert */
+.info-block.share .value { color: #3498db; } /* Bleu */
+.info-block.likes .value { color: #e74c3c; } /* Rouge */
+.info-block.rating .value { color: #f39c12; } /* Orange */
+
+.info-block .value {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* Conteneurs de graphiques */
+.chart-container {
+  background-color: #1e1e1e; /* Fond gris très foncé */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  flex: 1;
+  min-width: 300px;
+  border: 1px solid #333;
+}
+
+.chart-container h2 {
+  color: #e0e0e0; /* Texte clair */
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+/* Graphique circulaire */
+.circular-chart {
+  position: relative;
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+.percentage-label {
+  color: #fff; /* Texte blanc */
+}
+
+/* Bouton */
+.check-now-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.check-now-button:hover {
+  background-color: #2980b9;
+}
+
+/* Adaptations responsive */
+@media (max-width: 768px) {
+  .info-blocks {
+    flex-direction: column;
+  }
+  .chart-row {
+    flex-direction: column;
+  }
+}
+
+.container-scroller {
+  display: flex;
+}
+
+app-back-menu-admin {
+  width: 250px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.page-body-wrapper {
+  flex: 1;
+  padding: 20px;
+}
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  position: fixed;
+  height: 100vh;
+  background: #2c3e50;
+  color: white;
+}
+
+.main-content {
+  margin-left: 250px;
+  flex: 1;
+  padding: 20px;
+}
+.totals-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.total-card {
+  background: #34495e;
+  padding: 20px;
+  border-radius: 8px;
+  flex: 1;
+  color: white;
+}
+
+.total-card h3 {
+  margin-top: 0;
+  color: #aaa;
+  font-size: 1em;
+}
+
+.total-value {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* Dimensions des graphiques */
+.chart-container {
+  height: 350px; /* Hauteur fixe */
+  min-width: 400px; /* Largeur minimale */
+}
+
+.circular-chart {
+  width: 200px;
+  height: 200px;
+}
+/* Sidebar Fixe */
+.fixed-sidebar {
+  position: fixed;
+  width: 250px;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background: #1e1e1e;
+  overflow-y: auto;
+}
+
+/* Contenu Principal */
+.main-content-with-sidebar {
+  margin-left: 250px;
+  padding: 20px;
+  width: calc(100% - 250px);
+}
+
+/* Taille réduite des diagrammes */
+.chart-container {
+  height: 280px; /* Réduit de 350px */
+  min-width: 300px; /* Réduit de 400px */
+  max-width: 100%;
+}
+
+/* Ajustement des canvas */
+canvas {
+  max-height: 240px !important;
+  width: auto !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fixed-sidebar {
+    width: 200px;
+  }
+  
+  .main-content-with-sidebar {
+    margin-left: 200px;
+    width: calc(100% - 200px);
+  }
+  
+  .chart-container {
+    height: 250px;
+    min-width: 100%;
+  }
+}

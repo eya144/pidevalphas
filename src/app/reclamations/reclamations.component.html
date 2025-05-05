@@ -1,0 +1,58 @@
+<app-app-header></app-app-header>
+
+<div class="reclamation-container mt-5 mb-5">
+  <h2 class="mb-4">Reclamations List</h2>
+
+  <!-- 🔍 Barre de recherche -->
+  <div class="mb-3">
+    <input type="text" class="form-control" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="Rechercher...">
+  </div>
+
+  <div class="d-flex mb-4">
+    <button class="btn btn-primary" (click)="addReclamation()">Add Reclamation</button>
+
+  </div>
+  
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <!-- 🖱️ Ajout du tri au clic -->
+          <th (click)="onSortChange('typeReclamation')">Type </th>
+          <th (click)="onSortChange('description')">Description </th>
+          <th (click)="onSortChange('dateReclamation')">Date </th>
+          <th (click)="onSortChange('statusReclamation')">Status </th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reclamation of filteredReclamations | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+          <td>{{ reclamation.typeReclamation.replace('_', ' ') }}</td>
+          <td style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ reclamation.description }}">
+            {{ reclamation.description }}
+          </td>
+          <td>{{ reclamation.dateReclamation | date:'yyyy-MM-dd HH:mm' }}</td>
+          <td>
+            <span class="badge" [ngClass]="{'badge-success': reclamation.statusReclamation === 'RESOLVED', 'badge-danger': reclamation.statusReclamation === 'UNRESOLVED'}">
+              {{ reclamation.statusReclamation }}
+            </span>
+          </td>
+          <td class="grid gap-3">
+            <a [routerLink]="['/view-reclamation', reclamation.idReclamation]" class="btn btn-info btn-sm">View</a>
+            <button class="btn btn-warning btn-sm" (click)="editReclamation(reclamation.idReclamation)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteReclamation(reclamation.idReclamation)">Delete</button>
+            <button *ngIf="reclamation.statusReclamation === 'UNRESOLVED'" class="btn btn-success btn-sm" (click)="markAsResolved(reclamation.idReclamation)">Mark as Resolved</button>
+            <button *ngIf="reclamation.statusReclamation === 'RESOLVED'" class="btn btn-secondary btn-sm" (click)="markAsUnresolved(reclamation.idReclamation)">Mark as Unresolved</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+</div>
+
+<app-app-footer></app-app-footer>

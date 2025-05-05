@@ -1,0 +1,40 @@
+<app-app-header></app-app-header>
+<div class="container mt-5 mb-5">
+  <h2>Edit Conges</h2>
+  <form (ngSubmit)="updateConges()" [formGroup]="congesForm">
+
+    <div class="mb-3">
+      <label for="dateDebut" class="form-label">Start Date:</label>
+      <input type="date" id="dateDebut" formControlName="dateDebut" class="form-control" required>
+      <div *ngIf="congesForm.get('dateDebut')?.hasError('required') && congesForm.get('dateDebut')?.touched" class="text-danger">
+        Start Date is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="dateFin" class="form-label">End Date:</label>
+      <input type="date" id="dateFin" formControlName="dateFin" class="form-control" required>
+      <div *ngIf="congesForm.get('dateFin')?.hasError('required') && congesForm.get('dateFin')?.touched" class="text-danger">
+        End Date is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="utilisateur" class="form-label">Assign User:</label>
+      <select id="utilisateur" formControlName="utilisateur" class="form-control" required>
+        <option *ngFor="let user of users" [value]="user.id">
+          {{ user.nomUtilisateur }} {{ user.prenomUtilisateur }} - {{ user.matricule }}
+        </option>
+      </select>
+      <div *ngIf="congesForm.get('utilisateur')?.hasError('required') && congesForm.get('utilisateur')?.touched" class="text-danger">
+        Selecting a user is required.
+      </div>
+    </div>
+
+    <div class="d-flex flex-row">
+      <button type="submit" class="btn btn-primary mx-1" [disabled]="congesForm.invalid">Update Conges</button>
+      <button type="button" class="btn btn-secondary mx-1" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
+<app-app-footer></app-app-footer>

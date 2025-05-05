@@ -1,0 +1,63 @@
+<app-back-header></app-back-header>
+
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Interview Scheduling</h2>
+
+    <form (ngSubmit)="validerEntretien()" class="needs-validation" novalidate>
+      <!-- Interview Date and Time -->
+      <div class="mb-4">
+        <label for="dateEntretien" class="form-label">Interview Date and Time:</label>
+        <input type="datetime-local" id="dateEntretien" [(ngModel)]="dateEntretien" name="dateEntretien" class="form-control" required />
+        <div class="invalid-feedback">
+          Please select a date and time.
+        </div>
+      </div>
+
+      <!-- Interview Type -->
+      <div class="mb-4">
+        <label class="form-label">Interview Type</label>
+        <div class="form-check">
+          <input type="checkbox" [(ngModel)]="estEnLigne" name="estEnLigne" class="form-check-input" (change)="gererTypeEntretien()" id="entretienEnLigne" />
+          <label class="form-check-label" for="entretienEnLigne">
+            Online Interview
+          </label>
+        </div>
+      </div>
+
+      <!-- Google Meet Link (only if online) -->
+      <div *ngIf="estEnLigne" class="mb-4">
+        <label for="lienMeet" class="form-label">Google Meet Link:</label>
+        <div class="input-group">
+          <input type="text" id="lienMeet" [(ngModel)]="lienMeet" name="lienMeet" class="form-control" required />
+          <button type="button" class="btn btn-primary" (click)="genererLienMeet()">Generate Meet Link</button>
+        </div>
+        <div class="invalid-feedback">
+          Google Meet link is required.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success w-100">Confirm Interview</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS for form validation and other interactions -->
+  <script>
+    (function () {
+      'use strict'
+      var forms = document.querySelectorAll('.needs-validation')
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
+</body>
+
+<app-footer-home></app-footer-home>

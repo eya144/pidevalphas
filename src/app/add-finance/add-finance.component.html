@@ -1,0 +1,72 @@
+<app-app-header></app-app-header>
+  <!-- Slider Area End -->
+<br>
+<br>
+
+    <div class="container mt-5" >
+    <h2>Add Invoice</h2>
+    <form (ngSubmit)="addFacture()" [formGroup]="factureForm">
+      <div class="mb-3">
+        <label for="montantTotal" class="form-label">Total Amount:</label>
+        <input type="number" step="0.01" id="montantTotal" formControlName="montantTotal" class="form-control" required>
+        <div *ngIf="factureForm.get('montantTotal')?.hasError('required') && factureForm.get('montantTotal')?.touched">
+          Le montant total est obligatoire.
+        </div>
+        <div *ngIf="factureForm.get('montantTotal')?.hasError('min') && factureForm.get('montantTotal')?.touched">
+          Le montant total doit être supérieur ou égal à 0.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="dateFacture" class="form-label">Invoice Date:</label>
+        <input type="date" id="dateFacture" formControlName="dateFacture" class="form-control" required>
+        <div *ngIf="factureForm.get('dateFacture')?.hasError('required') && factureForm.get('dateFacture')?.touched">
+          La date de facture est obligatoire.
+        </div>
+      </div>
+        <div class="mb-3">
+        <label for="dateEcheance" class="form-label">Due Date:</label>
+        <input type="date" id="dateEcheance" formControlName="dateEcheance" class="form-control" required>
+        <div *ngIf="factureForm.get('dateEcheance')?.hasError('required') && factureForm.get('dateEcheance')?.touched">
+          La date d'échéance est obligatoire.
+        </div>
+        <div *ngIf="factureForm.hasError('dateEcheanceInvalid') && factureForm.get('dateEcheance')?.touched">
+          La date d'échéance doit être postérieure à la date de facture.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="montantTotalHorsTaxe" class="form-label">Total Amount (Excl. Tax):</label>
+        <input type="number" step="0.01" id="montantTotalHorsTaxe" formControlName="montantTotalHorsTaxe" class="form-control" readonly>
+      </div>
+
+      <div class="mb-3">
+        <label for="tva" class="form-label">Tax (TVA):</label>
+        <select id="tva" formControlName="tva" class="form-control" required>
+          <option value="5">5%</option>
+          <option value="10">10%</option>
+          <option value="15">15%</option>
+          <option value="20">20%</option>
+          <option value="25">25%</option>
+          <option value="30">30%</option>
+        </select>
+        <div *ngIf="factureForm.get('tva')?.hasError('required') && factureForm.get('tva')?.touched" class="error-message">
+          La TVA est obligatoire.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="status" class="form-label">Status:</label>
+        <select id="status" formControlName="status" class="form-control" required>
+          <option value="Paid">Paid</option>
+          <option value="Unpaid">Unpaid</option>
+        </select>
+        <div *ngIf="factureForm.get('status')?.hasError('required') && factureForm.get('status')?.touched">
+          Le statut est obligatoire.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="factureForm.invalid">Add Invoice</button>
+      <div *ngIf="isLoading" class="spinner-overlay">
+        <div class="spinner"></div>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="annuler()">Cancel</button>
+    </form>
+  </div>
+  <app-app-footer></app-app-footer>

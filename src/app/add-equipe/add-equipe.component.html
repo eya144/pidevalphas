@@ -1,0 +1,35 @@
+<app-app-header></app-app-header>
+
+<div class="container mt-5 mb-5">
+  <div class="form-container">
+    <h2 class="form-title">Ajouter une Équipe</h2>
+
+    <form (ngSubmit)="addTeam()" [formGroup]="teamForm">
+      <!-- Team Name -->
+      <div class="form-group">
+        <label for="nomEquipe" class="form-label">Nom de l'équipe :</label>
+        <input type="text" id="nomEquipe" formControlName="nomEquipe" class="form-control" required>
+        <div *ngIf="teamForm.get('nomEquipe')?.hasError('required') && teamForm.get('nomEquipe')?.touched" class="text-danger">
+          Le nom de l'équipe est requis.
+        </div>
+      </div>
+
+      <!-- Disponibility -->
+      <div class="form-group">
+        <label for="disponibilite" class="form-label">Disponibilité :</label>
+        <input type="text" id="disponibilite" formControlName="disponibilite" class="form-control" required>
+        <div *ngIf="teamForm.get('disponibilite')?.hasError('required') && teamForm.get('disponibilite')?.touched" class="text-danger">
+          La disponibilité est requise.
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-submit" [disabled]="teamForm.invalid">Ajouter</button>
+        <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-app-footer></app-app-footer>

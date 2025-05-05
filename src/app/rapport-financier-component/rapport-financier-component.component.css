@@ -1,0 +1,41 @@
+.badge {
+    padding: 8px 12px;
+    font-size: 0.9em;
+  }
+  
+  .bg-success {
+    background-color: #28a745 !important;
+  }
+  
+  .bg-danger {
+    background-color: #dc3545 !important;
+  }
+  
+  .text-success {
+    color: #28a745 !important;
+    font-weight: bold;
+  }
+  
+  .text-danger {
+    color: #dc3545 !important;
+    font-weight: bold;
+  }
+  
+  .table th {
+    background-color: #f8f9fa;
+  }
+  
+  .table td {
+    vertical-align: middle;
+  }
+  
+  .alert-dismissible {
+    position: relative;
+  }
+  
+  .btn-close {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }

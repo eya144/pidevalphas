@@ -1,0 +1,7 @@
+
+  body {
+    padding-top: 280px;  /* Assure que le contenu commence après l'en-tête */
+    padding-bottom: 360px; /* Assure que le contenu n'est pas caché sous le footer */
+  }
+  
+  

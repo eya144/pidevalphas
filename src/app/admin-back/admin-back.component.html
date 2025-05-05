@@ -1,0 +1,90 @@
+<div class="container-scroller bg-black text-white min-h-screen p-4">
+  <!-- Back Menu Admin Start -->
+  <app-back-menu-admin></app-back-menu-admin>
+  <!-- Back Menu Admin End -->
+
+  <div class="container-fluid page-body-wrapper">
+    <!-- navbar Start -->
+    <app-back-header (searchEvent)="onSearch($event)"></app-back-header>
+    <!-- navbar End -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- navbar Start -->
+      <app-back-header (searchEvent)="onSearch($event)"></app-back-header>
+      <!-- navbar End -->
+    <!-- Wrapper pour les deux blocs côte à côte -->
+<div class="flex justify-center gap-6 flex-wrap md:flex-nowrap w-full p-4">
+   <!-- Bloc des totaux -->
+   <div class="totals-container">
+    <div class="total-card">
+      <h1> 🧾 Total Invoices</h1>
+      <div class="total-value" style="color : yellow"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{totalInvoices}} </div>
+    </div>
+    <div class="total-card">
+      <h1> 💰 Paid    Invoices</h1>
+      <div class="total-value" style="color:green;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{paidInvoices}}  </div>
+
+    </div>
+    <div class="total-card">
+      <h1> 📑 generated PaySlips</h1>
+      <div class="total-value" style="color:red;" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{generatedPaySlips}}  </div>
+    </div>
+    <div class="total-card">
+      <h1> 📑 Total Payslips</h1>
+      <div class="total-value" style="color:blue;" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{totalPaySlips}} </div>
+      
+    </div>
+  </div>
+  <!-- Invoice Statistics -->
+  <div class="container w-full md:w-1/2">
+    <div class="flex flex-col items-center gap-2 mb-4 text-center">
+      <h2 class="text-xl font-bold">Invoice Statistics</h2>
+      <select [(ngModel)]="selectedChart" class="bg-gray-800 text-white border border-gray-600 rounded-lg p-2">
+        <option value="bar">Bar Chart</option>
+        <option value="line">Sine Wave</option>
+        <option value="pie">Circular Chart</option>
+      </select>
+    </div>
+    <div class="max-w-md mx-auto">
+      <canvas *ngIf="selectedChart === 'bar'" baseChart
+              [data]="barChartData"
+              [type]="barChartType"
+              [options]="barChartOptions"></canvas>
+
+      <canvas *ngIf="selectedChart === 'line'" baseChart
+              [data]="lineChartData"
+              [type]="lineChartType"
+              [options]="lineChartOptions"></canvas>
+
+      <canvas *ngIf="selectedChart === 'pie'" baseChart
+              [data]="pieChartData"
+              [type]="pieChartType"
+              [options]="pieChartOptions"></canvas>
+    </div>
+  </div>
+
+  <!-- Pay Slip Statistics -->
+  <div class="container w-full md:w-1/2">
+    <div class="flex flex-col items-center gap-2 mb-4 text-center">
+      <h2 class="text-xl font-bold">Pay Slip Statistics</h2>
+      <select [(ngModel)]="selectedPayChart" class="bg-gray-800 text-white border border-gray-600 rounded-lg p-2">
+        <option value="bar">Bar Chart</option>
+        <option value="pie">Circular Chart</option>
+      </select>
+    </div>
+    <div class="max-w-md mx-auto">
+      <canvas *ngIf="selectedPayChart === 'bar'" baseChart
+              [data]="payBarChartData"
+              [type]="payBarChartType"
+              [options]="payBarChartOptions"></canvas>
+
+      <canvas *ngIf="selectedPayChart === 'pie'" baseChart
+              [data]="payPieChartData"
+              [type]="payPieChartType"
+              [options]="payPieChartOptions"></canvas>
+    </div>
+  </div>
+
+</div>
+  
+</div>
+</div>

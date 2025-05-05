@@ -1,0 +1,37 @@
+<div>
+    <h5>Liste des Utilisateurs</h5>
+    
+    <!-- Barre de recherche -->
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher par nom, prénom ou email" class="form-control mb-3">
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th (click)="sort('nomU')">firstName</th>
+                <th (click)="sort('prenomU')">lastName</th>
+                <th (click)="sort('emailU')">Email</th>
+                <th>Role</th>
+                
+                
+                
+                
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of filterUsers()">
+                <td>{{ user.nomU }}</td>
+                <td>{{ user.prenomU }}</td>
+                <td>{{ user.emailU }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <i class="fas fa-trash" (click)="deleteUser(user.idU)" style="cursor: pointer;"></i>
+                    &nbsp;&nbsp;
+                    <i class="fas fa-edit" (click)="openUpdateDialog(user)" style="cursor: pointer; margin-right: 10px;"></i>
+                    &nbsp;&nbsp;
+                    <i class="fas fa-plus" *ngIf="user.role === 'ROLE_EMPLOYE' && user.idU !== undefined" (click)="openPresenceModal(user.idU!)" style="cursor: pointer;"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>  

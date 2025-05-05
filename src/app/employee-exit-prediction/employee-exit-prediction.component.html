@@ -1,0 +1,214 @@
+<div class="container">
+    <h1>{{ title }}</h1>
+  
+    <form #predictionForm="ngForm" (ngSubmit)="getPrediction()" class="prediction-form">
+      <!-- Satisfaction Level -->
+      <div class="form-group">
+        <label>Satisfaction Level:</label>
+        <input
+          type="number"
+          step="0.01"
+          [(ngModel)]="features.satisfaction_level"
+          name="satisfaction_level"
+          class="form-control"
+          required
+          min="0"
+          max="1"
+          #satisfaction="ngModel"
+        />
+        <div *ngIf="satisfaction.invalid && satisfaction.touched" class="text-danger">
+          Must be between 0 and 1
+        </div>
+      </div>
+  
+      <!-- Last Evaluation -->
+      <div class="form-group">
+        <label>Last Evaluation:</label>
+        <input
+          type="number"
+          step="0.01"
+          [(ngModel)]="features.last_evaluation"
+          name="last_evaluation"
+          class="form-control"
+          required
+          min="0"
+          max="1"
+          #evaluation="ngModel"
+        />
+        <div *ngIf="evaluation.invalid && evaluation.touched" class="text-danger">
+          Must be between 0 and 1
+        </div>
+      </div>
+  
+      <!-- Number of Projects -->
+      <div class="form-group">
+        <label>Number of Projects:</label>
+        <input
+          type="number"
+          [(ngModel)]="features.number_project"
+          name="number_project"
+          class="form-control"
+          required
+          min="1"
+          #projects="ngModel"
+        />
+        <div *ngIf="projects.invalid && projects.touched" class="text-danger">
+          Must be at least 1
+        </div>
+      </div>
+  
+      <!-- Average Monthly Hours -->
+      <div class="form-group">
+        <label>Average Monthly Hours:</label>
+        <input
+          type="number"
+          [(ngModel)]="features.average_montly_hours"
+          name="average_montly_hours"
+          class="form-control"
+          required
+          min="1"
+          #hours="ngModel"
+        />
+        <div *ngIf="hours.invalid && hours.touched" class="text-danger">
+          Enter a valid number
+        </div>
+      </div>
+  
+      <!-- Time Spent in Company -->
+      <div class="form-group">
+        <label>Time Spent in Company (Years):</label>
+        <input
+          type="number"
+          [(ngModel)]="features.time_spend_company"
+          name="time_spend_company"
+          class="form-control"
+          required
+          min="0"
+          #time="ngModel"
+        />
+        <div *ngIf="time.invalid && time.touched" class="text-danger">
+          Enter a valid number of years
+        </div>
+      </div>
+  
+      <!-- Work Accident -->
+      <div class="form-group">
+        <label>Work Accident (0 or 1):</label>
+        <input
+          type="number"
+          [(ngModel)]="features.Work_accident"
+          name="Work_accident"
+          class="form-control"
+          required
+          min="0"
+          max="1"
+          #accident="ngModel"
+        />
+        <div *ngIf="accident.invalid && accident.touched" class="text-danger">
+          Must be 0 or 1
+        </div>
+      </div>
+  
+      <!-- Promotion -->
+      <div class="form-group">
+        <label>Promotion in Last 5 Years (0 or 1):</label>
+        <input
+          type="number"
+          [(ngModel)]="features.promotion_last_5years"
+          name="promotion_last_5years"
+          class="form-control"
+          required
+          min="0"
+          max="1"
+          #promotion="ngModel"
+        />
+        <div *ngIf="promotion.invalid && promotion.touched" class="text-danger">
+          Must be 0 or 1
+        </div>
+      </div>
+  
+      <!-- Sales -->
+      <div class="form-group">
+        <label>Sales (integer):</label>
+        <input
+          type="number"
+          [(ngModel)]="features.sales"
+          name="sales"
+          class="form-control"
+          required
+          min="0"
+          #sales="ngModel"
+        />
+        <div *ngIf="sales.invalid && sales.touched" class="text-danger">
+          Enter a valid department code
+        </div>
+      </div>
+  
+      <!-- Salary -->
+      <div class="form-group">
+        <label>Salary (0 = low, 1 = medium, 2 = high):</label>
+        <input
+          type="number"
+          [(ngModel)]="features.salary"
+          name="salary"
+          class="form-control"
+          required
+          min="0"
+          max="2"
+          #salary="ngModel"
+        />
+        <div *ngIf="salary.invalid && salary.touched" class="text-danger">
+          Must be 0, 1 or 2
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="predictionForm.invalid">
+        Predict
+      </button>
+    </form>
+  
+    <!-- Prediction Result -->
+    <div *ngIf="prediction" class="prediction-result">
+      <h2>Prediction Result: {{ prediction }}</h2>
+    </div>
+  
+    <!-- Back to Home Link -->
+    <a routerLink="/home" class="back-link">Back to Home</a>
+  
+    <!-- Chat Section (unchanged) -->
+    <div class="chat-container">
+      <h2 class="chat-title">Chat with AI</h2>
+      <div class="chat-messages" *ngIf="chatHistory.length > 0">
+        <div *ngFor="let message of chatHistory" class="message-container">
+          <div class="message user-message">
+            <div class="message-avatar">You</div>
+            <div class="message-content">{{ message.question }}</div>
+          </div>
+          <div class="message ai-message">
+            <div class="message-avatar">AI</div>
+            <div class="message-content">{{ message.response }}</div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="chatHistory.length === 0" class="empty-chat">
+        <p>No messages yet. Start a conversation!</p>
+      </div>
+  
+      <form (ngSubmit)="askQuestion()" class="chat-form">
+        <div class="chat-input-container">
+          <input
+            type="text"
+            [(ngModel)]="chatMessage"
+            name="chatMessage"
+            class="chat-input"
+            required
+            placeholder="Type your question..."
+          />
+          <button type="submit" class="chat-send-btn">
+            <span>Send</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

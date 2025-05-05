@@ -1,0 +1,179 @@
+<app-app-header></app-app-header>
+<br>
+<br>
+<!-- Slider Area End -->
+
+    <div class="container mt-5">
+      <div class="form-container">
+    <h2>Invoice List</h2>
+
+    <!-- Bouton Ajouter -->
+    <div class="button-container">
+      <button ><a routerLink="/add-finance" >
+       🧾Add
+      </a></button>
+      <button (click)="exportToExcel()">📊 Excel</button>
+    </div>
+
+    <!-- Invoice List -->
+    <table class="table">
+      <thead>
+        <tr>
+       <!-- <th>Order ID</th>
+          <th>Logistics Manager ID</th>   -->  
+          <th>
+            Total Amount
+            <span (click)="sortByAmount('montantTotal')" style="cursor: pointer;">
+              {{ sortDirection === 'asc' && sortField === 'montantTotal' ? '⬆️' : '⬇️' }}
+            </span>
+          </th>
+          <th>Invoice Date</th>
+          <th>Due Date</th>
+          <th>
+            Total Amount (Excl. Tax)
+            <span (click)="sortByAmount('montantTotalHorsTaxe')" style="cursor: pointer;">
+              {{ sortDirection === 'asc' && sortField === 'montantTotalHorsTaxe' ? '⬆️' : '⬇️' }}
+            </span>
+          </th>
+          <th>Tax</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let facture of currentPageFactures">
+        <!-- <td>{{ facture.idCommande }}</td>
+          <td>{{ facture.idResponsableLogistique }}</td>   --> 
+          <td>{{ facture.montantTotal | currency }}</td>
+          <td>{{ facture.dateFacture | date }}</td>
+         <!--  <td>{{ facture.dateEcheance | date }}</td> -->
+         <td>
+          {{ facture.dateEcheance | date: 'dd/MM/yyyy' }}
+          <br>
+          <span *ngIf="getDaysRemaining(facture.dateEcheance) >= 0">
+            {{ getDaysRemaining(facture.dateEcheance) }} jours restants
+          </span>
+          <span *ngIf="getDaysRemaining(facture.dateEcheance) < 0">
+            Échéance dépassée
+          </span>
+        </td>
+          <td>{{ facture.montantTotalHorsTaxe | currency }}</td>
+          <td>{{ facture.tva | currency }}</td>
+          <td>
+            <button [ngClass]="{'btn-success': facture.status === 'Paid', 'btn-danger': facture.status === 'Unpaid'}" (click)="toggleStatus(facture)">
+              {{ facture.status === 'Paid' ? '✅ Paid' : '❌ Unpaid' }}
+            </button>
+          </td>
+          <td>
+            <div class="button-container">
+              <button (click)="deleteFacture(facture.idFacture)">🗑️</button>
+              <button (click)="updateFacture(facture)" [disabled]="!facture.idFacture">✏️</button>
+              <button (click)="navigateToPaiement(facture.idFacture)">💳</button>
+              <button (click)="viewFacture(facture)">👁️</button> 
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+ <!-- Pagination -->
+   <!-- Pagination -->
+   <nav>
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="changePage(currentPage - 1)">
+          <i class="fas fa-chevron-left"></i> <!-- Flèche gauche -->
+        </a>
+      </li>
+      <li *ngFor="let page of [].constructor(totalPages); let i = index" class="page-item" [class.active]="currentPage === i + 1">
+        <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="changePage(currentPage + 1)">
+          <i class="fas fa-chevron-right"></i> <!-- Flèche droite -->
+        </a>
+      </li>
+      
+    </ul>
+  </nav>
+
+
+  </div>
+</div>
+<!-- View Modal -->
+<div class="modal-overlay" *ngIf="selectedFacture" [class.active]="selectedFacture">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3>Invoice Details</h3>
+      <button class="close-btn" (click)="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="invoice-details">
+      <div class="invoice-header">
+        <div class="invoice-info">
+          <p><strong>Date:</strong> {{selectedFacture.dateFacture | date}}</p>
+          <p><strong>Due Date:</strong> {{selectedFacture.dateEcheance | date}}</p>
+        </div>
+        <div class="status-badge" [ngClass]="{'paid': selectedFacture.status === 'Paid', 'unpaid': selectedFacture.status === 'Unpaid'}">
+          {{selectedFacture.status}}
+        </div>
+      </div>
+      
+      <div class="invoice-amounts">
+        <div class="amount-row">
+          <span>Subtotal:</span>
+          <span>{{selectedFacture.montantTotalHorsTaxe | currency}}</span>
+        </div>
+        <div class="amount-row">
+          <span>Tax (TVA):</span>
+          <span>{{selectedFacture.tva | currency}}</span>
+        </div>
+        <div class="amount-row total">
+          <span>Total Amount:</span>
+          <span>{{selectedFacture.montantTotal | currency}}</span>
+        </div>
+      </div>
+      
+      <div class="days-remaining" *ngIf="getDaysRemaining(selectedFacture.dateEcheance) >= 0">
+        <i class="fas fa-clock"></i> {{getDaysRemaining(selectedFacture.dateEcheance)}} days remaining
+      </div>
+      <div class="days-overdue" *ngIf="getDaysRemaining(selectedFacture.dateEcheance) < 0">
+        <i class="fas fa-exclamation-triangle"></i> Payment overdue by {{-getDaysRemaining(selectedFacture.dateEcheance)}} days
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-print" (click)="printInvoice()"><i class="fas fa-print"></i> Print</button>
+      <button class="btn-qr" (click)="showQRCode()"><i class="fas fa-qrcode"></i> Show QR</button>
+      <button class="btn-cancel" (click)="closeModal()"><i class="fas fa-times"></i> Cancel</button>
+      <!-- Signature Section -->
+<div class="signature-container" *ngIf="selectedFacture">
+  <h4>Digital Signature</h4>
+  <div class="signature-pad">
+    <canvas #signaturePad width="400" height="200" class="signature-canvas"></canvas>
+  </div>
+  <div class="signature-buttons">
+    <button class="btn-clear" (click)="clearSignature()">Clear</button>
+    <button class="btn-save" (click)="saveSignature()">Save Signature</button>
+  </div>
+</div>
+    </div>
+    <!-- Ajoutez cette section après votre modal-footer pour afficher le QR code -->
+<div class="qr-container" *ngIf="showQR">
+  <h4>Invoice QR Code</h4>
+  <canvas id="qrCanvas"></canvas>
+  <button class="btn-close-qr" (click)="hideQRCode()">Close</button>
+</div>
+
+<!-- Ajoutez cette section pour le scanner -->
+<div class="scanner-container" *ngIf="showScanner">
+  <h4>Scan Invoice QR Code</h4>
+  <zxing-scanner 
+    [enable]="showScanner"
+    (scanSuccess)="onScanSuccess($event)"
+    [formats]="allowedFormats">
+  </zxing-scanner>
+  <button (click)="stopScanner()">Close Scanner</button>
+</div>
+  </div>
+
+</div>
+<app-app-footer></app-app-footer>

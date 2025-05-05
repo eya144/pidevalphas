@@ -1,0 +1,104 @@
+.card {
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    }
+    
+    /* Style de la barre de progression circulaire */
+    .progress-circle-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    
+    .progress-circle svg {
+    transform: rotate(-90deg);
+    }
+    
+    .progress-circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    }
+    
+    .circle-text {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #4dbd74;
+    }
+    
+    .progress-circle circle {
+    transition: stroke-dasharray 0.5s ease;
+    }
+    
+    /* Style des icônes de vérification */
+    .fa {
+    margin-right: 8px;
+    font-size: 20px;
+    }
+    
+    .text-success {
+    color: #28a745;
+    }
+    
+    .text-danger {
+    color: #dc3545;
+    }
+    
+    /* Bouton pour compléter le profil */
+    .btn-warning {
+    background-color: #f39c12;
+    border-color: #f39c12;
+    }
+    
+    .btn-warning:hover {
+    background-color: #e67e22;
+    border-color: #e67e22;
+    }
+    
+    .btn-primary, .btn-success {
+    width: 100%;
+    margin-top: 1rem;
+    }
+    
+    /* Améliorer les entrées de formulaire */
+    .form-group {
+    margin-bottom: 1.5rem;
+    }
+    
+    .form-control {
+    border-radius: 5px;
+    box-shadow: none;
+    }
+    
+    h3 {
+    color: #007bff;
+    font-size: 24px;
+    font-weight: 600;
+    }
+    .circle-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.verified-icon i {
+  font-size: 2rem;
+  color: #28a745;
+  animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+    
+    

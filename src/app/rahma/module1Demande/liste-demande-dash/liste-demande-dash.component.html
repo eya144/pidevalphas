@@ -1,0 +1,45 @@
+<h2>Request List</h2>
+
+<div *ngIf="alertMessage" class="alert {{ alertClass }} alert-dismissible fade show" role="alert">
+  {{ alertMessage }}
+  <button type="button" class="btn-close" (click)="closeAlert()" aria-label="Close"></button>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Request ID</th>
+      <th>Status</th>
+      <th>Request Date</th>
+      <th>Request Lines</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let demande of demandes">
+      <td>{{ demande.idDemande }}</td>
+      <td>{{ demande.status }}</td>
+      <td>{{ demande.dateDemande | date: 'dd/MM/yyyy' }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let ligne of demande.ligneDemandes">
+            <strong>Quantity:</strong> {{ ligne.quantite }} <br>
+            <strong>Material:</strong> {{ ligne.materiel.nomMateriel }} ({{ ligne.materiel.categorie }})
+          </li>
+        </ul>
+      </td>
+      <td>
+        <!-- Action Buttons -->
+        <button (click)="accepterDemande(demande.idDemande)" [disabled]="demande.status === 'accepte'" class="btn btn-success">
+          Accept
+        </button>
+        <button (click)="refuserDemande(demande.idDemande)" [disabled]="demande.status === 'refuse'" class="btn btn-danger">
+          Reject
+        </button>
+        <button (click)="mettreEnAttente(demande.idDemande)" [disabled]="demande.status === 'en_attente'" class="btn btn-warning">
+          Pending
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

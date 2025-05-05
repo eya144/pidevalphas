@@ -1,0 +1,48 @@
+ 
+<app-app-header></app-app-header>
+<div class="container mt-5">
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="facture && !isLoading" class="card">
+    <div class="card-header">
+      <h2>Paiement de la facture #{{ facture.idFacture }}</h2>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <p><strong>Date de facturation:</strong> {{ facture.dateFacture | date }}</p>
+          <p><strong>Date d'échéance:</strong> {{ facture.dateEcheance | date }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Montant HT:</strong> {{ facture.montantTotalHorsTaxe | currency:'EUR' }}</p>
+          <p><strong>TVA:</strong> {{ facture.tva | currency:'EUR' }}</p>
+          <p><strong>Montant TTC:</strong> {{ facture.montantTotal | currency:'EUR' }}</p>
+        </div>
+      </div>
+
+     <!-- <div class="d-grid gap-2">
+        <button class="btn btn-primary btn-lg" (click)="proceedToPayment()">
+          Payer avec Stripe
+        </button>
+      </div> --> 
+      <div class="d-grid gap-2">
+        <button 
+          class="btn btn-primary btn-lg" 
+          (click)="proceedToPayment()"
+          [disabled]="isLoading">
+          <span *ngIf="!isLoading">Payer avec Stripe</span>
+          <span *ngIf="isLoading">Traitement en cours...</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-app-footer></app-app-footer>  

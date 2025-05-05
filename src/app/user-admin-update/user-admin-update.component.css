@@ -1,0 +1,17 @@
+mat-card {
+    margin: 20px;
+}
+
+mat-form-field {
+    width: 100%; /* Pour que les champs de formulaire prennent toute la largeur */
+}
+
+button {
+    margin-top: 20px; /* Espacement au-dessus du bouton */
+}
+.close-button {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    color: #000; /* Couleur de l'icône, ajustez si nécessaire */
+}

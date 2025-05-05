@@ -1,0 +1,81 @@
+<app-back-header></app-back-header>
+
+<body>
+  <div class="container mt-5">
+    
+    <!-- Notification and Calendar Icons -->
+    <div class="text-center mb-4">
+      <!-- Notification Icon -->
+      <button class="btn btn-outline-primary btn-sm mx-2" (click)="afficherNotifications()">
+        <i class="bi bi-bell"></i> Notifications
+      </button>
+
+      <!-- Notifications List -->
+      <div *ngIf="showNotifications" class="notifications-container">
+        <h4>Notifications</h4>
+        <ul>
+          <li *ngFor="let notification of notifications">
+            <i class="bi bi-calendar-event"></i>
+            <span>{{ notification.message }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Calendar Button -->
+      <button class="btn btn-outline-secondary btn-sm mx-2" (click)="redirectToPlaning()">
+        <i class="bi bi-calendar"></i> Calendar
+      </button>
+    </div>
+
+    <!-- Main Title -->
+    <h2 class="text-center mb-4">Job Applications List</h2>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Applications Table -->
+    <div *ngIf="!isLoading && demandes.length > 0">
+      <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Age</th>
+            <th>Specialty</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let demande of demandes">
+            <td>{{ demande.nom }}</td>
+            <td>{{ demande.prenom }}</td>
+            <td>{{ demande.age }}</td>
+            <td>{{ demande.specialite }}</td>
+            <td>{{ demande.adresseMail }}</td>
+            <td>{{ demande.status }}</td>
+            <td class="d-flex justify-content-around">
+              <button (click)="passerEntretien(demande.idDemandeEmploi)" class="btn btn-success btn-sm">
+                Schedule Interview
+              </button>
+              <button (click)="refuserDemande(demande.idDemandeEmploi, demande.adresseMail)" class="btn btn-danger btn-sm">
+                Reject
+              </button>
+              <button (click)="supprimerDemande(demande.idDemandeEmploi)" class="btn btn-warning btn-sm">
+                🗑️
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- No Application Message -->
+    <p *ngIf="!isLoading && demandes.length === 0" class="text-center text-muted">No applications found.</p>
+  </div>
+</body>

@@ -1,0 +1,123 @@
+<!--<h2>Ajouter un Utilisateur</h2>
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+    <div>
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom" ngModel required>
+    </div>
+    <div>
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" name="prenom" ngModel required>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" ngModel required>
+    </div>
+    <div>
+        <label for="motdepasse">Mot de passe:</label>
+        <input type="password" id="motdepasse" name="motdepasse" ngModel required>
+    </div>
+    <div>
+        <label for="salaire">Salaire:</label>
+        <input type="number" id="salaire" name="salaire" ngModel required>
+    </div>
+    <div>
+        <label for="role">Rôle:</label>
+        <select id="role" name="role" ngModel required>
+            <option value="ADMIN">Admin</option>
+            <option value="USER">User</option>
+            <option value="GUEST">Guest</option>
+        </select>
+    </div>
+    <button type="submit">Ajouter Utilisateur</button>
+</form>-->
+<!--<h2>Ajouter un Utilisateur</h2>
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+  <div>
+    <label for="nom">Nom:</label>
+    <input type="text" id="nom" name="nom" ngModel required>
+  </div>
+  
+  <div>
+    <label for="prenom">Prénom:</label>
+    <input type="text" id="prenom" name="prenom" ngModel required>
+  </div>
+  
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" ngModel required>
+  </div>
+  
+  <div>
+    <label for="motdepasse">Mot de passe:</label>
+    <input type="password" id="motdepasse" name="motdepasse" ngModel required>
+  </div>
+  
+  <div>
+    <label for="salaire">Salaire:</label>
+    <input type="number" id="salaire" name="salaire" ngModel required>
+  </div>
+  
+  <div>
+    <label for="role">Rôle:</label>
+    <select id="role" name="role" ngModel required>
+      <option value="ADMIN">Admin</option>
+      <option value="USER">User</option>
+      <option value="GUEST">Guest</option>
+    </select>
+  </div>
+  
+  <button type="submit">Ajouter Utilisateur</button>
+</form>-->
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Ajouter un Utilisateur</mat-card-title>
+      <mat-card-subtitle>Remplissez les informations ci-dessous</mat-card-subtitle>
+      <button mat-icon-button (click)="dialogRef.close()" class="close-button">
+        <mat-icon>close</mat-icon> <!-- Icône de fermeture -->
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+        <mat-form-field appearance="fill">
+          <mat-label>Nom</mat-label>
+          <input matInput id="nom" name="nom" ngModel required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Prénom</mat-label>
+          <input matInput id="prenom" name="prenom" ngModel required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput id="email" name="email" type="email" ngModel required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput id="motdepasse" name="motdepasse" type="password" ngModel required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Salaire</mat-label>
+          <input matInput id="salaire" name="salaire" type="number" ngModel required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Rôle</mat-label>
+          <mat-select id="role" name="role" ngModel required>
+            <mat-option value="ROLE_ADMIN">Admin</mat-option>
+            <mat-option value="ROLE_USER">User</mat-option>
+            <mat-option value="ROLE_GUEST">Guest</mat-option>
+            <mat-option value="ROLE_RESPONSABLELOG"> RESPONSABLELOG</mat-option>
+            <mat-option value="ROLE_INSPECTER">INSPECTER</mat-option>
+            <mat-option value="ROLE_RH">RH</mat-option>
+            <mat-option value="ROLE_PROJECTMANAGER">PROJECTMANAGER</mat-option>
+            <mat-option value="ROLE_EMPLOYE">EMPLOYE</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" type="submit">Ajouter Utilisateur</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
