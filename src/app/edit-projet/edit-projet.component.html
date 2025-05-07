@@ -1,0 +1,115 @@
+<app-app-header></app-app-header>
+
+<div class="container my-4">
+  <h2 class="text-center">✏️ Modifier un Projet</h2>
+  <div id="map" style="height: 400px; width: 100%;"></div>
+
+  <form (ngSubmit)="saveProjet()" #projetForm="ngForm" class="shadow-lg p-4 rounded">
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nom du Projet</label>
+      <input
+        type="text"
+        id="nom"
+        class="form-control"
+        [(ngModel)]="projet.nom"
+        name="nom"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        id="description"
+        class="form-control"
+        [(ngModel)]="projet.description"
+        name="description"
+        required
+      ></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="chefProjetId" class="form-label">Chef de Projet</label>
+      <select
+        id="chefProjetId"
+        class="form-select"
+        [(ngModel)]="projet.chefProjetId"
+        name="chefProjetId"
+        required
+      >
+        <option value="">Sélectionner un chef</option>
+        <option *ngFor="let chef of chefList" [value]="chef.id">{{ chef.nom }}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="status" class="form-label">Statut</label>
+      <select
+        id="status"
+        class="form-select"
+        [(ngModel)]="projet.status"
+        name="status"
+        required
+      >
+        <option *ngFor="let status of statusList" [value]="status.value">
+          {{ status.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label for="latitude" class="form-label">Latitude</label>
+        <input
+          type="text"
+          id="latitude"
+          class="form-control"
+          [(ngModel)]="projet.latitude"
+          name="latitude"
+          required
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="longitude" class="form-label">Longitude</label>
+        <input
+          type="text"
+          id="longitude"
+          class="form-control"
+          [(ngModel)]="projet.longitude"
+          name="longitude"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="mb-3 mt-3">
+      <label for="dateDebut" class="form-label">Date Début</label>
+      <input
+        type="date"
+        id="dateDebut"
+        class="form-control"
+        [(ngModel)]="projet.dateDebut"
+        name="dateDebut"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="dateFinPrevue" class="form-label">Date Fin Prévue</label>
+      <input
+        type="date"
+        id="dateFinPrevue"
+        class="form-control"
+        [(ngModel)]="projet.dateFinPrevue"
+        name="dateFinPrevue"
+        required
+      />
+    </div>
+
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary" [disabled]="!projetForm.form.valid">
+        Enregistrer
+      </button>
+    </div>
+  </form>
+</div>

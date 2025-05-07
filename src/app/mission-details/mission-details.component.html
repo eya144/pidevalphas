@@ -1,0 +1,38 @@
+<app-app-header></app-app-header>
+
+<div class="container py-5">
+    <h3 class="text-center mb-4 text-primary">Mission Details</h3>
+  
+    <div *ngIf="mission; else loading">
+      <div class="card shadow-lg rounded-lg border-0">
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{ mission.nom }}</h5>
+          <p class="card-text text-muted">{{ mission.description }}</p>
+          <hr class="my-4">
+          <p><strong>Status:</strong> 
+            <span class="badge bg-{{ mission.etatMission === 'TODO' ? 'warning' : mission.etatMission === 'DOING' ? 'info' : mission.etatMission === 'SUSPENDED' ? 'secondary' : 'success' }}">
+              {{ mission.etatMission }}
+            </span>
+          </p>
+          <p><strong>Priority:</strong> 
+            <span class="badge bg-{{ mission.priorite === 'BASSE' ? 'secondary' : mission.priorite === 'MOYENNE' ? 'warning' : 'danger' }}">
+              {{ mission.priorite }}
+            </span>
+          </p>
+          <p><strong>Budget:</strong> 
+            <span class="badge bg-light text-dark">{{ mission.budget | currency }}</span>
+          </p>
+          <p><strong>Start Date:</strong> 
+            <span class="badge bg-light">{{ mission.startDate | date:'shortDate' }}</span>
+          </p>
+          <p><strong>Finish Date:</strong> 
+            <span class="badge bg-light">{{ mission.finishDate | date:'shortDate' }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  
+    <ng-template #loading>
+      <p class="text-center text-muted">Loading mission details...</p>
+    </ng-template>
+  </div>

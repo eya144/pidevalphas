@@ -1,0 +1,74 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="container mt-4">
+    <mat-card>
+      <mat-card-title>Update Task</mat-card-title>
+      <mat-card-content>
+  
+        <mat-form-field class="w-100">
+          <mat-label>Task Name</mat-label>
+          <input matInput formControlName="nom" required>
+          <mat-error *ngIf="taskForm.get('nom')?.invalid">Task name is required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="w-100">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" required></textarea>
+          <mat-error *ngIf="taskForm.get('description')?.invalid">Description is required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="w-100">
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field class="w-100">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="endPicker" formControlName="finishDate">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field class="w-100">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="etatTache">
+            <mat-option value="TODO">TODO</mat-option>
+            <mat-option value="DOING">DOING</mat-option>
+            <mat-option value="SUSPENDED">SUSPENDED</mat-option>
+            <mat-option value="DONE">DONE</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field class="w-100">
+          <mat-label>Priority</mat-label>
+          <mat-select formControlName="priorite">
+            <mat-option value="HAUTE">High</mat-option>
+            <mat-option value="MOYENNE">Medium</mat-option>
+            <mat-option value="BASSE">Low</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field class="w-100">
+          <mat-label>Workload (hours)</mat-label>
+          <input matInput type="number" formControlName="chargeTravail">
+        </mat-form-field>
+  
+        <mat-form-field class="w-100">
+          <mat-label>Responsible ID</mat-label>
+          <input matInput type="number" formControlName="responsableId">
+        </mat-form-field>
+  
+        <mat-form-field class="w-100">
+          <mat-label>Assigned User IDs (comma-separated)</mat-label>
+          <input matInput formControlName="assignesIds">
+        </mat-form-field>
+  
+      </mat-card-content>
+  
+      <mat-card-actions class="d-flex justify-content-end">
+        <button mat-stroked-button color="warn" type="button" (click)="navigateToTasks()">Cancel</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="taskForm.invalid">Update</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  

@@ -60,10 +60,11 @@ import { ChauffeurInterfaceComponent } from './rahma/module1Materiel/chauffeur-i
 import { VehiculeDispoComponent } from './rahma/module1Materiel/vehicule-dispo/vehicule-dispo.component';
 
 import { NgChartsModule } from 'ng2-charts';
+import { NgxPrintModule } from 'ngx-print';
 import { MatOptionModule } from '@angular/material/core';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { RecaptchaModule } from "ng-recaptcha";  // Import RecaptchaModule here
-
+// Duplicate import removed
 // Angular Material Modules
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -76,6 +77,9 @@ import { UserAdminUpdateComponent } from './user-admin-update/user-admin-update.
 import { MatIconModule } from '@angular/material/icon';
 
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { PresenceModalComponent } from './presence-modal/presence-modal.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -101,6 +105,7 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
 import { ViewReclamationComponent } from './view-reclamation/view-reclamation.component';
 import { ToastrModule } from 'ngx-toastr';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { LayoutModule } from '@angular/cdk/layout';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -115,6 +120,21 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { DocumentChatComponent } from './document-chat/document-chat.component';
 import { EmployeeExitPredictionComponent } from './employee-exit-prediction/employee-exit-prediction.component';
+import { ProjetComponent } from './projet/projet.component';
+import { AddProjetComponent } from './add-projet/add-projet.component';
+import { EditProjetComponent } from './edit-projet/edit-projet.component';
+import { DetailsProjetComponent } from './details-projet/details-projet.component';
+import { MissionComponent } from './mission/mission.component';
+import { AddMissionComponent } from './add-mission/add-mission.component';
+import { UpdateMissionComponent } from './update-mission/update-mission.component';
+import { MissionDetailsComponent } from './mission-details/mission-details.component';
+import { RapportProjetComponent } from './rapport-projet/rapport-projet.component';
+import { TaskComponent } from './task/task.component';
+import { TaskDetailsComponent } from './task-details/task-details.component';
+import { UpdateTaskComponent } from './update-task/update-task.component';
+import { AddTaskComponent } from './add-task/add-task.component';
+import { MapComponent } from './map/map.component';
+import { MapSelectorComponentComponent } from './map-selector-component/map-selector-component.component';
 
 @NgModule({
   declarations: [
@@ -200,6 +220,22 @@ import { EmployeeExitPredictionComponent } from './employee-exit-prediction/empl
     ViewReclamationComponent,
     DocumentChatComponent,
     EmployeeExitPredictionComponent,
+    ProjetComponent,
+    AddProjetComponent,
+    EditProjetComponent,
+    DetailsProjetComponent,
+    MissionComponent,
+    AddMissionComponent,
+    UpdateMissionComponent,
+    MissionDetailsComponent,
+    RapportProjetComponent,
+    TaskComponent,
+    TaskDetailsComponent,
+    UpdateTaskComponent,
+    AddTaskComponent,
+    MapComponent,
+    MapSelectorComponentComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -208,28 +244,47 @@ import { EmployeeExitPredictionComponent } from './employee-exit-prediction/empl
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgChartsModule,
-    DragDropModule ,
-    MatProgressSpinnerModule,
-    MatStepperModule,
-    ZXingScannerModule,
-    RecaptchaModule,
-    MatCardModule,
-    MatIconModule,
+  
+    // Angular Material Modules (une seule fois chacun)
+    MatFormFieldModule,
     MatInputModule,
-    MatOptionModule,
-    NgxPaginationModule,
-    MatDialogModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSlideToggleModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatMenuModule,
     MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatStepperModule,
+  
+    // CDK & Layout
+    LayoutModule,
+    DragDropModule,
+  
+    // External modules
+    NgChartsModule,
+    NgxPaginationModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
-    MatFormFieldModule,
+    ZXingScannerModule,
+    RecaptchaModule,
+    NgxPrintModule,
+    
   ],
+  
   providers: [
     
     {

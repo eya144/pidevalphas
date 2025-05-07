@@ -1,0 +1,99 @@
+.container {
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+  }
+  
+  
+  h2 {
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  
+  .table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  /* projet.component.css */
+  .table {
+    margin-top: 20px;
+  }
+  
+  
+  button {
+    cursor: pointer;
+  }
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .chart-container {
+    width: 60%; /* Réduire la largeur */
+    max-width: 400px; /* Réduire la largeur maximale */
+    height: 300px; /* Réduire la hauteur */
+    margin: 0 auto; /* Centrer le graphique */
+  }
+  
+  
+  canvas {
+    width: 100% !important; /* Utiliser toute la largeur de .chart-container */
+    height: 100% !important; /* Utiliser toute la hauteur de .chart-container */
+  }
+  .weather-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 15px;
+  }
+  
+  
+  
+  .weather-icon img {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+  }
+  
+  
+  .weather-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .weather-card {
+    background-color: #f0f8ff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .weather-icon img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .weather-info p {
+    margin: 5px 0;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .weather-info strong {
+    color: #007bff;
+  }
+  
+  .alert-info {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  
+  
+  

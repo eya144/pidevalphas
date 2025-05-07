@@ -1,0 +1,314 @@
+/* Main Container */
+/* Main Container */
+.task-board-container {
+    min-height: calc(100vh - 120px);
+    padding: 0 20px 60px; /* Remove extra padding at the top */
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+    max-width: 1400px; /* Elargir le conteneur à 1400px */
+    margin: 0 auto; /* Center the content horizontally */
+  }
+  
+  
+  /* Header Styles */
+  .board-header {
+    background: white;
+    border-left: 6px solid #3f51b5;
+    padding: 20px 0; /* Adjust header padding */
+    position: relative; /* Make sure it's part of the flow, not fixed */
+  }
+  
+  /* Text Gradient */
+  .text-gradient {
+    background: linear-gradient(45deg, #3f51b5, #2196f3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+  
+  /* Glass Morphism Effect */
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Kanban Board */
+  .kanban-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .kanban-column {
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.85); /* Semi-transparent white background */
+    border-radius: 8px;
+    padding: 15px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .kanban-column:hover {
+    transform: scale(1.02); /* Add hover scale effect */
+  }
+  
+  /* Column Headers */
+  .column-header {
+    transition: all 0.3s ease;
+  }
+  
+  .bg-gradient-todo {
+    background: linear-gradient(135deg, #5c6bc0 0%, #3949ab 100%);
+  }
+  
+  .bg-gradient-doing {
+    background: linear-gradient(135deg, #26c6da 0%, #00acc1 100%);
+  }
+  
+  .bg-gradient-done {
+    background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+  }
+  
+  .bg-gradient-suspended {
+    background: linear-gradient(135deg, #78909c 0%, #546e7a 100%);
+  }
+  
+  .column-title {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Task Cards */
+  .task-card {
+    cursor: pointer;
+    background: white;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-left: 4px solid;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin: 10px 0;
+  }
+  
+  .task-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  
+  .task-title {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .task-description {
+    color: #7f8c8d;
+    line-height: 1.6;
+  }
+  
+  /* Priority Styles */
+  .priority-haute {
+    border-left-color: #ef5350;
+  }
+  
+  .priority-moyenne {
+    border-left-color: #ffa726;
+  }
+  
+  .priority-basse {
+    border-left-color: #66bb6a;
+  }
+  
+  .priority-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .priority-haute .priority-badge {
+    background: #ef5350;
+    color: white;
+  }
+  
+  .priority-moyenne .priority-badge {
+    background: #ffa726;
+    color: white;
+  }
+  
+  .priority-basse .priority-badge {
+    background: #66bb6a;
+    color: white;
+  }
+  
+  /* Status Badges in Select */
+  .status-badge {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .status-badge.todo {
+    background: #5c6bc0;
+  }
+  
+  .status-badge.doing {
+    background: #26c6da;
+  }
+  
+  .status-badge.done {
+    background: #66bb6a;
+  }
+  
+  .status-badge.suspended {
+    background: #78909c;
+  }
+  
+  /* Empty State */
+  .empty-state {
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+  
+  .empty-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #bdc3c7;
+  }
+  
+  /* Drag & Drop */
+  .cdk-drag-preview {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    opacity: 0.9;
+    transform: scale(1.02);
+    z-index: 1000;
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0.5;
+    background: #f5f7fa;
+    border: 2px dashed #cfd8dc;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .task-list.cdk-drop-list-dragging .task-card:not(.cdk-drag-placeholder) {
+    transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  /* Responsive */
+  @media (max-width: 992px) {
+    .kanban-board {
+      grid-template-columns: 1fr;
+    }
+    
+    .kanban-column {
+      margin-bottom: 24px;
+    }
+  }
+  
+  .task-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .task-card.cdk-dragging {
+    transform: scale(1.05); /* Slightly enlarge the card during dragging */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Adding more noticeable shadow */
+  }
+  
+  .task-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .task-card:active {
+    transform: scale(0.98); /* Slightly shrink when clicked */
+  }
+  
+  /* Modernize Background */
+  .task-board-container {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+  }
+  
+  /* Add subtle shadow to task containers */
+  .kanban-board {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .kanban-column {
+    background: rgba(255, 255, 255, 0.85); /* Semi-transparent white background */
+    border-radius: 8px;
+    padding: 15px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .kanban-column:hover {
+    transform: scale(1.02); /* Add hover scale effect */
+  }
+  
+  .sort-btn, .add-task-btn, .filters-section mat-select {
+    border-radius: 20px;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .sort-btn:hover, .add-task-btn:hover, .filters-section mat-select:hover {
+    background-color: #e3f2fd;
+    transform: scale(1.05);
+  }
+  
+  .task-board {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .task-column {
+    width: 23%;
+  }
+  
+  .task-list {
+    min-height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  .task-card {
+    margin: 10px 0;
+    transition: transform 200ms ease;
+  }
+  
+  .task-card.dragging {
+    opacity: 0.5;
+  }
+  
+  mat-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  mat-card-title {
+    font-weight: bold;
+  }
+  
+  mat-card-content {
+    font-size: 14px;
+  }
+  
+  mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  button {
+    margin-left: 10px;
+  }
+  
+  mat-icon {
+    font-size: 16px;
+  }
+  

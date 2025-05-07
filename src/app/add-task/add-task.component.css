@@ -1,0 +1,77 @@
+/* Styling the card container */
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header of the card */
+  .card-header {
+    background-color: #007bff;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  /* Body of the card */
+  .card-body {
+    padding: 30px;
+    background: #f9f9f9;
+  }
+  
+  /* Input fields and error handling */
+  .form-control.is-invalid {
+    border-color: #dc3545;
+  }
+  
+  /* Invalid feedback messages */
+  .invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875rem;
+  }
+  
+  /* Enhancing the appearance of the buttons */
+  button {
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 25px;
+  }
+  
+  button.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  button.btn-outline-secondary {
+    border-color: #6c757d;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+  }
+  
+  /* Add some space between fields */
+  .mb-3 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+  }
+  
+  .mat-form-field .mat-input-element {
+    font-size: 1rem;
+  }
+  
+  /* Add subtle hover effect on the fields */
+  input.form-control:hover, textarea.form-control:hover, .mat-form-field:hover {
+    border-color: #007bff;
+  }
+  
+  input.form-control:focus, textarea.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+  

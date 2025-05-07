@@ -69,10 +69,23 @@ import { ManageEquipeMembersComponent } from './manage-equipe-members/manage-equ
 import { ReclamationsComponent } from './reclamations/reclamations.component';
 import { ViewReclamationComponent } from './view-reclamation/view-reclamation.component';
 import { DocumentChatComponent } from './document-chat/document-chat.component';
+import { ProjetComponent } from './projet/projet.component';
+import { AddProjetComponent } from './add-projet/add-projet.component';
+import { DetailsProjetComponent } from './details-projet/details-projet.component';
+import { EditProjetComponent } from './edit-projet/edit-projet.component';
+import { AddMissionComponent } from './add-mission/add-mission.component';
+import { MissionDetailsComponent } from './mission-details/mission-details.component';
+import { MissionComponent } from './mission/mission.component';
+import { UpdateMissionComponent } from './update-mission/update-mission.component';
+import { RapportProjetComponent } from './rapport-projet/rapport-projet.component';
+import { TaskDetailsComponent } from './task-details/task-details.component';
+import { TaskComponent } from './task/task.component';
+import { UpdateTaskComponent } from './update-task/update-task.component';
+import { AddTaskComponent } from './add-task/add-task.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'produit', component: ProductComponent },
+ // { path: 'produit', component: ProductComponent },
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
   { path: 'RH', component: RHComponent },
@@ -83,6 +96,21 @@ const routes: Routes = [
   { path: 'inscrire', component: InscriptionComponent },
   { path: 'service', component: ServiceComponent },
   { path: 'dashboard', component: DashboardComponent },
+  //hela
+  { path: 'projet', component: ProjetComponent },
+  { path: 'add-projet', component: AddProjetComponent },
+  { path: 'edit-projet/:id', component: EditProjetComponent },
+  { path: 'details-projet/:id', component: DetailsProjetComponent },
+  { path: 'add-mission/:id', component: AddMissionComponent },  // L'ID du projet
+  { path: 'projets/:id/missions', component: MissionComponent },
+  { path: 'mission-details/:id', component: MissionDetailsComponent },
+  { path: 'update-mission/:idMission/:id', component: UpdateMissionComponent },
+  { path: 'tasks/:missionId', component: TaskComponent }, // Liste des tâches
+  { path: 'tasks/add/:missionId', component: AddTaskComponent },
+  { path: 'task-details/:id', component: TaskDetailsComponent },
+  { path: 'tasks/:missionId/:idTache', component: UpdateTaskComponent },
+  { path: 'rapport/:id', component: RapportProjetComponent },
+
   //Zayneb
   { path: 'app-app-header', component: AppHeaderComponent },
   { path: 'add-finance', component: AddFinanceComponent },

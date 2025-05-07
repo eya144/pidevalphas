@@ -1,0 +1,53 @@
+<app-app-header></app-app-header>
+<div class="container py-4">
+    <h3 class="text-center text-primary">Task Details</h3>
+
+    <div *ngIf="task">
+        <div class="mb-3">
+            <label class="form-label fw-bold">Task Name:</label>
+            <p class="form-control bg-light">{{ task.nom }}</p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Description:</label>
+            <p class="form-control bg-light">{{ task.description }}</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Start Date:</label>
+                <p class="form-control bg-light">{{ task.startDate | date }}</p>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">End Date:</label>
+                <p class="form-control bg-light">{{ task.finishDate | date }}</p>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Status:</label>
+                <p class="form-control bg-light">{{ task.etatTache }}</p>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Priority:</label>
+                <p class="form-control bg-light">{{ task.priorite }}</p>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Workload (hours):</label>
+                <p class="form-control bg-light">{{ task.chargeTravail }}</p>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Responsible ID:</label>
+                <p class="form-control bg-light">{{ task.responsableId }}</p>
+            </div>
+        </div>
+
+       
+
+        
+    </div>
+</div>

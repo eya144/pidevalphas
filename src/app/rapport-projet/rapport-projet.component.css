@@ -1,0 +1,124 @@
+/* Container for the entire page */
+#rapportToPrint {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title styles */
+  h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  /* Paragraph style for project description */
+  p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  /* Mat-Card Styling for sections */
+  mat-card {
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  /* Mat-Progress-Bar customization */
+  mat-progress-bar {
+    margin-top: 10px;
+  }
+  
+  /* Graph Section Styling */
+  canvas {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+  }
+  
+  /* Customizing buttons */
+  button {
+    margin-top: 20px;
+    margin-right: 10px;
+  }
+  
+  /* Button style for Export */
+  button.mat-raised-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 50px;
+  }
+  
+  /* For large screens: Display the chart cards in a grid */
+  @media (min-width: 768px) {
+    .chart-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+  
+    .chart-container mat-card {
+      padding: 15px;
+    }
+  }
+  
+  /* For small screens: Make the charts stack vertically */
+  @media (max-width: 768px) {
+    .chart-container {
+      display: block;
+    }
+    
+    canvas {
+      max-height: 300px;
+    }
+  }
+  
+  /* Styling the header of the mission table */
+  .mat-expansion-panel-header {
+    background-color: #f5f5f5;
+    font-weight: 500;
+    color: #333;
+    border-radius: 6px;
+  }
+  
+  /* For the icons inside the task table */
+  mat-icon {
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  
+  /* Responsive typography for better readability */
+  @media (max-width: 600px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+  
+    h3 {
+      font-size: 1.2rem;
+    }
+  
+    p {
+      font-size: 0.9rem;
+    }
+  
+    mat-progress-bar {
+      margin-top: 10px;
+    }
+  }
+  

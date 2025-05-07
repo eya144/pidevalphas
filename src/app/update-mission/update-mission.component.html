@@ -1,0 +1,105 @@
+<app-app-header></app-app-header>
+
+<div class="container py-5">
+    <h3 class="text-center mb-4 text-primary">Update Mission</h3>
+  
+    <!-- Indicateur de chargement -->
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p>Chargement des données...</p>
+    </div>
+  
+    <!-- Message de succès -->
+    <div *ngIf="updateSuccess" class="alert alert-success text-center" aria-live="polite">
+      ✅ Mission updated successfully!
+    </div>
+  
+    <!-- Message d'erreur -->
+    <div *ngIf="updateError" class="alert alert-danger text-center" aria-live="polite">
+      ❌ An error occurred while updating the mission. Please try again.
+    </div>
+  
+    <!-- Formulaire affiché uniquement lorsque le chargement est terminé -->
+    <form *ngIf="!isLoading" [formGroup]="missionForm" (ngSubmit)="onSubmit()">
+      <!-- Mission Name -->
+      <div class="mb-3">
+        <label for="nom" class="form-label">Mission Name</label>
+        <input id="nom" type="text" formControlName="nom" class="form-control" placeholder="Nom de la mission" required>
+        <div *ngIf="missionForm.get('nom')?.invalid && missionForm.get('nom')?.touched" class="text-danger">
+          Name is required.
+        </div>
+      </div>
+  
+      <!-- Description -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" formControlName="description" class="form-control" placeholder="Description" required></textarea>
+        <div *ngIf="missionForm.get('description')?.invalid && missionForm.get('description')?.touched" class="text-danger">
+          Description is required.
+        </div>
+      </div>
+  
+      <!-- Status -->
+      <div class="mb-3">
+        <label for="etatMission" class="form-label">Status</label>
+        <select id="etatMission" formControlName="etatMission" class="form-select" required>
+          <option value="">Select status</option>
+          <option value="TODO">TODO</option>
+          <option value="DOING">DOING</option>
+          <option value="SUSPENDED">SUSPENDED</option>
+          <option value="DONE">DONE</option>
+        </select>
+        <div *ngIf="missionForm.get('etatMission')?.invalid && missionForm.get('etatMission')?.touched" class="text-danger">
+          Please select a status.
+        </div>
+      </div>
+  
+      <!-- Priority -->
+      <div class="mb-3">
+        <label for="priorite" class="form-label">Priority</label>
+        <select id="priorite" formControlName="priorite" class="form-select" required>
+          <option value="">Select priority</option>
+          <option value="BASSE">Low</option>
+          <option value="MOYENNE">Medium</option>
+          <option value="HAUTE">High</option>
+        </select>
+        <div *ngIf="missionForm.get('priorite')?.invalid && missionForm.get('priorite')?.touched" class="text-danger">
+          Please select a priority.
+        </div>
+      </div>
+  
+      <!-- Budget -->
+      <div class="mb-3">
+        <label for="budget" class="form-label">Budget</label>
+        <input id="budget" type="number" formControlName="budget" class="form-control" placeholder="Budget">
+        <div *ngIf="missionForm.get('budget')?.invalid && missionForm.get('budget')?.touched" class="text-danger">
+          Please enter a valid budget.
+        </div>
+      </div>
+  
+      <!-- Start Date -->
+      <div class="mb-3">
+        <label for="startDate" class="form-label">Start Date</label>
+        <input id="startDate" type="date" formControlName="startDate" class="form-control" required>
+        <div *ngIf="missionForm.get('startDate')?.invalid && missionForm.get('startDate')?.touched" class="text-danger">
+          Start Date is required.
+        </div>
+      </div>
+  
+      <!-- Finish Date -->
+      <div class="mb-3">
+        <label for="finishDate" class="form-label">Finish Date</label>
+        <input id="finishDate" type="date" formControlName="finishDate" class="form-control">
+        <div *ngIf="missionForm.get('finishDate')?.invalid && missionForm.get('finishDate')?.touched" class="text-danger">
+          Please enter a valid finish date.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="missionForm.invalid || isLoading">
+        Update Mission
+      </button>
+    </form>
+  </div>
+  
