@@ -1,0 +1,56 @@
+<app-menu-front></app-menu-front>
+
+<div class="container mt-5">
+  <div class="card shadow-lg">
+    <div class="card-header" style="background-color: #343a40; color: white;">
+      <h3 class="mb-0">Add Corrective Action</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="actionCorrectiveForm" (ngSubmit)="addActionCorrective()">
+        
+        <!-- Description -->
+        <div class="mb-4">
+          <label class="form-label" for="description"><i class="bi bi-pencil"></i> Description:</label>
+          <input id="description" type="text" class="form-control" formControlName="description" required placeholder="Enter a detailed description">
+          <div *ngIf="actionCorrectiveForm.get('description')?.invalid && actionCorrectiveForm.get('description')?.touched" class="text-danger small">
+            <div *ngIf="actionCorrectiveForm.get('description')?.hasError('required')">Description is required.</div>
+            <div *ngIf="actionCorrectiveForm.get('description')?.hasError('minlength')">Description must be at least 5 characters long.</div>
+          </div>
+        </div>
+
+        <!-- Start Date -->
+        <div class="mb-4">
+          <label class="form-label" for="dateDebut"><i class="bi bi-calendar-check"></i> Start Date:</label>
+          <input id="dateDebut" type="date" class="form-control" formControlName="dateDebut" required>
+          <div *ngIf="actionCorrectiveForm.get('dateDebut')?.invalid && actionCorrectiveForm.get('dateDebut')?.touched" class="text-danger small">
+            <div *ngIf="actionCorrectiveForm.get('dateDebut')?.hasError('required')">Start date is required.</div>
+            <div *ngIf="actionCorrectiveForm.get('dateDebut')?.hasError('dateDebutInvalid')">Start date must be today or later.</div>
+          </div>
+        </div>
+
+        <!-- End Date -->
+        <div class="mb-4">
+          <label class="form-label" for="dateFin"><i class="bi bi-calendar"></i> End Date:</label>
+          <input id="dateFin" type="date" class="form-control" formControlName="dateFin" required>
+          <div *ngIf="actionCorrectiveForm.get('dateFin')?.invalid && actionCorrectiveForm.get('dateFin')?.touched" class="text-danger small">
+            <div *ngIf="actionCorrectiveForm.get('dateFin')?.hasError('required')">End date is required.</div>
+            <div *ngIf="actionCorrectiveForm.get('dateFin')?.hasError('dateFinInvalid')">End date must be after the start date.</div>
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div class="mb-3">
+          <label for="status" class="form-label"><i class="bi bi-list-check"></i> Status:</label>
+          <select [(ngModel)]="action.statusActionCorrective" name="status" class="form-select" required>
+            <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+          </select>
+        </div>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success w-100" [disabled]="actionCorrectiveForm.invalid">
+          <i class="bi bi-plus-circle"></i> Add Action
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<app-footer-front></app-footer-front>

@@ -1,0 +1,89 @@
+
+<app-menu-front></app-menu-front>
+
+<body class="bg-light">
+  <div class="container mt-5">
+    <!-- 📝 En-tête de la page -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold text-dark">📋 Inspection List</h2>
+    </div>
+
+    <!-- 🔍 Champ de recherche -->
+    <div class="mb-4">
+      <input type="text" class="form-control form-control-lg shadow-sm rounded-pill" 
+             [(ngModel)]="searchText" 
+             placeholder="🔍 Search by Inspector or Project Name"
+             (ngModelChange)="searchInspections()">
+    </div>
+
+    <!-- Tableau responsive avec ombre et bordures arrondies -->
+    <div class="table-responsive shadow-lg p-4 bg-white rounded">
+      <table class="table table-hover text-center align-middle">
+        <!-- En-tête de la table avec des couleurs sobres -->
+        <thead class="table-dark text-white">
+          <tr>
+            <th>Project Name</th>
+           
+            <th>Inspection Date</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Report</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inspection of filteredInspections | paginate: { itemsPerPage: itemsPerPage, currentPage: page }" class="table-row">
+            <td>{{inspection.projet?.nomProjet}}</td>
+       
+            <td>{{ inspection.dateInspection | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ inspection.typeInspection }}</td>
+            <td>
+              <span [ngClass]="{
+                'badge bg-success': inspection.statusInspection === 'In_Progress',
+                'badge bg-warning text-dark': inspection.statusInspection === 'Completed',
+                'badge bg-danger': inspection.statusInspection === 'Canceled',
+                'badge bg-primary': inspection.statusInspection === 'Planned',
+              }">
+                {{ inspection.statusInspection }}
+              </span>
+            </td>
+            <td>
+              <button class="btn btn-outline-success btn-sm rounded-circle" 
+                      (click)="generateRapport(inspection.idINS)" 
+                      title="Generate Report"
+                      [disabled]="inspection.statusInspection === 'Canceled'">
+                <i class="bi bi-file-earmark-plus"></i>
+              </button>
+            </td>
+            <td>
+              <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-warning btn-sm rounded-circle" 
+                        (click)="goToAddNonConformity(inspection.idINS)" 
+                        title="Add Non-Conformity"
+                        [disabled]="inspection.statusInspection === 'Canceled'">
+                  <i class="bi bi-plus-circle"></i>
+                </button>
+                <a class="btn btn-info btn-sm rounded-circle" 
+                   [routerLink]="['/inspection-detail', inspection.idINS]" 
+                   title="Show Details"
+                   [class.disabled]="inspection.statusInspection === 'Canceled'"
+                   [attr.aria-disabled]="inspection.statusInspection === 'Canceled' ? 'true' : null">
+                  <i class="bi bi-eye"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="d-flex justify-content-center mt-3">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</body>
+<br>
+<br><br><br>
+<app-footer-front></app-footer-front>
+

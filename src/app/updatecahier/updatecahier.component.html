@@ -1,0 +1,31 @@
+<app-cahiernavbar></app-cahiernavbar>
+  <div class="container">
+    <h2>✏️ Edit Cahier de Charge</h2>
+  
+    <!-- Affiche un spinner tant que les données ne sont pas chargées -->
+    <div *ngIf="loading" class="text-center">
+      <p>Loading Cahier de Charge...</p>
+      <img src="../../assets/images/Loading_icon.gif" alt="Loading..." width="110">
+    </div>
+  
+    <form *ngIf="!loading" (submit)="updateCahier()">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" [(ngModel)]="cahier.titre" name="titre" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label>Description</label>
+        <textarea [(ngModel)]="cahier.description" name="description" class="form-control" required></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label>PDF File</label>
+        <input type="file" (change)="onFileSelected($event)" class="form-control">
+      </div>
+  
+      <button type="submit"  class="btn btn-primary">Save Changes</button>
+      
+    </form>
+  </div>
+  <app-footer-front></app-footer-front>

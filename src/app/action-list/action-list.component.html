@@ -1,0 +1,29 @@
+<app-menu-front></app-menu-front>
+<a routerLink="/add-action" class="btn btn-success mb-3">Add Action</a>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Description</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let action of actions">
+      <td>{{ action.idAC }}</td>
+      <td>{{ action.description }}</td>
+      <td>{{ action.dateDebut }}</td>
+      <td>{{ action.dateFin }}</td>
+      <td>{{ action.statusActionCorrective }}</td>
+      <td>
+        <button class="btn btn-info btn-sm" [routerLink]="['/action-detail', action.idAC]">Details</button>
+        <button class="btn btn-warning btn-sm" [routerLink]="['/edit-action', action.idAC]">Edit</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteAction(action.idAC)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<app-footer-front></app-footer-front>

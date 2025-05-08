@@ -1,0 +1,64 @@
+<app-menu-front></app-menu-front>
+<div class="container mt-4">
+  <div class="card shadow-lg border-0">
+    <div class="card-header" style="background-color: #343a40; color: white;">
+      <h3>Edit Non-Conformity</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="nonConformityForm" (ngSubmit)="updateNonConformity()" class="border p-4 shadow rounded bg-light">
+        
+        <!-- Description -->
+        <div class="mb-4">
+          <label class="form-label fw-bold text-secondary">Description</label>
+          <input type="text" class="form-control border-primary" formControlName="description">
+          <div *ngIf="nonConformityForm.controls['description'].touched && nonConformityForm.controls['description'].invalid" class="text-danger">
+            <small>Description is required.</small>
+          </div>
+        </div>
+
+        <!-- Type Non-Conformity -->
+        <div class="mb-4">
+          <label class="form-label fw-bold text-secondary">Type</label>
+          <select class="form-select border-primary" formControlName="typeNonConform">
+            <option *ngFor="let type of typeNonConformities" [value]="type" [selected]="type === nonConformityForm.value.typeNonConform">{{ type }}</option>
+          </select>
+          <div *ngIf="nonConformityForm.controls['typeNonConform'].touched && nonConformityForm.controls['typeNonConform'].invalid" class="text-danger">
+            <small>Please select a type.</small>
+          </div>
+        </div>
+
+        <!-- Detection Date -->
+        <div class="mb-4">
+          <label class="form-label fw-bold text-secondary">Detection Date</label>
+          <input type="date" class="form-control border-primary" formControlName="dateDetection">
+          <div *ngIf="nonConformityForm.controls['dateDetection'].touched && nonConformityForm.controls['dateDetection'].invalid" class="text-danger">
+            <small *ngIf="nonConformityForm.controls['dateDetection'].errors?.['required']">The date is required.</small>
+            <small *ngIf="nonConformityForm.controls['dateDetection'].errors?.['invalidDate']">The date must be today or earlier.</small>
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div class="mb-4">
+          <label class="form-label fw-bold text-secondary">Status</label>
+          <select class="form-select border-primary" formControlName="statutsNonConform">
+            <option *ngFor="let statut of statutsNonConformity" [value]="statut" [selected]="statut === nonConformityForm.value.statutsNonConform">{{ statut }}</option>
+          </select>
+          <div *ngIf="nonConformityForm.controls['statutsNonConform'].touched && nonConformityForm.controls['statutsNonConform'].invalid" class="text-danger">
+            <small>Please select a status.</small>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-success px-4 py-2" [disabled]="nonConformityForm.invalid">
+            <i class="bi bi-check-circle"></i> Update
+          </button>
+         
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+<br><br>
+<app-footer-front></app-footer-front>

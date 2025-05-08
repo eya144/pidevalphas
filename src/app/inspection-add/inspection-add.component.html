@@ -1,0 +1,87 @@
+<app-menu-front></app-menu-front>
+<div class="container my-4">
+  <h2 class="mb-4 text-center">Add Inspections</h2>
+
+  <!-- Inspector Selection -->
+  <div class="form-group mb-3">
+    <label for="inspecteur">Select Inspector:</label>
+    <select [(ngModel)]="selectedInspecteur" name="inspecteur" class="form-control" required #inspecteur="ngModel">
+      <option *ngFor="let user of users" [ngValue]="inspecteur">
+        {{ user.nom }}
+      </option>
+    </select>
+    <div *ngIf="inspecteur.invalid && inspecteur.touched" class="text-danger">
+      The inspector is required.
+    </div>
+  </div>
+
+  <!-- Project Selection -->
+  <div class="form-group mb-3">
+    <label for="projet">Select Project:</label>
+    <select [(ngModel)]="selectedProjet" name="projet" class="form-control" required #projet="ngModel">
+      <option *ngFor="let projet of projets" [ngValue]="projet">
+        {{ projet.nomProjet }}
+      </option>
+    </select>
+    <div *ngIf="projet.invalid && projet.touched" class="text-danger">
+      The project is required.
+    </div>
+  </div>
+
+  <div *ngFor="let inspection of inspections; let i = index" class="inspection-form mb-4 p-3 border rounded shadow-sm">
+    <h4>Inspection {{ i + 1 }}</h4>
+
+    <!-- Date -->
+    <div class="form-group mb-3">
+      <label>Date:</label>
+      <input type="date" [(ngModel)]="inspection.dateInspection" name="dateInspection" class="form-control" required [min]="today" #date="ngModel">
+      <div *ngIf="date.invalid && date.touched" class="text-danger">
+        The date is required and must be today or later.
+      </div>
+    </div>
+
+    <!-- Inspection Type -->
+    <div class="form-group mb-3">
+      <label>Inspection Type:</label>
+      <select [(ngModel)]="inspection.typeInspection" name="typeInspection" class="form-control" required #type="ngModel">
+        <option *ngFor="let type of typeInspection | keyvalue" [value]="type.value">
+          {{ type.value }}
+        </option>
+      </select>
+      <div *ngIf="type.invalid && type.touched" class="text-danger">
+        The inspection type is required.
+      </div>
+    </div>
+
+    <!-- Inspection Status -->
+    <div class="form-group mb-3">
+      <label>Inspection Status:</label>
+      <select [(ngModel)]="inspection.statusInspection" name="statusInspection" class="form-control" required #status="ngModel">
+        <option *ngFor="let status of statusOptions | keyvalue" [value]="status.value">
+          {{ status.value }}
+        </option>
+      </select>
+      <div *ngIf="status.invalid && status.touched" class="text-danger">
+        The status is required.
+      </div>
+    </div>
+
+    <!-- Delete Inspection Button -->
+    <button class="btn btn-danger btn-sm mt-2" (click)="inspections.splice(i, 1)">
+      <i class="bi bi-trash"></i> Delete
+    </button>
+  </div>
+
+  <!-- Add and Submit Buttons -->
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-outline-primary mt-3" (click)="ajouterNouvelleInspection()">
+      <i class="bi bi-plus-circle"></i> Add Inspection
+    </button>
+    <button class="btn btn-primary mt-3" (click)="ajouterInspection()" [disabled]="formInvalid()">
+      <i class="bi bi-check2-circle"></i> Submit
+    </button>
+  </div>
+
+
+</div>
+<app-footer-front></app-footer-front>

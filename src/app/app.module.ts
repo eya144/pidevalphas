@@ -135,6 +135,36 @@ import { UpdateTaskComponent } from './update-task/update-task.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { MapComponent } from './map/map.component';
 import { MapSelectorComponentComponent } from './map-selector-component/map-selector-component.component';
+import { CahierDesChargesAddComponent } from './cahier-des-charges-add/cahier-des-charges-add.component';
+import { EditActionComponent } from './edit-action/edit-action.component';
+import { ListecahierpararchitectComponent } from './listecahierpararchitect/listecahierpararchitect.component';
+import { ActionDetailComponent } from './action-detail/action-detail.component';
+import { ActionListComponent } from './action-list/action-list.component';
+import { AddActionComponent } from './add-action/add-action.component';
+import { FooterFrontComponent } from './footer-front/footer-front.component';
+import { NonConformityEditComponent } from './non-conformity-edit/non-conformity-edit.component';
+import { DashboardaComponent } from './dashboarda/dashboarda.component';
+import { NonConformityDetailComponent } from './non-conformity-detail/non-conformity-detail.component';
+import { InspectionAddComponent } from './inspection-add/inspection-add.component';
+import { RapportDetailComponent } from './rapport-detail/rapport-detail.component';
+import { StatistiqueadminComponent } from './statistiqueadmin/statistiqueadmin.component';
+import { ShowinspectionsComponent } from './showinspections/showinspections.component';
+import { ListadmininspectionComponent } from './listadmininspection/listadmininspection.component';
+import { UpdateadmininspectionComponent } from './updateadmininspection/updateadmininspection.component';
+import { StatistiqueComponent } from './statistique/statistique.component';
+import { InspectionDetailComponent } from './inspection-detail/inspection-detail.component';
+import { InspectionEditComponent } from './inspection-edit/inspection-edit.component';
+import { InspectionListComponent } from './inspection-list/inspection-list.component';
+import { NonConformityListComponent } from './non-conformity-list/non-conformity-list.component';
+import { RapportAddComponent } from './rapport-add/rapport-add.component';
+import { RapportListComponent } from './rapport-list/rapport-list.component';
+import { AddNonconformityComponent } from './add-nonconformity/add-nonconformity.component';
+import { UpdateRapportComponent } from './update-rapport/update-rapport.component';
+import { UpdatecahierComponent } from './updatecahier/updatecahier.component';
+import { ListeAllcahierdechargeComponent } from './liste-allcahierdecharge/liste-allcahierdecharge.component';
+import { ProjectStatistiquesComponent } from './project-statistiques/project-statistiques.component';
+import { CahiernavbarComponent } from './cahiernavbar/cahiernavbar.component';
+import { MenuFrontComponent } from './menu-front/menu-front.component';
 
 @NgModule({
   declarations: [
@@ -235,6 +265,37 @@ import { MapSelectorComponentComponent } from './map-selector-component/map-sele
     AddTaskComponent,
     MapComponent,
     MapSelectorComponentComponent,
+    CahierDesChargesAddComponent,
+    EditActionComponent,
+    ListecahierpararchitectComponent,
+    ActionDetailComponent,
+    ActionListComponent,
+    AddActionComponent,
+    FooterFrontComponent,
+    NonConformityEditComponent,
+    DashboardaComponent,
+    NonConformityDetailComponent,
+    InspectionAddComponent,
+    RapportDetailComponent,
+    StatistiqueadminComponent,
+    ShowinspectionsComponent,
+    ListadmininspectionComponent,
+    UpdateadmininspectionComponent,
+    StatistiqueComponent,
+    InspectionDetailComponent,
+    InspectionEditComponent,
+    InspectionListComponent,
+    NonConformityListComponent,
+    RapportAddComponent,
+    RapportListComponent,
+    AddNonconformityComponent,
+    UpdateRapportComponent,
+    UpdatecahierComponent,
+    ListeAllcahierdechargeComponent,
+    ProjectStatistiquesComponent,
+    CahiernavbarComponent,
+    MenuFrontComponent,
+   
    
   ],
   imports: [

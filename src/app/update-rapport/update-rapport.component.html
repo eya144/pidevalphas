@@ -1,0 +1,44 @@
+<app-menu-front></app-menu-front>
+
+<div class="container mt-5">
+  <!-- 📝 Titre du Formulaire -->
+  <div class="text-center mb-4">
+    <h2 class="fw-bold text-dark">🖊️ Add or Edit External Content in the Report</h2>
+    <p class="text-muted">Select a content and add an external file to enrich the report..</p>
+    <hr class="border-2 border-dark">
+  </div>
+
+  <!-- Formulaire -->
+  <form [formGroup]="rapportForm" (ngSubmit)="updateRapport()">
+    
+    <!-- 📝 Contenu sous forme de liste (désactivée) -->
+    <div class="form-group mb-4">
+      <label for="contenu" class="text-dark fw-bold"> Report Content :</label>
+      <ul class="list-group">
+        <li *ngFor="let item of rapportForm.get('contenu')?.value.split('\n')" class="list-group-item bg-light text-dark border-0">
+         {{ item }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- 📸 Sélectionner un fichier ou image -->
+    <div class="form-group mb-4">
+      <label for="photoVideo" class="text-dark fw-bold"> additional content :</label>
+      <input type="file" id="photoVideo" class="form-control" (change)="onFileSelected($event)">
+      
+      <!-- Aperçu de l'image -->
+      <div *ngIf="imagePreview" class="text-center mt-3">
+        <img [src]="imagePreview" class="img-fluid rounded shadow-sm" alt="Aperçu de l'image" width="200">
+      </div>
+    </div>
+
+    <!-- 🟢 Bouton de Soumission -->
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary px-5 py-2" [disabled]="rapportForm.invalid">
+        <i class="fas fa-plus-circle"></i> additional content
+      </button>
+    </div>
+  </form>
+</div>
+<br><br><br>
+<app-footer-front></app-footer-front>

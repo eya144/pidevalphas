@@ -1,0 +1,34 @@
+
+<app-menu-front></app-menu-front>
+<div class="container mt-4">
+  <h2 class="mb-3">List of Non-Conformities</h2>
+  <button class="btn btn-primary mb-3" routerLink="/addNonconformity">Add Non-Conformity</button>
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Detection Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let nc of nonConformities">
+        <td>{{ nc.idNC }}</td>
+        <td>{{ nc.description }}</td>
+        <td>{{ nc.typeNonConfirm }}</td>
+        <td>{{ nc.dateDetection | date:'dd/MM/yyyy' }}</td>
+        <td>{{ nc.statutNonConfirm }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm me-2" (click)="goToDetail(nc.idNC)">Details</button> 
+          <button class="btn btn-warning btn-sm me-2" (click)="goToEdit(nc.idNC)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteNonConformity(nc.idNC)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br><br>
+<app-footer-front></app-footer-front>

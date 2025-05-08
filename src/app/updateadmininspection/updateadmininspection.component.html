@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<body>
+  <div class="container-scroller">
+
+    <!-- Back Menu Admin Start -->
+    <app-back-menu-admin></app-back-menu-admin>
+    <!-- Back Menu Admin End -->
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+
+      <!-- navbar Start -->
+      <app-back-header></app-back-header>
+      <!-- navbar End -->
+
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title text-primary">Edit Inspection</h4>
+                    <p class="card-description">Modify inspection details below:</p>
+                    <form [formGroup]="inspectionForm" (ngSubmit)="updateInspection()" class="forms-sample">
+                      
+                      <!-- Inspection Date -->
+                      <div class="form-group">
+                        <label for="dateInspection">Inspection Date</label>
+                        <input type="date" class="form-control" id="dateInspection" formControlName="dateInspection">
+                        <small *ngIf="inspectionForm.controls['dateInspection'].touched && inspectionForm.controls['dateInspection'].invalid" class="text-danger">
+                          <span *ngIf="inspectionForm.controls['dateInspection'].errors?.['required']">Date is required.</span>
+                          <span *ngIf="inspectionForm.controls['dateInspection'].errors?.['invalidDate']">The date must be today or in the future.</span>
+                        </small>
+                      </div>
+                      
+                      <!-- Inspection Type -->
+                      <div class="form-group">
+                        <label>Inspection Type</label>
+                        <select class="form-control" formControlName="typeInspection">
+                          <option *ngFor="let type of typeInspection" [value]="type">{{ type }}</option>
+                        </select>
+                        <small *ngIf="inspectionForm.controls['typeInspection'].touched && inspectionForm.controls['typeInspection'].invalid" class="text-danger">
+                          This field is required.
+                        </small>
+                      </div>
+                      
+                      <!-- Inspection Status -->
+                      <div class="form-group">
+                        <label>Status</label>
+                        <select class="form-control" formControlName="statusInspection">
+                          <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+                        </select>
+                        <small *ngIf="inspectionForm.controls['statusInspection'].touched && inspectionForm.controls['statusInspection'].invalid" class="text-danger">
+                          This field is required.
+                        </small>
+                      </div>
+                      
+                      <!-- Buttons -->
+                      <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary" [disabled]="inspectionForm.invalid">
+                          <i class="bi bi-check-circle"></i> Update
+                        </button>
+                        <a routerLink="/listadmininspection" class="btn btn-secondary">
+                          <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+              
+
+          <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+<app-back-menu-admin></app-back-menu-admin>

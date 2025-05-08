@@ -98,12 +98,20 @@
         </a>
       </li>
       <li class="nav-item menu-items">
-        <a class="nav-link" href="/assets/templateback/pages/forms/basic_elements.html">
+        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
           <span class="menu-icon">
-            <i class="mdi mdi-playlist-play"></i>
+            <i class="mdi mdi-security"></i>
           </span>
           <span class="menu-title">Projects</span>
+          <i class="menu-arrow"></i>
         </a>
+        <div class="collapse" id="auth">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" routerLink="/listeCahier"> Requirement Book List </a></li>
+            <li class="nav-item"> <a class="nav-link"  routerLink="/projetStatistique" > Project charts </a></li>
+        
+          </ul>
+        </div>
       </li>
       <li class="nav-item menu-items">
         <a class="nav-link" href="/assets/templateback/pages/tables/basic-table.html">
@@ -122,6 +130,23 @@
         </a>
       </li>
       <li class="nav-item menu-items">
+        <a class="nav-link" data-toggle="collapse" href="#abc" aria-expanded="false" aria-controls="auth">
+          <span class="menu-icon">
+            <i class="mdi mdi-security"></i>
+          </span>
+          <span class="menu-title">Inspections</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="abc">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" routerLink="/showinspections"> Add Inspections </a></li>
+            <li class="nav-item"> <a class="nav-link"  routerLink="/listadmininspection"> Show inspections </a></li>
+            <li class="nav-item"> <a class="nav-link"  routerLink="/statistique" > Inspection charts </a></li>
+        
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item menu-items">
         <a class="nav-link" routerLink="/admin-back">
           <span class="menu-icon">
             <i class="mdi mdi-playlist-play"></i>
@@ -137,14 +162,7 @@
           <span class="menu-title">Logistics</span>
         </a>
       </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="/assets/templateback/pages/forms/basic_elements.html">
-          <span class="menu-icon">
-            <i class="mdi mdi-playlist-play"></i>
-          </span>
-          <span class="menu-title">Inspection</span>
-        </a>
-      </li>
+     
       <li class="nav-item menu-items">
         <a class="nav-link" href="/assets/templateback/pages/charts/chartjs.html">
           <span class="menu-icon">

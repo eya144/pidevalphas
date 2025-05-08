@@ -1,0 +1,43 @@
+
+<body>
+    <br>
+    
+        <div class="container">
+            <h2 class="statistics-title">Statistics Dashboard</h2> <!-- Titre principal -->
+    
+            <div class="row">
+                <!-- Non-Conformity Types Chart -->
+                <div class="col-md-4">
+                    <h3>Non-Conformity Types</h3>
+                    <div *ngIf="nonConformityChartData">
+                        <canvas baseChart [data]="nonConformityChartData" [options]="chartOptions" [type]="'pie'"></canvas>
+                    </div>
+                </div>
+    
+                <!-- Non-Conformity Status Chart -->
+                <div class="col-md-4">
+                    <h3>Non-Conformity Status</h3>
+                    <div *ngIf="statutNonConformityChartData">
+                        <canvas baseChart [data]="statutNonConformityChartData" [options]="chartOptions" [type]="'line'"></canvas>
+                    </div>
+                </div>
+    
+                <!-- Inspections by Status Chart -->
+                <div class="col-md-4">
+                    <h3>Inspections by Status</h3>
+                    <div *ngIf="inspectionByStatusChartData">
+                        <canvas baseChart [data]="inspectionByStatusChartData" [options]="chartOptions" [type]="'pie'"></canvas>
+                    </div>
+                </div>
+    
+                <!-- Inspections by Type Chart -->
+                <div class="col-md-4">
+                    <h3>Inspections by Type</h3>
+                    <div *ngIf="inspectionByTypeChartData">
+                        <canvas baseChart [data]="inspectionByTypeChartData" [options]="chartOptions" [type]="'bar'"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    

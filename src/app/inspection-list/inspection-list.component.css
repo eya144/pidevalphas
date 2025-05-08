@@ -1,0 +1,69 @@
+/* 🌟 Amélioration de l'interface */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* 🏆 Ombre et design du tableau */
+  .table-responsive {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table th {
+    background-color: #343a40 !important;
+    color: white;
+    padding: 12px;
+  }
+  
+  .table-row:hover {
+    background-color: #f1f1f1;
+    transition: 0.3s ease-in-out;
+  }
+  
+  /* 🔘 Amélioration des boutons */
+  .btn {
+    transition: all 0.3s ease-in-out;
+    padding: 8px 12px;
+  }
+  
+  .btn-sm {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  
+  .btn-outline-success:hover {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  /* 📌 Badges améliorés */
+  .badge {
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 12px;
+  }
+  
+  /* 🔍 Champ de recherche stylisé */
+  .form-control-lg {
+    border-radius: 25px;
+    padding: 12px;
+    font-size: 16px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 📏 Pagination */
+  .pagination {
+    margin-top: 15px;
+  }
+  
+  a.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  

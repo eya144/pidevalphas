@@ -1,0 +1,113 @@
+
+ 
+ 
+ <!DOCTYPE html>
+ <html lang="en">
+   
+ <body>
+   <div class="container-scroller">
+ 
+     <!-- Back Menu Admin Start -->
+     <app-back-menu-admin></app-back-menu-admin>
+     <!-- Back Menu Admin End -->
+ 
+     <!-- partial -->
+     <div class="container-fluid page-body-wrapper">
+ 
+       <!-- navbar Start -->
+       <app-back-header></app-back-header>
+       <!-- navbar End -->
+ 
+       <!-- partial -->
+       <div class="main-panel">
+         <div class="content-wrapper">
+ 
+             <div class="col-lg-12 grid-margin stretch-card">
+                 <div class="card">
+                   <div class="card-body">
+                   
+                    <div class="spec-container">
+                      <h2 class="title">📜 Specification Documents</h2>
+                    
+                      <div class="search-bar">
+                        <input type="text" [(ngModel)]="searchQuery" (input)="searchCahiers()" placeholder="🔍 Search by Architect's Name" />
+                      </div>
+                    
+                      <div *ngIf="isLoading" class="custom-spinner"></div>
+                    
+                      <div *ngIf="filteredCahiers.length > 0; else noCahiersTemplate" class="table-wrapper">
+                        <table class="spec-table">
+                          <thead>
+                            <tr>
+                              <th>Associated project</th>
+                              <th>Architect</th>
+                              <th>Title</th>
+                            
+                              <th>Description</th>
+                             
+                              <th>Status</th>
+                              <th>Document</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let cahier of filteredCahiers | slice:(page-1)*pageSize:(page*pageSize)">
+                              <td>{{ cahier.projet?.nomProjet }}</td>
+                              <td>{{ cahier.user?.nom }}</td>
+                              <td>{{ cahier.titre }}</td>
+                              
+
+                              <td>{{ cahier.description }}</td>
+                             
+                              <td>
+                                <span [class.status-approved]="cahier.valider" [class.status-pending]="!cahier.valider">
+                                  {{ cahier.valider ? '✅ Approved' : '❌ Not Approved' }}
+                                </span>
+                              </td>
+                              <td>
+                                <button class="btn view-btn" (click)="viewPdf(cahier.id)">📄 View</button>
+                              </td>
+                              <td>
+                                <button class="btn approve-btn" *ngIf="!cahier.valider" (click)="validerCahier(cahier.id)">✅ Approve</button>
+                                <button class="btn delete-btn" (click)="deleteCahier(cahier.id)">🗑️ Delete</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    
+                        <div class="pagination">
+                          <button (click)="page = page - 1" [disabled]="page <= 1">⬅️ Previous</button>
+                          <span>Page {{ page }}</span>
+                          <button (click)="page = page + 1" [disabled]="page * pageSize >= filteredCahiers.length">Next ➡️</button>
+                        </div>
+                      </div>
+                    
+                      <ng-template #noCahiersTemplate>
+                        <p class="no-data">⏳ Please wait while loading the specification documents...</p>
+                      </ng-template>
+                    </div>
+                    
+                   </div>
+                 </div>
+               </div>
+               
+ 
+           <!-- main-panel ends -->
+         </div>
+         <!-- page-body-wrapper ends -->
+       </div>
+     </div>
+   </div>
+ </body>
+ 
+ </html>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
