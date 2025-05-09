@@ -1,152 +1,211 @@
-<body>
-  <div class="btns-container">
-    <button class="btn-add" (click)="redirectToAddMateriel()">
-      <i class="fa fa-plus"></i> Add a material
-    </button>
-    <button class="btn-add" (click)="redirectToAddVehicule()">
-      <i class="fa fa-plus"></i> Add Vehicle
-    </button>
-    <button class="btn-notification" (click)="toggleNotifications()">
-      <i class="fa fa-bell"></i>
-      <span class="notification-badge">{{ notifications.length }}</span>
-    </button>
+<div class="container-scroller">
+  <!-- Navbar -->
+  <app-back-header></app-back-header>
+  
+  <!-- Main structure -->
+  <div class="container-fluid page-body-wrapper">
+    <!-- Sidebar -->
+    <app-back-menu-admin></app-back-menu-admin>
     
-    <div *ngIf="showNotifications" class="notifications-container">
-      <h3>Notifications</h3>
-      <ul>
-        <li *ngFor="let notification of notifications">
-          <i class="fa fa-exclamation-circle"></i> {{ notification.message }}
-        </li>
-      </ul>
-    </div>
-  </div>
+    <!-- Main content -->
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <!-- Boutons d'action -->
+                <div class="d-flex justify-content-between mb-4">
+                  <div>
+                    <button class="btn btn-primary mr-2" (click)="redirectToAddMateriel()">
+                      <i class="mdi mdi-plus"></i> Add Material
+                    </button>
+                    <button class="btn btn-primary" (click)="redirectToAddVehicule()">
+                      <i class="mdi mdi-plus"></i> Add Vehicle
+                    </button>
+                  </div>
+                  <button class="btn btn-outline-secondary" (click)="toggleNotifications()">
+                    <i class="mdi mdi-bell"></i>
+                    <span class="notification-badge">{{ notifications.length }}</span>
+                  </button>
+                </div>
 
-  <div class="container">
-    <!-- Drawer des catégories -->
-    <div class="drawer">
-      <h3>Categories</h3>
-      <ul>
-        <li *ngFor="let cat of categories" (click)="filtrerParCategorie(cat)">
-          {{ cat }}
-        </li>
-        <li class="reset-filter" (click)="resetFilters()">Show All</li>       
-      </ul>
-    </div>
+                <!-- Notifications -->
+                <div *ngIf="showNotifications" class="notifications-dropdown">
+                  <h4>Notifications</h4>
+                  <ul>
+                    <li *ngFor="let notification of notifications">
+                      <i class="mdi mdi-alert-circle text-warning"></i> {{ notification.message }}
+                    </li>
+                  </ul>
+                </div>
 
-    <!-- Liste des matériels -->
-    <div class="materiels-container">
-      <div class="title-container">
-        <h2>Materials List</h2>
-        
-        <div class="search-container">
-          <input type="text" (input)="filtrerMateriels($event)" class="search-input" placeholder="Search for a material..." />
-          <i class="fa fa-search search-icon"></i>
-        </div>
-        
-      
-        <button class="export-excel" (click)="exporterMateriels()">
-          <i class="fa fa-file-excel"></i> Export to Excel
-        </button>
-      </div>
-      
-      <div class="materiels-list">
-        <div class="materiel-card" *ngFor="let materiel of materielsPagine">
-          <div class="materiel-details">
-            <h4>Name: {{ materiel.nomMateriel }}</h4>
-            <p>Categorie: {{ materiel.categorie }}</p>
-            <p>Quantity: {{ materiel.quantite }}</p>
-            <p>Unit Price: {{ materiel.prixMateriel }}</p>
-            <div class="commande-container">
-              <input type="checkbox" 
-                     [checked]="materielSelectionne[materiel.idMateriel]" 
-                     (change)="toggleCommande(materiel.idMateriel)">
-              <span>place an order</span>
-              <div *ngIf="materielSelectionne[materiel.idMateriel]" class="commande-inputs">
-                <input type="number" 
-                       [(ngModel)]="quantites[materiel.idMateriel]" 
-                       placeholder="Quantity requested">
-                <button (click)="passerCommande(materiel)">✔</button>
+                <!-- Onglets -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#materials" role="tab">Materials</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#vehicles" role="tab">Vehicles</a>
+                  </li>
+                </ul>
+
+                <!-- Contenu des onglets -->
+                <div class="tab-content py-3">
+                  <!-- Onglet Matériels -->
+                  <div class="tab-pane fade show active" id="materials" role="tabpanel">
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search materials..." 
+                                   (input)="filtrerMateriels($event)">
+                            <div class="input-group-append">
+                              <span class="input-group-text">
+                                <i class="mdi mdi-magnify"></i>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <button class="btn btn-success float-right" (click)="exporterMateriels()">
+                          <i class="mdi mdi-file-excel"></i> Export
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Liste des matériels -->
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let materiel of materielsPagine">
+                            <td>{{ materiel.nomMateriel }}</td>
+                            <td>{{ materiel.categorie }}</td>
+                            <td [class.text-danger]="materiel.quantite <= 5">{{ materiel.quantite }}</td>
+                            <td>{{ materiel.prixMateriel | currency:'Dt ' }}</td>
+                            <td>
+                              <button class="btn btn-sm btn-info" (click)="redirectToEditMateriel(materiel.idMateriel)">
+                                <i class="mdi mdi-pencil"></i>
+                              </button>
+                              <button class="btn btn-sm btn-danger ml-2" (click)="deleteMateriel(materiel.idMateriel)">
+                                <i class="mdi mdi-delete"></i>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav *ngIf="totalPages() > 1" class="mt-3">
+                      <ul class="pagination justify-content-center">
+                        <li class="page-item" [class.disabled]="currentPage === 1">
+                          <a class="page-link" (click)="setPage(currentPage - 1)">Previous</a>
+                        </li>
+                        <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                          <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+                        </li>
+                        <li class="page-item" [class.disabled]="currentPage === totalPages()">
+                          <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+
+                  <!-- Onglet Véhicules -->
+                  <div class="tab-pane fade" id="vehicles" role="tabpanel">
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search vehicles..." 
+                                   (input)="filtrerVehicules($event)">
+                            <div class="input-group-append">
+                              <span class="input-group-text">
+                                <i class="mdi mdi-magnify"></i>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <button class="btn btn-success float-right" (click)="exporterVehicules()">
+                          <i class="mdi mdi-file-excel"></i> Export
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Liste des véhicules -->
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Registration</th>
+                            <th>Type</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let vehicule of vehiculesPagine">
+                            <td>{{ vehicule.nomVehicule }}</td>
+                            <td>{{ vehicule.marque }}</td>
+                            <td>{{ vehicule.modele }}</td>
+                            <td>{{ vehicule.immatriculation }}</td>
+                            <td>{{ vehicule.typeVehicule }}</td>
+                            <td>
+                              <button class="btn btn-sm btn-info" (click)="redirectToEditVehicule(vehicule.idVehicule)">
+                                <i class="mdi mdi-pencil"></i>
+                              </button>
+                              <button class="btn btn-sm btn-danger ml-2" (click)="deleteVehicule(vehicule.idVehicule)">
+                                <i class="mdi mdi-delete"></i>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav *ngIf="totalPagesVehicules() > 1" class="mt-3">
+                      <ul class="pagination justify-content-center">
+                        <li class="page-item" [class.disabled]="currentPageVehicules === 1">
+                          <a class="page-link" (click)="setPageVehicules(currentPageVehicules - 1)">Previous</a>
+                        </li>
+                        <li class="page-item" *ngFor="let page of getPagesVehicules()" [class.active]="page === currentPageVehicules">
+                          <a class="page-link" (click)="setPageVehicules(page)">{{ page }}</a>
+                        </li>
+                        <li class="page-item" [class.disabled]="currentPageVehicules === totalPagesVehicules()">
+                          <a class="page-link" (click)="setPageVehicules(currentPageVehicules + 1)">Next</a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
               </div>
             </div>
-            <button class="btn-delete" (click)="deleteMateriel(materiel.idMateriel)">
-              <i class="fa fa-trash"></i> Delete
-            </button>
-            <button class="btn-edit" (click)="redirectToEditMateriel(materiel.idMateriel)">
-              <i class="fa fa-pencil"></i> Update
-            </button>
           </div>
         </div>
       </div>
-     <!-- Pagination -->
-<div class="pagination-container">
-  <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">Precedent</button>
-  <span>Page {{ currentPage }} / {{ totalPages() }}</span>
-  <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages()">Next</button>
-</div>
-
-    </div>
-  </div>
-
-  <!-- Bouton "Passer la commande" -->
-  <button *ngIf="hasSelectedMateriels()" (click)="passerCommandeGlobale()" class="btn-commande">
-    Place an order
-  </button>
-  <div class="separator"></div>
-  <!-- Section Véhicules -->
-  <div class="container">
-    <!-- Drawer des types de véhicules -->
-    <div class="drawer">
-      <h3>Type of Vehicles</h3>
-      <ul>
-        <li *ngFor="let type of typeVehicule" (click)="filtrerParType(type)">
-          {{ type }}
-        </li>
-        <li class="reset-filter" (click)="resetFiltersVehicules()">Show All</li>      </ul>
-    </div>
-
-    <!-- Liste des véhicules -->
-    <div class="materiels-container">
-      <div class="title-container">
-        <h2>Vehicles List</h2>
-        <div class="search-container">
-          <input type="text" (input)="filtrerVehicules($event)" class="search-input" placeholder="Search for a vehicle..." />
-          <i class="fa fa-search search-icon"></i>
-        </div>        
-        <button class="export-excel" (click)="exporterVehicules()">
-          <i class="fa fa-file-excel"></i> Export to Excel
-      </button>
       
-      </div>
-      <div class="materiels-list">
-        <div class="materiel-card" *ngFor="let vehicule of vehiculesPagine">
-          <div class="materiel-details">
-            <h4>Nom: {{ vehicule.nomVehicule }}</h4>
-            <p>Marque: {{ vehicule.marque }}</p>
-            <p>Modèle: {{ vehicule.modele }}</p>
-            <p>Immatriculation: {{ vehicule.immatriculation }}</p>
-            <p>Type: {{ vehicule.typeVehicule }}</p>
-            <p>Disponible: {{ vehicule.disponible ? 'Oui' : 'Non' }}</p>
-            <button class="btn-delete" (click)="deleteVehicule(vehicule.idVehicule)">
-              <i class="fa fa-trash"></i> Delete
-            </button>            
-            <button class="btn-edit" (click)="redirectToEditVehicule(vehicule.idVehicule)">
-              <i class="fa fa-pencil"></i> Update
-            </button>
-          </div>
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © DND Serv 2023</span>
         </div>
-      </div>
-      <div class="pagination-container">
-        <button (click)="setPageVehicules(currentPageVehicules - 1)" 
-                [disabled]="currentPageVehicules <= 1">
-          Precedent
-        </button>
-        <span>Page {{ currentPageVehicules }} / {{ totalPagesVehicules() }}</span>
-        <button (click)="setPageVehicules(currentPageVehicules + 1)" 
-                [disabled]="currentPageVehicules >= totalPagesVehicules()">
-          Next
-        </button>
-      </div>
+      </footer>
     </div>
-     
   </div>
-</body>
+</div>

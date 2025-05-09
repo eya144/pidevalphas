@@ -166,6 +166,8 @@ import { ProjectStatistiquesComponent } from './project-statistiques/project-sta
 import { CahiernavbarComponent } from './cahiernavbar/cahiernavbar.component';
 import { MenuFrontComponent } from './menu-front/menu-front.component';
 import { RecommandersystemComponent } from './recommandersystem/recommandersystem.component';
+import { BackFichedepaieComponent } from './back-fichedepaie/back-fichedepaie.component';
+import { HelabackComponent } from './helaback/helaback.component';
 
 @NgModule({
   declarations: [
@@ -297,6 +299,8 @@ import { RecommandersystemComponent } from './recommandersystem/recommandersyste
     CahiernavbarComponent,
     MenuFrontComponent,
     RecommandersystemComponent,
+    BackFichedepaieComponent,
+    HelabackComponent,
    
    
   ],

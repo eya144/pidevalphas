@@ -1,19 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
 <body>
-  <div class="container mt-4">
-    <h2>📊 Statistiques des Matériels</h2>
-  
-    <select class="form-select mb-3" [(ngModel)]="selectedStat" (ngModelChange)="updateChart()">
-      <option value="topMateriels">Matériels les Plus Demandés</option>
-      <option value="parCategorie">Matériels par Catégorie</option>
-      <option value="parAnnee">Évolution des Commandes (3 dernières années)</option>
-    </select>
-  
-    <canvas id="myChart" *ngIf="selectedStat === 'topMateriels'"></canvas>
-    <canvas id="materielChart" *ngIf="selectedStat === 'parCategorie'"></canvas>
-    <canvas id="statAnneeChart" *ngIf="selectedStat === 'parAnnee'"></canvas>
+  <div class="container-scroller">
+    <!-- Back Menu Admin Start -->
+    <app-back-menu-admin class="sidebar"></app-back-menu-admin>
+    <!-- Back Menu Admin End -->
+    
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- navbar Start -->
+      <app-back-header></app-back-header>
+      <!-- navbar End -->
+
+      <div class="container mt-4">
+        <h2>📊 Statistiques des Matériels</h2>
+      
+        <select class="form-select mb-3" [(ngModel)]="selectedStat" (ngModelChange)="updateChart()">
+          <option value="topMateriels">Matériels les Plus Demandés</option>
+          <option value="parCategorie">Matériels par Catégorie</option>
+          <option value="parAnnee">Évolution des Commandes (3 dernières années)</option>
+        </select>
+      
+        <canvas id="myChart" *ngIf="selectedStat === 'topMateriels'"></canvas>
+        <canvas id="materielChart" *ngIf="selectedStat === 'parCategorie'"></canvas>
+        <canvas id="statAnneeChart" *ngIf="selectedStat === 'parAnnee'"></canvas>
+      </div>
+    </div>
   </div>
 </body>
-
-  
-
-  
+</html>

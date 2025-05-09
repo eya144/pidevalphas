@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div class="container-scroller">
+      <!-- Menu Admin -->
+      <app-back-menu-admin></app-back-menu-admin>
+
+      <!-- Corps de page -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- Header -->
+        <app-back-header></app-back-header>
+
+        <br><br>
+
+        <div class="flex justify-center gap-6 flex-wrap md:flex-nowrap w-full p-4">
+          <!-- Bloc Totaux -->
+          <div class="totals-container">
+            <div class="total-card">
+              <h1>📑 Generated PaySlips</h1>
+              <div class="total-value" style="color:red;">{{ generatedPaySlips }}</div>
+            </div>
+            <div class="total-card">
+              <h1>📑 Total PaySlips</h1>
+              <div class="total-value" style="color:blue;">{{ totalPaySlips }}</div>
+            </div>
+          </div>
+
+          <!-- Statistiques -->
+          <div class="container w-full md:w-1/2">
+            <div class="flex flex-col items-center gap-2 mb-4 text-center">
+              <h2 class="text-xl font-bold">Pay Slip Statistics</h2>
+              <select [(ngModel)]="selectedPayChart" class="bg-gray-800 text-white border border-gray-600 rounded-lg p-2">
+                <option value="bar">Bar Chart</option>
+                <option value="pie">Circular Chart</option>
+              </select>
+            </div>
+
+            <div class="max-w-md mx-auto">
+              <canvas *ngIf="selectedPayChart === 'bar'" baseChart
+                      [data]="payBarChartData"
+                      [type]="payBarChartType"
+                      [options]="payBarChartOptions"></canvas>
+
+              <canvas *ngIf="selectedPayChart === 'pie'" baseChart
+                      [data]="payPieChartData"
+                      [type]="payPieChartType"
+                      [options]="payPieChartOptions"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

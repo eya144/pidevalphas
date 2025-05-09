@@ -1,10 +1,32 @@
-<app-back-header></app-back-header>
+<!DOCTYPE html>
+<html lang="en">
+  
+  <body>
+ <div class="container-scroller">
 
-<body>
-  <div class="container mt-5">
-    
+      <!-- Back Menu Admin Start -->
+       <app-back-menu-admin></app-back-menu-admin>
+      <!-- Back Menu Admin End -->
+      
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+<br>
+<br> 
+<br> 
+        <!-- navbar Start -->
+         <app-back-header></app-back-header>
+        <!-- navbar End -->
+
+
     <!-- Notification and Calendar Icons -->
     <div class="text-center mb-4">
+<br>
+<br> 
+<br> 
+<br>
+<br> 
+<br> 
+
       <!-- Notification Icon -->
       <button class="btn btn-outline-primary btn-sm mx-2" (click)="afficherNotifications()">
         <i class="bi bi-bell"></i> Notifications
@@ -77,5 +99,7 @@
 
     <!-- No Application Message -->
     <p *ngIf="!isLoading && demandes.length === 0" class="text-center text-muted">No applications found.</p>
-  </div>
-</body>
+    </div>
+    </div>
+  </body>
+</html>

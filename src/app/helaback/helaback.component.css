@@ -1,0 +1,31 @@
+.chart-container {
+    width: 60%; /* Largeur du conteneur du graphique */
+    max-width: 500px; /* Largeur maximale */
+    height: 300px; /* Hauteur du graphique */
+    margin: 0 auto; /* Centrer le graphique */
+  }
+  
+  canvas {
+    width: 100% !important; /* Utiliser toute la largeur du conteneur */
+    height: 100% !important; /* Utiliser toute la hauteur du conteneur */
+  }
+  
+  .card {
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .list-group-item {
+    font-size: 1.1rem;
+    padding: 10px 15px;
+  }
+  
+  .alert {
+    margin-top: 20px;
+  }

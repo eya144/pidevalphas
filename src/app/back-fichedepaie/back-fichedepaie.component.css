@@ -1,0 +1,143 @@
+/* Styles globaux */
+body, .container-scroller, .container-fluid {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Conteneur principal */
+.container-fluid.page-body-wrapper {
+  padding-top: -20px;  /* Espace pour le header + marge */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Wrapper des contenus */
+.flex.justify-center {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto; /* Marge pour abaisser le contenu */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px;
+}
+
+/* Conteneur des totaux */
+.totals-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 600px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Cartes de total */
+.total-card {
+  background: #34495e;
+  padding: 25px;
+  border-radius: 10px;
+  flex: 1;
+  min-width: 250px;
+  max-width: 280px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.total-card h1 {
+  margin: 0 0 15px 0;
+  font-size: 1.2em;
+}
+
+.total-value {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* Conteneur des graphiques */
+.container.w-full {
+  width: 100%;
+  max-width: 600px;
+  background: #1e1e1e;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* En-tête des statistiques */
+.flex.flex-col.items-center {
+  margin-bottom: 20px;
+}
+
+.text-xl.font-bold {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+/* Sélecteur de graphique */
+select {
+  padding: 10px 15px;
+  background-color: #34495e;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+/* Canvas des graphiques */
+.max-w-md.mx-auto {
+  width: 100%;
+}
+
+canvas {
+  width: 100% !important;
+  height: 280px !important;
+  max-height: 300px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container-fluid.page-body-wrapper {
+    padding-top: 20px;
+  }
+  
+  .flex.justify-center {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2px;
+    gap: 30px;
+  }
+  
+  .totals-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .total-card {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .total-card {
+    padding: 20px;
+  }
+  
+  .total-value {
+    font-size: 1.8em;
+  }
+  
+  select {
+    padding: 8px 12px;
+  }
+}
