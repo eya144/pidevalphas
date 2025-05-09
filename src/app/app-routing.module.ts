@@ -112,6 +112,8 @@ import { ListeAllcahierdechargeComponent } from './liste-allcahierdecharge/liste
 import { ProjectStatistiquesComponent } from './project-statistiques/project-statistiques.component';
 import { CahiernavbarComponent } from './cahiernavbar/cahiernavbar.component';
 import { MenuFrontComponent } from './menu-front/menu-front.component';
+import { BackFichedepaieComponent } from './back-fichedepaie/back-fichedepaie.component';
+import { HelabackComponent } from './helaback/helaback.component';
 
 
 const routes: Routes = [
@@ -127,6 +129,7 @@ const routes: Routes = [
   { path: 'inscrire', component: InscriptionComponent },
   { path: 'service', component: ServiceComponent },
   { path: 'dashboard', component: DashboardComponent },
+
   //eya
 
    { path: 'cahiercharge/:architecteId', component: CahierDesChargesAddComponent },
@@ -156,6 +159,7 @@ const routes: Routes = [
    { path: 'RapportList', component: RapportListComponent },
     { path: 'report/:id', component: RapportAddComponent },
     { path: 'menu', component: MenuFrontComponent },
+
   
       { path: 'addnonconformity/:id', component: AddNonconformityComponent },
       { path: 'nonConformities/:id/add-action', component: AddActionComponent } ,
@@ -196,6 +200,7 @@ const routes: Routes = [
   { path: 'task-details/:id', component: TaskDetailsComponent },
   { path: 'tasks/:missionId/:idTache', component: UpdateTaskComponent },
   { path: 'rapport/:id', component: RapportProjetComponent },
+  { path: 'helaback', component: HelabackComponent },
 
   //Zayneb
   { path: 'app-app-header', component: AppHeaderComponent },
@@ -214,6 +219,8 @@ const routes: Routes = [
   { path: 'rapport', component: RapportFinancierComponentComponent },
   { path: 'service', component: ServiceComponent }, 
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'back-fichedepaie', component: BackFichedepaieComponent },
+
   //dawser
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'dashboard_user', component: DashboardUserComponent }, 
@@ -278,6 +285,12 @@ const routes: Routes = [
       
     ],
   },
+  { path: 'logistique', component: LogistiqueComponent }, 
+  { path: 'orders', component: CommandeDashComponent }, 
+  { path: 'listDemandeDash', component: ListeDemandeDashComponent },
+  { path: 'affectVehicule', component: AffectVehiculeComponent },
+  { path: 'statistiques', component: TopMaterielComponent },  
+  { path: 'vehiculeDispo', component: VehiculeDispoComponent },
   { path: 'commandeFournisseur', component: CommandeFournisseurComponent },
   { path: 'chauffeurInterface', component: ChauffeurInterfaceComponent },  
   { path: 'vehiculeDispo', component: VehiculeDispoComponent },  
