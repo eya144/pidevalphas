@@ -6,7 +6,7 @@ import { Injectable, inject } from '@angular/core';
 })
 export class ReclamationService {
   private http = inject(HttpClient);
-  private url = 'http://localhost:8083/api/reclamations';
+  private url = 'http://localhost:8090/api/reclamations';
 
   constructor() {}
 

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class RapportService {
 
-  private baseUrl = 'http://localhost:8087/pidev/api/projets'; // via API Gateway
+  private baseUrl = 'http://localhost:8090/pidev/api/projets'; // via API Gateway
 
   constructor(private http: HttpClient) {}
 

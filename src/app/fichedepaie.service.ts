@@ -10,7 +10,7 @@ import { Paiement } from './core/models/Paiement';
 })
 export class FichedepaieService {
 
-private apiUrl = 'http://localhost:8089/pidev/Api/ficheDePaie'; // Remplacez par l'URL de votre API
+private apiUrl = 'http://localhost:8090/pidev/Api/ficheDePaie'; // Remplacez par l'URL de votre API
 
 
 

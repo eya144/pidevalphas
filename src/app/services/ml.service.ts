@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class MlService {
 
-  private apiUrl = 'http://localhost:8081/predict';  // Replace with your Spring Boot API endpoint
+  private apiUrl = 'http://localhost:8090/ml/predict';  // Replace with your Spring Boot API endpoint
 
   constructor(private http: HttpClient) { }
 
@@ -19,4 +19,9 @@ export class MlService {
       })
     });
   }
-}
+
+
+  recommend(data: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8090/ml/recommendation', data);
+  }
+} 

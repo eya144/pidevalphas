@@ -52,7 +52,7 @@ export class AddReclamationComponent {
     if (this.reclamationForm.valid) {
       this.reclamationService.add({
         ...this.reclamationForm.value,
-        utilisateur: { id: 1}
+        utilisateur: { id:3}
       }).subscribe(
         () => {
           // Update step statuses on success

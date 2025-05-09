@@ -85,6 +85,7 @@
                     <div class="card corona-gradient-card">
                         <div class="card-body">
                             <h4 class="mb-3">Présences des Utilisateurs</h4>
+                           
                             <input type="text" [(ngModel)]="filterText" placeholder="Rechercher..." class="form-control mb-3" />
                             <table class="table">
                                 <thead>
@@ -94,6 +95,7 @@
                                         <th (click)="sort('dateP')">Date of Attendance</th>
                                         <th (click)="sort('heureentre')">check-in Time</th>
                                         <th (click)="sort('heuresortie')">check-out</th>
+                                        <th >&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -103,6 +105,11 @@
                                         <td>{{ presence.dateP | date }}</td>
                                         <td>{{ presence.heureentre }}</td>
                                         <td>{{ presence.heuresortie }}</td>
+                                        <td>
+        <!-- Boutons pour chaque utilisateur -->
+        <button class="btn btn-primary btn-sm me-1" [routerLink]="['/predict']">Predict</button>
+        <button class="btn btn-success btn-sm" [routerLink]="['/recommand']">Recommand</button>
+      </td>
                                     </tr>
                                 </tbody>
                             </table>

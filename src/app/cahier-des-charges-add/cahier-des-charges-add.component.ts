@@ -34,7 +34,7 @@ export class CahierDesChargesAddComponent implements OnInit {
   }
 
   loadProjects() {
-    this.http.get<any[]>('http://localhost:8083/pidev/Projet/getAllProjets').subscribe(
+    this.http.get<any[]>('http://localhost:8090/pidev/Projet/getAllProjets').subscribe(
       data => { this.projects = data;
         console.log("Projets chargés :", data); // Vérifier les données reçues
        
@@ -73,7 +73,7 @@ export class CahierDesChargesAddComponent implements OnInit {
 
  
 
-    this.http.post(`http://localhost:8083/pidev/api/cahier-de-charge/create-with-pdf/${architecteId}/${projetId}`, formData)
+    this.http.post(`http://localhost:8090/pidev/api/cahier-de-charge/create-with-pdf/${architecteId}/${projetId}`, formData)
     .subscribe(
       (response: any) => {
         Swal.fire({ icon: 'success', title: 'Document Added', text: response.message })

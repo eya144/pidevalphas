@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class StatistiqueServiceService {
 
-  private apiUrl = 'http://localhost:8083/pidev/statistiques'; // URL backend
+  private apiUrl = 'http://localhost:8090/pidev/statistiques'; // URL backend
   constructor(private http: HttpClient) {}
 
   // Récupère les statistiques sur les types de non-conformité

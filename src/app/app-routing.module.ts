@@ -112,6 +112,9 @@ import { ListeAllcahierdechargeComponent } from './liste-allcahierdecharge/liste
 import { ProjectStatistiquesComponent } from './project-statistiques/project-statistiques.component';
 import { CahiernavbarComponent } from './cahiernavbar/cahiernavbar.component';
 import { MenuFrontComponent } from './menu-front/menu-front.component';
+import { EmployeeExitPredictionComponent } from './employee-exit-prediction/employee-exit-prediction.component';
+import { RecommandersystemComponent } from './recommandersystem/recommandersystem.component';
+
 import { BackFichedepaieComponent } from './back-fichedepaie/back-fichedepaie.component';
 import { HelabackComponent } from './helaback/helaback.component';
 
@@ -145,6 +148,8 @@ const routes: Routes = [
   { path: 'addinspection', component: InspectionAddComponent },
   { path: 'rapport-detail/:id', component: RapportDetailComponent }, 
    { path: 'statadmin', component: StatistiqueadminComponent },
+     { path: 'predict', component: EmployeeExitPredictionComponent },
+          { path: 'recommand', component: RecommandersystemComponent },
   
   { path: 'showinspections', component: ShowinspectionsComponent},
   { path: 'listadmininspection', component: ListadmininspectionComponent},

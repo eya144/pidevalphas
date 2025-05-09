@@ -10,7 +10,7 @@ import { CahierDeCharge } from 'src/models/Inspection.model';
 })
 
 export class CahierDesChargesServiceService  {
-private apiUrl = 'http://localhost:8083/pidev/api/cahier-de-charge'; 
+private apiUrl = 'http://localhost:8090/api/cahier-de-charge'; 
 
 constructor(private http: HttpClient) {}
 

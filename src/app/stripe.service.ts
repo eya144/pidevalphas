@@ -7,7 +7,7 @@ import { Observable, catchError, firstValueFrom } from 'rxjs';
   providedIn: 'root'
 })
 export class StripeService {
-  private backendUrl = 'http://localhost:8089/pidev/Api/paiement';
+  private backendUrl = 'http://localhost:8090/pidev/Api/paiement';
   private stripePromise: Promise<Stripe | null>;
   
   constructor(private http: HttpClient) {

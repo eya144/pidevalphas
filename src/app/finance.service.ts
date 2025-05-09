@@ -10,7 +10,7 @@ import { FichedepaieComptableComponent } from './fichedepaie-comptable/fichedepa
 export class FinanceService {
 
   // URL de l'API pour accéder aux factures
-  private apiUrl = 'http://localhost:8089/pidev/Api/facture';
+  private apiUrl = 'http://localhost:8090/pidev/Api/facture';
   router: any;
 
   // Static command data

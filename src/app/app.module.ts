@@ -165,6 +165,7 @@ import { ListeAllcahierdechargeComponent } from './liste-allcahierdecharge/liste
 import { ProjectStatistiquesComponent } from './project-statistiques/project-statistiques.component';
 import { CahiernavbarComponent } from './cahiernavbar/cahiernavbar.component';
 import { MenuFrontComponent } from './menu-front/menu-front.component';
+import { RecommandersystemComponent } from './recommandersystem/recommandersystem.component';
 import { BackFichedepaieComponent } from './back-fichedepaie/back-fichedepaie.component';
 import { HelabackComponent } from './helaback/helaback.component';
 
@@ -297,6 +298,7 @@ import { HelabackComponent } from './helaback/helaback.component';
     ProjectStatistiquesComponent,
     CahiernavbarComponent,
     MenuFrontComponent,
+    RecommandersystemComponent,
     BackFichedepaieComponent,
     HelabackComponent,
    

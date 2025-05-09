@@ -45,7 +45,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PresenceService {
-  private apiUrl = 'http://localhost:8089/api/users';
+  private apiUrl = 'http://localhost:8090/api/users';
 
   constructor(private http: HttpClient) {}
 

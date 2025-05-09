@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { MlService } from '../services/ml.service';  // Your existing ML service
-import { HttpClient } from '@angular/common/http';   // HttpClient to call backend
+import { MlService } from '../services/ml.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-employee-exit-prediction',
-  templateUrl: './employee-exit-prediction.component.html',
-  styleUrls: ['./employee-exit-prediction.component.css']
+  selector: 'app-recommandersystem',
+  templateUrl: './recommandersystem.component.html',
+  styleUrls: ['./recommandersystem.component.css']
 })
-export class EmployeeExitPredictionComponent {
-  title = 'Employee Exit Prediction';
+export class RecommandersystemComponent {
+  title = 'Recommender System of Employees';
   prediction: string = '';
   features = {
     satisfaction_level: null,
@@ -17,9 +17,7 @@ export class EmployeeExitPredictionComponent {
     average_montly_hours: null,
     time_spend_company: null,
     Work_accident: null,
-    promotion_last_5years: null,
-    sales: null,
-    salary: null
+    promotion_last_5years: null
   };
 
   chatMessage: string = '';  // User's message
@@ -37,7 +35,7 @@ export class EmployeeExitPredictionComponent {
   
     const payload = { prompt: this.chatMessage };
   
-    this.http.post('http://localhost:8090/api/chat/ask', payload, { responseType: 'text' }).subscribe({
+    this.http.post('http://localhost:8083/api/chat/ask', payload, { responseType: 'text' }).subscribe({
       next: (response: string) => {
         this.chatHistory.push({
           question: this.chatMessage,
@@ -59,20 +57,17 @@ export class EmployeeExitPredictionComponent {
 
 
 
+getRecommendation(): void {
 
-
-
-getPrediction(): void {
-  
-
-  this.mlService.predict(this.features).subscribe(
+  this.mlService.recommend(this.features).subscribe(
     response => {
-      this.prediction = response.prediction;
+      this.prediction = `Cluster ${response.cluster} - ${response.label}: ${response.recommendation}`;
     },
     error => {
-      console.error('Error fetching prediction', error);
+      console.error('Error fetching recommendation', error);
     }
   );
 }
- 
-  }
+
+} 
+

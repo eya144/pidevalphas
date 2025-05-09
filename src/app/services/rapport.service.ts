@@ -7,7 +7,7 @@ import { RapportQualite } from 'src/models/Inspection.model';
   providedIn: 'root'
 })
 export class RapportService {
-  private apiUrl = 'http://localhost:8083/pidev/Rapport'; // URL backend
+  private apiUrl = 'http://localhost:8090/pidev/Rapport'; // URL backend
 
   constructor(private http: HttpClient) {}
 

@@ -10,7 +10,7 @@ import { Inspection, NonConformity, Projet } from 'src/models/Inspection.model';
 export class InspectionService {
 
 
-  private apiUrl = 'http://localhost:8083/pidev/Qualite';
+  private apiUrl = 'http://localhost:8090/pidev/Qualite';
 
   constructor(private http: HttpClient) {}
   addInspection(inspection: Inspection): Observable<Inspection> {
@@ -54,7 +54,7 @@ updateNonConformity(idInspection: number, idNonConformity: number, updatedNonCon
 
 
 getProjetsByNom(nom: string): Observable<Projet[]> {
-  return this.http.get<Projet[]>(`http://localhost:8081/projets/nom/${nom}`);
+  return this.http.get<Projet[]>(`http://localhost:8090/projets/nom/${nom}`);
 }
 
 ajouterInspection(inspection: Inspection, projetId: number): Observable<Inspection> {

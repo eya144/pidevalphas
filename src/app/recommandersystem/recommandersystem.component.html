@@ -1,7 +1,7 @@
 <div class="container">
     <h1>{{ title }}</h1>
   
-    <form #predictionForm="ngForm" (ngSubmit)="getPrediction()" class="prediction-form">
+    <form #predictionForm="ngForm" class="prediction-form">
       <!-- Satisfaction Level -->
       <div class="form-group">
         <label>Satisfaction Level:</label>
@@ -127,47 +127,14 @@
         </div>
       </div>
   
-   <!-- Sales -->
-<div class="form-group" >
-  <label>Sales (integer):</label>
-  <input
-    type="number"
-    [(ngModel)]="features.sales"
-    name="sales"
-    class="form-control"
-    required
-    min="0"
-    #sales="ngModel"
-  />
-  <div *ngIf="sales.invalid && sales.touched" class="text-danger">
-    Enter a valid department code
-  </div>
-</div>
 
-<!-- Salary -->
-<div class="form-group" >
-  <label>Salary (0 = low, 1 = medium, 2 = high):</label>
-  <input
-    type="number"
-    [(ngModel)]="features.salary"
-    name="salary"
-    class="form-control"
-    required
-    min="0"
-    max="2"
-    #salary="ngModel"
-  />
-  <div *ngIf="salary.invalid && salary.touched" class="text-danger">
-    Must be 0, 1 or 2
-  </div>
-</div>
 
 <div class="d-flex gap-3 mt-3">
-  <button type="submit" class="btn btn-primary rounded-pill w-100"  [disabled]="predictionForm.invalid">
-    <i class="bi bi-graph-up"></i> Predict
-  </button>
 
- 
+
+  <button type="button" class="btn btn-success rounded-pill w-100"  [disabled]="predictionForm.invalid" (click)="getRecommendation()">
+    <i class="bi bi-lightbulb"></i> Recommend
+  </button>
 </div>
 
 
