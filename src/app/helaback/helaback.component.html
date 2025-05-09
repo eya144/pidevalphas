@@ -1,0 +1,78 @@
+<div class="container-scroller">
+  <!-- Back Menu Admin Start -->
+  <app-back-menu-admin></app-back-menu-admin>
+  <!-- Back Menu Admin End -->
+
+  <!-- partial -->
+  <div class="container-fluid page-body-wrapper">
+    <!-- navbar Start -->
+    <app-back-header></app-back-header>
+    <!-- navbar End -->
+
+    <div class="container">
+      <br /><br />
+      <br /><br />
+
+      <!-- Sélection du type de graphique -->
+      <div class="d-flex justify-content-between mb-3">
+        <label for="chartType">Choose Chart Type:</label>
+        <select
+          class="form-control w-25"
+          id="chartType"
+          [(ngModel)]="chartType"
+          (change)="changeChartType(chartType)"
+        >
+          <option value="pie">📊 Pie Chart</option>
+          <option value="bar">📊 Bar Chart</option>
+          <option value="line">📈 Line Chart (Sinusoidal)</option>
+        </select>
+      </div>
+
+      <!-- Graphique des statistiques -->
+      <div class="mb-4">
+        <h3 class="text-center">📊 Project Statistics</h3>
+        <div class="chart-container">
+          <canvas
+            *ngIf="chartData.labels.length > 0"
+            baseChart
+            [data]="chartData"
+            [options]="chartOptions"
+            [type]="chartType"
+          >
+          </canvas>
+        </div>
+      </div>
+
+      <!-- Section des statistiques sous forme de liste -->
+      <div class="row">
+        <div class="col-md-12">
+          <h2>📊 Statistiques des projets</h2>
+          <div *ngIf="stats">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Statistiques par statut</h5>
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <strong>🟡 To Do:</strong> {{ stats['TODO'] || 0 }} projets
+                  </li>
+                  <li class="list-group-item">
+                    <strong>🟡 Doing:</strong> {{ stats['DOING'] || 0 }} projets
+                  </li>
+                  <li class="list-group-item">
+                    <strong>🟢 Done:</strong> {{ stats['DONE'] || 0 }} projets
+                  </li>
+                  <li class="list-group-item">
+                    <strong>🔴 Suspended:</strong> {{ stats['SUSPENDED'] || 0 }} projets
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!stats" class="alert alert-info mt-3">
+            Aucune donnée statistique disponible.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

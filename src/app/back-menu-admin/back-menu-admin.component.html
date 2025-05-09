@@ -89,20 +89,13 @@
           <span class="menu-title">Home</span>
         </a>
       </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="#">
-          <span class="menu-icon">
-            <i class="mdi mdi-laptop"></i>
-          </span>
-          <span class="menu-title">About</span>
-        </a>
-      </li>
+    
       <li class="nav-item menu-items">
         <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
           <span class="menu-icon">
             <i class="mdi mdi-security"></i>
           </span>
-          <span class="menu-title">Projects</span>
+          <span class="menu-title">Requirement Book</span>
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="auth">
@@ -113,22 +106,7 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="/assets/templateback/pages/tables/basic-table.html">
-          <span class="menu-icon">
-            <i class="mdi mdi-table-large"></i>
-          </span>
-          <span class="menu-title">HR</span>
-        </a>
-      </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="/assets/templateback/pages/forms/basic_elements.html">
-          <span class="menu-icon">
-            <i class="mdi mdi-playlist-play"></i>
-          </span>
-          <span class="menu-title">Command</span>
-        </a>
-      </li>
+     
       <li class="nav-item menu-items">
         <a class="nav-link" data-toggle="collapse" href="#abc" aria-expanded="false" aria-controls="auth">
           <span class="menu-icon">
@@ -146,37 +124,121 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" routerLink="/admin-back">
+        <li class="nav-item menu-items">
+        <a class="nav-link" data-toggle="collapse" href="#biling" aria-expanded="false" aria-controls="auth">
           <span class="menu-icon">
-            <i class="mdi mdi-playlist-play"></i>
+            <i class="mdi mdi-security"></i>
           </span>
-          <span class="menu-title">Finance</span>
+          <span class="menu-title">Biling</span>
+          <i class="menu-arrow"></i>
         </a>
+        <div class="collapse" id="biling">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" routerLink="/admin-back"> Finance</a></li>
+            <li class="nav-item"> <a class="nav-link"  routerLink="/back-fichedepaie"> Payslip </a></li>        
+          </ul>
+        </div>
       </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="/assets/templateback/pages/forms/basic_elements.html">
+
+        <li class="nav-item menu-items">
+        <a class="nav-link" data-toggle="collapse" href="#rahma" aria-expanded="false" aria-controls="auth">
           <span class="menu-icon">
-            <i class="mdi mdi-playlist-play"></i>
+            <i class="mdi mdi-security"></i>
           </span>
           <span class="menu-title">Logistics</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="rahma">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" routerLink="/orders"> Supplier order tracking</a></li>
+            <li class="nav-item"> <a class="nav-link"  routerLink="/listDemandeDash"> Assignment of materials to projects </a></li>        
+            <li class="nav-item"> <a class="nav-link"  routerLink="/statistiques"> Stats and Performance</a></li>        
+            <li class="nav-item"> <a class="nav-link"  routerLink="/affectVehicule"> Vehicle assignment</a></li>        
+            <li class="nav-item"> <a class="nav-link"  routerLink="/logistique"> Stock overview</a></li>        
+          </ul>
+        </div>
+      </li>
+   <!--  <li class="nav-item menu-items">
+        <a class="nav-link" routerLink="/admin-back">
+          <span class="menu-icon">Assignment of materials to projects
+            <i class="mdi mdi-playlist-play"></i>
+          </span>
+          <span class="menu-title">Project</span>
         </a>
       </li>
-     
       <li class="nav-item menu-items">
-        <a class="nav-link" href="/assets/templateback/pages/charts/chartjs.html">
+        <a class="nav-link" routerLink="/back-fichedepaie">
           <span class="menu-icon">
-            <i class="mdi mdi-chart-bar"></i>
+            <i class="mdi mdi-playlist-play"></i>
           </span>
-          <span class="menu-title">...</span>
+          <span class="menu-title">Payslip</span>
+        </a>
+      </li>--> 
+
+    <!---  <li class="nav-item menu-items">
+        <a class="nav-link" routerLink="/orders">
+          <span class="menu-icon">
+            <i class="mdi mdi-playlist-play"></i>
+          </span>
+          <span class="menu-title">Supplier order tracking</span>
+        </a>
+      </li>-->
+
+     <!--  <li class="nav-item menu-items">
+        <a class="nav-link" routerLink="/demandesEmploi">
+          <span class="menu-icon">
+            <i class="mdi mdi-playlist-play"></i>
+          </span>
+          <span class="menu-title">Job Interview</span>
+        </a>
+      </li>-->
+      <!-- <li class="nav-item menu-items">
+        <a class="nav-link" routerLink="/listDemandeDash">
+          <span class="menu-icon">
+            <i class="mdi mdi-playlist-play"></i>
+          </span>
+          <span class="menu-title">Assignment of materials to projects</span>
+        </a>
+      </li>-->
+     <!-- <li class="nav-item menu-items">
+        <a class="nav-link" routerLink="/affectVehicule">
+          <span class="menu-icon">
+            <i class="mdi mdi-playlist-play"></i>
+          </span>
+          <span class="menu-title">Vehicle assignment</span>
+        </a>
+      </li>-->
+    <!-- <li class="nav-item menu-items">
+        <a class="nav-link" routerLink="/statistiques">
+          <span class="menu-icon">
+            <i class="mdi mdi-playlist-play"></i>
+          </span>
+          <span class="menu-title">Stats and Performance</span>
+        </a>
+      </li>--> 
+ 
+        <!--  <li class="nav-item menu-items">
+        <a class="nav-link" routerLink="/logistique">
+          <span class="menu-icon">
+            <i class="mdi mdi-playlist-play"></i>
+          </span>
+          <span class="menu-title">Stock overview</span>
+        </a>
+      </li>-->
+       <li class="nav-item menu-items">
+        <a class="nav-link" href="/helaback">
+          <span class="menu-icon">
+            <i class="mdi mdi-speedometer"></i>
+          </span>
+          <span class="menu-title">Projects</span>
         </a>
       </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="/assets/templateback/pages/icons/mdi.html">
+       <li class="nav-item menu-items">
+        <a class="nav-link" href="/demandesEmploi">
           <span class="menu-icon">
-            <i class="mdi mdi-contacts"></i>
+            <i class="mdi mdi-speedometer"></i>
           </span>
-          <span class="menu-title">...</span>
+          <span class="menu-title">Job Interview </span>
         </a>
       </li>
       <li class="nav-item menu-items">
@@ -197,14 +259,7 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
-          <span class="menu-icon">
-            <i class="mdi mdi-file-document-box"></i>
-          </span>
-          <span class="menu-title">...</span>
-        </a>
-      </li>
+      
     </ul>
   </nav>
 

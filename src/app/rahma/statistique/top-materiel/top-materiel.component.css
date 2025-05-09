@@ -1,22 +1,43 @@
-/* Empêcher que la page déborde sans contrôle */
+/* Style global */
 body {
     background-color: aliceblue;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh; /* S'assurer que la page prend toute la hauteur de l'écran */
-    overflow-y: auto; /* Permet le défilement vertical */
+    min-height: 100vh;
+    overflow-y: auto;
 }
 
+/* Conteneur principal */
+.container-scroller {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar - supposons qu'elle a une largeur fixe */
+.sidebar {
+    width: 260px; /* Ajustez selon la largeur réelle de votre sidebar */
+    position: fixed;
+    height: 100vh;
+    z-index: 10;
+}
+
+/* Contenu principal */
+.page-body-wrapper {
+    flex: 1;
+    margin-left: 260px; /* Doit correspondre à la largeur de la sidebar */
+    width: calc(100% - 260px);
+    padding-top: 70px; /* Pour compenser la navbar fixe en haut */
+}
+
+/* Conteneur des statistiques */
 .container {
     padding: 20px;
     width: 100%;
-    max-width: 1200px; /* Largeur maximale du conteneur */
-    margin-bottom: 30px;
+    max-width: 1200px;
+    margin: 0 auto 30px;
 }
 
+/* Titre */
 h2 {
     color: #1e1338;
     text-align: center;
@@ -24,6 +45,7 @@ h2 {
     margin: 20px 0;
 }
 
+/* Graphiques */
 #myChart {
     width: 100%;
     height: 400px;
@@ -39,16 +61,14 @@ h2 {
     padding: 20px;
 }
 
+/* Séparateur */
 .separator {
     height: 5px;
     background-color: #ccc;
     margin: 20px 0;
 }
 
-body {
-    background-color: aliceblue;
-}
+/* Smooth scrolling */
 html {
     scroll-behavior: smooth;
 }
-

@@ -1,112 +1,179 @@
-/* liste-demande-dash.component.css */
+/* Style global minimaliste */
+body {
+    background-color: #f8fafc;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #334155;
+}
 
-/* Style général du tableau */
+/* Structure layout */
+.container-scroller {
+    display: flex;
+    min-height: 100vh;
+}
+
+.page-body-wrapper {
+    flex: 1;
+    margin-left: 240px; /* Largeur sidebar */
+    width: calc(100% - 240px);
+    padding-top: 70px; /* Hauteur navbar */
+}
+
+/* Conteneur principal */
+.container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Titre */
+h2 {
+    color: #1e293b;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Alertes */
+.alert {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.375rem;
+    border: 1px solid transparent;
+}
+
+.alert-success {
+    background-color: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #166534;
+}
+
+/* Tableau minimaliste */
 .table {
     width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #ffffff;
-    border-radius: 8px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: 0.5rem;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* En-têtes du tableau */
-  .table th {
-    background-color: #2c3e50; /* Couleur sombre pour les en-têtes */
-    color: white;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 15px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.table th {
+    background-color: #f1f5f9;
+    color: #64748b;
+    padding: 1rem 1.25rem;
     text-align: left;
-  }
-  
-  /* Lignes du tableau */
-  .table td {
-    padding: 15px 20px;
-    border-bottom: 1px solid #eaeaea;
-    color: #333;
-  }
-  
-  /* Effet de survol sur les lignes */
-  .table tr:hover {
-    background-color: #f8f9fa; /* Couleur de survol très légère */
-  }
-  
-  /* Style des boutons */
-  .btn {
-    margin: 4px;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
     font-weight: 500;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-  }
-  
-  .btn-success {
-    background-color: #28a745; /* Vert */
-    color: white;
-  }
-  
-  .btn-success:hover {
-    background-color: #218838;
-  }
-  
-  .btn-danger {
-    background-color: #dc3545; /* Rouge */
-    color: white;
-  }
-  
-  .btn-danger:hover {
-    background-color: #c82333;
-  }
-  
-  .btn-warning {
-    background-color: #ffc107; /* Jaune */
-    color: black;
-  }
-  
-  .btn-warning:hover {
-    background-color: #e0a800;
-  }
-  
-  .btn:disabled {
-    background-color: #6c757d; /* Gris */
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.table td {
+    padding: 1.25rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: top;
+}
+
+/* Boutons sobres */
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.btn-success {
+    background-color: #f0fdf4;
+    color: #166534;
+    border-color: #bbf7d0;
+}
+
+.btn-success:hover {
+    background-color: #dcfce7;
+}
+
+.btn-danger {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border-color: #fecaca;
+}
+
+.btn-danger:hover {
+    background-color: #fee2e2;
+}
+
+.btn-warning {
+    background-color: #fffbeb;
+    color: #92400e;
+    border-color: #fef08a;
+}
+
+.btn-warning:hover {
+    background-color: #fef3c7;
+}
+
+.btn:disabled {
+    opacity: 0.5;
     cursor: not-allowed;
-  }
-  
-  /* Style de la liste des lignes de demande */
-  ul {
-    list-style-type: none;
+    background-color: #f1f5f9;
+    color: #64748b;
+    border-color: #e2e8f0;
+}
+
+/* Liste des matériels */
+.request-lines {
+    list-style: none;
     padding: 0;
     margin: 0;
-  }
-  
-  ul li {
-    margin-bottom: 8px;
-    padding: 8px;
-    background-color: #f8f9fa;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  ul li strong {
-    color: #2c3e50; /* Couleur sombre pour les textes importants */
-    font-weight: 600;
-  }
-  
-  /* Titre de la section */
-  h2 {
-    text-align: center;
-    color: #ffffff; /* Couleur sombre pour le titre */
-    font-family: 'Arial', sans-serif;
-    margin-bottom: 20px;
-    font-size: 28px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-  }
+}
+
+.request-line {
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background-color: #f8fafc;
+    border-radius: 0.25rem;
+    border-left: 2px solid #e2e8f0;
+}
+
+.request-line:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .page-body-wrapper {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+.status-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-accepte {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status-refuse {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.status-en_attente {
+  background-color: #fef3c7;
+  color: #92400e;
+}
