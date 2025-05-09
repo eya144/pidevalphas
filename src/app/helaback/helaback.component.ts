@@ -1,7 +1,7 @@
 import { Component , OnInit } from '@angular/core';
 import { ChartConfiguration, ChartType } from 'chart.js';
-import { ProjetService } from '../projet.service';
 import { Projet } from '../Model/Projet';
+import { ProjetService } from '../services/projet.service';
 
 @Component({
   selector: 'app-helaback',
