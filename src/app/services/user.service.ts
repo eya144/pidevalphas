@@ -8,7 +8,7 @@ import { Inspection, User } from 'src/models/Inspection.model';
 })
 export class UserService {
 
-  private baseUrl = 'http://localhost:8083/pidev/api/users';
+  private baseUrl = 'http://localhost:8090/pidev/api/users';
 
   constructor(private http: HttpClient) {}
 

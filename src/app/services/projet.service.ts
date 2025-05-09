@@ -6,7 +6,7 @@ import { Projet } from 'src/models/Inspection.model';
   providedIn: 'root'
 })
 export class ProjetService {
- private apiUrl = 'http://localhost:8083/pidev/Projet';
+ private apiUrl = 'http://localhost:8090/pidev/Projet';
 
   constructor(private http: HttpClient) {}
   getProjets(): Observable<any> {

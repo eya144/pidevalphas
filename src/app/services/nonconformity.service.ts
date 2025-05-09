@@ -7,7 +7,7 @@ import { NonConformity } from 'src/models/Inspection.model';
   providedIn: 'root'
 })
 export class NonconformityService {
-  private apiUrl = 'http://localhost:8083/pidev/Nonconform';
+  private apiUrl = 'http://localhost:8090/pidev/Nonconform';
 
   constructor(private http: HttpClient) { }
 

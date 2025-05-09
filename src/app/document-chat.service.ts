@@ -9,7 +9,7 @@ export class DocumentChatService {
 
     private http = inject(HttpClient);
 
-    private url = 'http://localhost:8083/api/';
+    private url = 'http://localhost:8090/api/';
 
   constructor() { }
 

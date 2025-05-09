@@ -9,9 +9,9 @@ export class CongesService {
 
     private http = inject(HttpClient);
 
-    private url = 'http://localhost:8083/api/conges';
+    private url = 'http://localhost:8090/api/conges';
 
-    private usersListUrl = 'http://localhost:8083/api/usr/list';
+    private usersListUrl = 'http://localhost:8090/api/usr/list';
 
 
     constructor() { }

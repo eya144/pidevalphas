@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TextToSpeechService {
-  private apiUrl = 'http://localhost:8083/api/tts'; // Ensure this is the correct URL for your backend
+  private apiUrl = 'http://localhost:8090/api/tts'; // Ensure this is the correct URL for your backend
 
   constructor(private http: HttpClient) {}
 

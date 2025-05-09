@@ -29,7 +29,7 @@ export class ListeAllcahierdechargeComponent implements OnInit {
   }
   loadCahiersByArchitecte() {
     this.isLoading = true;
-    this.http.get<any[]>(`http://localhost:8083/pidev/api/cahier-de-charge/getAll`)
+    this.http.get<any[]>(`http://localhost:8090/pidev/api/cahier-de-charge/getAll`)
       .subscribe((data: any[]) => {
         this.cahiers = data;
         this.filteredCahiers = data;
@@ -54,7 +54,7 @@ export class ListeAllcahierdechargeComponent implements OnInit {
   }
 
   viewPdf(id: number) {
-    const pdfUrl = `http://localhost:8083/pidev/api/cahier-de-charge/view-pdf/${id}`;
+    const pdfUrl = `http://localhost:8090/pidev/api/cahier-de-charge/view-pdf/${id}`;
     window.open(pdfUrl, '_blank');
   }
 
@@ -69,7 +69,7 @@ export class ListeAllcahierdechargeComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.http.delete(`http://localhost:8083/pidev/api/cahier-de-charge/delete/${id}`)
+        this.http.delete(`http://localhost:8090/pidev/api/cahier-de-charge/delete/${id}`)
           .subscribe(() => {
             this.cahiers = this.cahiers.filter(c => c.id !== id);
             this.filteredCahiers = this.filteredCahiers.filter(c => c.id !== id);
@@ -83,7 +83,7 @@ export class ListeAllcahierdechargeComponent implements OnInit {
   }
 
   validerCahier(id: number) {
-    this.http.put(`http://localhost:8083/pidev/api/cahier-de-charge/valider/${id}`, {})
+    this.http.put(`http://localhost:8090/pidev/api/cahier-de-charge/valider/${id}`, {})
       .subscribe(() => {
         Swal.fire('Success', 'Document validated!', 'success');
         this.loadCahiersByArchitecte();

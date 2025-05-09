@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SearchService {
-  private apiUrl = 'http://localhost:8089/pidev/Api/facture'; // Remplacez par l'URL de votre API
+  private apiUrl = 'http://localhost:8090/pidev/Api/facture'; // Remplacez par l'URL de votre API
 
   constructor(private http: HttpClient) {}
 
